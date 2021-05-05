@@ -9,6 +9,7 @@
 
         <compilerflag value="-I${LINC_IMGUI_PATH}src/linc/"/>
         <compilerflag value="-I${LINC_IMGUI_PATH}lib/cimgui/imgui/" />
+        <compilerflag value="-I${LINC_IMGUI_PATH}lib/cimgui/imgui/backends/" />
 
     </files>
 
@@ -17,12 +18,26 @@
 
         <compilerflag value="-DIMGUI_DISABLE_OBSOLETE_FUNCTIONS"/>
         <compilerflag value="-I${LINC_IMGUI_PATH}lib/cimgui/imgui/" />
+        <compilerflag value="-I${LINC_IMGUI_PATH}lib/cimgui/imgui/backends/" />
         
         <file name="${IMGUI}/imgui.cpp" />
         <file name="${IMGUI}/imgui_draw.cpp" />
         <file name="${IMGUI}/imgui_demo.cpp" />
         <file name="${IMGUI}/imgui_tables.cpp" />
         <file name="${IMGUI}/imgui_widgets.cpp" />
+
+        <section if="linc_sdl">
+            <file name="${IMGUI}/backends/imgui_impl_sdl.cpp" />
+            <compilerflag value="-I${LINC_IMGUI_PATH}../linc_sdl/lib/sdl/include/" />
+        </section>
+
+        <section if="linc_opengl">
+            <compilerflag value="-DIMGUI_IMPL_OPENGL_LOADER_GLEW" />
+            <compilerflag value="-I${LINC_IMGUI_PATH}../linc_opengl/lib/glew/include/" />
+            <file name="${IMGUI}/backends/imgui_impl_opengl3.cpp" />
+        </section>
+
+
     </files>
 
     <target id="haxe">
