@@ -1,6 +1,6 @@
-package imgui;
+package imguicpp;
 
-import imgui.utils.VarPointer;
+import imguicpp.utils.VarPointer;
 
 abstract BoolPointer(cpp.Pointer<Bool>) from cpp.Pointer<Bool> to cpp.Pointer<Bool>
 {

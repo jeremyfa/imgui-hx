@@ -1,4 +1,4 @@
-package imgui.linc;
+package imguicpp.linc;
 
 import haxe.io.Path;
 import haxe.macro.Expr;
@@ -51,7 +51,7 @@ class Linc {
         var _linc_lib_var = 'LINC_${_lib.toUpperCase()}_PATH';
 
         var _define = '<set name="$_linc_lib_var" value="$_linc_lib_path/"/>';
-        var _import_path = '$${$_linc_lib_var}src/imgui/linc/linc_${_lib}.xml';
+        var _import_path = '$${$_linc_lib_var}src/imguicpp/linc/linc_${_lib}.xml';
         var _import = '<include name="$_import_path" />';
 
         _class.get().meta.add(":buildXml", [{ expr:EConst( CString( '$_define\n$_import' ) ), pos:_pos }], _pos );

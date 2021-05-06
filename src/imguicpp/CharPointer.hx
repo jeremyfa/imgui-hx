@@ -1,4 +1,4 @@
-package imgui;
+package imguicpp;
 
 import haxe.io.Bytes;
 import haxe.io.BytesData;

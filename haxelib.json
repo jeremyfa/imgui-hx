@@ -1,12 +1,13 @@
 
 {
-    "name" : "linc_imgui",
+    "name" : "imgui-hx",
     "license": "MIT",
-    "description": "Haxe hxcpp @:native externs for ImGui",
+    "description": "Haxe externs for ImGui",
     "version" : "0.0.1",
-    "releasenote": "Initial release",
+    "releasenote": "Working on unified bindings to C++ and JS builds of ImGui",
     "contributors": [
-        "Aidan"
+        "Aidan",
+        "jeremyfa"
     ],
     "classPath": "src"
 }

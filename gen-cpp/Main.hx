@@ -16,7 +16,7 @@ class Main
             File.getContent('lib/cimgui/generator/output/structs_and_enums.json'),
             File.getContent('lib/cimgui/generator/output/definitions.json'));
 
-        buffer.append('package imgui;');
+        buffer.append('package imguicpp;');
         buffer.newline();
         buffer.newline();
 
@@ -52,7 +52,7 @@ class Main
             buffer.newline();
         }
 
-        File.saveContent('src/imgui/ImGui.hx', buffer.toString());
+        File.saveContent('src/imguicpp/ImGui.hx', buffer.toString());
     }
 }
 

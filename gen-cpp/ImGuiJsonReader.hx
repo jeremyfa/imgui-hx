@@ -85,8 +85,8 @@ class ImGuiJsonReader
     public function generateTypedefs() : Array<TypeDefinition>
     {
         final gen = [
-            { pack: [ 'imgui' ], name: 'FILE', pos: null, fields: [], kind: TDAlias(parseNativeString('void')) },
-            { pack: [ 'imgui' ], name: 'ImGuiWindowPtr', pos: null, fields: [], kind: TDAlias(parseNativeString('void')) }
+            { pack: [ 'imguicpp' ], name: 'FILE', pos: null, fields: [], kind: TDAlias(parseNativeString('void')) },
+            { pack: [ 'imguicpp' ], name: 'ImGuiWindowPtr', pos: null, fields: [], kind: TDAlias(parseNativeString('void')) }
         ];
 
         abstractPtrs = false;
@@ -107,7 +107,7 @@ class ImGuiJsonReader
                 continue;
             }
 
-            gen.push({ pack: [ 'imgui' ], name: name, pos: null, fields: [], kind: TDAlias(parseNativeString(value)) });
+            gen.push({ pack: [ 'imguicpp' ], name: name, pos: null, fields: [], kind: TDAlias(parseNativeString(value)) });
         }
 
         abstractPtrs = true;
@@ -128,7 +128,7 @@ class ImGuiJsonReader
         return [
             for (name => values in enumStruct.enums)
             {
-                pack   : [ 'imgui' ],
+                pack   : [ 'imguicpp' ],
                 kind   : TDAbstract(macro : Int, [ macro : Int ], [ macro : Int ]),
                 name   : if (name.endsWith('_')) name.substr(0, name.length - 1) else name,
                 pos    : null,
@@ -418,8 +418,8 @@ class ImGuiJsonReader
             { name: ':keep', pos : null },
             { name: ':structAccess', pos : null },
             { name: ':include', pos : null, params: [ macro $i{ '"imgui.h"' } ] },
-            { name: ':build', pos : null, params: [ macro imgui.linc.Linc.xml('imgui') ] },
-            { name: ':build', pos : null, params: [ macro imgui.linc.Linc.touch() ] }
+            { name: ':build', pos : null, params: [ macro imguicpp.linc.Linc.xml('imgui') ] },
+            { name: ':build', pos : null, params: [ macro imguicpp.linc.Linc.touch() ] }
         ];
 
         return topLevelClass;
@@ -734,11 +734,11 @@ class ImGuiJsonReader
 
                     switch inner.name
                     {
-                        case 'UInt8' if (abstractPtrs): return macro : imgui.CharPointer;
-                        case 'Void' if (abstractPtrs): return macro : imgui.VoidPointer;
-                        case 'Int' if (abstractPtrs): return macro : imgui.IntPointer;
-                        case 'Float32' if (abstractPtrs): return macro : imgui.FloatPointer;
-                        case 'Bool' if (abstractPtrs): return macro : imgui.BoolPointer;
+                        case 'UInt8' if (abstractPtrs): return macro : imguicpp.CharPointer;
+                        case 'Void' if (abstractPtrs): return macro : imguicpp.VoidPointer;
+                        case 'Int' if (abstractPtrs): return macro : imguicpp.IntPointer;
+                        case 'Float32' if (abstractPtrs): return macro : imguicpp.FloatPointer;
+                        case 'Bool' if (abstractPtrs): return macro : imguicpp.BoolPointer;
                         case 'Star':
                             final inner = getInnerParameter(inner.params);
                             
@@ -758,7 +758,7 @@ class ImGuiJsonReader
 
                     switch inner.name
                     {
-                        case 'Int8', 'UInt8', 'Char': return macro : imgui.utils.VarConstCharStar;
+                        case 'Int8', 'UInt8', 'Char': return macro : imguicpp.utils.VarConstCharStar;
                         case _:
                             final ct = TPath(inner);
 

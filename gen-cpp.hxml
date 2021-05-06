@@ -1,4 +1,4 @@
--cp gen
+-cp gen-cpp
 
 -lib safety
 -lib json2object

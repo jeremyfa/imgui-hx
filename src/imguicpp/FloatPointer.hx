@@ -1,6 +1,6 @@
-package imgui;
+package imguicpp;
 
-import imgui.utils.VarPointer;
+import imguicpp.utils.VarPointer;
 
 abstract FloatPointer(cpp.Pointer<cpp.Float32>) from cpp.Pointer<cpp.Float32> to cpp.Pointer<cpp.Float32>
 {

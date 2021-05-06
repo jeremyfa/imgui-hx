@@ -1,4 +1,4 @@
-package imgui.utils;
+package imguicpp.utils;
 
 import cpp.Char;
 import cpp.RawConstPointer;

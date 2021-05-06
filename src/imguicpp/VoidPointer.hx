@@ -1,6 +1,6 @@
-package imgui;
+package imguicpp;
 
-import imgui.utils.VarPointer;
+import imguicpp.utils.VarPointer;
 
 abstract VoidPointer(cpp.Pointer<cpp.Void>) from cpp.Pointer<cpp.Void> to cpp.Pointer<cpp.Void>
 {

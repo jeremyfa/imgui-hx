@@ -1,6 +1,6 @@
-package imgui;
+package imguicpp;
 
-import imgui.utils.VarPointer;
+import imguicpp.utils.VarPointer;
 
 abstract IntPointer(cpp.Pointer<Int>) from cpp.Pointer<Int> to cpp.Pointer<Int>
 {
