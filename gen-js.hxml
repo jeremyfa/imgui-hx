@@ -1,5 +1,5 @@
 -cp gen
--cp gen-cpp
+-cp gen-js
 
 -lib safety
 -lib json2object

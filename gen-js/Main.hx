@@ -1,7 +1,7 @@
 
 import haxe.macro.Printer;
 import sys.io.File;
-import ImGuiJsonCPP;
+import ImGuiJsonJS;
 
 using StringBufChainer;
 
@@ -11,12 +11,16 @@ class Main
     {
         final printer = new Printer();
         final buffer  = new StringBuf();
-        final reader  = new ImGuiJsonCPP(
+        final reader  = new ImGuiJsonJS(
             File.getContent('lib/cimgui/generator/output/typedefs_dict.json'),
             File.getContent('lib/cimgui/generator/output/structs_and_enums.json'),
             File.getContent('lib/cimgui/generator/output/definitions.json'));
 
-        buffer.append('package imguicpp;');
+        buffer.append('package imguijs;');
+        buffer.newline();
+        buffer.newline();
+
+        buffer.append('import imguijs.Types;');
         buffer.newline();
         buffer.newline();
 
@@ -52,6 +56,6 @@ class Main
             buffer.newline();
         }
 
-        File.saveContent('src/imguicpp/ImGui.hx', buffer.toString());
+        File.saveContent('src/imguijs/ImGui.hx', buffer.toString());
     }
 }

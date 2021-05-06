@@ -62,7 +62,7 @@ typedef JsonFunction = {
 typedef JsonDefinitions = Map<String, Array<JsonFunction>>;
 typedef JsonTypedef = Map<String, String>;
 
-class ImGuiJsonReader
+class ImGuiJsonCPP
 {
     final typedefs : JsonTypedef;
     final enumStruct : JsonEnumStruct;
