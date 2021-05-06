@@ -1,3 +1,6 @@
 [submodule "lib/cimgui"]
 	path = lib/cimgui
 	url = https://github.com/cimgui/cimgui
+[submodule "lib/imgui-js"]
+	path = lib/imgui-js
+	url = https://github.com/flyover/imgui-js.git
