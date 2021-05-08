@@ -28,4 +28,11 @@ class StringBufChainer
 
         return _buffer;
     }
+
+    public static function tabSpaces(_buffer : StringBuf) : StringBuf
+    {
+        _buffer.add('    ');
+
+        return _buffer;
+    }
 }

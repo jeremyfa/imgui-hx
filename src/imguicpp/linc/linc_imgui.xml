@@ -7,7 +7,7 @@
 
         <!-- add files and flags to the haxe c++ build -->
 
-        <compilerflag value="-I${LINC_IMGUI_PATH}src/linc/"/>
+        <compilerflag value="-I${LINC_IMGUI_PATH}src/imguicpp/linc/"/>
         <compilerflag value="-I${LINC_IMGUI_PATH}lib/cimgui/imgui/" />
         <compilerflag value="-I${LINC_IMGUI_PATH}lib/cimgui/imgui/backends/" />
 
@@ -25,6 +25,8 @@
         <file name="${IMGUI}/imgui_demo.cpp" />
         <file name="${IMGUI}/imgui_tables.cpp" />
         <file name="${IMGUI}/imgui_widgets.cpp" />
+
+        <file name="${LINC_IMGUI_PATH}src/imguicpp/linc/linc_imgui.cpp" />
 
         <section if="linc_sdl">
             <file name="${IMGUI}/backends/imgui_impl_sdl.cpp" />

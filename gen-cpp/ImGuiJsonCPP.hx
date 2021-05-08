@@ -1,6 +1,7 @@
 
 import json2object.JsonParser;
 import haxe.macro.Expr;
+import haxe.macro.Context;
 
 using StringTools;
 using Lambda;
@@ -58,6 +59,7 @@ typedef JsonFunction = {
     var ?namespace : String;
     var ?ret : String;
     var ?retorig : String;
+    var ?location : String;
 }
 typedef JsonDefinitions = Map<String, Array<JsonFunction>>;
 typedef JsonTypedef = Map<String, String>;
@@ -412,17 +414,65 @@ class ImGuiJsonCPP
     public function generateTopLevelFunctions() : TypeDefinition
     {
         final topLevelClass    = macro class ImGui { };
-        topLevelClass.fields   = generateFunctionFieldsArray(definitions.map(f -> f.filter(i -> i.stname == '')), true);
+        topLevelClass.fields   = generateFunctionFieldsArray(definitions.map(f -> f.filter(i -> i.stname == '' && (i.location != null && i.location.startsWith('imgui:')))), true);
         topLevelClass.isExtern = true;
         topLevelClass.meta     = [
             { name: ':keep', pos : null },
             { name: ':structAccess', pos : null },
-            { name: ':include', pos : null, params: [ macro $i{ '"imgui.h"' } ] },
+            { name: ':include', pos : null, params: [ macro $i{ '"linc_imgui.h"' } ] },
             { name: ':build', pos : null, params: [ macro imguicpp.linc.Linc.xml('imgui') ] },
             { name: ':build', pos : null, params: [ macro imguicpp.linc.Linc.touch() ] }
         ];
 
         return topLevelClass;
+    }
+
+    public function topLevelFunctionNeedsWrapping(fn : JsonFunction):Bool {
+
+        var needsWrapping = false;
+        if (fn.argsT.length > 0 && fn.argsT[fn.argsT.length-1].type == '...') {
+            if (!fn.funcname.startsWith('Log') || fn.funcname.charAt(3).toLowerCase() == fn.funcname.charAt(3)) {
+                needsWrapping = true;
+            }
+        }
+        else {
+            for (arg in fn.argsT) {
+                var parsedType = parseNativeString(arg.type);
+                switch parsedType {
+                    default:
+                    case TPath(p):
+                        if (p.pack.length == 1 && p.pack[0] == 'imguicpp') {
+                            if (p.name.endsWith('Pointer')) {
+                                needsWrapping = true;
+                                break;
+                            }
+                        }
+                }
+            }
+        }
+        return needsWrapping;
+
+    }
+
+    public function retrieveTopLevelWrappedMethods() : Array<JsonFunction> {
+
+        var topLevelDefinitions = definitions.map(f -> f.filter(i -> i.stname == '' && (i.location != null && i.location.startsWith('imgui:'))));
+        var result = [];
+
+        for (overloads in topLevelDefinitions.filter(a -> a.length > 0))
+        {
+            // Check if we need to wrap this method
+            var needsWrapping = false;
+            for (overloadedFn in overloads)
+            {
+                if (topLevelFunctionNeedsWrapping(overloadedFn)) {
+                    result.push(overloadedFn);
+                }
+            }
+        }
+
+        return result;
+
     }
 
     /**
@@ -436,19 +486,62 @@ class ImGuiJsonCPP
     function generateFunctionFieldsArray(_overloads : Array<Array<JsonFunction>>, _isTopLevel : Bool) : Array<Field>
     {
         final fields = [];
+        final wrappers = [];
 
         for (overloads in _overloads.filter(a -> a.length > 0))
         {
             var baseFn = null;
 
+            // Check if we need to wrap this method
+            var needsWrapping = false;
+            if (_isTopLevel) {
+                for (overloadedFn in overloads)
+                {
+                    needsWrapping = topLevelFunctionNeedsWrapping(overloadedFn);
+                    if (needsWrapping)
+                        break;
+                }
+            }
+
             for (overloadedFn in overloads)
             {
+                var hasVaArgs = false;
+                if (overloadedFn.argsT.length > 0 && overloadedFn.argsT[overloadedFn.argsT.length-1].type == '...') {
+                    hasVaArgs = true;
+                }
+
                 if (baseFn == null)
                 {
-                    baseFn = generateFunction(overloadedFn, _isTopLevel, overloadedFn.constructor);
+                    baseFn = generateFunction(overloadedFn, _isTopLevel, overloadedFn.constructor, needsWrapping, hasVaArgs);
+                    // if (needsWrapping) {
+                    //     baseFn.name = '_' + baseFn.name;
+                    // }
+                    if (hasVaArgs) {
+                        baseFn.meta.push({
+                            name   : ':overload',
+                            pos    : null,
+                            params : [ { pos: null, expr: EFunction(FAnonymous, generateFunctionAst(
+                                overloadedFn.constructor ? overloadedFn.stname : overloadedFn.retorig.or(overloadedFn.ret),
+                                overloadedFn.retref == '&',
+                                overloadedFn.argsT.copy(),
+                                true)) } ]
+                        });
+                    }
                 }
                 else
                 {
+                    if (hasVaArgs) {
+                        baseFn.meta.push({
+                            name   : ':overload',
+                            pos    : null,
+                            params : [ { pos: null, expr: EFunction(FAnonymous, generateFunctionAst(
+                                overloadedFn.constructor ? overloadedFn.stname : overloadedFn.retorig.or(overloadedFn.ret),
+                                overloadedFn.retref == '&',
+                                overloadedFn.argsT.filter(i -> i.type != '...'),
+                                true)) } ]
+                        });
+                    }
+                    
                     baseFn.meta.push({
                         name   : ':overload',
                         pos    : null,
@@ -459,6 +552,11 @@ class ImGuiJsonCPP
                             true)) } ]
                     });
                 }
+
+                // if (needsWrapping) {
+                //     var wrapper = generateFunctionWrapper(overloadedFn, _isTopLevel, overloadedFn.constructor);
+                //     wrappers.push(wrapper);
+                // }
 
                 // For each overloaded function also look at the default values.
                 // Generate additional overloads by filtering the aguments based on a growing list of arguments to remove.
@@ -483,6 +581,16 @@ class ImGuiJsonCPP
             }
 
             fields.push(baseFn);
+
+            if (wrappers.length > 1) {
+                for (wrapper in wrappers) {
+                    wrapper.access.push(AExtern);
+                    wrapper.access.push(AOverload);
+                }
+            }
+            while (wrappers.length > 0) {
+                fields.push(wrappers.shift());
+            }
         }
 
         return fields;
@@ -494,21 +602,56 @@ class ImGuiJsonCPP
      * @param _isTopLevel If the function doesn't belong to a struct.
      * If true the function is generated as static and the native type is prefixed with the `ImGui::` namespace.
      * @param _isConstructor if this function is a constructor.
+     * @param _wrapped if this function is wrapped.
+     * @param _filterVaArgs if we should remove ... arg.
      * @return Field
      */
-    function generateFunction(_function : JsonFunction, _isTopLevel : Bool, _isConstructor : Bool) : Field
+    function generateFunction(_function : JsonFunction, _isTopLevel : Bool, _isConstructor : Bool, _wrapped : Bool, _filterVaArgs : Bool = false) : Field
     {
-        final nativeType = _isTopLevel ? 'ImGui::${_function.funcname}' : _function.funcname;
+        final nativeType = _isTopLevel ? 'ImGui::${(_wrapped ? 'linc_' : '') + _function.funcname}' : _function.funcname;
         final funcName   = _isConstructor ? 'create' : getHaxefriendlyName(_function.funcname);
         final returnType = _isConstructor ? _function.stname : _function.retorig.or(_function.ret);
+
+        final args = _filterVaArgs ? _function.argsT.filter(i -> i.type != '...') : _function.argsT.copy();
 
         return {
             name   : funcName,
             pos    : null,
             access : _isTopLevel || _isConstructor ? [ AStatic ] : [],
-            kind   : FFun(generateFunctionAst(returnType, _function.retref == '&', _function.argsT.copy(), false)),
+            kind   : FFun(generateFunctionAst(returnType, _function.retref == '&', args, false)),
             meta   : [
                 { name: ':native', pos : null, params: [ macro $i{ '"$nativeType"' } ] }
+            ]
+        }
+    }
+
+    /**
+     * Generates a field function wrapper from a json definition.
+     * @param _function Json definition to generate a function from.
+     * @param _isTopLevel If the function doesn't belong to a struct.
+     * If true the function is generated as static and the native type is prefixed with the `ImGui::` namespace.
+     * @param _isConstructor if this function is a constructor.
+     * @return Field
+     */
+    function generateFunctionWrapper(_function : JsonFunction, _isTopLevel : Bool, _isConstructor : Bool, ?filtered : Array<String>) : Field
+    {
+        final funcName   = _isConstructor ? 'create' : getHaxefriendlyName(_function.funcname);
+        final returnType = _isConstructor ? _function.stname : _function.retorig.or(_function.ret);
+
+        var funcArgs;
+        if (filtered != null) {
+            funcArgs =  _function.argsT.filter(i -> !filtered.has(i.name));
+        }
+        else {
+            funcArgs = _function.argsT.copy();
+        }
+
+        return {
+            name   : funcName,
+            pos    : null,
+            access : _isTopLevel || _isConstructor ? [ AStatic, AInline ] : [ AInline ],
+            kind   : FFun(generateFunctionWrapperAst(_function, returnType, _function.retref == '&', funcArgs)),
+            meta   : [
             ]
         }
     }
@@ -542,17 +685,185 @@ class ImGuiJsonCPP
     }
 
     /**
+     * Generates an AST representation of a function wrapper.
+     * AST representations do not contain a function name, this type is then wrapped in an anonymous and function expr or type definition.
+     * @param _function Json definition of the function being wrapped.
+     * @param _return String of the native return type.
+     * @param _reference If the return type is a reference.
+     * @param _args Array of arguments for this function.
+     * @return Function
+     */
+    function generateFunctionWrapperAst(_function : JsonFunction, _return : String, _reference : Bool, _args : Array<JsonFunctionArg>) : Function
+    {
+        // If the first argument is called 'self' then thats part of cimgui
+        // we can safely remove it as we aren't using the c bindings code.
+        if (_args.length > 0)
+        {
+            if (_args[0].name == 'self')
+            {
+                _args.shift();
+            }
+        }
+
+        final funcName = getHaxefriendlyName(_function.funcname);
+        final retComplexType = parseNativeString(_return);
+
+        var isVoid = false;
+        switch retComplexType {
+            default:
+            case TPath(p):
+                if (p.name == 'Void') {
+                    isVoid = true;
+                }
+        }
+
+        final defaults = [ for (k in _function.defaults.keys()) k ];
+        final defaultsForCall = [ for (k in _function.defaults.keys()) k ];
+        final filtered = [];
+
+        var exprStr = '{';
+        if (!isVoid) {
+            exprStr += 'var _res = ';
+        }
+        if (defaultsForCall.length == 0) {
+            exprStr += '_' + funcName + '(';
+            for (i in 0..._args.length) {
+                var arg = _args[i];
+                if (i > 0) {
+                    exprStr += ', ';
+                }
+                exprStr += getHaxefriendlyName(arg.name);
+            }
+            exprStr += ');';
+        }
+        else {
+            var n = 0;
+            do {
+                var i = 0;
+                if (n > 0) {
+                    filtered.push(defaultsForCall.pop());
+                    exprStr += 'else ';
+                }
+                if (defaultsForCall.length > 0) {
+                    exprStr += 'if (';
+                    i = 0;
+                    for (argName in defaultsForCall) {
+                        if (i > 0) {
+                            exprStr += ' && ';
+                        }
+                        exprStr += getHaxefriendlyName(argName) + ' != null';
+                        i++;
+                    }
+                    exprStr += ') {';
+                }
+                else {
+                    exprStr += '{';
+                }
+                exprStr += '_' + funcName + '(';
+                i = 0;
+                for (arg in _args) {
+                    if (filtered.indexOf(arg.name) == -1) {
+                        if (i > 0) {
+                            exprStr += ', ';
+                        }
+                        exprStr += getHaxefriendlyName(arg.name);
+                        i++;
+                    }
+                }
+                exprStr += ');';
+                exprStr += '}';
+                n++;
+            }
+            while (defaultsForCall.length > 0);
+            
+            /*
+            var i = 0;
+            while (defaultsForCall.length > 0) {
+                var optArg = defaultsForCall.pop();
+                if (i > 0) {
+                    exprStr += 'else ';
+                }
+                exprStr += 'if (' + getHaxefriendlyName(optArg) + ' != null) {';
+                exprStr += '_' + funcName + '(';
+                var n = 0;
+                for (arg in _args) {
+                    if (defaults.indexOf(arg.name) == -1 || defaultsForCall.indexOf(arg.name) != -1) {
+                        if (n > 0) {
+                            exprStr += ', ';
+                        }
+                        exprStr += getHaxefriendlyName(arg.name);
+                        n++;
+                    }
+                }
+                if (n > 0) {
+                    exprStr += ', ';
+                }
+                exprStr += getHaxefriendlyName(optArg);
+                exprStr += ');';
+                exprStr += '}';
+                i++;
+            }
+            exprStr += 'else {';
+            exprStr += '_' + funcName + '(';
+            var n = 0;
+            for (arg in _args) {
+                if (defaults.indexOf(arg.name) == -1) {
+                    if (n > 0) {
+                        exprStr += ', ';
+                    }
+                    exprStr += getHaxefriendlyName(arg.name);
+                    n++;
+                }
+            }
+            exprStr += ');';
+            exprStr += '}';
+            */
+        }
+        exprStr += 'imguicpp.Address.sync();';
+        if (!isVoid) {
+            exprStr += 'return _res;';
+        }
+        exprStr += '}';
+
+        var funcExpr = Context.parse(
+            exprStr, 
+            Context.currentPos()
+        );
+
+        return {
+            expr : funcExpr,
+            ret  : buildReturnType(isVoid ? macro :Void : retComplexType, _reference),
+            args : [ for (arg in _args) { generateFunctionArg(arg.name, arg.type, defaults.indexOf(arg.name) != -1, true); } ]
+        }
+    }
+
+    /**
      * Generate a function argument AST representation.
      * @param _name name of the argument.
      * Will prefix this with and _ to avoid collisions with haxe preserved keyworks and will force the first character to a lower case.
      * @param _type Native type of this argument.
+     * @param _opt Whether the argument is optional or not.
+     * @param _wrapper Whether the argument is generated for a function wrapper.
      * @return FunctionArg
      */
-    function generateFunctionArg(_name : String, _type : String) : FunctionArg
+    function generateFunctionArg(_name : String, _type : String, _opt : Bool = false, _wrapper : Bool = false) : FunctionArg
     {
+        var argType = parseNativeString(_type);
+
+        // switch argType {
+        //     default:
+        //     case TPath(p):
+        //         if (p.pack.length == 2 && p.pack[0] == 'imguicpp' && p.pack[1] == 'utils') {
+        //             if (p.name == 'VarConstCharStar') {
+        //                 argType = macro :String;
+        //             }
+        //         }
+        // }
+
         return {
-            name : '_${ getHaxefriendlyName(_name) }',
-            type : parseNativeString(_type)
+            name : '${ getHaxefriendlyName(_name) }',
+            type : argType,
+            opt: _opt
         }
     }
 
@@ -809,6 +1120,10 @@ class ImGuiJsonCPP
         if (_in == '...')
         {
             return 'vargs';
+        }
+        else if (_in == 'in')
+        {
+            return '_in';
         }
         else
         {

@@ -4,6 +4,7 @@ import sys.io.File;
 import ImGuiJsonCPP;
 
 using StringBufChainer;
+using StringTools;
 
 class Main
 {
@@ -53,5 +54,165 @@ class Main
         }
 
         File.saveContent('src/imguicpp/ImGui.hx', buffer.toString());
+
+        //var imguiH = File.getContent('lib/cimgui/imgui/imgui.h').replace('\r','').split('\n');
+
+        var wrappedMethods = reader.retrieveTopLevelWrappedMethods();
+        var headerData = new StringBuf();
+        var implData = new StringBuf();
+
+        for (method in wrappedMethods) {
+
+            headerData.tabSpaces();
+            headerData.add(method.ret);
+            headerData.add(' linc_');
+            headerData.add(method.funcname);
+            headerData.add(method.argsoriginal.replace('((void*)0)', 'NULL').replace(',', ', '));
+            headerData.add(';');
+            headerData.newline();
+            headerData.newline();
+
+            var argsImpl = [];
+            var lastArgName = null;
+            var isVaArgs = false;
+            for (arg in method.argsT) {
+                if (arg.type.endsWith(']')) {
+                    var index = arg.type.lastIndexOf('[');
+                    argsImpl.push(arg.type.substring(0, index) + ' ' + arg.name + arg.type.substring(index));
+                }
+                else if (arg.type.contains('(*)')) {
+                    argsImpl.push(arg.type.replace('(*)', '(*${arg.name})'));
+                }
+                else if (arg.type == '...') {
+                    argsImpl.push('...');
+                    isVaArgs = true;
+                    lastArgName = method.argsT[method.argsT.length - 2].name;
+                }
+                else {
+                    argsImpl.push(arg.type + ' ' + arg.name);
+                }
+            }
+
+            implData.tabSpaces();
+            implData.add(method.ret);
+            implData.add(' linc_');
+            implData.add(method.funcname);
+            implData.add('(');
+            implData.add(argsImpl.join(', '));
+            implData.add(')');
+            implData.add(' {');
+            if (isVaArgs) {
+                implData.newline();
+                implData.tabSpaces();
+                implData.tabSpaces();
+                implData.add('va_list _args;');
+                implData.newline();
+                implData.tabSpaces();
+                implData.tabSpaces();
+                implData.add('va_start(_args, $lastArgName);');
+            }
+            implData.newline();
+            implData.tabSpaces();
+            implData.tabSpaces();
+            if (method.ret != 'void') {
+                implData.add(method.ret);
+                implData.add(' _res = ');
+            }
+            implData.add('ImGui::');
+            implData.add(method.funcname);
+            if (isVaArgs) {
+                implData.add('V');
+            }
+            implData.add(method.call_args.replace('...', '_args'));
+            implData.add(';');
+            implData.newline();
+            implData.tabSpaces();
+            implData.tabSpaces();
+            implData.add('if (linc_Address_sync != NULL) (*linc_Address_sync)();');
+            if (method.ret != 'void') {
+                implData.newline();
+                implData.tabSpaces();
+                implData.tabSpaces();
+                implData.add('return _res;');
+            }
+            implData.newline();
+            implData.tabSpaces();
+            implData.add('}');
+            implData.newline();
+            implData.newline();
+
+        }
+        
+        var lincImguiH = '#pragma once
+
+#ifndef HXCPP_H
+#include <hxcpp.h>
+#endif
+
+#include "imgui.h"
+
+namespace ImGui {
+
+    extern void (*linc_Address_sync)(void);
+
+${headerData.toString()}
+
+}
+';
+        
+        var lincImguiCPP = '//hxcpp include should be first
+#include <hxcpp.h>
+#include "./linc_imgui.h"
+
+namespace ImGui {
+
+    void (*linc_Address_sync)(void) = NULL;
+
+${implData.toString()}
+
+}
+';
+
+File.saveContent('src/imguicpp/linc/linc_imgui.h', lincImguiH);
+File.saveContent('src/imguicpp/linc/linc_imgui.cpp', lincImguiCPP);
+
+        // for (wrappedName in wrappedNames) {
+        //     for (line in imguiH) {
+        //         line = line.trim();
+        //         if (line.startsWith('IMGUI_API ')) {
+        //             var parenIndex = line.indexOf('(');
+        //             if (parenIndex != -1) {
+        //                 var section = line.substr(0, parenIndex);
+        //                 if (section.endsWith(' $wrappedName')) {
+        //                     var info = extractImGuiHeaderAPI(line);
+        //                 }
+        //             }
+        //         }
+        //     }
+        // }
+
     }
+
+    // static var RE_IMGUI_API = ~/IMGUI_API\s+/;
+
+    // static var RE_SIGNATURE = ~/^([a-zA-Z0-9_\*\s]+)\s+([a-zA-Z0-9_]+)\((.*?)\);/;
+
+    // static function extractImGuiHeaderAPI(line:String) {
+
+    //     line = line.trim();
+    //     line = RE_IMGUI_API.replace(line, '').trim();
+    //     if (RE_SIGNATURE.match(line)) {
+    //         trace('type=${RE_SIGNATURE.matched(1).trim()} name=${RE_SIGNATURE.matched(2).trim()} args=${RE_SIGNATURE.matched(3).trim()}');
+    //     }
+    //     else {
+    //         throw 'Failed to parse line: $line';
+    //     }
+    //     return {
+    //         type: RE_SIGNATURE.matched(1).trim(),
+    //         name: RE_SIGNATURE.matched(2).trim(),
+    //         args: RE_SIGNATURE.matched(2).trim()
+    //     };
+
+    // }
+
 }

@@ -1,4 +1,4 @@
-package imguijs;
+package imgui;
 
 typedef Int16 = Int;
 

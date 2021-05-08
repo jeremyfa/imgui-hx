@@ -915,7 +915,7 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("w")
 	var w : cpp.Float32;
 	@:native("ImVec4")
-	@:overload(function(__x:cpp.Float32, __y:cpp.Float32, __z:cpp.Float32, __w:cpp.Float32):ImVec4 { })
+	@:overload(function(_x:cpp.Float32, _y:cpp.Float32, _z:cpp.Float32, _w:cpp.Float32):ImVec4 { })
 	static function create():ImVec4;
 }
 
@@ -925,8 +925,8 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("y")
 	var y : cpp.Int16;
 	@:native("ImVec2ih")
-	@:overload(function(__x:cpp.Int16, __y:cpp.Int16):ImVec2ih { })
-	@:overload(function(_rhs:ImVec2):ImVec2ih { })
+	@:overload(function(_x:cpp.Int16, _y:cpp.Int16):ImVec2ih { })
+	@:overload(function(rhs:ImVec2):ImVec2ih { })
 	static function create():ImVec2ih;
 }
 
@@ -936,7 +936,7 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("y")
 	var y : cpp.Float32;
 	@:native("ImVec2")
-	@:overload(function(__x:cpp.Float32, __y:cpp.Float32):ImVec2 { })
+	@:overload(function(_x:cpp.Float32, _y:cpp.Float32):ImVec2 { })
 	static function create():ImVec2;
 }
 
@@ -944,7 +944,7 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("x")
 	var x : cpp.Float32;
 	@:native("ImVec1")
-	@:overload(function(__x:cpp.Float32):ImVec1 { })
+	@:overload(function(_x:cpp.Float32):ImVec1 { })
 	static function create():ImVec1;
 }
 
@@ -954,53 +954,53 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("Max")
 	var max : ImVec2;
 	@:native("TranslateY")
-	function translateY(_dy:cpp.Float32):cpp.Void;
+	function translateY(dy:cpp.Float32):cpp.Void;
 	@:native("TranslateX")
-	function translateX(_dx:cpp.Float32):cpp.Void;
+	function translateX(dx:cpp.Float32):cpp.Void;
 	@:native("Translate")
-	function translate(_d:ImVec2):cpp.Void;
+	function translate(d:ImVec2):cpp.Void;
 	@:native("ToVec4")
-	function toVec4(_pOut:cpp.Star<ImVec4>, _self:cpp.Star<ImRect>):cpp.Void;
+	function toVec4(pOut:cpp.Star<ImVec4>, self:cpp.Star<ImRect>):cpp.Void;
 	@:native("Overlaps")
-	function overlaps(_r:ImRect):Bool;
+	function overlaps(r:ImRect):Bool;
 	@:native("IsInverted")
 	function isInverted():Bool;
 	@:native("ImRect")
-	@:overload(function(_min:ImVec2, _max:ImVec2):ImRect { })
-	@:overload(function(_v:ImVec4):ImRect { })
-	@:overload(function(_x1:cpp.Float32, _y1:cpp.Float32, _x2:cpp.Float32, _y2:cpp.Float32):ImRect { })
+	@:overload(function(min:ImVec2, max:ImVec2):ImRect { })
+	@:overload(function(v:ImVec4):ImRect { })
+	@:overload(function(x1:cpp.Float32, y1:cpp.Float32, x2:cpp.Float32, y2:cpp.Float32):ImRect { })
 	static function create():ImRect;
 	@:native("GetWidth")
 	function getWidth():cpp.Float32;
 	@:native("GetTR")
-	function getTR(_pOut:cpp.Star<ImVec2>, _self:cpp.Star<ImRect>):cpp.Void;
+	function getTR(pOut:cpp.Star<ImVec2>, self:cpp.Star<ImRect>):cpp.Void;
 	@:native("GetTL")
-	function getTL(_pOut:cpp.Star<ImVec2>, _self:cpp.Star<ImRect>):cpp.Void;
+	function getTL(pOut:cpp.Star<ImVec2>, self:cpp.Star<ImRect>):cpp.Void;
 	@:native("GetSize")
-	function getSize(_pOut:cpp.Star<ImVec2>, _self:cpp.Star<ImRect>):cpp.Void;
+	function getSize(pOut:cpp.Star<ImVec2>, self:cpp.Star<ImRect>):cpp.Void;
 	@:native("GetHeight")
 	function getHeight():cpp.Float32;
 	@:native("GetCenter")
-	function getCenter(_pOut:cpp.Star<ImVec2>, _self:cpp.Star<ImRect>):cpp.Void;
+	function getCenter(pOut:cpp.Star<ImVec2>, self:cpp.Star<ImRect>):cpp.Void;
 	@:native("GetBR")
-	function getBR(_pOut:cpp.Star<ImVec2>, _self:cpp.Star<ImRect>):cpp.Void;
+	function getBR(pOut:cpp.Star<ImVec2>, self:cpp.Star<ImRect>):cpp.Void;
 	@:native("GetBL")
-	function getBL(_pOut:cpp.Star<ImVec2>, _self:cpp.Star<ImRect>):cpp.Void;
+	function getBL(pOut:cpp.Star<ImVec2>, self:cpp.Star<ImRect>):cpp.Void;
 	@:native("Floor")
 	function floor():cpp.Void;
 	@:native("Expand")
-	@:overload(function(_amount:ImVec2):cpp.Void { })
-	function expand(_amount:cpp.Float32):cpp.Void;
+	@:overload(function(amount:ImVec2):cpp.Void { })
+	function expand(amount:cpp.Float32):cpp.Void;
 	@:native("Contains")
-	@:overload(function(_r:ImRect):Bool { })
-	function contains(_p:ImVec2):Bool;
+	@:overload(function(r:ImRect):Bool { })
+	function contains(p:ImVec2):Bool;
 	@:native("ClipWithFull")
-	function clipWithFull(_r:ImRect):cpp.Void;
+	function clipWithFull(r:ImRect):cpp.Void;
 	@:native("ClipWith")
-	function clipWith(_r:ImRect):cpp.Void;
+	function clipWith(r:ImRect):cpp.Void;
 	@:native("Add")
-	@:overload(function(_r:ImRect):cpp.Void { })
-	function add(_p:ImVec2):cpp.Void;
+	@:overload(function(r:ImRect):cpp.Void { })
+	function add(p:ImVec2):cpp.Void;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImGuiWindowTempData") extern class ImGuiWindowTempData {
@@ -1269,29 +1269,29 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("MemoryCompacted")
 	var memoryCompacted : Bool;
 	@:native("TitleBarRect")
-	function titleBarRect(_pOut:cpp.Star<ImRect>, _self:cpp.Star<ImGuiWindow>):cpp.Void;
+	function titleBarRect(pOut:cpp.Star<ImRect>, self:cpp.Star<ImGuiWindow>):cpp.Void;
 	@:native("TitleBarHeight")
 	function titleBarHeight():cpp.Float32;
 	@:native("Rect")
-	function rect(_pOut:cpp.Star<ImRect>, _self:cpp.Star<ImGuiWindow>):cpp.Void;
+	function rect(pOut:cpp.Star<ImRect>, self:cpp.Star<ImGuiWindow>):cpp.Void;
 	@:native("MenuBarRect")
-	function menuBarRect(_pOut:cpp.Star<ImRect>, _self:cpp.Star<ImGuiWindow>):cpp.Void;
+	function menuBarRect(pOut:cpp.Star<ImRect>, self:cpp.Star<ImGuiWindow>):cpp.Void;
 	@:native("MenuBarHeight")
 	function menuBarHeight():cpp.Float32;
 	@:native("ImGuiWindow")
-	static function create(_context:cpp.Star<ImGuiContext>, _name:imguicpp.utils.VarConstCharStar):ImGuiWindow;
+	static function create(context:cpp.Star<ImGuiContext>, name:imguicpp.utils.VarConstCharStar):ImGuiWindow;
 	@:native("GetIDNoKeepAlive")
-	@:overload(function(_str:imguicpp.utils.VarConstCharStar):ImGuiID { })
-	@:overload(function(_ptr:imguicpp.VoidPointer):ImGuiID { })
-	@:overload(function(_n:Int):ImGuiID { })
-	function getIDNoKeepAlive(_str:imguicpp.utils.VarConstCharStar, _str_end:imguicpp.utils.VarConstCharStar):ImGuiID;
+	@:overload(function(str:imguicpp.utils.VarConstCharStar):ImGuiID { })
+	@:overload(function(ptr:imguicpp.VoidPointer):ImGuiID { })
+	@:overload(function(n:Int):ImGuiID { })
+	function getIDNoKeepAlive(str:imguicpp.utils.VarConstCharStar, str_end:imguicpp.utils.VarConstCharStar):ImGuiID;
 	@:native("GetIDFromRectangle")
-	function getIDFromRectangle(_r_abs:ImRect):ImGuiID;
+	function getIDFromRectangle(r_abs:ImRect):ImGuiID;
 	@:native("GetID")
-	@:overload(function(_str:imguicpp.utils.VarConstCharStar):ImGuiID { })
-	@:overload(function(_ptr:imguicpp.VoidPointer):ImGuiID { })
-	@:overload(function(_n:Int):ImGuiID { })
-	function getID(_str:imguicpp.utils.VarConstCharStar, _str_end:imguicpp.utils.VarConstCharStar):ImGuiID;
+	@:overload(function(str:imguicpp.utils.VarConstCharStar):ImGuiID { })
+	@:overload(function(ptr:imguicpp.VoidPointer):ImGuiID { })
+	@:overload(function(n:Int):ImGuiID { })
+	function getID(str:imguicpp.utils.VarConstCharStar, str_end:imguicpp.utils.VarConstCharStar):ImGuiID;
 	@:native("CalcFontSize")
 	function calcFontSize():cpp.Float32;
 }
@@ -1302,11 +1302,11 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("e")
 	var e : imguicpp.utils.VarConstCharStar;
 	@:native("split")
-	function split(_separator:cpp.Char, _out:ImVectorImGuiTextRangePointer):cpp.Void;
+	function split(separator:cpp.Char, out:ImVectorImGuiTextRangePointer):cpp.Void;
 	@:native("empty")
 	function empty():Bool;
 	@:native("ImGuiTextRange")
-	@:overload(function(__b:imguicpp.utils.VarConstCharStar, __e:imguicpp.utils.VarConstCharStar):ImGuiTextRange { })
+	@:overload(function(_b:imguicpp.utils.VarConstCharStar, _e:imguicpp.utils.VarConstCharStar):ImGuiTextRange { })
 	static function create():ImGuiTextRange;
 }
 
@@ -1318,17 +1318,17 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("CountGrep")
 	var countGrep : Int;
 	@:native("PassFilter")
-	@:overload(function(_text:imguicpp.utils.VarConstCharStar):Bool { })
-	function passFilter(_text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar):Bool;
+	@:overload(function(text:imguicpp.utils.VarConstCharStar):Bool { })
+	function passFilter(text:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar):Bool;
 	@:native("IsActive")
 	function isActive():Bool;
 	@:native("ImGuiTextFilter")
 	@:overload(function():ImGuiTextFilter { })
-	static function create(_default_filter:imguicpp.utils.VarConstCharStar):ImGuiTextFilter;
+	static function create(default_filter:imguicpp.utils.VarConstCharStar):ImGuiTextFilter;
 	@:native("Draw")
-	@:overload(function(_width:cpp.Float32):Bool { })
+	@:overload(function(width:cpp.Float32):Bool { })
 	@:overload(function():Bool { })
-	function draw(_label:imguicpp.utils.VarConstCharStar, _width:cpp.Float32):Bool;
+	function draw(label:imguicpp.utils.VarConstCharStar, width:cpp.Float32):Bool;
 	@:native("Clear")
 	function clear():cpp.Void;
 	@:native("Build")
@@ -1341,7 +1341,7 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("size")
 	function size():Int;
 	@:native("reserve")
-	function reserve(_capacity:Int):cpp.Void;
+	function reserve(capacity:Int):cpp.Void;
 	@:native("end")
 	function end():imguicpp.utils.VarConstCharStar;
 	@:native("empty")
@@ -1353,12 +1353,13 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("begin")
 	function begin():imguicpp.utils.VarConstCharStar;
 	@:native("appendfv")
-	function appendfv(_fmt:imguicpp.utils.VarConstCharStar, _args:cpp.VarArg):cpp.Void;
+	function appendfv(fmt:imguicpp.utils.VarConstCharStar, args:cpp.VarArg):cpp.Void;
 	@:native("appendf")
-	function appendf(_fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):cpp.Void;
+	@:overload(function(fmt:imguicpp.utils.VarConstCharStar, vargs:cpp.VarArg):cpp.Void { })
+	function appendf(fmt:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("append")
-	@:overload(function(_str:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	function append(_str:imguicpp.utils.VarConstCharStar, _str_end:imguicpp.utils.VarConstCharStar):cpp.Void;
+	@:overload(function(str:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	function append(str:imguicpp.utils.VarConstCharStar, str_end:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGuiTextBuffer")
 	static function create():ImGuiTextBuffer;
 }
@@ -1837,18 +1838,18 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("ImGuiTabBar")
 	static function create():ImGuiTabBar;
 	@:native("GetTabOrder")
-	function getTabOrder(_tab:cpp.Star<ImGuiTabItem>):Int;
+	function getTabOrder(tab:cpp.Star<ImGuiTabItem>):Int;
 	@:native("GetTabName")
-	function getTabName(_tab:cpp.Star<ImGuiTabItem>):imguicpp.utils.VarConstCharStar;
+	function getTabName(tab:cpp.Star<ImGuiTabItem>):imguicpp.utils.VarConstCharStar;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImGuiStyleMod") extern class ImGuiStyleMod {
 	@:native("VarIdx")
 	var varIdx : ImGuiStyleVar;
 	@:native("ImGuiStyleMod")
-	@:overload(function(_idx:ImGuiStyleVar, _v:cpp.Float32):ImGuiStyleMod { })
-	@:overload(function(_idx:ImGuiStyleVar, _v:ImVec2):ImGuiStyleMod { })
-	static function create(_idx:ImGuiStyleVar, _v:Int):ImGuiStyleMod;
+	@:overload(function(idx:ImGuiStyleVar, v:cpp.Float32):ImGuiStyleMod { })
+	@:overload(function(idx:ImGuiStyleVar, v:ImVec2):ImGuiStyleMod { })
+	static function create(idx:ImGuiStyleVar, v:Int):ImGuiStyleMod;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImGuiStyle") extern class ImGuiStyle {
@@ -1933,7 +1934,7 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("Colors")
 	var colors : cpp.RawPointer<ImVec4>;
 	@:native("ScaleAllSizes")
-	function scaleAllSizes(_scale_factor:cpp.Float32):cpp.Void;
+	function scaleAllSizes(scale_factor:cpp.Float32):cpp.Void;
 	@:native("ImGuiStyle")
 	static function create():ImGuiStyle;
 }
@@ -1942,47 +1943,47 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("key")
 	var key : ImGuiID;
 	@:native("ImGuiStoragePair")
-	@:overload(function(__key:ImGuiID, __val_f:cpp.Float32):ImGuiStoragePair { })
-	@:overload(function(__key:ImGuiID, __val_p:imguicpp.VoidPointer):ImGuiStoragePair { })
-	static function create(__key:ImGuiID, __val_i:Int):ImGuiStoragePair;
+	@:overload(function(_key:ImGuiID, _val_f:cpp.Float32):ImGuiStoragePair { })
+	@:overload(function(_key:ImGuiID, _val_p:imguicpp.VoidPointer):ImGuiStoragePair { })
+	static function create(_key:ImGuiID, _val_i:Int):ImGuiStoragePair;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImGuiStorage") extern class ImGuiStorage {
 	@:native("Data")
 	var data : ImVectorImGuiStoragePair;
 	@:native("SetVoidPtr")
-	function setVoidPtr(_key:ImGuiID, _val:imguicpp.VoidPointer):cpp.Void;
+	function setVoidPtr(key:ImGuiID, val:imguicpp.VoidPointer):cpp.Void;
 	@:native("SetInt")
-	function setInt(_key:ImGuiID, _val:Int):cpp.Void;
+	function setInt(key:ImGuiID, val:Int):cpp.Void;
 	@:native("SetFloat")
-	function setFloat(_key:ImGuiID, _val:cpp.Float32):cpp.Void;
+	function setFloat(key:ImGuiID, val:cpp.Float32):cpp.Void;
 	@:native("SetBool")
-	function setBool(_key:ImGuiID, _val:Bool):cpp.Void;
+	function setBool(key:ImGuiID, val:Bool):cpp.Void;
 	@:native("SetAllInt")
-	function setAllInt(_val:Int):cpp.Void;
+	function setAllInt(val:Int):cpp.Void;
 	@:native("GetVoidPtrRef")
-	@:overload(function(_key:ImGuiID):cpp.Star<cpp.Star<cpp.Void>> { })
-	function getVoidPtrRef(_key:ImGuiID, _default_val:imguicpp.VoidPointer):cpp.Star<cpp.Star<cpp.Void>>;
+	@:overload(function(key:ImGuiID):cpp.Star<cpp.Star<cpp.Void>> { })
+	function getVoidPtrRef(key:ImGuiID, default_val:imguicpp.VoidPointer):cpp.Star<cpp.Star<cpp.Void>>;
 	@:native("GetVoidPtr")
-	function getVoidPtr(_key:ImGuiID):imguicpp.VoidPointer;
+	function getVoidPtr(key:ImGuiID):imguicpp.VoidPointer;
 	@:native("GetIntRef")
-	@:overload(function(_key:ImGuiID):imguicpp.IntPointer { })
-	function getIntRef(_key:ImGuiID, _default_val:Int):imguicpp.IntPointer;
+	@:overload(function(key:ImGuiID):imguicpp.IntPointer { })
+	function getIntRef(key:ImGuiID, default_val:Int):imguicpp.IntPointer;
 	@:native("GetInt")
-	@:overload(function(_key:ImGuiID):Int { })
-	function getInt(_key:ImGuiID, _default_val:Int):Int;
+	@:overload(function(key:ImGuiID):Int { })
+	function getInt(key:ImGuiID, default_val:Int):Int;
 	@:native("GetFloatRef")
-	@:overload(function(_key:ImGuiID):imguicpp.FloatPointer { })
-	function getFloatRef(_key:ImGuiID, _default_val:cpp.Float32):imguicpp.FloatPointer;
+	@:overload(function(key:ImGuiID):imguicpp.FloatPointer { })
+	function getFloatRef(key:ImGuiID, default_val:cpp.Float32):imguicpp.FloatPointer;
 	@:native("GetFloat")
-	@:overload(function(_key:ImGuiID):cpp.Float32 { })
-	function getFloat(_key:ImGuiID, _default_val:cpp.Float32):cpp.Float32;
+	@:overload(function(key:ImGuiID):cpp.Float32 { })
+	function getFloat(key:ImGuiID, default_val:cpp.Float32):cpp.Float32;
 	@:native("GetBoolRef")
-	@:overload(function(_key:ImGuiID):imguicpp.BoolPointer { })
-	function getBoolRef(_key:ImGuiID, _default_val:Bool):imguicpp.BoolPointer;
+	@:overload(function(key:ImGuiID):imguicpp.BoolPointer { })
+	function getBoolRef(key:ImGuiID, default_val:Bool):imguicpp.BoolPointer;
 	@:native("GetBool")
-	@:overload(function(_key:ImGuiID):Bool { })
-	function getBool(_key:ImGuiID, _default_val:Bool):Bool;
+	@:overload(function(key:ImGuiID):Bool { })
+	function getBool(key:ImGuiID, default_val:Bool):Bool;
 	@:native("Clear")
 	function clear():cpp.Void;
 	@:native("BuildSortByKey")
@@ -2059,8 +2060,8 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("Index")
 	var index : Int;
 	@:native("ImGuiPtrOrIndex")
-	@:overload(function(_index:Int):ImGuiPtrOrIndex { })
-	static function create(_ptr:imguicpp.VoidPointer):ImGuiPtrOrIndex;
+	@:overload(function(index:Int):ImGuiPtrOrIndex { })
+	static function create(ptr:imguicpp.VoidPointer):ImGuiPtrOrIndex;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImGuiPopupData") extern class ImGuiPopupData {
@@ -2104,7 +2105,7 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("IsDelivery")
 	function isDelivery():Bool;
 	@:native("IsDataType")
-	function isDataType(_type:imguicpp.utils.VarConstCharStar):Bool;
+	function isDataType(type:imguicpp.utils.VarConstCharStar):Bool;
 	@:native("ImGuiPayload")
 	static function create():ImGuiPayload;
 	@:native("Clear")
@@ -2276,13 +2277,13 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("NextWidths")
 	var nextWidths : imguicpp.FloatPointer;
 	@:native("Update")
-	function update(_count:Int, _spacing:cpp.Float32, _clear:Bool):cpp.Void;
+	function update(count:Int, spacing:cpp.Float32, clear:Bool):cpp.Void;
 	@:native("ImGuiMenuColumns")
 	static function create():ImGuiMenuColumns;
 	@:native("DeclColumns")
-	function declColumns(_w0:cpp.Float32, _w1:cpp.Float32, _w2:cpp.Float32):cpp.Float32;
+	function declColumns(w0:cpp.Float32, w1:cpp.Float32, w2:cpp.Float32):cpp.Float32;
 	@:native("CalcExtraSpace")
-	function calcExtraSpace(_avail_w:cpp.Float32):cpp.Float32;
+	function calcExtraSpace(avail_w:cpp.Float32):cpp.Float32;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImGuiListClipper") extern class ImGuiListClipper {
@@ -2307,8 +2308,8 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("End")
 	function end():cpp.Void;
 	@:native("Begin")
-	@:overload(function(_items_count:Int):cpp.Void { })
-	function begin(_items_count:Int, _items_height:cpp.Float32):cpp.Void;
+	@:overload(function(items_count:Int):cpp.Void { })
+	function begin(items_count:Int, items_height:cpp.Float32):cpp.Void;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImGuiLastItemDataBackup") extern class ImGuiLastItemDataBackup {
@@ -2364,7 +2365,7 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("SelectAll")
 	function selectAll():cpp.Void;
 	@:native("OnKeyPressed")
-	function onKeyPressed(_key:Int):cpp.Void;
+	function onKeyPressed(key:Int):cpp.Void;
 	@:native("ImGuiInputTextState")
 	static function create():ImGuiInputTextState;
 	@:native("HasSelection")
@@ -2413,14 +2414,14 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("SelectAll")
 	function selectAll():cpp.Void;
 	@:native("InsertChars")
-	@:overload(function(_pos:Int, _text:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	function insertChars(_pos:Int, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar):cpp.Void;
+	@:overload(function(pos:Int, text:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	function insertChars(pos:Int, text:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGuiInputTextCallbackData")
 	static function create():ImGuiInputTextCallbackData;
 	@:native("HasSelection")
 	function hasSelection():Bool;
 	@:native("DeleteChars")
-	function deleteChars(_pos:Int, _bytes_count:Int):cpp.Void;
+	function deleteChars(pos:Int, bytes_count:Int):cpp.Void;
 	@:native("ClearSelection")
 	function clearSelection():cpp.Void;
 }
@@ -2591,11 +2592,11 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("ClearInputCharacters")
 	function clearInputCharacters():cpp.Void;
 	@:native("AddInputCharactersUTF8")
-	function addInputCharactersUTF8(_str:imguicpp.utils.VarConstCharStar):cpp.Void;
+	function addInputCharactersUTF8(str:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("AddInputCharacterUTF16")
-	function addInputCharacterUTF16(_c:ImWchar16):cpp.Void;
+	function addInputCharacterUTF16(c:ImWchar16):cpp.Void;
 	@:native("AddInputCharacter")
-	function addInputCharacter(_c:UInt):cpp.Void;
+	function addInputCharacter(c:UInt):cpp.Void;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImGuiGroupData") extern class ImGuiGroupData {
@@ -3062,7 +3063,7 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("TempBuffer")
 	var tempBuffer : cpp.RawPointer<cpp.Char>;
 	@:native("ImGuiContext")
-	static function create(_shared_font_atlas:cpp.Star<ImFontAtlas>):ImGuiContext;
+	static function create(shared_font_atlas:cpp.Star<ImFontAtlas>):ImGuiContext;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImGuiColorMod") extern class ImGuiColorMod {
@@ -3076,22 +3077,22 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("UsedChars")
 	var usedChars : ImVectorImU32;
 	@:native("SetBit")
-	function setBit(_n:cpp.SizeT):cpp.Void;
+	function setBit(n:cpp.SizeT):cpp.Void;
 	@:native("ImFontGlyphRangesBuilder")
 	static function create():ImFontGlyphRangesBuilder;
 	@:native("GetBit")
-	function getBit(_n:cpp.SizeT):Bool;
+	function getBit(n:cpp.SizeT):Bool;
 	@:native("Clear")
 	function clear():cpp.Void;
 	@:native("BuildRanges")
-	function buildRanges(_out_ranges:ImVectorImWcharPointer):cpp.Void;
+	function buildRanges(out_ranges:ImVectorImWcharPointer):cpp.Void;
 	@:native("AddText")
-	@:overload(function(_text:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	function addText(_text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar):cpp.Void;
+	@:overload(function(text:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	function addText(text:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("AddRanges")
-	function addRanges(_ranges:cpp.Star<ImWchar>):cpp.Void;
+	function addRanges(ranges:cpp.Star<ImWchar>):cpp.Void;
 	@:native("AddChar")
-	function addChar(_c:ImWchar):cpp.Void;
+	function addChar(c:ImWchar):cpp.Void;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImFontGlyph") extern class ImFontGlyph {
@@ -3221,19 +3222,19 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("PackIdLines")
 	var packIdLines : Int;
 	@:native("SetTexID")
-	function setTexID(_id:ImTextureID):cpp.Void;
+	function setTexID(id:ImTextureID):cpp.Void;
 	@:native("IsBuilt")
 	function isBuilt():Bool;
 	@:native("ImFontAtlas")
 	static function create():ImFontAtlas;
 	@:native("GetTexDataAsRGBA32")
-	@:overload(function(_out_pixels:cpp.Star<cpp.Star<cpp.UInt8>>, _out_width:imguicpp.IntPointer, _out_height:imguicpp.IntPointer):cpp.Void { })
-	function getTexDataAsRGBA32(_out_pixels:cpp.Star<cpp.Star<cpp.UInt8>>, _out_width:imguicpp.IntPointer, _out_height:imguicpp.IntPointer, _out_bytes_per_pixel:imguicpp.IntPointer):cpp.Void;
+	@:overload(function(out_pixels:cpp.Star<cpp.Star<cpp.UInt8>>, out_width:imguicpp.IntPointer, out_height:imguicpp.IntPointer):cpp.Void { })
+	function getTexDataAsRGBA32(out_pixels:cpp.Star<cpp.Star<cpp.UInt8>>, out_width:imguicpp.IntPointer, out_height:imguicpp.IntPointer, out_bytes_per_pixel:imguicpp.IntPointer):cpp.Void;
 	@:native("GetTexDataAsAlpha8")
-	@:overload(function(_out_pixels:cpp.Star<cpp.Star<cpp.UInt8>>, _out_width:imguicpp.IntPointer, _out_height:imguicpp.IntPointer):cpp.Void { })
-	function getTexDataAsAlpha8(_out_pixels:cpp.Star<cpp.Star<cpp.UInt8>>, _out_width:imguicpp.IntPointer, _out_height:imguicpp.IntPointer, _out_bytes_per_pixel:imguicpp.IntPointer):cpp.Void;
+	@:overload(function(out_pixels:cpp.Star<cpp.Star<cpp.UInt8>>, out_width:imguicpp.IntPointer, out_height:imguicpp.IntPointer):cpp.Void { })
+	function getTexDataAsAlpha8(out_pixels:cpp.Star<cpp.Star<cpp.UInt8>>, out_width:imguicpp.IntPointer, out_height:imguicpp.IntPointer, out_bytes_per_pixel:imguicpp.IntPointer):cpp.Void;
 	@:native("GetMouseCursorTexData")
-	function getMouseCursorTexData(_cursor:ImGuiMouseCursor, _out_offset:cpp.Star<ImVec2>, _out_size:cpp.Star<ImVec2>, _out_uv_border:cpp.RawPointer<ImVec2>, _out_uv_fill:cpp.RawPointer<ImVec2>):Bool;
+	function getMouseCursorTexData(cursor:ImGuiMouseCursor, out_offset:cpp.Star<ImVec2>, out_size:cpp.Star<ImVec2>, out_uv_border:cpp.RawPointer<ImVec2>, out_uv_fill:cpp.RawPointer<ImVec2>):Bool;
 	@:native("GetGlyphRangesVietnamese")
 	function getGlyphRangesVietnamese():cpp.Star<ImWchar>;
 	@:native("GetGlyphRangesThai")
@@ -3251,7 +3252,7 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("GetGlyphRangesChineseFull")
 	function getGlyphRangesChineseFull():cpp.Star<ImWchar>;
 	@:native("GetCustomRectByIndex")
-	function getCustomRectByIndex(_index:Int):cpp.Star<ImFontAtlasCustomRect>;
+	function getCustomRectByIndex(index:Int):cpp.Star<ImFontAtlasCustomRect>;
 	@:native("ClearTexData")
 	function clearTexData():cpp.Void;
 	@:native("ClearInputData")
@@ -3261,35 +3262,35 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("Clear")
 	function clear():cpp.Void;
 	@:native("CalcCustomRectUV")
-	function calcCustomRectUV(_rect:cpp.Star<ImFontAtlasCustomRect>, _out_uv_min:cpp.Star<ImVec2>, _out_uv_max:cpp.Star<ImVec2>):cpp.Void;
+	function calcCustomRectUV(rect:cpp.Star<ImFontAtlasCustomRect>, out_uv_min:cpp.Star<ImVec2>, out_uv_max:cpp.Star<ImVec2>):cpp.Void;
 	@:native("Build")
 	function build():Bool;
 	@:native("AddFontFromMemoryTTF")
-	@:overload(function(_font_data:imguicpp.VoidPointer, _font_size:Int, _size_pixels:cpp.Float32, _glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont> { })
-	@:overload(function(_font_data:imguicpp.VoidPointer, _font_size:Int, _size_pixels:cpp.Float32):cpp.Star<ImFont> { })
-	function addFontFromMemoryTTF(_font_data:imguicpp.VoidPointer, _font_size:Int, _size_pixels:cpp.Float32, _font_cfg:cpp.Star<ImFontConfig>, _glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont>;
+	@:overload(function(font_data:imguicpp.VoidPointer, font_size:Int, size_pixels:cpp.Float32, glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont> { })
+	@:overload(function(font_data:imguicpp.VoidPointer, font_size:Int, size_pixels:cpp.Float32):cpp.Star<ImFont> { })
+	function addFontFromMemoryTTF(font_data:imguicpp.VoidPointer, font_size:Int, size_pixels:cpp.Float32, font_cfg:cpp.Star<ImFontConfig>, glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont>;
 	@:native("AddFontFromMemoryCompressedTTF")
-	@:overload(function(_compressed_font_data:imguicpp.VoidPointer, _compressed_font_size:Int, _size_pixels:cpp.Float32, _glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont> { })
-	@:overload(function(_compressed_font_data:imguicpp.VoidPointer, _compressed_font_size:Int, _size_pixels:cpp.Float32):cpp.Star<ImFont> { })
-	function addFontFromMemoryCompressedTTF(_compressed_font_data:imguicpp.VoidPointer, _compressed_font_size:Int, _size_pixels:cpp.Float32, _font_cfg:cpp.Star<ImFontConfig>, _glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont>;
+	@:overload(function(compressed_font_data:imguicpp.VoidPointer, compressed_font_size:Int, size_pixels:cpp.Float32, glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont> { })
+	@:overload(function(compressed_font_data:imguicpp.VoidPointer, compressed_font_size:Int, size_pixels:cpp.Float32):cpp.Star<ImFont> { })
+	function addFontFromMemoryCompressedTTF(compressed_font_data:imguicpp.VoidPointer, compressed_font_size:Int, size_pixels:cpp.Float32, font_cfg:cpp.Star<ImFontConfig>, glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont>;
 	@:native("AddFontFromMemoryCompressedBase85TTF")
-	@:overload(function(_compressed_font_data_base85:imguicpp.utils.VarConstCharStar, _size_pixels:cpp.Float32, _glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont> { })
-	@:overload(function(_compressed_font_data_base85:imguicpp.utils.VarConstCharStar, _size_pixels:cpp.Float32):cpp.Star<ImFont> { })
-	function addFontFromMemoryCompressedBase85TTF(_compressed_font_data_base85:imguicpp.utils.VarConstCharStar, _size_pixels:cpp.Float32, _font_cfg:cpp.Star<ImFontConfig>, _glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont>;
+	@:overload(function(compressed_font_data_base85:imguicpp.utils.VarConstCharStar, size_pixels:cpp.Float32, glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont> { })
+	@:overload(function(compressed_font_data_base85:imguicpp.utils.VarConstCharStar, size_pixels:cpp.Float32):cpp.Star<ImFont> { })
+	function addFontFromMemoryCompressedBase85TTF(compressed_font_data_base85:imguicpp.utils.VarConstCharStar, size_pixels:cpp.Float32, font_cfg:cpp.Star<ImFontConfig>, glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont>;
 	@:native("AddFontFromFileTTF")
-	@:overload(function(_filename:imguicpp.utils.VarConstCharStar, _size_pixels:cpp.Float32, _glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont> { })
-	@:overload(function(_filename:imguicpp.utils.VarConstCharStar, _size_pixels:cpp.Float32):cpp.Star<ImFont> { })
-	function addFontFromFileTTF(_filename:imguicpp.utils.VarConstCharStar, _size_pixels:cpp.Float32, _font_cfg:cpp.Star<ImFontConfig>, _glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont>;
+	@:overload(function(filename:imguicpp.utils.VarConstCharStar, size_pixels:cpp.Float32, glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont> { })
+	@:overload(function(filename:imguicpp.utils.VarConstCharStar, size_pixels:cpp.Float32):cpp.Star<ImFont> { })
+	function addFontFromFileTTF(filename:imguicpp.utils.VarConstCharStar, size_pixels:cpp.Float32, font_cfg:cpp.Star<ImFontConfig>, glyph_ranges:cpp.Star<ImWchar>):cpp.Star<ImFont>;
 	@:native("AddFontDefault")
 	@:overload(function():cpp.Star<ImFont> { })
-	function addFontDefault(_font_cfg:cpp.Star<ImFontConfig>):cpp.Star<ImFont>;
+	function addFontDefault(font_cfg:cpp.Star<ImFontConfig>):cpp.Star<ImFont>;
 	@:native("AddFont")
-	function addFont(_font_cfg:cpp.Star<ImFontConfig>):cpp.Star<ImFont>;
+	function addFont(font_cfg:cpp.Star<ImFontConfig>):cpp.Star<ImFont>;
 	@:native("AddCustomRectRegular")
-	function addCustomRectRegular(_width:Int, _height:Int):Int;
+	function addCustomRectRegular(width:Int, height:Int):Int;
 	@:native("AddCustomRectFontGlyph")
-	@:overload(function(_font:cpp.Star<ImFont>, _id:ImWchar, _width:Int, _height:Int, _advance_x:cpp.Float32):Int { })
-	function addCustomRectFontGlyph(_font:cpp.Star<ImFont>, _id:ImWchar, _width:Int, _height:Int, _advance_x:cpp.Float32, _offset:ImVec2):Int;
+	@:overload(function(font:cpp.Star<ImFont>, id:ImWchar, width:Int, height:Int, advance_x:cpp.Float32):Int { })
+	function addCustomRectFontGlyph(font:cpp.Star<ImFont>, id:ImWchar, width:Int, height:Int, advance_x:cpp.Float32, offset:ImVec2):Int;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImFont") extern class ImFont {
@@ -3328,46 +3329,46 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("Used4kPagesMap")
 	var used4kPagesMap : cpp.RawPointer<ImU8>;
 	@:native("SetGlyphVisible")
-	function setGlyphVisible(_c:ImWchar, _visible:Bool):cpp.Void;
+	function setGlyphVisible(c:ImWchar, visible:Bool):cpp.Void;
 	@:native("SetFallbackChar")
-	function setFallbackChar(_c:ImWchar):cpp.Void;
+	function setFallbackChar(c:ImWchar):cpp.Void;
 	@:native("RenderText")
-	@:overload(function(_draw_list:cpp.Star<ImDrawList>, _size:cpp.Float32, _pos:ImVec2, _col:ImU32, _clip_rect:ImVec4, _text_begin:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _wrap_width:cpp.Float32):cpp.Void { })
-	@:overload(function(_draw_list:cpp.Star<ImDrawList>, _size:cpp.Float32, _pos:ImVec2, _col:ImU32, _clip_rect:ImVec4, _text_begin:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	function renderText(_draw_list:cpp.Star<ImDrawList>, _size:cpp.Float32, _pos:ImVec2, _col:ImU32, _clip_rect:ImVec4, _text_begin:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _wrap_width:cpp.Float32, _cpu_fine_clip:Bool):cpp.Void;
+	@:overload(function(draw_list:cpp.Star<ImDrawList>, size:cpp.Float32, pos:ImVec2, col:ImU32, clip_rect:ImVec4, text_begin:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar, wrap_width:cpp.Float32):cpp.Void { })
+	@:overload(function(draw_list:cpp.Star<ImDrawList>, size:cpp.Float32, pos:ImVec2, col:ImU32, clip_rect:ImVec4, text_begin:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	function renderText(draw_list:cpp.Star<ImDrawList>, size:cpp.Float32, pos:ImVec2, col:ImU32, clip_rect:ImVec4, text_begin:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar, wrap_width:cpp.Float32, cpu_fine_clip:Bool):cpp.Void;
 	@:native("RenderChar")
-	function renderChar(_draw_list:cpp.Star<ImDrawList>, _size:cpp.Float32, _pos:ImVec2, _col:ImU32, _c:ImWchar):cpp.Void;
+	function renderChar(draw_list:cpp.Star<ImDrawList>, size:cpp.Float32, pos:ImVec2, col:ImU32, c:ImWchar):cpp.Void;
 	@:native("IsLoaded")
 	function isLoaded():Bool;
 	@:native("IsGlyphRangeUnused")
-	function isGlyphRangeUnused(_c_begin:UInt, _c_last:UInt):Bool;
+	function isGlyphRangeUnused(c_begin:UInt, c_last:UInt):Bool;
 	@:native("ImFont")
 	static function create():ImFont;
 	@:native("GrowIndex")
-	function growIndex(_new_size:Int):cpp.Void;
+	function growIndex(new_size:Int):cpp.Void;
 	@:native("GetDebugName")
 	function getDebugName():imguicpp.utils.VarConstCharStar;
 	@:native("GetCharAdvance")
-	function getCharAdvance(_c:ImWchar):cpp.Float32;
+	function getCharAdvance(c:ImWchar):cpp.Float32;
 	@:native("FindGlyphNoFallback")
-	function findGlyphNoFallback(_c:ImWchar):cpp.Star<ImFontGlyph>;
+	function findGlyphNoFallback(c:ImWchar):cpp.Star<ImFontGlyph>;
 	@:native("FindGlyph")
-	function findGlyph(_c:ImWchar):cpp.Star<ImFontGlyph>;
+	function findGlyph(c:ImWchar):cpp.Star<ImFontGlyph>;
 	@:native("ClearOutputData")
 	function clearOutputData():cpp.Void;
 	@:native("CalcWordWrapPositionA")
-	function calcWordWrapPositionA(_scale:cpp.Float32, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _wrap_width:cpp.Float32):imguicpp.utils.VarConstCharStar;
+	function calcWordWrapPositionA(scale:cpp.Float32, text:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar, wrap_width:cpp.Float32):imguicpp.utils.VarConstCharStar;
 	@:native("CalcTextSizeA")
-	@:overload(function(_pOut:cpp.Star<ImVec2>, _self:cpp.Star<ImFont>, _size:cpp.Float32, _max_width:cpp.Float32, _wrap_width:cpp.Float32, _text_begin:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	@:overload(function(_pOut:cpp.Star<ImVec2>, _self:cpp.Star<ImFont>, _size:cpp.Float32, _max_width:cpp.Float32, _wrap_width:cpp.Float32, _text_begin:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	function calcTextSizeA(_pOut:cpp.Star<ImVec2>, _self:cpp.Star<ImFont>, _size:cpp.Float32, _max_width:cpp.Float32, _wrap_width:cpp.Float32, _text_begin:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _remaining:cpp.Star<cpp.RawConstPointer<cpp.Char>>):cpp.Void;
+	@:overload(function(pOut:cpp.Star<ImVec2>, self:cpp.Star<ImFont>, size:cpp.Float32, max_width:cpp.Float32, wrap_width:cpp.Float32, text_begin:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	@:overload(function(pOut:cpp.Star<ImVec2>, self:cpp.Star<ImFont>, size:cpp.Float32, max_width:cpp.Float32, wrap_width:cpp.Float32, text_begin:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	function calcTextSizeA(pOut:cpp.Star<ImVec2>, self:cpp.Star<ImFont>, size:cpp.Float32, max_width:cpp.Float32, wrap_width:cpp.Float32, text_begin:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar, remaining:cpp.Star<cpp.RawConstPointer<cpp.Char>>):cpp.Void;
 	@:native("BuildLookupTable")
 	function buildLookupTable():cpp.Void;
 	@:native("AddRemapChar")
-	@:overload(function(_dst:ImWchar, _src:ImWchar):cpp.Void { })
-	function addRemapChar(_dst:ImWchar, _src:ImWchar, _overwrite_dst:Bool):cpp.Void;
+	@:overload(function(dst:ImWchar, src:ImWchar):cpp.Void { })
+	function addRemapChar(dst:ImWchar, src:ImWchar, overwrite_dst:Bool):cpp.Void;
 	@:native("AddGlyph")
-	function addGlyph(_src_cfg:cpp.Star<ImFontConfig>, _c:ImWchar, _x0:cpp.Float32, _y0:cpp.Float32, _x1:cpp.Float32, _y1:cpp.Float32, _u0:cpp.Float32, _v0:cpp.Float32, _u1:cpp.Float32, _v1:cpp.Float32, _advance_x:cpp.Float32):cpp.Void;
+	function addGlyph(src_cfg:cpp.Star<ImFontConfig>, c:ImWchar, x0:cpp.Float32, y0:cpp.Float32, x1:cpp.Float32, y1:cpp.Float32, u0:cpp.Float32, v0:cpp.Float32, u1:cpp.Float32, v1:cpp.Float32, advance_x:cpp.Float32):cpp.Void;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImDrawVert") extern class ImDrawVert {
@@ -3387,11 +3388,11 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("_Channels")
 	var _Channels : ImVectorImDrawChannel;
 	@:native("Split")
-	function split(_draw_list:cpp.Star<ImDrawList>, _count:Int):cpp.Void;
+	function split(draw_list:cpp.Star<ImDrawList>, count:Int):cpp.Void;
 	@:native("SetCurrentChannel")
-	function setCurrentChannel(_draw_list:cpp.Star<ImDrawList>, _channel_idx:Int):cpp.Void;
+	function setCurrentChannel(draw_list:cpp.Star<ImDrawList>, channel_idx:Int):cpp.Void;
 	@:native("Merge")
-	function merge(_draw_list:cpp.Star<ImDrawList>):cpp.Void;
+	function merge(draw_list:cpp.Star<ImDrawList>):cpp.Void;
 	@:native("ImDrawListSplitter")
 	static function create():ImDrawListSplitter;
 	@:native("ClearFreeMemory")
@@ -3422,7 +3423,7 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("TexUvLines")
 	var texUvLines : cpp.Star<ImVec4>;
 	@:native("SetCircleSegmentMaxError")
-	function setCircleSegmentMaxError(_max_error:cpp.Float32):cpp.Void;
+	function setCircleSegmentMaxError(max_error:cpp.Float32):cpp.Void;
 	@:native("ImDrawListSharedData")
 	static function create():ImDrawListSharedData;
 }
@@ -3471,144 +3472,144 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("_ClearFreeMemory")
 	function _ClearFreeMemory():cpp.Void;
 	@:native("PushTextureID")
-	function pushTextureID(_texture_id:ImTextureID):cpp.Void;
+	function pushTextureID(texture_id:ImTextureID):cpp.Void;
 	@:native("PushClipRectFullScreen")
 	function pushClipRectFullScreen():cpp.Void;
 	@:native("PushClipRect")
-	@:overload(function(_clip_rect_min:ImVec2, _clip_rect_max:ImVec2):cpp.Void { })
-	function pushClipRect(_clip_rect_min:ImVec2, _clip_rect_max:ImVec2, _intersect_with_current_clip_rect:Bool):cpp.Void;
+	@:overload(function(clip_rect_min:ImVec2, clip_rect_max:ImVec2):cpp.Void { })
+	function pushClipRect(clip_rect_min:ImVec2, clip_rect_max:ImVec2, intersect_with_current_clip_rect:Bool):cpp.Void;
 	@:native("PrimWriteVtx")
-	function primWriteVtx(_pos:ImVec2, _uv:ImVec2, _col:ImU32):cpp.Void;
+	function primWriteVtx(pos:ImVec2, uv:ImVec2, col:ImU32):cpp.Void;
 	@:native("PrimWriteIdx")
-	function primWriteIdx(_idx:ImDrawIdx):cpp.Void;
+	function primWriteIdx(idx:ImDrawIdx):cpp.Void;
 	@:native("PrimVtx")
-	function primVtx(_pos:ImVec2, _uv:ImVec2, _col:ImU32):cpp.Void;
+	function primVtx(pos:ImVec2, uv:ImVec2, col:ImU32):cpp.Void;
 	@:native("PrimUnreserve")
-	function primUnreserve(_idx_count:Int, _vtx_count:Int):cpp.Void;
+	function primUnreserve(idx_count:Int, vtx_count:Int):cpp.Void;
 	@:native("PrimReserve")
-	function primReserve(_idx_count:Int, _vtx_count:Int):cpp.Void;
+	function primReserve(idx_count:Int, vtx_count:Int):cpp.Void;
 	@:native("PrimRectUV")
-	function primRectUV(_a:ImVec2, _b:ImVec2, _uv_a:ImVec2, _uv_b:ImVec2, _col:ImU32):cpp.Void;
+	function primRectUV(a:ImVec2, b:ImVec2, uv_a:ImVec2, uv_b:ImVec2, col:ImU32):cpp.Void;
 	@:native("PrimRect")
-	function primRect(_a:ImVec2, _b:ImVec2, _col:ImU32):cpp.Void;
+	function primRect(a:ImVec2, b:ImVec2, col:ImU32):cpp.Void;
 	@:native("PrimQuadUV")
-	function primQuadUV(_a:ImVec2, _b:ImVec2, _c:ImVec2, _d:ImVec2, _uv_a:ImVec2, _uv_b:ImVec2, _uv_c:ImVec2, _uv_d:ImVec2, _col:ImU32):cpp.Void;
+	function primQuadUV(a:ImVec2, b:ImVec2, c:ImVec2, d:ImVec2, uv_a:ImVec2, uv_b:ImVec2, uv_c:ImVec2, uv_d:ImVec2, col:ImU32):cpp.Void;
 	@:native("PopTextureID")
 	function popTextureID():cpp.Void;
 	@:native("PopClipRect")
 	function popClipRect():cpp.Void;
 	@:native("PathStroke")
-	@:overload(function(_col:ImU32, _closed:Bool):cpp.Void { })
-	function pathStroke(_col:ImU32, _closed:Bool, _thickness:cpp.Float32):cpp.Void;
+	@:overload(function(col:ImU32, closed:Bool):cpp.Void { })
+	function pathStroke(col:ImU32, closed:Bool, thickness:cpp.Float32):cpp.Void;
 	@:native("PathRect")
-	@:overload(function(_rect_min:ImVec2, _rect_max:ImVec2, _rounding_corners:ImDrawCornerFlags):cpp.Void { })
-	@:overload(function(_rect_min:ImVec2, _rect_max:ImVec2):cpp.Void { })
-	function pathRect(_rect_min:ImVec2, _rect_max:ImVec2, _rounding:cpp.Float32, _rounding_corners:ImDrawCornerFlags):cpp.Void;
+	@:overload(function(rect_min:ImVec2, rect_max:ImVec2, rounding_corners:ImDrawCornerFlags):cpp.Void { })
+	@:overload(function(rect_min:ImVec2, rect_max:ImVec2):cpp.Void { })
+	function pathRect(rect_min:ImVec2, rect_max:ImVec2, rounding:cpp.Float32, rounding_corners:ImDrawCornerFlags):cpp.Void;
 	@:native("PathLineToMergeDuplicate")
-	function pathLineToMergeDuplicate(_pos:ImVec2):cpp.Void;
+	function pathLineToMergeDuplicate(pos:ImVec2):cpp.Void;
 	@:native("PathLineTo")
-	function pathLineTo(_pos:ImVec2):cpp.Void;
+	function pathLineTo(pos:ImVec2):cpp.Void;
 	@:native("PathFillConvex")
-	function pathFillConvex(_col:ImU32):cpp.Void;
+	function pathFillConvex(col:ImU32):cpp.Void;
 	@:native("PathClear")
 	function pathClear():cpp.Void;
 	@:native("PathBezierQuadraticCurveTo")
-	@:overload(function(_p2:ImVec2, _p3:ImVec2):cpp.Void { })
-	function pathBezierQuadraticCurveTo(_p2:ImVec2, _p3:ImVec2, _num_segments:Int):cpp.Void;
+	@:overload(function(p2:ImVec2, p3:ImVec2):cpp.Void { })
+	function pathBezierQuadraticCurveTo(p2:ImVec2, p3:ImVec2, num_segments:Int):cpp.Void;
 	@:native("PathBezierCubicCurveTo")
-	@:overload(function(_p2:ImVec2, _p3:ImVec2, _p4:ImVec2):cpp.Void { })
-	function pathBezierCubicCurveTo(_p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _num_segments:Int):cpp.Void;
+	@:overload(function(p2:ImVec2, p3:ImVec2, p4:ImVec2):cpp.Void { })
+	function pathBezierCubicCurveTo(p2:ImVec2, p3:ImVec2, p4:ImVec2, num_segments:Int):cpp.Void;
 	@:native("PathArcToFast")
-	function pathArcToFast(_center:ImVec2, _radius:cpp.Float32, _a_min_of_12:Int, _a_max_of_12:Int):cpp.Void;
+	function pathArcToFast(center:ImVec2, radius:cpp.Float32, a_min_of_12:Int, a_max_of_12:Int):cpp.Void;
 	@:native("PathArcTo")
-	@:overload(function(_center:ImVec2, _radius:cpp.Float32, _a_min:cpp.Float32, _a_max:cpp.Float32):cpp.Void { })
-	function pathArcTo(_center:ImVec2, _radius:cpp.Float32, _a_min:cpp.Float32, _a_max:cpp.Float32, _num_segments:Int):cpp.Void;
+	@:overload(function(center:ImVec2, radius:cpp.Float32, a_min:cpp.Float32, a_max:cpp.Float32):cpp.Void { })
+	function pathArcTo(center:ImVec2, radius:cpp.Float32, a_min:cpp.Float32, a_max:cpp.Float32, num_segments:Int):cpp.Void;
 	@:native("ImDrawList")
-	static function create(_shared_data:cpp.Star<ImDrawListSharedData>):ImDrawList;
+	static function create(shared_data:cpp.Star<ImDrawListSharedData>):ImDrawList;
 	@:native("GetClipRectMin")
-	function getClipRectMin(_pOut:cpp.Star<ImVec2>, _self:cpp.Star<ImDrawList>):cpp.Void;
+	function getClipRectMin(pOut:cpp.Star<ImVec2>, self:cpp.Star<ImDrawList>):cpp.Void;
 	@:native("GetClipRectMax")
-	function getClipRectMax(_pOut:cpp.Star<ImVec2>, _self:cpp.Star<ImDrawList>):cpp.Void;
+	function getClipRectMax(pOut:cpp.Star<ImVec2>, self:cpp.Star<ImDrawList>):cpp.Void;
 	@:native("CloneOutput")
 	function cloneOutput():cpp.Star<ImDrawList>;
 	@:native("ChannelsSplit")
-	function channelsSplit(_count:Int):cpp.Void;
+	function channelsSplit(count:Int):cpp.Void;
 	@:native("ChannelsSetCurrent")
-	function channelsSetCurrent(_n:Int):cpp.Void;
+	function channelsSetCurrent(n:Int):cpp.Void;
 	@:native("ChannelsMerge")
 	function channelsMerge():cpp.Void;
 	@:native("AddTriangleFilled")
-	function addTriangleFilled(_p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _col:ImU32):cpp.Void;
+	function addTriangleFilled(p1:ImVec2, p2:ImVec2, p3:ImVec2, col:ImU32):cpp.Void;
 	@:native("AddTriangle")
-	@:overload(function(_p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _col:ImU32):cpp.Void { })
-	function addTriangle(_p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _col:ImU32, _thickness:cpp.Float32):cpp.Void;
+	@:overload(function(p1:ImVec2, p2:ImVec2, p3:ImVec2, col:ImU32):cpp.Void { })
+	function addTriangle(p1:ImVec2, p2:ImVec2, p3:ImVec2, col:ImU32, thickness:cpp.Float32):cpp.Void;
 	@:native("AddText")
-	@:overload(function(_pos:ImVec2, _col:ImU32, _text_begin:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	@:overload(function(_font:cpp.Star<ImFont>, _font_size:cpp.Float32, _pos:ImVec2, _col:ImU32, _text_begin:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _wrap_width:cpp.Float32, _cpu_fine_clip_rect:cpp.Star<ImVec4>):cpp.Void { })
-	@:overload(function(_font:cpp.Star<ImFont>, _font_size:cpp.Float32, _pos:ImVec2, _col:ImU32, _text_begin:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _wrap_width:cpp.Float32):cpp.Void { })
-	@:overload(function(_font:cpp.Star<ImFont>, _font_size:cpp.Float32, _pos:ImVec2, _col:ImU32, _text_begin:imguicpp.utils.VarConstCharStar, _wrap_width:cpp.Float32):cpp.Void { })
-	@:overload(function(_font:cpp.Star<ImFont>, _font_size:cpp.Float32, _pos:ImVec2, _col:ImU32, _text_begin:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	function addText(_pos:ImVec2, _col:ImU32, _text_begin:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar):cpp.Void;
+	@:overload(function(pos:ImVec2, col:ImU32, text_begin:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	@:overload(function(font:cpp.Star<ImFont>, font_size:cpp.Float32, pos:ImVec2, col:ImU32, text_begin:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar, wrap_width:cpp.Float32, cpu_fine_clip_rect:cpp.Star<ImVec4>):cpp.Void { })
+	@:overload(function(font:cpp.Star<ImFont>, font_size:cpp.Float32, pos:ImVec2, col:ImU32, text_begin:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar, wrap_width:cpp.Float32):cpp.Void { })
+	@:overload(function(font:cpp.Star<ImFont>, font_size:cpp.Float32, pos:ImVec2, col:ImU32, text_begin:imguicpp.utils.VarConstCharStar, wrap_width:cpp.Float32):cpp.Void { })
+	@:overload(function(font:cpp.Star<ImFont>, font_size:cpp.Float32, pos:ImVec2, col:ImU32, text_begin:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	function addText(pos:ImVec2, col:ImU32, text_begin:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("AddRectFilledMultiColor")
-	function addRectFilledMultiColor(_p_min:ImVec2, _p_max:ImVec2, _col_upr_left:ImU32, _col_upr_right:ImU32, _col_bot_right:ImU32, _col_bot_left:ImU32):cpp.Void;
+	function addRectFilledMultiColor(p_min:ImVec2, p_max:ImVec2, col_upr_left:ImU32, col_upr_right:ImU32, col_bot_right:ImU32, col_bot_left:ImU32):cpp.Void;
 	@:native("AddRectFilled")
-	@:overload(function(_p_min:ImVec2, _p_max:ImVec2, _col:ImU32, _rounding_corners:ImDrawCornerFlags):cpp.Void { })
-	@:overload(function(_p_min:ImVec2, _p_max:ImVec2, _col:ImU32):cpp.Void { })
-	function addRectFilled(_p_min:ImVec2, _p_max:ImVec2, _col:ImU32, _rounding:cpp.Float32, _rounding_corners:ImDrawCornerFlags):cpp.Void;
+	@:overload(function(p_min:ImVec2, p_max:ImVec2, col:ImU32, rounding_corners:ImDrawCornerFlags):cpp.Void { })
+	@:overload(function(p_min:ImVec2, p_max:ImVec2, col:ImU32):cpp.Void { })
+	function addRectFilled(p_min:ImVec2, p_max:ImVec2, col:ImU32, rounding:cpp.Float32, rounding_corners:ImDrawCornerFlags):cpp.Void;
 	@:native("AddRect")
-	@:overload(function(_p_min:ImVec2, _p_max:ImVec2, _col:ImU32, _rounding_corners:ImDrawCornerFlags, _thickness:cpp.Float32):cpp.Void { })
-	@:overload(function(_p_min:ImVec2, _p_max:ImVec2, _col:ImU32, _thickness:cpp.Float32):cpp.Void { })
-	@:overload(function(_p_min:ImVec2, _p_max:ImVec2, _col:ImU32):cpp.Void { })
-	function addRect(_p_min:ImVec2, _p_max:ImVec2, _col:ImU32, _rounding:cpp.Float32, _rounding_corners:ImDrawCornerFlags, _thickness:cpp.Float32):cpp.Void;
+	@:overload(function(p_min:ImVec2, p_max:ImVec2, col:ImU32, rounding_corners:ImDrawCornerFlags, thickness:cpp.Float32):cpp.Void { })
+	@:overload(function(p_min:ImVec2, p_max:ImVec2, col:ImU32, thickness:cpp.Float32):cpp.Void { })
+	@:overload(function(p_min:ImVec2, p_max:ImVec2, col:ImU32):cpp.Void { })
+	function addRect(p_min:ImVec2, p_max:ImVec2, col:ImU32, rounding:cpp.Float32, rounding_corners:ImDrawCornerFlags, thickness:cpp.Float32):cpp.Void;
 	@:native("AddQuadFilled")
-	function addQuadFilled(_p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _col:ImU32):cpp.Void;
+	function addQuadFilled(p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2, col:ImU32):cpp.Void;
 	@:native("AddQuad")
-	@:overload(function(_p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _col:ImU32):cpp.Void { })
-	function addQuad(_p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _col:ImU32, _thickness:cpp.Float32):cpp.Void;
+	@:overload(function(p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2, col:ImU32):cpp.Void { })
+	function addQuad(p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2, col:ImU32, thickness:cpp.Float32):cpp.Void;
 	@:native("AddPolyline")
-	function addPolyline(_points:cpp.Star<ImVec2>, _num_points:Int, _col:ImU32, _closed:Bool, _thickness:cpp.Float32):cpp.Void;
+	function addPolyline(points:cpp.Star<ImVec2>, num_points:Int, col:ImU32, closed:Bool, thickness:cpp.Float32):cpp.Void;
 	@:native("AddNgonFilled")
-	function addNgonFilled(_center:ImVec2, _radius:cpp.Float32, _col:ImU32, _num_segments:Int):cpp.Void;
+	function addNgonFilled(center:ImVec2, radius:cpp.Float32, col:ImU32, num_segments:Int):cpp.Void;
 	@:native("AddNgon")
-	@:overload(function(_center:ImVec2, _radius:cpp.Float32, _col:ImU32, _num_segments:Int):cpp.Void { })
-	function addNgon(_center:ImVec2, _radius:cpp.Float32, _col:ImU32, _num_segments:Int, _thickness:cpp.Float32):cpp.Void;
+	@:overload(function(center:ImVec2, radius:cpp.Float32, col:ImU32, num_segments:Int):cpp.Void { })
+	function addNgon(center:ImVec2, radius:cpp.Float32, col:ImU32, num_segments:Int, thickness:cpp.Float32):cpp.Void;
 	@:native("AddLine")
-	@:overload(function(_p1:ImVec2, _p2:ImVec2, _col:ImU32):cpp.Void { })
-	function addLine(_p1:ImVec2, _p2:ImVec2, _col:ImU32, _thickness:cpp.Float32):cpp.Void;
+	@:overload(function(p1:ImVec2, p2:ImVec2, col:ImU32):cpp.Void { })
+	function addLine(p1:ImVec2, p2:ImVec2, col:ImU32, thickness:cpp.Float32):cpp.Void;
 	@:native("AddImageRounded")
-	@:overload(function(_user_texture_id:ImTextureID, _p_min:ImVec2, _p_max:ImVec2, _uv_min:ImVec2, _uv_max:ImVec2, _col:ImU32, _rounding:cpp.Float32):cpp.Void { })
-	function addImageRounded(_user_texture_id:ImTextureID, _p_min:ImVec2, _p_max:ImVec2, _uv_min:ImVec2, _uv_max:ImVec2, _col:ImU32, _rounding:cpp.Float32, _rounding_corners:ImDrawCornerFlags):cpp.Void;
+	@:overload(function(user_texture_id:ImTextureID, p_min:ImVec2, p_max:ImVec2, uv_min:ImVec2, uv_max:ImVec2, col:ImU32, rounding:cpp.Float32):cpp.Void { })
+	function addImageRounded(user_texture_id:ImTextureID, p_min:ImVec2, p_max:ImVec2, uv_min:ImVec2, uv_max:ImVec2, col:ImU32, rounding:cpp.Float32, rounding_corners:ImDrawCornerFlags):cpp.Void;
 	@:native("AddImageQuad")
-	@:overload(function(_user_texture_id:ImTextureID, _p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _uv1:ImVec2, _uv2:ImVec2, _uv3:ImVec2, _uv4:ImVec2):cpp.Void { })
-	@:overload(function(_user_texture_id:ImTextureID, _p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _uv2:ImVec2, _uv3:ImVec2, _uv4:ImVec2):cpp.Void { })
-	@:overload(function(_user_texture_id:ImTextureID, _p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _uv3:ImVec2, _uv4:ImVec2):cpp.Void { })
-	@:overload(function(_user_texture_id:ImTextureID, _p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _uv4:ImVec2):cpp.Void { })
-	@:overload(function(_user_texture_id:ImTextureID, _p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2):cpp.Void { })
-	function addImageQuad(_user_texture_id:ImTextureID, _p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _uv1:ImVec2, _uv2:ImVec2, _uv3:ImVec2, _uv4:ImVec2, _col:ImU32):cpp.Void;
+	@:overload(function(user_texture_id:ImTextureID, p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2, uv1:ImVec2, uv2:ImVec2, uv3:ImVec2, uv4:ImVec2):cpp.Void { })
+	@:overload(function(user_texture_id:ImTextureID, p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2, uv2:ImVec2, uv3:ImVec2, uv4:ImVec2):cpp.Void { })
+	@:overload(function(user_texture_id:ImTextureID, p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2, uv3:ImVec2, uv4:ImVec2):cpp.Void { })
+	@:overload(function(user_texture_id:ImTextureID, p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2, uv4:ImVec2):cpp.Void { })
+	@:overload(function(user_texture_id:ImTextureID, p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2):cpp.Void { })
+	function addImageQuad(user_texture_id:ImTextureID, p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2, uv1:ImVec2, uv2:ImVec2, uv3:ImVec2, uv4:ImVec2, col:ImU32):cpp.Void;
 	@:native("AddImage")
-	@:overload(function(_user_texture_id:ImTextureID, _p_min:ImVec2, _p_max:ImVec2, _uv_min:ImVec2, _uv_max:ImVec2):cpp.Void { })
-	@:overload(function(_user_texture_id:ImTextureID, _p_min:ImVec2, _p_max:ImVec2, _uv_min:ImVec2):cpp.Void { })
-	@:overload(function(_user_texture_id:ImTextureID, _p_min:ImVec2, _p_max:ImVec2):cpp.Void { })
-	function addImage(_user_texture_id:ImTextureID, _p_min:ImVec2, _p_max:ImVec2, _uv_min:ImVec2, _uv_max:ImVec2, _col:ImU32):cpp.Void;
+	@:overload(function(user_texture_id:ImTextureID, p_min:ImVec2, p_max:ImVec2, uv_min:ImVec2, uv_max:ImVec2):cpp.Void { })
+	@:overload(function(user_texture_id:ImTextureID, p_min:ImVec2, p_max:ImVec2, uv_min:ImVec2):cpp.Void { })
+	@:overload(function(user_texture_id:ImTextureID, p_min:ImVec2, p_max:ImVec2):cpp.Void { })
+	function addImage(user_texture_id:ImTextureID, p_min:ImVec2, p_max:ImVec2, uv_min:ImVec2, uv_max:ImVec2, col:ImU32):cpp.Void;
 	@:native("AddDrawCmd")
 	function addDrawCmd():cpp.Void;
 	@:native("AddConvexPolyFilled")
-	function addConvexPolyFilled(_points:cpp.Star<ImVec2>, _num_points:Int, _col:ImU32):cpp.Void;
+	function addConvexPolyFilled(points:cpp.Star<ImVec2>, num_points:Int, col:ImU32):cpp.Void;
 	@:native("AddCircleFilled")
-	@:overload(function(_center:ImVec2, _radius:cpp.Float32, _col:ImU32):cpp.Void { })
-	function addCircleFilled(_center:ImVec2, _radius:cpp.Float32, _col:ImU32, _num_segments:Int):cpp.Void;
+	@:overload(function(center:ImVec2, radius:cpp.Float32, col:ImU32):cpp.Void { })
+	function addCircleFilled(center:ImVec2, radius:cpp.Float32, col:ImU32, num_segments:Int):cpp.Void;
 	@:native("AddCircle")
-	@:overload(function(_center:ImVec2, _radius:cpp.Float32, _col:ImU32, _thickness:cpp.Float32):cpp.Void { })
-	@:overload(function(_center:ImVec2, _radius:cpp.Float32, _col:ImU32):cpp.Void { })
-	function addCircle(_center:ImVec2, _radius:cpp.Float32, _col:ImU32, _num_segments:Int, _thickness:cpp.Float32):cpp.Void;
+	@:overload(function(center:ImVec2, radius:cpp.Float32, col:ImU32, thickness:cpp.Float32):cpp.Void { })
+	@:overload(function(center:ImVec2, radius:cpp.Float32, col:ImU32):cpp.Void { })
+	function addCircle(center:ImVec2, radius:cpp.Float32, col:ImU32, num_segments:Int, thickness:cpp.Float32):cpp.Void;
 	@:native("AddCallback")
-	function addCallback(_callback:ImDrawCallback, _callback_data:imguicpp.VoidPointer):cpp.Void;
+	function addCallback(callback:ImDrawCallback, callback_data:imguicpp.VoidPointer):cpp.Void;
 	@:native("AddBezierQuadratic")
-	@:overload(function(_p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _col:ImU32, _thickness:cpp.Float32):cpp.Void { })
-	function addBezierQuadratic(_p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _col:ImU32, _thickness:cpp.Float32, _num_segments:Int):cpp.Void;
+	@:overload(function(p1:ImVec2, p2:ImVec2, p3:ImVec2, col:ImU32, thickness:cpp.Float32):cpp.Void { })
+	function addBezierQuadratic(p1:ImVec2, p2:ImVec2, p3:ImVec2, col:ImU32, thickness:cpp.Float32, num_segments:Int):cpp.Void;
 	@:native("AddBezierCubic")
-	@:overload(function(_p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _col:ImU32, _thickness:cpp.Float32):cpp.Void { })
-	function addBezierCubic(_p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _col:ImU32, _thickness:cpp.Float32, _num_segments:Int):cpp.Void;
+	@:overload(function(p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2, col:ImU32, thickness:cpp.Float32):cpp.Void { })
+	function addBezierCubic(p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2, col:ImU32, thickness:cpp.Float32, num_segments:Int):cpp.Void;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImDrawDataBuilder") extern class ImDrawDataBuilder {
@@ -3640,7 +3641,7 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("FramebufferScale")
 	var framebufferScale : ImVec2;
 	@:native("ScaleClipRects")
-	function scaleClipRects(_fb_scale:ImVec2):cpp.Void;
+	function scaleClipRects(fb_scale:ImVec2):cpp.Void;
 	@:native("ImDrawData")
 	static function create():ImDrawData;
 	@:native("DeIndexAllBuffers")
@@ -3688,837 +3689,539 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("Value")
 	var value : ImVec4;
 	@:native("SetHSV")
-	@:overload(function(_h:cpp.Float32, _s:cpp.Float32, _v:cpp.Float32):cpp.Void { })
-	function setHSV(_h:cpp.Float32, _s:cpp.Float32, _v:cpp.Float32, _a:cpp.Float32):cpp.Void;
+	@:overload(function(h:cpp.Float32, s:cpp.Float32, v:cpp.Float32):cpp.Void { })
+	function setHSV(h:cpp.Float32, s:cpp.Float32, v:cpp.Float32, a:cpp.Float32):cpp.Void;
 	@:native("ImColor")
-	@:overload(function(_r:Int, _g:Int, _b:Int, _a:Int):ImColor { })
-	@:overload(function(_r:Int, _g:Int, _b:Int):ImColor { })
-	@:overload(function(_rgba:ImU32):ImColor { })
-	@:overload(function(_r:cpp.Float32, _g:cpp.Float32, _b:cpp.Float32, _a:cpp.Float32):ImColor { })
-	@:overload(function(_r:cpp.Float32, _g:cpp.Float32, _b:cpp.Float32):ImColor { })
-	@:overload(function(_col:ImVec4):ImColor { })
+	@:overload(function(r:Int, g:Int, b:Int, a:Int):ImColor { })
+	@:overload(function(r:Int, g:Int, b:Int):ImColor { })
+	@:overload(function(rgba:ImU32):ImColor { })
+	@:overload(function(r:cpp.Float32, g:cpp.Float32, b:cpp.Float32, a:cpp.Float32):ImColor { })
+	@:overload(function(r:cpp.Float32, g:cpp.Float32, b:cpp.Float32):ImColor { })
+	@:overload(function(col:ImVec4):ImColor { })
 	static function create():ImColor;
 	@:native("HSV")
-	@:overload(function(_pOut:cpp.Star<ImColor>, _h:cpp.Float32, _s:cpp.Float32, _v:cpp.Float32):cpp.Void { })
-	function hSV(_pOut:cpp.Star<ImColor>, _h:cpp.Float32, _s:cpp.Float32, _v:cpp.Float32, _a:cpp.Float32):cpp.Void;
+	@:overload(function(pOut:cpp.Star<ImColor>, h:cpp.Float32, s:cpp.Float32, v:cpp.Float32):cpp.Void { })
+	function hSV(pOut:cpp.Star<ImColor>, h:cpp.Float32, s:cpp.Float32, v:cpp.Float32, a:cpp.Float32):cpp.Void;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImBitVector") extern class ImBitVector {
 	@:native("Storage")
 	var storage : ImVectorImU32;
 	@:native("TestBit")
-	function testBit(_n:Int):Bool;
+	function testBit(n:Int):Bool;
 	@:native("SetBit")
-	function setBit(_n:Int):cpp.Void;
+	function setBit(n:Int):cpp.Void;
 	@:native("Create")
-	function create(_sz:Int):cpp.Void;
+	function create(sz:Int):cpp.Void;
 	@:native("ClearBit")
-	function clearBit(_n:Int):cpp.Void;
+	function clearBit(n:Int):cpp.Void;
 	@:native("Clear")
 	function clear():cpp.Void;
 }
 
-@:keep @:structAccess @:include("imgui.h") @:build(imguicpp.linc.Linc.xml("imgui")) @:build(imguicpp.linc.Linc.touch()) extern class ImGui {
+@:keep @:structAccess @:include("linc_imgui.h") @:build(imguicpp.linc.Linc.xml('imgui')) @:build(imguicpp.linc.Linc.touch()) extern class ImGui {
 	@:native("ImGui::Value")
-	@:overload(function(_prefix:imguicpp.utils.VarConstCharStar, _v:Int):cpp.Void { })
-	@:overload(function(_prefix:imguicpp.utils.VarConstCharStar, _v:UInt):cpp.Void { })
-	@:overload(function(_prefix:imguicpp.utils.VarConstCharStar, _v:cpp.Float32, _float_format:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	@:overload(function(_prefix:imguicpp.utils.VarConstCharStar, _v:cpp.Float32):cpp.Void { })
-	static function value(_prefix:imguicpp.utils.VarConstCharStar, _b:Bool):cpp.Void;
-	@:native("ImGui::VSliderScalar")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _size:ImVec2, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _size:ImVec2, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer):Bool { })
-	static function vSliderScalar(_label:imguicpp.utils.VarConstCharStar, _size:ImVec2, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::VSliderInt")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _size:ImVec2, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _size:ImVec2, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int):Bool { })
-	static function vSliderInt(_label:imguicpp.utils.VarConstCharStar, _size:ImVec2, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::VSliderFloat")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _size:ImVec2, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _size:ImVec2, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32):Bool { })
-	static function vSliderFloat(_label:imguicpp.utils.VarConstCharStar, _size:ImVec2, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::UpdateWindowParentAndRootLinks")
-	static function updateWindowParentAndRootLinks(_window:cpp.Star<ImGuiWindow>, _flags:ImGuiWindowFlags, _parent_window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::UpdateMouseMovingWindowNewFrame")
-	static function updateMouseMovingWindowNewFrame():cpp.Void;
-	@:native("ImGui::UpdateMouseMovingWindowEndFrame")
-	static function updateMouseMovingWindowEndFrame():cpp.Void;
-	@:native("ImGui::UpdateHoveredWindowAndCaptureFlags")
-	static function updateHoveredWindowAndCaptureFlags():cpp.Void;
+	@:overload(function(prefix:imguicpp.utils.VarConstCharStar, v:Int):cpp.Void { })
+	@:overload(function(prefix:imguicpp.utils.VarConstCharStar, v:UInt):cpp.Void { })
+	@:overload(function(prefix:imguicpp.utils.VarConstCharStar, v:cpp.Float32, float_format:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	@:overload(function(prefix:imguicpp.utils.VarConstCharStar, v:cpp.Float32):cpp.Void { })
+	static function value(prefix:imguicpp.utils.VarConstCharStar, b:Bool):cpp.Void;
+	@:native("ImGui::linc_VSliderScalar")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, size:ImVec2, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, size:ImVec2, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer):Bool { })
+	static function vSliderScalar(label:imguicpp.utils.VarConstCharStar, size:ImVec2, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_VSliderInt")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, size:ImVec2, v:imguicpp.IntPointer, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, size:ImVec2, v:imguicpp.IntPointer, v_min:Int, v_max:Int):Bool { })
+	static function vSliderInt(label:imguicpp.utils.VarConstCharStar, size:ImVec2, v:imguicpp.IntPointer, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_VSliderFloat")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, size:ImVec2, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, size:ImVec2, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32):Bool { })
+	static function vSliderFloat(label:imguicpp.utils.VarConstCharStar, size:ImVec2, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
 	@:native("ImGui::Unindent")
 	@:overload(function():cpp.Void { })
-	static function unindent(_indent_w:cpp.Float32):cpp.Void;
-	@:native("ImGui::TreePushOverrideID")
-	static function treePushOverrideID(_id:ImGuiID):cpp.Void;
-	@:native("ImGui::TreePush")
-	@:overload(function(_ptr_id:imguicpp.VoidPointer):cpp.Void { })
+	static function unindent(indent_w:cpp.Float32):cpp.Void;
+	@:native("ImGui::linc_TreePush")
+	@:overload(function(ptr_id:imguicpp.VoidPointer):cpp.Void { })
 	@:overload(function():cpp.Void { })
-	static function treePush(_str_id:imguicpp.utils.VarConstCharStar):cpp.Void;
+	static function treePush(str_id:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::TreePop")
 	static function treePop():cpp.Void;
-	@:native("ImGui::TreeNodeV")
-	@:overload(function(_ptr_id:imguicpp.VoidPointer, _fmt:imguicpp.utils.VarConstCharStar, _args:cpp.VarArg):Bool { })
-	static function treeNodeV(_str_id:imguicpp.utils.VarConstCharStar, _fmt:imguicpp.utils.VarConstCharStar, _args:cpp.VarArg):Bool;
-	@:native("ImGui::TreeNodeExV")
-	@:overload(function(_ptr_id:imguicpp.VoidPointer, _flags:ImGuiTreeNodeFlags, _fmt:imguicpp.utils.VarConstCharStar, _args:cpp.VarArg):Bool { })
-	static function treeNodeExV(_str_id:imguicpp.utils.VarConstCharStar, _flags:ImGuiTreeNodeFlags, _fmt:imguicpp.utils.VarConstCharStar, _args:cpp.VarArg):Bool;
-	@:native("ImGui::TreeNodeEx")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar, _flags:ImGuiTreeNodeFlags, _fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):Bool { })
-	@:overload(function(_ptr_id:imguicpp.VoidPointer, _flags:ImGuiTreeNodeFlags, _fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):Bool { })
-	static function treeNodeEx(_label:imguicpp.utils.VarConstCharStar, _flags:ImGuiTreeNodeFlags):Bool;
-	@:native("ImGui::TreeNodeBehaviorIsOpen")
-	@:overload(function(_id:ImGuiID):Bool { })
-	static function treeNodeBehaviorIsOpen(_id:ImGuiID, _flags:ImGuiTreeNodeFlags):Bool;
-	@:native("ImGui::TreeNodeBehavior")
-	@:overload(function(_id:ImGuiID, _flags:ImGuiTreeNodeFlags, _label:imguicpp.utils.VarConstCharStar):Bool { })
-	static function treeNodeBehavior(_id:ImGuiID, _flags:ImGuiTreeNodeFlags, _label:imguicpp.utils.VarConstCharStar, _label_end:imguicpp.utils.VarConstCharStar):Bool;
-	@:native("ImGui::TreeNode")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar, _fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):Bool { })
-	@:overload(function(_ptr_id:imguicpp.VoidPointer, _fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):Bool { })
-	static function treeNode(_label:imguicpp.utils.VarConstCharStar):Bool;
+	@:native("ImGui::linc_TreeNodeV")
+	@:overload(function(ptr_id:imguicpp.VoidPointer, fmt:imguicpp.utils.VarConstCharStar, args:cpp.VarArg):Bool { })
+	static function treeNodeV(str_id:imguicpp.utils.VarConstCharStar, fmt:imguicpp.utils.VarConstCharStar, args:cpp.VarArg):Bool;
+	@:native("ImGui::linc_TreeNodeExV")
+	@:overload(function(ptr_id:imguicpp.VoidPointer, flags:ImGuiTreeNodeFlags, fmt:imguicpp.utils.VarConstCharStar, args:cpp.VarArg):Bool { })
+	static function treeNodeExV(str_id:imguicpp.utils.VarConstCharStar, flags:ImGuiTreeNodeFlags, fmt:imguicpp.utils.VarConstCharStar, args:cpp.VarArg):Bool;
+	@:native("ImGui::linc_TreeNodeEx")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar, flags:ImGuiTreeNodeFlags, fmt:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar, flags:ImGuiTreeNodeFlags, fmt:imguicpp.utils.VarConstCharStar, vargs:cpp.VarArg):Bool { })
+	@:overload(function(ptr_id:imguicpp.VoidPointer, flags:ImGuiTreeNodeFlags, fmt:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(ptr_id:imguicpp.VoidPointer, flags:ImGuiTreeNodeFlags, fmt:imguicpp.utils.VarConstCharStar, vargs:cpp.VarArg):Bool { })
+	static function treeNodeEx(label:imguicpp.utils.VarConstCharStar, flags:ImGuiTreeNodeFlags):Bool;
+	@:native("ImGui::linc_TreeNode")
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar, fmt:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar, fmt:imguicpp.utils.VarConstCharStar, vargs:cpp.VarArg):Bool { })
+	@:overload(function(ptr_id:imguicpp.VoidPointer, fmt:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(ptr_id:imguicpp.VoidPointer, fmt:imguicpp.utils.VarConstCharStar, vargs:cpp.VarArg):Bool { })
+	static function treeNode(label:imguicpp.utils.VarConstCharStar):Bool;
 	@:native("ImGui::TextWrappedV")
-	static function textWrappedV(_fmt:imguicpp.utils.VarConstCharStar, _args:cpp.VarArg):cpp.Void;
-	@:native("ImGui::TextWrapped")
-	static function textWrapped(_fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):cpp.Void;
+	static function textWrappedV(fmt:imguicpp.utils.VarConstCharStar, args:cpp.VarArg):cpp.Void;
+	@:native("ImGui::linc_TextWrapped")
+	@:overload(function(fmt:imguicpp.utils.VarConstCharStar, vargs:cpp.VarArg):cpp.Void { })
+	static function textWrapped(fmt:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::TextV")
-	static function textV(_fmt:imguicpp.utils.VarConstCharStar, _args:cpp.VarArg):cpp.Void;
+	static function textV(fmt:imguicpp.utils.VarConstCharStar, args:cpp.VarArg):cpp.Void;
 	@:native("ImGui::TextUnformatted")
-	@:overload(function(_text:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	static function textUnformatted(_text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar):cpp.Void;
-	@:native("ImGui::TextEx")
-	@:overload(function(_text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	@:overload(function(_text:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	static function textEx(_text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _flags:ImGuiTextFlags):cpp.Void;
+	@:overload(function(text:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	static function textUnformatted(text:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::TextDisabledV")
-	static function textDisabledV(_fmt:imguicpp.utils.VarConstCharStar, _args:cpp.VarArg):cpp.Void;
-	@:native("ImGui::TextDisabled")
-	static function textDisabled(_fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):cpp.Void;
+	static function textDisabledV(fmt:imguicpp.utils.VarConstCharStar, args:cpp.VarArg):cpp.Void;
+	@:native("ImGui::linc_TextDisabled")
+	@:overload(function(fmt:imguicpp.utils.VarConstCharStar, vargs:cpp.VarArg):cpp.Void { })
+	static function textDisabled(fmt:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::TextColoredV")
-	static function textColoredV(_col:ImVec4, _fmt:imguicpp.utils.VarConstCharStar, _args:cpp.VarArg):cpp.Void;
-	@:native("ImGui::TextColored")
-	static function textColored(_col:ImVec4, _fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):cpp.Void;
-	@:native("ImGui::Text")
-	static function text(_fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):cpp.Void;
-	@:native("ImGui::TempInputText")
-	static function tempInputText(_bb:ImRect, _id:ImGuiID, _label:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:Int, _flags:ImGuiInputTextFlags):Bool;
-	@:native("ImGui::TempInputScalar")
-	@:overload(function(_bb:ImRect, _id:ImGuiID, _label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar, _p_clamp_min:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_bb:ImRect, _id:ImGuiID, _label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	static function tempInputScalar(_bb:ImRect, _id:ImGuiID, _label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar, _p_clamp_min:imguicpp.VoidPointer, _p_clamp_max:imguicpp.VoidPointer):Bool;
-	@:native("ImGui::TempInputIsActive")
-	static function tempInputIsActive(_id:ImGuiID):Bool;
-	@:native("ImGui::TableUpdateLayout")
-	static function tableUpdateLayout(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableUpdateColumnsWeightFromWidth")
-	static function tableUpdateColumnsWeightFromWidth(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableUpdateBorders")
-	static function tableUpdateBorders(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableSortSpecsSanitize")
-	static function tableSortSpecsSanitize(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableSortSpecsBuild")
-	static function tableSortSpecsBuild(_table:cpp.Star<ImGuiTable>):cpp.Void;
+	static function textColoredV(col:ImVec4, fmt:imguicpp.utils.VarConstCharStar, args:cpp.VarArg):cpp.Void;
+	@:native("ImGui::linc_TextColored")
+	@:overload(function(col:ImVec4, fmt:imguicpp.utils.VarConstCharStar, vargs:cpp.VarArg):cpp.Void { })
+	static function textColored(col:ImVec4, fmt:imguicpp.utils.VarConstCharStar):cpp.Void;
+	@:native("ImGui::linc_Text")
+	@:overload(function(fmt:imguicpp.utils.VarConstCharStar, vargs:cpp.VarArg):cpp.Void { })
+	static function text(fmt:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::TableSetupScrollFreeze")
-	static function tableSetupScrollFreeze(_cols:Int, _rows:Int):cpp.Void;
-	@:native("ImGui::TableSetupDrawChannels")
-	static function tableSetupDrawChannels(_table:cpp.Star<ImGuiTable>):cpp.Void;
+	static function tableSetupScrollFreeze(cols:Int, rows:Int):cpp.Void;
 	@:native("ImGui::TableSetupColumn")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _init_width_or_weight:cpp.Float32, _user_id:ImU32):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _user_id:ImU32):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	static function tableSetupColumn(_label:imguicpp.utils.VarConstCharStar, _flags:ImGuiTableColumnFlags, _init_width_or_weight:cpp.Float32, _user_id:ImU32):cpp.Void;
-	@:native("ImGui::TableSettingsInstallHandler")
-	static function tableSettingsInstallHandler(_context:cpp.Star<ImGuiContext>):cpp.Void;
-	@:native("ImGui::TableSettingsFindByID")
-	static function tableSettingsFindByID(_id:ImGuiID):cpp.Star<ImGuiTableSettings>;
-	@:native("ImGui::TableSettingsCreate")
-	static function tableSettingsCreate(_id:ImGuiID, _columns_count:Int):cpp.Star<ImGuiTableSettings>;
-	@:native("ImGui::TableSetColumnWidthAutoSingle")
-	static function tableSetColumnWidthAutoSingle(_table:cpp.Star<ImGuiTable>, _column_n:Int):cpp.Void;
-	@:native("ImGui::TableSetColumnWidthAutoAll")
-	static function tableSetColumnWidthAutoAll(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableSetColumnWidth")
-	static function tableSetColumnWidth(_column_n:Int, _width:cpp.Float32):cpp.Void;
-	@:native("ImGui::TableSetColumnSortDirection")
-	static function tableSetColumnSortDirection(_column_n:Int, _sort_direction:ImGuiSortDirection, _append_to_sort_specs:Bool):cpp.Void;
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, init_width_or_weight:cpp.Float32, user_id:ImU32):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, user_id:ImU32):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	static function tableSetupColumn(label:imguicpp.utils.VarConstCharStar, flags:ImGuiTableColumnFlags, init_width_or_weight:cpp.Float32, user_id:ImU32):cpp.Void;
 	@:native("ImGui::TableSetColumnIndex")
-	static function tableSetColumnIndex(_column_n:Int):Bool;
+	static function tableSetColumnIndex(column_n:Int):Bool;
 	@:native("ImGui::TableSetBgColor")
-	@:overload(function(_target:ImGuiTableBgTarget, _color:ImU32):cpp.Void { })
-	static function tableSetBgColor(_target:ImGuiTableBgTarget, _color:ImU32, _column_n:Int):cpp.Void;
-	@:native("ImGui::TableSaveSettings")
-	static function tableSaveSettings(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableResetSettings")
-	static function tableResetSettings(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableRemove")
-	static function tableRemove(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TablePushBackgroundChannel")
-	static function tablePushBackgroundChannel():cpp.Void;
-	@:native("ImGui::TablePopBackgroundChannel")
-	static function tablePopBackgroundChannel():cpp.Void;
-	@:native("ImGui::TableOpenContextMenu")
-	@:overload(function():cpp.Void { })
-	static function tableOpenContextMenu(_column_n:Int):cpp.Void;
+	@:overload(function(target:ImGuiTableBgTarget, color:ImU32):cpp.Void { })
+	static function tableSetBgColor(target:ImGuiTableBgTarget, color:ImU32, column_n:Int):cpp.Void;
 	@:native("ImGui::TableNextRow")
-	@:overload(function(_row_flags:ImGuiTableRowFlags):cpp.Void { })
+	@:overload(function(row_flags:ImGuiTableRowFlags):cpp.Void { })
 	@:overload(function():cpp.Void { })
-	static function tableNextRow(_row_flags:ImGuiTableRowFlags, _min_row_height:cpp.Float32):cpp.Void;
+	static function tableNextRow(row_flags:ImGuiTableRowFlags, min_row_height:cpp.Float32):cpp.Void;
 	@:native("ImGui::TableNextColumn")
 	static function tableNextColumn():Bool;
-	@:native("ImGui::TableMergeDrawChannels")
-	static function tableMergeDrawChannels(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableLoadSettings")
-	static function tableLoadSettings(_table:cpp.Star<ImGuiTable>):cpp.Void;
 	@:native("ImGui::TableHeadersRow")
 	static function tableHeadersRow():cpp.Void;
 	@:native("ImGui::TableHeader")
-	static function tableHeader(_label:imguicpp.utils.VarConstCharStar):cpp.Void;
+	static function tableHeader(label:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::TableGetSortSpecs")
 	static function tableGetSortSpecs():cpp.Star<ImGuiTableSortSpecs>;
 	@:native("ImGui::TableGetRowIndex")
 	static function tableGetRowIndex():Int;
-	@:native("ImGui::TableGetMaxColumnWidth")
-	static function tableGetMaxColumnWidth(_table:cpp.Star<ImGuiTable>, _column_n:Int):cpp.Float32;
-	@:native("ImGui::TableGetHoveredColumn")
-	static function tableGetHoveredColumn():Int;
-	@:native("ImGui::TableGetHeaderRowHeight")
-	static function tableGetHeaderRowHeight():cpp.Float32;
-	@:native("ImGui::TableGetColumnWidthAuto")
-	static function tableGetColumnWidthAuto(_table:cpp.Star<ImGuiTable>, _column:cpp.Star<ImGuiTableColumn>):cpp.Float32;
-	@:native("ImGui::TableGetColumnResizeID")
-	@:overload(function(_table:cpp.Star<ImGuiTable>, _column_n:Int):ImGuiID { })
-	static function tableGetColumnResizeID(_table:cpp.Star<ImGuiTable>, _column_n:Int, _instance_no:Int):ImGuiID;
-	@:native("ImGui::TableGetColumnNextSortDirection")
-	static function tableGetColumnNextSortDirection(_column:cpp.Star<ImGuiTableColumn>):ImGuiSortDirection;
 	@:native("ImGui::TableGetColumnName")
 	@:overload(function():imguicpp.utils.VarConstCharStar { })
-	@:overload(function(_table:cpp.Star<ImGuiTable>, _column_n:Int):imguicpp.utils.VarConstCharStar { })
-	static function tableGetColumnName(_column_n:Int):imguicpp.utils.VarConstCharStar;
+	static function tableGetColumnName(column_n:Int):imguicpp.utils.VarConstCharStar;
 	@:native("ImGui::TableGetColumnIndex")
 	static function tableGetColumnIndex():Int;
 	@:native("ImGui::TableGetColumnFlags")
 	@:overload(function():ImGuiTableColumnFlags { })
-	static function tableGetColumnFlags(_column_n:Int):ImGuiTableColumnFlags;
+	static function tableGetColumnFlags(column_n:Int):ImGuiTableColumnFlags;
 	@:native("ImGui::TableGetColumnCount")
 	static function tableGetColumnCount():Int;
-	@:native("ImGui::TableGetCellBgRect")
-	static function tableGetCellBgRect(_pOut:cpp.Star<ImRect>, _table:cpp.Star<ImGuiTable>, _column_n:Int):cpp.Void;
-	@:native("ImGui::TableGetBoundSettings")
-	static function tableGetBoundSettings(_table:cpp.Star<ImGuiTable>):cpp.Star<ImGuiTableSettings>;
-	@:native("ImGui::TableGcCompactTransientBuffers")
-	static function tableGcCompactTransientBuffers(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableGcCompactSettings")
-	static function tableGcCompactSettings():cpp.Void;
-	@:native("ImGui::TableFixColumnSortDirection")
-	static function tableFixColumnSortDirection(_table:cpp.Star<ImGuiTable>, _column:cpp.Star<ImGuiTableColumn>):cpp.Void;
-	@:native("ImGui::TableFindByID")
-	static function tableFindByID(_id:ImGuiID):cpp.Star<ImGuiTable>;
-	@:native("ImGui::TableEndRow")
-	static function tableEndRow(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableEndCell")
-	static function tableEndCell(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableDrawContextMenu")
-	static function tableDrawContextMenu(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableDrawBorders")
-	static function tableDrawBorders(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableBeginRow")
-	static function tableBeginRow(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TableBeginInitMemory")
-	static function tableBeginInitMemory(_table:cpp.Star<ImGuiTable>, _columns_count:Int):cpp.Void;
-	@:native("ImGui::TableBeginCell")
-	static function tableBeginCell(_table:cpp.Star<ImGuiTable>, _column_n:Int):cpp.Void;
-	@:native("ImGui::TableBeginApplyRequests")
-	static function tableBeginApplyRequests(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::TabItemLabelAndCloseButton")
-	static function tabItemLabelAndCloseButton(_draw_list:cpp.Star<ImDrawList>, _bb:ImRect, _flags:ImGuiTabItemFlags, _frame_padding:ImVec2, _label:imguicpp.utils.VarConstCharStar, _tab_id:ImGuiID, _close_button_id:ImGuiID, _is_contents_visible:Bool, _out_just_closed:imguicpp.BoolPointer, _out_text_clipped:imguicpp.BoolPointer):cpp.Void;
-	@:native("ImGui::TabItemEx")
-	static function tabItemEx(_tab_bar:cpp.Star<ImGuiTabBar>, _label:imguicpp.utils.VarConstCharStar, _p_open:imguicpp.BoolPointer, _flags:ImGuiTabItemFlags):Bool;
-	@:native("ImGui::TabItemCalcSize")
-	static function tabItemCalcSize(_pOut:cpp.Star<ImVec2>, _label:imguicpp.utils.VarConstCharStar, _has_close_button:Bool):cpp.Void;
 	@:native("ImGui::TabItemButton")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar):Bool { })
-	static function tabItemButton(_label:imguicpp.utils.VarConstCharStar, _flags:ImGuiTabItemFlags):Bool;
-	@:native("ImGui::TabItemBackground")
-	static function tabItemBackground(_draw_list:cpp.Star<ImDrawList>, _bb:ImRect, _flags:ImGuiTabItemFlags, _col:ImU32):cpp.Void;
-	@:native("ImGui::TabBarRemoveTab")
-	static function tabBarRemoveTab(_tab_bar:cpp.Star<ImGuiTabBar>, _tab_id:ImGuiID):cpp.Void;
-	@:native("ImGui::TabBarQueueReorder")
-	static function tabBarQueueReorder(_tab_bar:cpp.Star<ImGuiTabBar>, _tab:cpp.Star<ImGuiTabItem>, _dir:Int):cpp.Void;
-	@:native("ImGui::TabBarProcessReorder")
-	static function tabBarProcessReorder(_tab_bar:cpp.Star<ImGuiTabBar>):Bool;
-	@:native("ImGui::TabBarFindTabByID")
-	static function tabBarFindTabByID(_tab_bar:cpp.Star<ImGuiTabBar>, _tab_id:ImGuiID):cpp.Star<ImGuiTabItem>;
-	@:native("ImGui::TabBarCloseTab")
-	static function tabBarCloseTab(_tab_bar:cpp.Star<ImGuiTabBar>, _tab:cpp.Star<ImGuiTabItem>):cpp.Void;
+	@:overload(function(label:imguicpp.utils.VarConstCharStar):Bool { })
+	static function tabItemButton(label:imguicpp.utils.VarConstCharStar, flags:ImGuiTabItemFlags):Bool;
 	@:native("ImGui::StyleColorsLight")
 	@:overload(function():cpp.Void { })
-	static function styleColorsLight(_dst:cpp.Star<ImGuiStyle>):cpp.Void;
+	static function styleColorsLight(dst:cpp.Star<ImGuiStyle>):cpp.Void;
 	@:native("ImGui::StyleColorsDark")
 	@:overload(function():cpp.Void { })
-	static function styleColorsDark(_dst:cpp.Star<ImGuiStyle>):cpp.Void;
+	static function styleColorsDark(dst:cpp.Star<ImGuiStyle>):cpp.Void;
 	@:native("ImGui::StyleColorsClassic")
 	@:overload(function():cpp.Void { })
-	static function styleColorsClassic(_dst:cpp.Star<ImGuiStyle>):cpp.Void;
-	@:native("ImGui::StartMouseMovingWindow")
-	static function startMouseMovingWindow(_window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::SplitterBehavior")
-	@:overload(function(_bb:ImRect, _id:ImGuiID, _axis:ImGuiAxis, _size1:imguicpp.FloatPointer, _size2:imguicpp.FloatPointer, _min_size1:cpp.Float32, _min_size2:cpp.Float32, _hover_visibility_delay:cpp.Float32):Bool { })
-	@:overload(function(_bb:ImRect, _id:ImGuiID, _axis:ImGuiAxis, _size1:imguicpp.FloatPointer, _size2:imguicpp.FloatPointer, _min_size1:cpp.Float32, _min_size2:cpp.Float32):Bool { })
-	static function splitterBehavior(_bb:ImRect, _id:ImGuiID, _axis:ImGuiAxis, _size1:imguicpp.FloatPointer, _size2:imguicpp.FloatPointer, _min_size1:cpp.Float32, _min_size2:cpp.Float32, _hover_extend:cpp.Float32, _hover_visibility_delay:cpp.Float32):Bool;
+	static function styleColorsClassic(dst:cpp.Star<ImGuiStyle>):cpp.Void;
 	@:native("ImGui::Spacing")
 	static function spacing():cpp.Void;
 	@:native("ImGui::SmallButton")
-	static function smallButton(_label:imguicpp.utils.VarConstCharStar):Bool;
-	@:native("ImGui::SliderScalarN")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _components:Int, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _components:Int, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer):Bool { })
-	static function sliderScalarN(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _components:Int, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::SliderScalar")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer):Bool { })
-	static function sliderScalar(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::SliderInt4")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int):Bool { })
-	static function sliderInt4(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::SliderInt3")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int):Bool { })
-	static function sliderInt3(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::SliderInt2")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int):Bool { })
-	static function sliderInt2(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::SliderInt")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int):Bool { })
-	static function sliderInt(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::SliderFloat4")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32):Bool { })
-	static function sliderFloat4(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::SliderFloat3")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32):Bool { })
-	static function sliderFloat3(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::SliderFloat2")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32):Bool { })
-	static function sliderFloat2(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::SliderFloat")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32):Bool { })
-	static function sliderFloat(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::SliderBehavior")
-	static function sliderBehavior(_bb:ImRect, _id:ImGuiID, _data_type:ImGuiDataType, _p_v:imguicpp.VoidPointer, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags, _out_grab_bb:cpp.Star<ImRect>):Bool;
-	@:native("ImGui::SliderAngle")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_rad:imguicpp.FloatPointer, _v_degrees_min:cpp.Float32, _v_degrees_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_rad:imguicpp.FloatPointer, _v_degrees_min:cpp.Float32, _v_degrees_max:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_rad:imguicpp.FloatPointer, _v_degrees_min:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_rad:imguicpp.FloatPointer):Bool { })
-	static function sliderAngle(_label:imguicpp.utils.VarConstCharStar, _v_rad:imguicpp.FloatPointer, _v_degrees_min:cpp.Float32, _v_degrees_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::Shutdown")
-	static function shutdown(_context:cpp.Star<ImGuiContext>):cpp.Void;
-	@:native("ImGui::ShrinkWidths")
-	static function shrinkWidths(_items:cpp.Star<ImGuiShrinkWidthItem>, _count:Int, _width_excess:cpp.Float32):cpp.Void;
+	static function smallButton(label:imguicpp.utils.VarConstCharStar):Bool;
+	@:native("ImGui::linc_SliderScalarN")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, components:Int, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, components:Int, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer):Bool { })
+	static function sliderScalarN(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, components:Int, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_SliderScalar")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer):Bool { })
+	static function sliderScalar(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_SliderInt4")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_min:Int, v_max:Int):Bool { })
+	static function sliderInt4(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_SliderInt3")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_min:Int, v_max:Int):Bool { })
+	static function sliderInt3(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_SliderInt2")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_min:Int, v_max:Int):Bool { })
+	static function sliderInt2(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_SliderInt")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_min:Int, v_max:Int):Bool { })
+	static function sliderInt(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_SliderFloat4")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32):Bool { })
+	static function sliderFloat4(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_SliderFloat3")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32):Bool { })
+	static function sliderFloat3(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_SliderFloat2")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32):Bool { })
+	static function sliderFloat2(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_SliderFloat")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32):Bool { })
+	static function sliderFloat(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_SliderAngle")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_rad:imguicpp.FloatPointer, v_degrees_min:cpp.Float32, v_degrees_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_rad:imguicpp.FloatPointer, v_degrees_min:cpp.Float32, v_degrees_max:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_rad:imguicpp.FloatPointer, v_degrees_min:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_rad:imguicpp.FloatPointer):Bool { })
+	static function sliderAngle(label:imguicpp.utils.VarConstCharStar, v_rad:imguicpp.FloatPointer, v_degrees_min:cpp.Float32, v_degrees_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
 	@:native("ImGui::ShowUserGuide")
 	static function showUserGuide():cpp.Void;
 	@:native("ImGui::ShowStyleSelector")
-	static function showStyleSelector(_label:imguicpp.utils.VarConstCharStar):Bool;
+	static function showStyleSelector(label:imguicpp.utils.VarConstCharStar):Bool;
 	@:native("ImGui::ShowStyleEditor")
 	@:overload(function():cpp.Void { })
-	static function showStyleEditor(_ref:cpp.Star<ImGuiStyle>):cpp.Void;
-	@:native("ImGui::ShowMetricsWindow")
+	static function showStyleEditor(ref:cpp.Star<ImGuiStyle>):cpp.Void;
+	@:native("ImGui::linc_ShowMetricsWindow")
 	@:overload(function():cpp.Void { })
-	static function showMetricsWindow(_p_open:imguicpp.BoolPointer):cpp.Void;
+	static function showMetricsWindow(p_open:imguicpp.BoolPointer):cpp.Void;
 	@:native("ImGui::ShowFontSelector")
-	static function showFontSelector(_label:imguicpp.utils.VarConstCharStar):cpp.Void;
-	@:native("ImGui::ShowDemoWindow")
+	static function showFontSelector(label:imguicpp.utils.VarConstCharStar):cpp.Void;
+	@:native("ImGui::linc_ShowDemoWindow")
 	@:overload(function():cpp.Void { })
-	static function showDemoWindow(_p_open:imguicpp.BoolPointer):cpp.Void;
-	@:native("ImGui::ShowAboutWindow")
+	static function showDemoWindow(p_open:imguicpp.BoolPointer):cpp.Void;
+	@:native("ImGui::linc_ShowAboutWindow")
 	@:overload(function():cpp.Void { })
-	static function showAboutWindow(_p_open:imguicpp.BoolPointer):cpp.Void;
-	@:native("ImGui::ShadeVertsLinearUV")
-	static function shadeVertsLinearUV(_draw_list:cpp.Star<ImDrawList>, _vert_start_idx:Int, _vert_end_idx:Int, _a:ImVec2, _b:ImVec2, _uv_a:ImVec2, _uv_b:ImVec2, _clamp:Bool):cpp.Void;
-	@:native("ImGui::ShadeVertsLinearColorGradientKeepAlpha")
-	static function shadeVertsLinearColorGradientKeepAlpha(_draw_list:cpp.Star<ImDrawList>, _vert_start_idx:Int, _vert_end_idx:Int, _gradient_p0:ImVec2, _gradient_p1:ImVec2, _col0:ImU32, _col1:ImU32):cpp.Void;
+	static function showAboutWindow(p_open:imguicpp.BoolPointer):cpp.Void;
 	@:native("ImGui::SetWindowSize")
-	@:overload(function(_size:ImVec2):cpp.Void { })
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar, _size:ImVec2, _cond:ImGuiCond):cpp.Void { })
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar, _size:ImVec2):cpp.Void { })
-	@:overload(function(_window:cpp.Star<ImGuiWindow>, _size:ImVec2, _cond:ImGuiCond):cpp.Void { })
-	@:overload(function(_window:cpp.Star<ImGuiWindow>, _size:ImVec2):cpp.Void { })
-	static function setWindowSize(_size:ImVec2, _cond:ImGuiCond):cpp.Void;
+	@:overload(function(size:ImVec2):cpp.Void { })
+	@:overload(function(name:imguicpp.utils.VarConstCharStar, size:ImVec2, cond:ImGuiCond):cpp.Void { })
+	@:overload(function(name:imguicpp.utils.VarConstCharStar, size:ImVec2):cpp.Void { })
+	static function setWindowSize(size:ImVec2, cond:ImGuiCond):cpp.Void;
 	@:native("ImGui::SetWindowPos")
-	@:overload(function(_pos:ImVec2):cpp.Void { })
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar, _pos:ImVec2, _cond:ImGuiCond):cpp.Void { })
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar, _pos:ImVec2):cpp.Void { })
-	@:overload(function(_window:cpp.Star<ImGuiWindow>, _pos:ImVec2, _cond:ImGuiCond):cpp.Void { })
-	@:overload(function(_window:cpp.Star<ImGuiWindow>, _pos:ImVec2):cpp.Void { })
-	static function setWindowPos(_pos:ImVec2, _cond:ImGuiCond):cpp.Void;
-	@:native("ImGui::SetWindowHitTestHole")
-	static function setWindowHitTestHole(_window:cpp.Star<ImGuiWindow>, _pos:ImVec2, _size:ImVec2):cpp.Void;
+	@:overload(function(pos:ImVec2):cpp.Void { })
+	@:overload(function(name:imguicpp.utils.VarConstCharStar, pos:ImVec2, cond:ImGuiCond):cpp.Void { })
+	@:overload(function(name:imguicpp.utils.VarConstCharStar, pos:ImVec2):cpp.Void { })
+	static function setWindowPos(pos:ImVec2, cond:ImGuiCond):cpp.Void;
 	@:native("ImGui::SetWindowFontScale")
-	static function setWindowFontScale(_scale:cpp.Float32):cpp.Void;
+	static function setWindowFontScale(scale:cpp.Float32):cpp.Void;
 	@:native("ImGui::SetWindowFocus")
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	@:overload(function(name:imguicpp.utils.VarConstCharStar):cpp.Void { })
 	static function setWindowFocus():cpp.Void;
 	@:native("ImGui::SetWindowCollapsed")
-	@:overload(function(_collapsed:Bool):cpp.Void { })
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar, _collapsed:Bool, _cond:ImGuiCond):cpp.Void { })
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar, _collapsed:Bool):cpp.Void { })
-	@:overload(function(_window:cpp.Star<ImGuiWindow>, _collapsed:Bool, _cond:ImGuiCond):cpp.Void { })
-	@:overload(function(_window:cpp.Star<ImGuiWindow>, _collapsed:Bool):cpp.Void { })
-	static function setWindowCollapsed(_collapsed:Bool, _cond:ImGuiCond):cpp.Void;
-	@:native("ImGui::SetWindowClipRectBeforeSetChannel")
-	static function setWindowClipRectBeforeSetChannel(_window:cpp.Star<ImGuiWindow>, _clip_rect:ImRect):cpp.Void;
+	@:overload(function(collapsed:Bool):cpp.Void { })
+	@:overload(function(name:imguicpp.utils.VarConstCharStar, collapsed:Bool, cond:ImGuiCond):cpp.Void { })
+	@:overload(function(name:imguicpp.utils.VarConstCharStar, collapsed:Bool):cpp.Void { })
+	static function setWindowCollapsed(collapsed:Bool, cond:ImGuiCond):cpp.Void;
 	@:native("ImGui::SetTooltipV")
-	static function setTooltipV(_fmt:imguicpp.utils.VarConstCharStar, _args:cpp.VarArg):cpp.Void;
-	@:native("ImGui::SetTooltip")
-	static function setTooltip(_fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):cpp.Void;
+	static function setTooltipV(fmt:imguicpp.utils.VarConstCharStar, args:cpp.VarArg):cpp.Void;
+	@:native("ImGui::linc_SetTooltip")
+	@:overload(function(fmt:imguicpp.utils.VarConstCharStar, vargs:cpp.VarArg):cpp.Void { })
+	static function setTooltip(fmt:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::SetTabItemClosed")
-	static function setTabItemClosed(_tab_or_docked_window_label:imguicpp.utils.VarConstCharStar):cpp.Void;
+	static function setTabItemClosed(tab_or_docked_window_label:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::SetStateStorage")
-	static function setStateStorage(_storage:cpp.Star<ImGuiStorage>):cpp.Void;
+	static function setStateStorage(storage:cpp.Star<ImGuiStorage>):cpp.Void;
 	@:native("ImGui::SetScrollY")
-	@:overload(function(_window:cpp.Star<ImGuiWindow>, _scroll_y:cpp.Float32):cpp.Void { })
-	static function setScrollY(_scroll_y:cpp.Float32):cpp.Void;
+	static function setScrollY(scroll_y:cpp.Float32):cpp.Void;
 	@:native("ImGui::SetScrollX")
-	@:overload(function(_window:cpp.Star<ImGuiWindow>, _scroll_x:cpp.Float32):cpp.Void { })
-	static function setScrollX(_scroll_x:cpp.Float32):cpp.Void;
+	static function setScrollX(scroll_x:cpp.Float32):cpp.Void;
 	@:native("ImGui::SetScrollHereY")
 	@:overload(function():cpp.Void { })
-	static function setScrollHereY(_center_y_ratio:cpp.Float32):cpp.Void;
+	static function setScrollHereY(center_y_ratio:cpp.Float32):cpp.Void;
 	@:native("ImGui::SetScrollHereX")
 	@:overload(function():cpp.Void { })
-	static function setScrollHereX(_center_x_ratio:cpp.Float32):cpp.Void;
+	static function setScrollHereX(center_x_ratio:cpp.Float32):cpp.Void;
 	@:native("ImGui::SetScrollFromPosY")
-	@:overload(function(_local_y:cpp.Float32):cpp.Void { })
-	@:overload(function(_window:cpp.Star<ImGuiWindow>, _local_y:cpp.Float32, _center_y_ratio:cpp.Float32):cpp.Void { })
-	static function setScrollFromPosY(_local_y:cpp.Float32, _center_y_ratio:cpp.Float32):cpp.Void;
+	@:overload(function(local_y:cpp.Float32):cpp.Void { })
+	static function setScrollFromPosY(local_y:cpp.Float32, center_y_ratio:cpp.Float32):cpp.Void;
 	@:native("ImGui::SetScrollFromPosX")
-	@:overload(function(_local_x:cpp.Float32):cpp.Void { })
-	@:overload(function(_window:cpp.Star<ImGuiWindow>, _local_x:cpp.Float32, _center_x_ratio:cpp.Float32):cpp.Void { })
-	static function setScrollFromPosX(_local_x:cpp.Float32, _center_x_ratio:cpp.Float32):cpp.Void;
-	@:native("ImGui::SetNextWindowSizeConstraints")
-	@:overload(function(_size_min:ImVec2, _size_max:ImVec2, _custom_callback_data:imguicpp.VoidPointer):cpp.Void { })
-	@:overload(function(_size_min:ImVec2, _size_max:ImVec2):cpp.Void { })
-	static function setNextWindowSizeConstraints(_size_min:ImVec2, _size_max:ImVec2, _custom_callback:ImGuiSizeCallback, _custom_callback_data:imguicpp.VoidPointer):cpp.Void;
+	@:overload(function(local_x:cpp.Float32):cpp.Void { })
+	static function setScrollFromPosX(local_x:cpp.Float32, center_x_ratio:cpp.Float32):cpp.Void;
+	@:native("ImGui::linc_SetNextWindowSizeConstraints")
+	@:overload(function(size_min:ImVec2, size_max:ImVec2, custom_callback_data:imguicpp.VoidPointer):cpp.Void { })
+	@:overload(function(size_min:ImVec2, size_max:ImVec2):cpp.Void { })
+	static function setNextWindowSizeConstraints(size_min:ImVec2, size_max:ImVec2, custom_callback:ImGuiSizeCallback, custom_callback_data:imguicpp.VoidPointer):cpp.Void;
 	@:native("ImGui::SetNextWindowSize")
-	@:overload(function(_size:ImVec2):cpp.Void { })
-	static function setNextWindowSize(_size:ImVec2, _cond:ImGuiCond):cpp.Void;
-	@:native("ImGui::SetNextWindowScroll")
-	static function setNextWindowScroll(_scroll:ImVec2):cpp.Void;
+	@:overload(function(size:ImVec2):cpp.Void { })
+	static function setNextWindowSize(size:ImVec2, cond:ImGuiCond):cpp.Void;
 	@:native("ImGui::SetNextWindowPos")
-	@:overload(function(_pos:ImVec2, _pivot:ImVec2):cpp.Void { })
-	@:overload(function(_pos:ImVec2):cpp.Void { })
-	static function setNextWindowPos(_pos:ImVec2, _cond:ImGuiCond, _pivot:ImVec2):cpp.Void;
+	@:overload(function(pos:ImVec2, pivot:ImVec2):cpp.Void { })
+	@:overload(function(pos:ImVec2):cpp.Void { })
+	static function setNextWindowPos(pos:ImVec2, cond:ImGuiCond, pivot:ImVec2):cpp.Void;
 	@:native("ImGui::SetNextWindowFocus")
 	static function setNextWindowFocus():cpp.Void;
 	@:native("ImGui::SetNextWindowContentSize")
-	static function setNextWindowContentSize(_size:ImVec2):cpp.Void;
+	static function setNextWindowContentSize(size:ImVec2):cpp.Void;
 	@:native("ImGui::SetNextWindowCollapsed")
-	@:overload(function(_collapsed:Bool):cpp.Void { })
-	static function setNextWindowCollapsed(_collapsed:Bool, _cond:ImGuiCond):cpp.Void;
+	@:overload(function(collapsed:Bool):cpp.Void { })
+	static function setNextWindowCollapsed(collapsed:Bool, cond:ImGuiCond):cpp.Void;
 	@:native("ImGui::SetNextWindowBgAlpha")
-	static function setNextWindowBgAlpha(_alpha:cpp.Float32):cpp.Void;
+	static function setNextWindowBgAlpha(alpha:cpp.Float32):cpp.Void;
 	@:native("ImGui::SetNextItemWidth")
-	static function setNextItemWidth(_item_width:cpp.Float32):cpp.Void;
+	static function setNextItemWidth(item_width:cpp.Float32):cpp.Void;
 	@:native("ImGui::SetNextItemOpen")
-	@:overload(function(_is_open:Bool):cpp.Void { })
-	static function setNextItemOpen(_is_open:Bool, _cond:ImGuiCond):cpp.Void;
-	@:native("ImGui::SetNavIDWithRectRel")
-	static function setNavIDWithRectRel(_id:ImGuiID, _nav_layer:Int, _focus_scope_id:ImGuiID, _rect_rel:ImRect):cpp.Void;
-	@:native("ImGui::SetNavID")
-	static function setNavID(_id:ImGuiID, _nav_layer:Int, _focus_scope_id:ImGuiID):cpp.Void;
+	@:overload(function(is_open:Bool):cpp.Void { })
+	static function setNextItemOpen(is_open:Bool, cond:ImGuiCond):cpp.Void;
 	@:native("ImGui::SetMouseCursor")
-	static function setMouseCursor(_cursor_type:ImGuiMouseCursor):cpp.Void;
-	@:native("ImGui::SetLastItemData")
-	static function setLastItemData(_window:cpp.Star<ImGuiWindow>, _item_id:ImGuiID, _status_flags:ImGuiItemStatusFlags, _item_rect:ImRect):cpp.Void;
+	static function setMouseCursor(cursor_type:ImGuiMouseCursor):cpp.Void;
 	@:native("ImGui::SetKeyboardFocusHere")
 	@:overload(function():cpp.Void { })
-	static function setKeyboardFocusHere(_offset:Int):cpp.Void;
-	@:native("ImGui::SetItemUsingMouseWheel")
-	static function setItemUsingMouseWheel():cpp.Void;
+	static function setKeyboardFocusHere(offset:Int):cpp.Void;
 	@:native("ImGui::SetItemDefaultFocus")
 	static function setItemDefaultFocus():cpp.Void;
 	@:native("ImGui::SetItemAllowOverlap")
 	static function setItemAllowOverlap():cpp.Void;
-	@:native("ImGui::SetHoveredID")
-	static function setHoveredID(_id:ImGuiID):cpp.Void;
-	@:native("ImGui::SetFocusID")
-	static function setFocusID(_id:ImGuiID, _window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::SetDragDropPayload")
-	@:overload(function(_type:imguicpp.utils.VarConstCharStar, _data:imguicpp.VoidPointer, _sz:cpp.SizeT):Bool { })
-	static function setDragDropPayload(_type:imguicpp.utils.VarConstCharStar, _data:imguicpp.VoidPointer, _sz:cpp.SizeT, _cond:ImGuiCond):Bool;
+	@:native("ImGui::linc_SetDragDropPayload")
+	@:overload(function(type:imguicpp.utils.VarConstCharStar, data:imguicpp.VoidPointer, sz:cpp.SizeT):Bool { })
+	static function setDragDropPayload(type:imguicpp.utils.VarConstCharStar, data:imguicpp.VoidPointer, sz:cpp.SizeT, cond:ImGuiCond):Bool;
 	@:native("ImGui::SetCursorScreenPos")
-	static function setCursorScreenPos(_pos:ImVec2):cpp.Void;
+	static function setCursorScreenPos(pos:ImVec2):cpp.Void;
 	@:native("ImGui::SetCursorPosY")
-	static function setCursorPosY(_local_y:cpp.Float32):cpp.Void;
+	static function setCursorPosY(local_y:cpp.Float32):cpp.Void;
 	@:native("ImGui::SetCursorPosX")
-	static function setCursorPosX(_local_x:cpp.Float32):cpp.Void;
+	static function setCursorPosX(local_x:cpp.Float32):cpp.Void;
 	@:native("ImGui::SetCursorPos")
-	static function setCursorPos(_local_pos:ImVec2):cpp.Void;
-	@:native("ImGui::SetCurrentFont")
-	static function setCurrentFont(_font:cpp.Star<ImFont>):cpp.Void;
+	static function setCursorPos(local_pos:ImVec2):cpp.Void;
 	@:native("ImGui::SetCurrentContext")
-	static function setCurrentContext(_ctx:cpp.Star<ImGuiContext>):cpp.Void;
+	static function setCurrentContext(ctx:cpp.Star<ImGuiContext>):cpp.Void;
 	@:native("ImGui::SetColumnWidth")
-	static function setColumnWidth(_column_index:Int, _width:cpp.Float32):cpp.Void;
+	static function setColumnWidth(column_index:Int, width:cpp.Float32):cpp.Void;
 	@:native("ImGui::SetColumnOffset")
-	static function setColumnOffset(_column_index:Int, _offset_x:cpp.Float32):cpp.Void;
+	static function setColumnOffset(column_index:Int, offset_x:cpp.Float32):cpp.Void;
 	@:native("ImGui::SetColorEditOptions")
-	static function setColorEditOptions(_flags:ImGuiColorEditFlags):cpp.Void;
+	static function setColorEditOptions(flags:ImGuiColorEditFlags):cpp.Void;
 	@:native("ImGui::SetClipboardText")
-	static function setClipboardText(_text:imguicpp.utils.VarConstCharStar):cpp.Void;
-	@:native("ImGui::SetAllocatorFunctions")
-	@:overload(function(_alloc_func:cpp.Callable<(cpp.SizeT, cpp.Star<cpp.Void>) -> imguicpp.VoidPointer>, _free_func:cpp.Callable<(cpp.Star<cpp.Void>, cpp.Star<cpp.Void>) -> Void>):cpp.Void { })
-	static function setAllocatorFunctions(_alloc_func:cpp.Callable<(cpp.SizeT, cpp.Star<cpp.Void>) -> imguicpp.VoidPointer>, _free_func:cpp.Callable<(cpp.Star<cpp.Void>, cpp.Star<cpp.Void>) -> Void>, _user_data:imguicpp.VoidPointer):cpp.Void;
-	@:native("ImGui::SetActiveID")
-	static function setActiveID(_id:ImGuiID, _window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::SeparatorEx")
-	static function separatorEx(_flags:ImGuiSeparatorFlags):cpp.Void;
+	static function setClipboardText(text:imguicpp.utils.VarConstCharStar):cpp.Void;
+	@:native("ImGui::linc_SetAllocatorFunctions")
+	@:overload(function(alloc_func:cpp.Callable<(cpp.SizeT, cpp.Star<cpp.Void>) -> imguicpp.VoidPointer>, free_func:cpp.Callable<(cpp.Star<cpp.Void>, cpp.Star<cpp.Void>) -> Void>):cpp.Void { })
+	static function setAllocatorFunctions(alloc_func:cpp.Callable<(cpp.SizeT, cpp.Star<cpp.Void>) -> imguicpp.VoidPointer>, free_func:cpp.Callable<(cpp.Star<cpp.Void>, cpp.Star<cpp.Void>) -> Void>, user_data:imguicpp.VoidPointer):cpp.Void;
 	@:native("ImGui::Separator")
 	static function separator():cpp.Void;
-	@:native("ImGui::Selectable")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _selected:Bool, _size:ImVec2):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _size:ImVec2):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _p_selected:imguicpp.BoolPointer, _flags:ImGuiSelectableFlags, _size:ImVec2):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _p_selected:imguicpp.BoolPointer, _size:ImVec2):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _p_selected:imguicpp.BoolPointer):Bool { })
-	static function selectable(_label:imguicpp.utils.VarConstCharStar, _selected:Bool, _flags:ImGuiSelectableFlags, _size:ImVec2):Bool;
-	@:native("ImGui::ScrollbarEx")
-	static function scrollbarEx(_bb:ImRect, _id:ImGuiID, _axis:ImGuiAxis, _p_scroll_v:imguicpp.FloatPointer, _avail_v:cpp.Float32, _contents_v:cpp.Float32, _rounding_corners:ImDrawCornerFlags):Bool;
-	@:native("ImGui::Scrollbar")
-	static function scrollbar(_axis:ImGuiAxis):cpp.Void;
-	@:native("ImGui::ScrollToBringRectIntoView")
-	static function scrollToBringRectIntoView(_pOut:cpp.Star<ImVec2>, _window:cpp.Star<ImGuiWindow>, _item_rect:ImRect):cpp.Void;
+	@:native("ImGui::linc_Selectable")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, selected:Bool, size:ImVec2):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, size:ImVec2):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, p_selected:imguicpp.BoolPointer, flags:ImGuiSelectableFlags, size:ImVec2):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, p_selected:imguicpp.BoolPointer, size:ImVec2):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, p_selected:imguicpp.BoolPointer):Bool { })
+	static function selectable(label:imguicpp.utils.VarConstCharStar, selected:Bool, flags:ImGuiSelectableFlags, size:ImVec2):Bool;
 	@:native("ImGui::SaveIniSettingsToMemory")
 	@:overload(function():imguicpp.utils.VarConstCharStar { })
-	static function saveIniSettingsToMemory(_out_ini_size:cpp.Star<cpp.SizeT>):imguicpp.utils.VarConstCharStar;
+	static function saveIniSettingsToMemory(out_ini_size:cpp.Star<cpp.SizeT>):imguicpp.utils.VarConstCharStar;
 	@:native("ImGui::SaveIniSettingsToDisk")
-	static function saveIniSettingsToDisk(_ini_filename:imguicpp.utils.VarConstCharStar):cpp.Void;
+	static function saveIniSettingsToDisk(ini_filename:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::SameLine")
-	@:overload(function(_spacing:cpp.Float32):cpp.Void { })
+	@:overload(function(spacing:cpp.Float32):cpp.Void { })
 	@:overload(function():cpp.Void { })
-	static function sameLine(_offset_from_start_x:cpp.Float32, _spacing:cpp.Float32):cpp.Void;
+	static function sameLine(offset_from_start_x:cpp.Float32, spacing:cpp.Float32):cpp.Void;
 	@:native("ImGui::ResetMouseDragDelta")
 	@:overload(function():cpp.Void { })
-	static function resetMouseDragDelta(_button:ImGuiMouseButton):cpp.Void;
-	@:native("ImGui::RenderTextWrapped")
-	static function renderTextWrapped(_pos:ImVec2, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _wrap_width:cpp.Float32):cpp.Void;
-	@:native("ImGui::RenderTextEllipsis")
-	static function renderTextEllipsis(_draw_list:cpp.Star<ImDrawList>, _pos_min:ImVec2, _pos_max:ImVec2, _clip_max_x:cpp.Float32, _ellipsis_max_x:cpp.Float32, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _text_size_if_known:cpp.Star<ImVec2>):cpp.Void;
-	@:native("ImGui::RenderTextClippedEx")
-	@:overload(function(_draw_list:cpp.Star<ImDrawList>, _pos_min:ImVec2, _pos_max:ImVec2, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _text_size_if_known:cpp.Star<ImVec2>, _clip_rect:cpp.Star<ImRect>):cpp.Void { })
-	@:overload(function(_draw_list:cpp.Star<ImDrawList>, _pos_min:ImVec2, _pos_max:ImVec2, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _text_size_if_known:cpp.Star<ImVec2>):cpp.Void { })
-	static function renderTextClippedEx(_draw_list:cpp.Star<ImDrawList>, _pos_min:ImVec2, _pos_max:ImVec2, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _text_size_if_known:cpp.Star<ImVec2>, _align:ImVec2, _clip_rect:cpp.Star<ImRect>):cpp.Void;
-	@:native("ImGui::RenderTextClipped")
-	@:overload(function(_pos_min:ImVec2, _pos_max:ImVec2, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _text_size_if_known:cpp.Star<ImVec2>, _clip_rect:cpp.Star<ImRect>):cpp.Void { })
-	@:overload(function(_pos_min:ImVec2, _pos_max:ImVec2, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _text_size_if_known:cpp.Star<ImVec2>):cpp.Void { })
-	static function renderTextClipped(_pos_min:ImVec2, _pos_max:ImVec2, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _text_size_if_known:cpp.Star<ImVec2>, _align:ImVec2, _clip_rect:cpp.Star<ImRect>):cpp.Void;
-	@:native("ImGui::RenderText")
-	@:overload(function(_pos:ImVec2, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	@:overload(function(_pos:ImVec2, _text:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	static function renderText(_pos:ImVec2, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _hide_text_after_hash:Bool):cpp.Void;
-	@:native("ImGui::RenderRectFilledWithHole")
-	static function renderRectFilledWithHole(_draw_list:cpp.Star<ImDrawList>, _outer:ImRect, _inner:ImRect, _col:ImU32, _rounding:cpp.Float32):cpp.Void;
-	@:native("ImGui::RenderRectFilledRangeH")
-	static function renderRectFilledRangeH(_draw_list:cpp.Star<ImDrawList>, _rect:ImRect, _col:ImU32, _x_start_norm:cpp.Float32, _x_end_norm:cpp.Float32, _rounding:cpp.Float32):cpp.Void;
-	@:native("ImGui::RenderNavHighlight")
-	@:overload(function(_bb:ImRect, _id:ImGuiID):cpp.Void { })
-	static function renderNavHighlight(_bb:ImRect, _id:ImGuiID, _flags:ImGuiNavHighlightFlags):cpp.Void;
-	@:native("ImGui::RenderMouseCursor")
-	static function renderMouseCursor(_draw_list:cpp.Star<ImDrawList>, _pos:ImVec2, _scale:cpp.Float32, _mouse_cursor:ImGuiMouseCursor, _col_fill:ImU32, _col_border:ImU32, _col_shadow:ImU32):cpp.Void;
-	@:native("ImGui::RenderFrameBorder")
-	@:overload(function(_p_min:ImVec2, _p_max:ImVec2):cpp.Void { })
-	static function renderFrameBorder(_p_min:ImVec2, _p_max:ImVec2, _rounding:cpp.Float32):cpp.Void;
-	@:native("ImGui::RenderFrame")
-	@:overload(function(_p_min:ImVec2, _p_max:ImVec2, _fill_col:ImU32, _rounding:cpp.Float32):cpp.Void { })
-	@:overload(function(_p_min:ImVec2, _p_max:ImVec2, _fill_col:ImU32):cpp.Void { })
-	static function renderFrame(_p_min:ImVec2, _p_max:ImVec2, _fill_col:ImU32, _border:Bool, _rounding:cpp.Float32):cpp.Void;
-	@:native("ImGui::RenderColorRectWithAlphaCheckerboard")
-	@:overload(function(_draw_list:cpp.Star<ImDrawList>, _p_min:ImVec2, _p_max:ImVec2, _fill_col:ImU32, _grid_step:cpp.Float32, _grid_off:ImVec2, _rounding_corners_flags:Int):cpp.Void { })
-	@:overload(function(_draw_list:cpp.Star<ImDrawList>, _p_min:ImVec2, _p_max:ImVec2, _fill_col:ImU32, _grid_step:cpp.Float32, _grid_off:ImVec2):cpp.Void { })
-	static function renderColorRectWithAlphaCheckerboard(_draw_list:cpp.Star<ImDrawList>, _p_min:ImVec2, _p_max:ImVec2, _fill_col:ImU32, _grid_step:cpp.Float32, _grid_off:ImVec2, _rounding:cpp.Float32, _rounding_corners_flags:Int):cpp.Void;
-	@:native("ImGui::RenderCheckMark")
-	static function renderCheckMark(_draw_list:cpp.Star<ImDrawList>, _pos:ImVec2, _col:ImU32, _sz:cpp.Float32):cpp.Void;
-	@:native("ImGui::RenderBullet")
-	static function renderBullet(_draw_list:cpp.Star<ImDrawList>, _pos:ImVec2, _col:ImU32):cpp.Void;
-	@:native("ImGui::RenderArrowPointingAt")
-	static function renderArrowPointingAt(_draw_list:cpp.Star<ImDrawList>, _pos:ImVec2, _half_sz:ImVec2, _direction:ImGuiDir, _col:ImU32):cpp.Void;
-	@:native("ImGui::RenderArrow")
-	@:overload(function(_draw_list:cpp.Star<ImDrawList>, _pos:ImVec2, _col:ImU32, _dir:ImGuiDir):cpp.Void { })
-	static function renderArrow(_draw_list:cpp.Star<ImDrawList>, _pos:ImVec2, _col:ImU32, _dir:ImGuiDir, _scale:cpp.Float32):cpp.Void;
+	static function resetMouseDragDelta(button:ImGuiMouseButton):cpp.Void;
 	@:native("ImGui::Render")
 	static function render():cpp.Void;
-	@:native("ImGui::RadioButton")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_button:Int):Bool { })
-	static function radioButton(_label:imguicpp.utils.VarConstCharStar, _active:Bool):Bool;
+	@:native("ImGui::linc_RadioButton")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_button:Int):Bool { })
+	static function radioButton(label:imguicpp.utils.VarConstCharStar, active:Bool):Bool;
 	@:native("ImGui::PushTextWrapPos")
 	@:overload(function():cpp.Void { })
-	static function pushTextWrapPos(_wrap_local_pos_x:cpp.Float32):cpp.Void;
+	static function pushTextWrapPos(wrap_local_pos_x:cpp.Float32):cpp.Void;
 	@:native("ImGui::PushStyleVar")
-	@:overload(function(_idx:ImGuiStyleVar, _val:ImVec2):cpp.Void { })
-	static function pushStyleVar(_idx:ImGuiStyleVar, _val:cpp.Float32):cpp.Void;
+	@:overload(function(idx:ImGuiStyleVar, val:ImVec2):cpp.Void { })
+	static function pushStyleVar(idx:ImGuiStyleVar, val:cpp.Float32):cpp.Void;
 	@:native("ImGui::PushStyleColor")
-	@:overload(function(_idx:ImGuiCol, _col:ImVec4):cpp.Void { })
-	static function pushStyleColor(_idx:ImGuiCol, _col:ImU32):cpp.Void;
-	@:native("ImGui::PushOverrideID")
-	static function pushOverrideID(_id:ImGuiID):cpp.Void;
-	@:native("ImGui::PushMultiItemsWidths")
-	static function pushMultiItemsWidths(_components:Int, _width_full:cpp.Float32):cpp.Void;
+	@:overload(function(idx:ImGuiCol, col:ImVec4):cpp.Void { })
+	static function pushStyleColor(idx:ImGuiCol, col:ImU32):cpp.Void;
 	@:native("ImGui::PushItemWidth")
-	static function pushItemWidth(_item_width:cpp.Float32):cpp.Void;
-	@:native("ImGui::PushItemFlag")
-	static function pushItemFlag(_option:ImGuiItemFlags, _enabled:Bool):cpp.Void;
-	@:native("ImGui::PushID")
-	@:overload(function(_str_id_begin:imguicpp.utils.VarConstCharStar, _str_id_end:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	@:overload(function(_ptr_id:imguicpp.VoidPointer):cpp.Void { })
-	@:overload(function(_int_id:Int):cpp.Void { })
-	static function pushID(_str_id:imguicpp.utils.VarConstCharStar):cpp.Void;
+	static function pushItemWidth(item_width:cpp.Float32):cpp.Void;
+	@:native("ImGui::linc_PushID")
+	@:overload(function(str_id_begin:imguicpp.utils.VarConstCharStar, str_id_end:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	@:overload(function(ptr_id:imguicpp.VoidPointer):cpp.Void { })
+	@:overload(function(int_id:Int):cpp.Void { })
+	static function pushID(str_id:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::PushFont")
-	static function pushFont(_font:cpp.Star<ImFont>):cpp.Void;
-	@:native("ImGui::PushFocusScope")
-	static function pushFocusScope(_id:ImGuiID):cpp.Void;
-	@:native("ImGui::PushColumnsBackground")
-	static function pushColumnsBackground():cpp.Void;
-	@:native("ImGui::PushColumnClipRect")
-	static function pushColumnClipRect(_column_index:Int):cpp.Void;
+	static function pushFont(font:cpp.Star<ImFont>):cpp.Void;
 	@:native("ImGui::PushClipRect")
-	static function pushClipRect(_clip_rect_min:ImVec2, _clip_rect_max:ImVec2, _intersect_with_current_clip_rect:Bool):cpp.Void;
+	static function pushClipRect(clip_rect_min:ImVec2, clip_rect_max:ImVec2, intersect_with_current_clip_rect:Bool):cpp.Void;
 	@:native("ImGui::PushButtonRepeat")
-	static function pushButtonRepeat(_repeat:Bool):cpp.Void;
+	static function pushButtonRepeat(repeat:Bool):cpp.Void;
 	@:native("ImGui::PushAllowKeyboardFocus")
-	static function pushAllowKeyboardFocus(_allow_keyboard_focus:Bool):cpp.Void;
+	static function pushAllowKeyboardFocus(allow_keyboard_focus:Bool):cpp.Void;
 	@:native("ImGui::ProgressBar")
-	@:overload(function(_fraction:cpp.Float32, _size_arg:ImVec2):cpp.Void { })
-	@:overload(function(_fraction:cpp.Float32):cpp.Void { })
-	static function progressBar(_fraction:cpp.Float32, _size_arg:ImVec2, _overlay:imguicpp.utils.VarConstCharStar):cpp.Void;
+	@:overload(function(fraction:cpp.Float32, size_arg:ImVec2):cpp.Void { })
+	@:overload(function(fraction:cpp.Float32):cpp.Void { })
+	static function progressBar(fraction:cpp.Float32, size_arg:ImVec2, overlay:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::PopTextWrapPos")
 	static function popTextWrapPos():cpp.Void;
 	@:native("ImGui::PopStyleVar")
 	@:overload(function():cpp.Void { })
-	static function popStyleVar(_count:Int):cpp.Void;
+	static function popStyleVar(count:Int):cpp.Void;
 	@:native("ImGui::PopStyleColor")
 	@:overload(function():cpp.Void { })
-	static function popStyleColor(_count:Int):cpp.Void;
+	static function popStyleColor(count:Int):cpp.Void;
 	@:native("ImGui::PopItemWidth")
 	static function popItemWidth():cpp.Void;
-	@:native("ImGui::PopItemFlag")
-	static function popItemFlag():cpp.Void;
 	@:native("ImGui::PopID")
 	static function popID():cpp.Void;
 	@:native("ImGui::PopFont")
 	static function popFont():cpp.Void;
-	@:native("ImGui::PopFocusScope")
-	static function popFocusScope():cpp.Void;
-	@:native("ImGui::PopColumnsBackground")
-	static function popColumnsBackground():cpp.Void;
 	@:native("ImGui::PopClipRect")
 	static function popClipRect():cpp.Void;
 	@:native("ImGui::PopButtonRepeat")
 	static function popButtonRepeat():cpp.Void;
 	@:native("ImGui::PopAllowKeyboardFocus")
 	static function popAllowKeyboardFocus():cpp.Void;
-	@:native("ImGui::PlotLines")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int, _values_offset:Int, _overlay_text:imguicpp.utils.VarConstCharStar, _scale_min:cpp.Float32, _scale_max:cpp.Float32, _stride:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int, _values_offset:Int, _scale_min:cpp.Float32, _scale_max:cpp.Float32, _stride:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int, _values_offset:Int, _scale_min:cpp.Float32, _stride:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int, _values_offset:Int, _stride:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int, _values_offset:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, _data:imguicpp.VoidPointer, _values_count:Int, _values_offset:Int, _overlay_text:imguicpp.utils.VarConstCharStar, _scale_min:cpp.Float32, _scale_max:cpp.Float32, _graph_size:ImVec2):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, _data:imguicpp.VoidPointer, _values_count:Int, _values_offset:Int, _overlay_text:imguicpp.utils.VarConstCharStar, _scale_min:cpp.Float32, _scale_max:cpp.Float32):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, _data:imguicpp.VoidPointer, _values_count:Int, _values_offset:Int, _scale_min:cpp.Float32, _scale_max:cpp.Float32):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, _data:imguicpp.VoidPointer, _values_count:Int, _values_offset:Int, _scale_min:cpp.Float32):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, _data:imguicpp.VoidPointer, _values_count:Int, _values_offset:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, _data:imguicpp.VoidPointer, _values_count:Int):cpp.Void { })
-	static function plotLines(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int, _values_offset:Int, _overlay_text:imguicpp.utils.VarConstCharStar, _scale_min:cpp.Float32, _scale_max:cpp.Float32, _graph_size:ImVec2, _stride:Int):cpp.Void;
-	@:native("ImGui::PlotHistogram")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int, _values_offset:Int, _overlay_text:imguicpp.utils.VarConstCharStar, _scale_min:cpp.Float32, _scale_max:cpp.Float32, _stride:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int, _values_offset:Int, _scale_min:cpp.Float32, _scale_max:cpp.Float32, _stride:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int, _values_offset:Int, _scale_min:cpp.Float32, _stride:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int, _values_offset:Int, _stride:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int, _values_offset:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, _data:imguicpp.VoidPointer, _values_count:Int, _values_offset:Int, _overlay_text:imguicpp.utils.VarConstCharStar, _scale_min:cpp.Float32, _scale_max:cpp.Float32, _graph_size:ImVec2):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, _data:imguicpp.VoidPointer, _values_count:Int, _values_offset:Int, _overlay_text:imguicpp.utils.VarConstCharStar, _scale_min:cpp.Float32, _scale_max:cpp.Float32):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, _data:imguicpp.VoidPointer, _values_count:Int, _values_offset:Int, _scale_min:cpp.Float32, _scale_max:cpp.Float32):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, _data:imguicpp.VoidPointer, _values_count:Int, _values_offset:Int, _scale_min:cpp.Float32):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, _data:imguicpp.VoidPointer, _values_count:Int, _values_offset:Int):cpp.Void { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, _data:imguicpp.VoidPointer, _values_count:Int):cpp.Void { })
-	static function plotHistogram(_label:imguicpp.utils.VarConstCharStar, _values:imguicpp.FloatPointer, _values_count:Int, _values_offset:Int, _overlay_text:imguicpp.utils.VarConstCharStar, _scale_min:cpp.Float32, _scale_max:cpp.Float32, _graph_size:ImVec2, _stride:Int):cpp.Void;
-	@:native("ImGui::PlotEx")
-	static function plotEx(_plot_type:ImGuiPlotType, _label:imguicpp.utils.VarConstCharStar, _values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, _data:imguicpp.VoidPointer, _values_count:Int, _values_offset:Int, _overlay_text:imguicpp.utils.VarConstCharStar, _scale_min:cpp.Float32, _scale_max:cpp.Float32, _frame_size:ImVec2):Int;
+	@:native("ImGui::linc_PlotLines")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int, values_offset:Int, overlay_text:imguicpp.utils.VarConstCharStar, scale_min:cpp.Float32, scale_max:cpp.Float32, stride:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int, values_offset:Int, scale_min:cpp.Float32, scale_max:cpp.Float32, stride:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int, values_offset:Int, scale_min:cpp.Float32, stride:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int, values_offset:Int, stride:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int, values_offset:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, data:imguicpp.VoidPointer, values_count:Int, values_offset:Int, overlay_text:imguicpp.utils.VarConstCharStar, scale_min:cpp.Float32, scale_max:cpp.Float32, graph_size:ImVec2):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, data:imguicpp.VoidPointer, values_count:Int, values_offset:Int, overlay_text:imguicpp.utils.VarConstCharStar, scale_min:cpp.Float32, scale_max:cpp.Float32):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, data:imguicpp.VoidPointer, values_count:Int, values_offset:Int, scale_min:cpp.Float32, scale_max:cpp.Float32):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, data:imguicpp.VoidPointer, values_count:Int, values_offset:Int, scale_min:cpp.Float32):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, data:imguicpp.VoidPointer, values_count:Int, values_offset:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, data:imguicpp.VoidPointer, values_count:Int):cpp.Void { })
+	static function plotLines(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int, values_offset:Int, overlay_text:imguicpp.utils.VarConstCharStar, scale_min:cpp.Float32, scale_max:cpp.Float32, graph_size:ImVec2, stride:Int):cpp.Void;
+	@:native("ImGui::linc_PlotHistogram")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int, values_offset:Int, overlay_text:imguicpp.utils.VarConstCharStar, scale_min:cpp.Float32, scale_max:cpp.Float32, stride:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int, values_offset:Int, scale_min:cpp.Float32, scale_max:cpp.Float32, stride:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int, values_offset:Int, scale_min:cpp.Float32, stride:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int, values_offset:Int, stride:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int, values_offset:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, data:imguicpp.VoidPointer, values_count:Int, values_offset:Int, overlay_text:imguicpp.utils.VarConstCharStar, scale_min:cpp.Float32, scale_max:cpp.Float32, graph_size:ImVec2):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, data:imguicpp.VoidPointer, values_count:Int, values_offset:Int, overlay_text:imguicpp.utils.VarConstCharStar, scale_min:cpp.Float32, scale_max:cpp.Float32):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, data:imguicpp.VoidPointer, values_count:Int, values_offset:Int, scale_min:cpp.Float32, scale_max:cpp.Float32):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, data:imguicpp.VoidPointer, values_count:Int, values_offset:Int, scale_min:cpp.Float32):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, data:imguicpp.VoidPointer, values_count:Int, values_offset:Int):cpp.Void { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, values_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int) -> cpp.Float32>, data:imguicpp.VoidPointer, values_count:Int):cpp.Void { })
+	static function plotHistogram(label:imguicpp.utils.VarConstCharStar, values:imguicpp.FloatPointer, values_count:Int, values_offset:Int, overlay_text:imguicpp.utils.VarConstCharStar, scale_min:cpp.Float32, scale_max:cpp.Float32, graph_size:ImVec2, stride:Int):cpp.Void;
 	@:native("ImGui::OpenPopupOnItemClick")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar):cpp.Void { })
 	@:overload(function():cpp.Void { })
-	static function openPopupOnItemClick(_str_id:imguicpp.utils.VarConstCharStar, _popup_flags:ImGuiPopupFlags):cpp.Void;
-	@:native("ImGui::OpenPopupEx")
-	@:overload(function(_id:ImGuiID):cpp.Void { })
-	static function openPopupEx(_id:ImGuiID, _popup_flags:ImGuiPopupFlags):cpp.Void;
+	static function openPopupOnItemClick(str_id:imguicpp.utils.VarConstCharStar, popup_flags:ImGuiPopupFlags):cpp.Void;
 	@:native("ImGui::OpenPopup")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	static function openPopup(_str_id:imguicpp.utils.VarConstCharStar, _popup_flags:ImGuiPopupFlags):cpp.Void;
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	static function openPopup(str_id:imguicpp.utils.VarConstCharStar, popup_flags:ImGuiPopupFlags):cpp.Void;
 	@:native("ImGui::NextColumn")
 	static function nextColumn():cpp.Void;
 	@:native("ImGui::NewLine")
 	static function newLine():cpp.Void;
 	@:native("ImGui::NewFrame")
 	static function newFrame():cpp.Void;
-	@:native("ImGui::NavMoveRequestTryWrapping")
-	static function navMoveRequestTryWrapping(_window:cpp.Star<ImGuiWindow>, _move_flags:ImGuiNavMoveFlags):cpp.Void;
-	@:native("ImGui::NavMoveRequestForward")
-	static function navMoveRequestForward(_move_dir:ImGuiDir, _clip_dir:ImGuiDir, _bb_rel:ImRect, _move_flags:ImGuiNavMoveFlags):cpp.Void;
-	@:native("ImGui::NavMoveRequestCancel")
-	static function navMoveRequestCancel():cpp.Void;
-	@:native("ImGui::NavMoveRequestButNoResultYet")
-	static function navMoveRequestButNoResultYet():Bool;
-	@:native("ImGui::NavInitWindow")
-	static function navInitWindow(_window:cpp.Star<ImGuiWindow>, _force_reinit:Bool):cpp.Void;
-	@:native("ImGui::MenuItem")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _shortcut:imguicpp.utils.VarConstCharStar, _selected:Bool):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _shortcut:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _shortcut:imguicpp.utils.VarConstCharStar, _p_selected:imguicpp.BoolPointer, _enabled:Bool):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _shortcut:imguicpp.utils.VarConstCharStar, _p_selected:imguicpp.BoolPointer):Bool { })
-	static function menuItem(_label:imguicpp.utils.VarConstCharStar, _shortcut:imguicpp.utils.VarConstCharStar, _selected:Bool, _enabled:Bool):Bool;
-	@:native("ImGui::MemFree")
-	static function memFree(_ptr:imguicpp.VoidPointer):cpp.Void;
+	@:native("ImGui::linc_MenuItem")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, shortcut:imguicpp.utils.VarConstCharStar, selected:Bool):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, shortcut:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, shortcut:imguicpp.utils.VarConstCharStar, p_selected:imguicpp.BoolPointer, enabled:Bool):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, shortcut:imguicpp.utils.VarConstCharStar, p_selected:imguicpp.BoolPointer):Bool { })
+	static function menuItem(label:imguicpp.utils.VarConstCharStar, shortcut:imguicpp.utils.VarConstCharStar, selected:Bool, enabled:Bool):Bool;
+	@:native("ImGui::linc_MemFree")
+	static function memFree(ptr:imguicpp.VoidPointer):cpp.Void;
 	@:native("ImGui::MemAlloc")
-	static function memAlloc(_size:cpp.SizeT):imguicpp.VoidPointer;
-	@:native("ImGui::MarkItemEdited")
-	static function markItemEdited(_id:ImGuiID):cpp.Void;
-	@:native("ImGui::MarkIniSettingsDirty")
-	@:overload(function(_window:cpp.Star<ImGuiWindow>):cpp.Void { })
-	static function markIniSettingsDirty():cpp.Void;
+	static function memAlloc(size:cpp.SizeT):imguicpp.VoidPointer;
 	@:native("ImGui::LogToTTY")
 	@:overload(function():cpp.Void { })
-	static function logToTTY(_auto_open_depth:Int):cpp.Void;
+	static function logToTTY(auto_open_depth:Int):cpp.Void;
 	@:native("ImGui::LogToFile")
-	@:overload(function(_filename:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	@:overload(function(filename:imguicpp.utils.VarConstCharStar):cpp.Void { })
 	@:overload(function():cpp.Void { })
-	static function logToFile(_auto_open_depth:Int, _filename:imguicpp.utils.VarConstCharStar):cpp.Void;
+	static function logToFile(auto_open_depth:Int, filename:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::LogToClipboard")
 	@:overload(function():cpp.Void { })
-	static function logToClipboard(_auto_open_depth:Int):cpp.Void;
-	@:native("ImGui::LogToBuffer")
-	@:overload(function():cpp.Void { })
-	static function logToBuffer(_auto_open_depth:Int):cpp.Void;
+	static function logToClipboard(auto_open_depth:Int):cpp.Void;
 	@:native("ImGui::LogText")
-	static function logText(_fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):cpp.Void;
-	@:native("ImGui::LogRenderedText")
-	@:overload(function(_ref_pos:cpp.Star<ImVec2>, _text:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	static function logRenderedText(_ref_pos:cpp.Star<ImVec2>, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar):cpp.Void;
+	@:overload(function(fmt:imguicpp.utils.VarConstCharStar, vargs:cpp.VarArg):cpp.Void { })
+	static function logText(fmt:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::LogFinish")
 	static function logFinish():cpp.Void;
 	@:native("ImGui::LogButtons")
 	static function logButtons():cpp.Void;
-	@:native("ImGui::LogBegin")
-	static function logBegin(_type:ImGuiLogType, _auto_open_depth:Int):cpp.Void;
 	@:native("ImGui::LoadIniSettingsFromMemory")
-	@:overload(function(_ini_data:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	static function loadIniSettingsFromMemory(_ini_data:imguicpp.utils.VarConstCharStar, _ini_size:cpp.SizeT):cpp.Void;
+	@:overload(function(ini_data:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	static function loadIniSettingsFromMemory(ini_data:imguicpp.utils.VarConstCharStar, ini_size:cpp.SizeT):cpp.Void;
 	@:native("ImGui::LoadIniSettingsFromDisk")
-	static function loadIniSettingsFromDisk(_ini_filename:imguicpp.utils.VarConstCharStar):cpp.Void;
+	static function loadIniSettingsFromDisk(ini_filename:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::ListBoxHeader")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _items_count:Int, _height_in_items:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _items_count:Int):Bool { })
-	static function listBoxHeader(_label:imguicpp.utils.VarConstCharStar, _size:ImVec2):Bool;
+	@:overload(function(label:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, items_count:Int, height_in_items:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, items_count:Int):Bool { })
+	static function listBoxHeader(label:imguicpp.utils.VarConstCharStar, size:ImVec2):Bool;
 	@:native("ImGui::ListBoxFooter")
 	static function listBoxFooter():cpp.Void;
-	@:native("ImGui::ListBox")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _current_item:imguicpp.IntPointer, _items:cpp.RawPointer<imguicpp.utils.VarConstCharStar>, _items_count:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _current_item:imguicpp.IntPointer, _items_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int, cpp.Star<cpp.RawConstPointer<cpp.Char>>) -> Bool>, _data:imguicpp.VoidPointer, _items_count:Int, _height_in_items:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _current_item:imguicpp.IntPointer, _items_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int, cpp.Star<cpp.RawConstPointer<cpp.Char>>) -> Bool>, _data:imguicpp.VoidPointer, _items_count:Int):Bool { })
-	static function listBox(_label:imguicpp.utils.VarConstCharStar, _current_item:imguicpp.IntPointer, _items:cpp.RawPointer<imguicpp.utils.VarConstCharStar>, _items_count:Int, _height_in_items:Int):Bool;
+	@:native("ImGui::linc_ListBox")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, current_item:imguicpp.IntPointer, items:cpp.RawPointer<imguicpp.utils.VarConstCharStar>, items_count:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, current_item:imguicpp.IntPointer, items_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int, cpp.Star<cpp.RawConstPointer<cpp.Char>>) -> Bool>, data:imguicpp.VoidPointer, items_count:Int, height_in_items:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, current_item:imguicpp.IntPointer, items_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int, cpp.Star<cpp.RawConstPointer<cpp.Char>>) -> Bool>, data:imguicpp.VoidPointer, items_count:Int):Bool { })
+	static function listBox(label:imguicpp.utils.VarConstCharStar, current_item:imguicpp.IntPointer, items:cpp.RawPointer<imguicpp.utils.VarConstCharStar>, items_count:Int, height_in_items:Int):Bool;
 	@:native("ImGui::LabelTextV")
-	static function labelTextV(_label:imguicpp.utils.VarConstCharStar, _fmt:imguicpp.utils.VarConstCharStar, _args:cpp.VarArg):cpp.Void;
-	@:native("ImGui::LabelText")
-	static function labelText(_label:imguicpp.utils.VarConstCharStar, _fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):cpp.Void;
-	@:native("ImGui::KeepAliveID")
-	static function keepAliveID(_id:ImGuiID):cpp.Void;
-	@:native("ImGui::ItemSize")
-	@:overload(function(_size:ImVec2):cpp.Void { })
-	@:overload(function(_bb:ImRect, _text_baseline_y:cpp.Float32):cpp.Void { })
-	@:overload(function(_bb:ImRect):cpp.Void { })
-	static function itemSize(_size:ImVec2, _text_baseline_y:cpp.Float32):cpp.Void;
-	@:native("ImGui::ItemHoverable")
-	static function itemHoverable(_bb:ImRect, _id:ImGuiID):Bool;
-	@:native("ImGui::ItemAdd")
-	@:overload(function(_bb:ImRect, _id:ImGuiID):Bool { })
-	static function itemAdd(_bb:ImRect, _id:ImGuiID, _nav_bb:cpp.Star<ImRect>):Bool;
-	@:native("ImGui::IsWindowNavFocusable")
-	static function isWindowNavFocusable(_window:cpp.Star<ImGuiWindow>):Bool;
+	static function labelTextV(label:imguicpp.utils.VarConstCharStar, fmt:imguicpp.utils.VarConstCharStar, args:cpp.VarArg):cpp.Void;
+	@:native("ImGui::linc_LabelText")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, fmt:imguicpp.utils.VarConstCharStar, vargs:cpp.VarArg):cpp.Void { })
+	static function labelText(label:imguicpp.utils.VarConstCharStar, fmt:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::IsWindowHovered")
 	@:overload(function():Bool { })
-	static function isWindowHovered(_flags:ImGuiHoveredFlags):Bool;
+	static function isWindowHovered(flags:ImGuiHoveredFlags):Bool;
 	@:native("ImGui::IsWindowFocused")
 	@:overload(function():Bool { })
-	static function isWindowFocused(_flags:ImGuiFocusedFlags):Bool;
+	static function isWindowFocused(flags:ImGuiFocusedFlags):Bool;
 	@:native("ImGui::IsWindowCollapsed")
 	static function isWindowCollapsed():Bool;
-	@:native("ImGui::IsWindowChildOf")
-	static function isWindowChildOf(_window:cpp.Star<ImGuiWindow>, _potential_parent:cpp.Star<ImGuiWindow>):Bool;
 	@:native("ImGui::IsWindowAppearing")
 	static function isWindowAppearing():Bool;
-	@:native("ImGui::IsWindowAbove")
-	static function isWindowAbove(_potential_above:cpp.Star<ImGuiWindow>, _potential_below:cpp.Star<ImGuiWindow>):Bool;
 	@:native("ImGui::IsRectVisible")
-	@:overload(function(_rect_min:ImVec2, _rect_max:ImVec2):Bool { })
-	static function isRectVisible(_size:ImVec2):Bool;
+	@:overload(function(rect_min:ImVec2, rect_max:ImVec2):Bool { })
+	static function isRectVisible(size:ImVec2):Bool;
 	@:native("ImGui::IsPopupOpen")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_id:ImGuiID, _popup_flags:ImGuiPopupFlags):Bool { })
-	static function isPopupOpen(_str_id:imguicpp.utils.VarConstCharStar, _flags:ImGuiPopupFlags):Bool;
-	@:native("ImGui::IsNavInputTest")
-	static function isNavInputTest(_n:ImGuiNavInput, _rm:ImGuiInputReadMode):Bool;
-	@:native("ImGui::IsNavInputDown")
-	static function isNavInputDown(_n:ImGuiNavInput):Bool;
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar):Bool { })
+	static function isPopupOpen(str_id:imguicpp.utils.VarConstCharStar, flags:ImGuiPopupFlags):Bool;
 	@:native("ImGui::IsMouseReleased")
-	static function isMouseReleased(_button:ImGuiMouseButton):Bool;
+	static function isMouseReleased(button:ImGuiMouseButton):Bool;
 	@:native("ImGui::IsMousePosValid")
 	@:overload(function():Bool { })
-	static function isMousePosValid(_mouse_pos:cpp.Star<ImVec2>):Bool;
+	static function isMousePosValid(mouse_pos:cpp.Star<ImVec2>):Bool;
 	@:native("ImGui::IsMouseHoveringRect")
-	@:overload(function(_r_min:ImVec2, _r_max:ImVec2):Bool { })
-	static function isMouseHoveringRect(_r_min:ImVec2, _r_max:ImVec2, _clip:Bool):Bool;
+	@:overload(function(r_min:ImVec2, r_max:ImVec2):Bool { })
+	static function isMouseHoveringRect(r_min:ImVec2, r_max:ImVec2, clip:Bool):Bool;
 	@:native("ImGui::IsMouseDragging")
-	@:overload(function(_button:ImGuiMouseButton):Bool { })
-	static function isMouseDragging(_button:ImGuiMouseButton, _lock_threshold:cpp.Float32):Bool;
-	@:native("ImGui::IsMouseDragPastThreshold")
-	@:overload(function(_button:ImGuiMouseButton):Bool { })
-	static function isMouseDragPastThreshold(_button:ImGuiMouseButton, _lock_threshold:cpp.Float32):Bool;
+	@:overload(function(button:ImGuiMouseButton):Bool { })
+	static function isMouseDragging(button:ImGuiMouseButton, lock_threshold:cpp.Float32):Bool;
 	@:native("ImGui::IsMouseDown")
-	static function isMouseDown(_button:ImGuiMouseButton):Bool;
+	static function isMouseDown(button:ImGuiMouseButton):Bool;
 	@:native("ImGui::IsMouseDoubleClicked")
-	static function isMouseDoubleClicked(_button:ImGuiMouseButton):Bool;
+	static function isMouseDoubleClicked(button:ImGuiMouseButton):Bool;
 	@:native("ImGui::IsMouseClicked")
-	@:overload(function(_button:ImGuiMouseButton):Bool { })
-	static function isMouseClicked(_button:ImGuiMouseButton, _repeat:Bool):Bool;
+	@:overload(function(button:ImGuiMouseButton):Bool { })
+	static function isMouseClicked(button:ImGuiMouseButton, repeat:Bool):Bool;
 	@:native("ImGui::IsKeyReleased")
-	static function isKeyReleased(_user_key_index:Int):Bool;
-	@:native("ImGui::IsKeyPressedMap")
-	@:overload(function(_key:ImGuiKey):Bool { })
-	static function isKeyPressedMap(_key:ImGuiKey, _repeat:Bool):Bool;
+	static function isKeyReleased(user_key_index:Int):Bool;
 	@:native("ImGui::IsKeyPressed")
-	@:overload(function(_user_key_index:Int):Bool { })
-	static function isKeyPressed(_user_key_index:Int, _repeat:Bool):Bool;
+	@:overload(function(user_key_index:Int):Bool { })
+	static function isKeyPressed(user_key_index:Int, repeat:Bool):Bool;
 	@:native("ImGui::IsKeyDown")
-	static function isKeyDown(_user_key_index:Int):Bool;
+	static function isKeyDown(user_key_index:Int):Bool;
 	@:native("ImGui::IsItemVisible")
 	static function isItemVisible():Bool;
-	@:native("ImGui::IsItemToggledSelection")
-	static function isItemToggledSelection():Bool;
 	@:native("ImGui::IsItemToggledOpen")
 	static function isItemToggledOpen():Bool;
 	@:native("ImGui::IsItemHovered")
 	@:overload(function():Bool { })
-	static function isItemHovered(_flags:ImGuiHoveredFlags):Bool;
+	static function isItemHovered(flags:ImGuiHoveredFlags):Bool;
 	@:native("ImGui::IsItemFocused")
 	static function isItemFocused():Bool;
 	@:native("ImGui::IsItemEdited")
@@ -4529,15 +4232,11 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	static function isItemDeactivated():Bool;
 	@:native("ImGui::IsItemClicked")
 	@:overload(function():Bool { })
-	static function isItemClicked(_mouse_button:ImGuiMouseButton):Bool;
+	static function isItemClicked(mouse_button:ImGuiMouseButton):Bool;
 	@:native("ImGui::IsItemActive")
 	static function isItemActive():Bool;
 	@:native("ImGui::IsItemActivated")
 	static function isItemActivated():Bool;
-	@:native("ImGui::IsDragDropPayloadBeingAccepted")
-	static function isDragDropPayloadBeingAccepted():Bool;
-	@:native("ImGui::IsClippedEx")
-	static function isClippedEx(_bb:ImRect, _id:ImGuiID, _clip_even_when_logged:Bool):Bool;
 	@:native("ImGui::IsAnyMouseDown")
 	static function isAnyMouseDown():Bool;
 	@:native("ImGui::IsAnyItemHovered")
@@ -4546,284 +4245,97 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	static function isAnyItemFocused():Bool;
 	@:native("ImGui::IsAnyItemActive")
 	static function isAnyItemActive():Bool;
-	@:native("ImGui::IsActiveIdUsingNavInput")
-	static function isActiveIdUsingNavInput(_input:ImGuiNavInput):Bool;
-	@:native("ImGui::IsActiveIdUsingNavDir")
-	static function isActiveIdUsingNavDir(_dir:ImGuiDir):Bool;
-	@:native("ImGui::IsActiveIdUsingKey")
-	static function isActiveIdUsingKey(_key:ImGuiKey):Bool;
 	@:native("ImGui::InvisibleButton")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar, _size:ImVec2):Bool { })
-	static function invisibleButton(_str_id:imguicpp.utils.VarConstCharStar, _size:ImVec2, _flags:ImGuiButtonFlags):Bool;
-	@:native("ImGui::InputTextWithHint")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _hint:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT, _flags:ImGuiInputTextFlags, _user_data:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _hint:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT, _user_data:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _hint:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT):Bool { })
-	static function inputTextWithHint(_label:imguicpp.utils.VarConstCharStar, _hint:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT, _flags:ImGuiInputTextFlags, _callback:ImGuiInputTextCallback, _user_data:imguicpp.VoidPointer):Bool;
-	@:native("ImGui::InputTextMultiline")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT, _size:ImVec2, _flags:ImGuiInputTextFlags, _user_data:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT, _size:ImVec2, _user_data:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT, _user_data:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT):Bool { })
-	static function inputTextMultiline(_label:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT, _size:ImVec2, _flags:ImGuiInputTextFlags, _callback:ImGuiInputTextCallback, _user_data:imguicpp.VoidPointer):Bool;
-	@:native("ImGui::InputTextEx")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _hint:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:Int, _size_arg:ImVec2, _flags:ImGuiInputTextFlags, _user_data:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _hint:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:Int, _size_arg:ImVec2, _flags:ImGuiInputTextFlags):Bool { })
-	static function inputTextEx(_label:imguicpp.utils.VarConstCharStar, _hint:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:Int, _size_arg:ImVec2, _flags:ImGuiInputTextFlags, _callback:ImGuiInputTextCallback, _user_data:imguicpp.VoidPointer):Bool;
-	@:native("ImGui::InputText")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT, _flags:ImGuiInputTextFlags, _user_data:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT, _user_data:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT):Bool { })
-	static function inputText(_label:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT, _flags:ImGuiInputTextFlags, _callback:ImGuiInputTextCallback, _user_data:imguicpp.VoidPointer):Bool;
-	@:native("ImGui::InputScalarN")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _components:Int, _p_step:imguicpp.VoidPointer, _p_step_fast:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _components:Int, _p_step:imguicpp.VoidPointer, _p_step_fast:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _components:Int, _p_step_fast:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _components:Int):Bool { })
-	static function inputScalarN(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _components:Int, _p_step:imguicpp.VoidPointer, _p_step_fast:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiInputTextFlags):Bool;
-	@:native("ImGui::InputScalar")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _p_step:imguicpp.VoidPointer, _p_step_fast:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _p_step:imguicpp.VoidPointer, _p_step_fast:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _p_step_fast:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer):Bool { })
-	static function inputScalar(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _p_step:imguicpp.VoidPointer, _p_step_fast:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiInputTextFlags):Bool;
-	@:native("ImGui::InputInt4")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer):Bool { })
-	static function inputInt4(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _flags:ImGuiInputTextFlags):Bool;
-	@:native("ImGui::InputInt3")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer):Bool { })
-	static function inputInt3(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _flags:ImGuiInputTextFlags):Bool;
-	@:native("ImGui::InputInt2")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer):Bool { })
-	static function inputInt2(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _flags:ImGuiInputTextFlags):Bool;
-	@:native("ImGui::InputInt")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _step:Int, _step_fast:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _step_fast:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer):Bool { })
-	static function inputInt(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _step:Int, _step_fast:Int, _flags:ImGuiInputTextFlags):Bool;
-	@:native("ImGui::InputFloat4")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer):Bool { })
-	static function inputFloat4(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiInputTextFlags):Bool;
-	@:native("ImGui::InputFloat3")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer):Bool { })
-	static function inputFloat3(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiInputTextFlags):Bool;
-	@:native("ImGui::InputFloat2")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer):Bool { })
-	static function inputFloat2(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiInputTextFlags):Bool;
-	@:native("ImGui::InputFloat")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _step:cpp.Float32, _step_fast:cpp.Float32, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _step:cpp.Float32, _step_fast:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _step_fast:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer):Bool { })
-	static function inputFloat(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _step:cpp.Float32, _step_fast:cpp.Float32, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiInputTextFlags):Bool;
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar, size:ImVec2):Bool { })
+	static function invisibleButton(str_id:imguicpp.utils.VarConstCharStar, size:ImVec2, flags:ImGuiButtonFlags):Bool;
+	@:native("ImGui::linc_InputTextWithHint")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, hint:imguicpp.utils.VarConstCharStar, buf:cpp.Star<cpp.Char>, buf_size:cpp.SizeT, flags:ImGuiInputTextFlags, user_data:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, hint:imguicpp.utils.VarConstCharStar, buf:cpp.Star<cpp.Char>, buf_size:cpp.SizeT, user_data:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, hint:imguicpp.utils.VarConstCharStar, buf:cpp.Star<cpp.Char>, buf_size:cpp.SizeT):Bool { })
+	static function inputTextWithHint(label:imguicpp.utils.VarConstCharStar, hint:imguicpp.utils.VarConstCharStar, buf:cpp.Star<cpp.Char>, buf_size:cpp.SizeT, flags:ImGuiInputTextFlags, callback:ImGuiInputTextCallback, user_data:imguicpp.VoidPointer):Bool;
+	@:native("ImGui::linc_InputTextMultiline")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, buf:cpp.Star<cpp.Char>, buf_size:cpp.SizeT, size:ImVec2, flags:ImGuiInputTextFlags, user_data:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, buf:cpp.Star<cpp.Char>, buf_size:cpp.SizeT, size:ImVec2, user_data:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, buf:cpp.Star<cpp.Char>, buf_size:cpp.SizeT, user_data:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, buf:cpp.Star<cpp.Char>, buf_size:cpp.SizeT):Bool { })
+	static function inputTextMultiline(label:imguicpp.utils.VarConstCharStar, buf:cpp.Star<cpp.Char>, buf_size:cpp.SizeT, size:ImVec2, flags:ImGuiInputTextFlags, callback:ImGuiInputTextCallback, user_data:imguicpp.VoidPointer):Bool;
+	@:native("ImGui::linc_InputText")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, buf:cpp.Star<cpp.Char>, buf_size:cpp.SizeT, flags:ImGuiInputTextFlags, user_data:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, buf:cpp.Star<cpp.Char>, buf_size:cpp.SizeT, user_data:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, buf:cpp.Star<cpp.Char>, buf_size:cpp.SizeT):Bool { })
+	static function inputText(label:imguicpp.utils.VarConstCharStar, buf:cpp.Star<cpp.Char>, buf_size:cpp.SizeT, flags:ImGuiInputTextFlags, callback:ImGuiInputTextCallback, user_data:imguicpp.VoidPointer):Bool;
+	@:native("ImGui::linc_InputScalarN")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, components:Int, p_step:imguicpp.VoidPointer, p_step_fast:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, components:Int, p_step:imguicpp.VoidPointer, p_step_fast:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, components:Int, p_step_fast:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, components:Int):Bool { })
+	static function inputScalarN(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, components:Int, p_step:imguicpp.VoidPointer, p_step_fast:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar, flags:ImGuiInputTextFlags):Bool;
+	@:native("ImGui::linc_InputScalar")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, p_step:imguicpp.VoidPointer, p_step_fast:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, p_step:imguicpp.VoidPointer, p_step_fast:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, p_step_fast:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer):Bool { })
+	static function inputScalar(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, p_step:imguicpp.VoidPointer, p_step_fast:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar, flags:ImGuiInputTextFlags):Bool;
+	@:native("ImGui::linc_InputInt4")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer):Bool { })
+	static function inputInt4(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, flags:ImGuiInputTextFlags):Bool;
+	@:native("ImGui::linc_InputInt3")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer):Bool { })
+	static function inputInt3(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, flags:ImGuiInputTextFlags):Bool;
+	@:native("ImGui::linc_InputInt2")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer):Bool { })
+	static function inputInt2(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, flags:ImGuiInputTextFlags):Bool;
+	@:native("ImGui::linc_InputInt")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, step:Int, step_fast:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, step_fast:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer):Bool { })
+	static function inputInt(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, step:Int, step_fast:Int, flags:ImGuiInputTextFlags):Bool;
+	@:native("ImGui::linc_InputFloat4")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer):Bool { })
+	static function inputFloat4(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, format:imguicpp.utils.VarConstCharStar, flags:ImGuiInputTextFlags):Bool;
+	@:native("ImGui::linc_InputFloat3")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer):Bool { })
+	static function inputFloat3(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, format:imguicpp.utils.VarConstCharStar, flags:ImGuiInputTextFlags):Bool;
+	@:native("ImGui::linc_InputFloat2")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer):Bool { })
+	static function inputFloat2(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, format:imguicpp.utils.VarConstCharStar, flags:ImGuiInputTextFlags):Bool;
+	@:native("ImGui::linc_InputFloat")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, step:cpp.Float32, step_fast:cpp.Float32, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, step:cpp.Float32, step_fast:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, step_fast:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer):Bool { })
+	static function inputFloat(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, step:cpp.Float32, step_fast:cpp.Float32, format:imguicpp.utils.VarConstCharStar, flags:ImGuiInputTextFlags):Bool;
 	@:native("ImGui::InputDouble")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:cpp.Star<Float>, _step:Float, _step_fast:Float, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:cpp.Star<Float>, _step:Float, _step_fast:Float):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:cpp.Star<Float>, _step_fast:Float):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:cpp.Star<Float>):Bool { })
-	static function inputDouble(_label:imguicpp.utils.VarConstCharStar, _v:cpp.Star<Float>, _step:Float, _step_fast:Float, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiInputTextFlags):Bool;
-	@:native("ImGui::Initialize")
-	static function initialize(_context:cpp.Star<ImGuiContext>):cpp.Void;
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:cpp.Star<Float>, step:Float, step_fast:Float, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:cpp.Star<Float>, step:Float, step_fast:Float):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:cpp.Star<Float>, step_fast:Float):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:cpp.Star<Float>):Bool { })
+	static function inputDouble(label:imguicpp.utils.VarConstCharStar, v:cpp.Star<Float>, step:Float, step_fast:Float, format:imguicpp.utils.VarConstCharStar, flags:ImGuiInputTextFlags):Bool;
 	@:native("ImGui::Indent")
 	@:overload(function():cpp.Void { })
-	static function indent(_indent_w:cpp.Float32):cpp.Void;
-	@:native("ImGui::ImageButtonEx")
-	static function imageButtonEx(_id:ImGuiID, _texture_id:ImTextureID, _size:ImVec2, _uv0:ImVec2, _uv1:ImVec2, _padding:ImVec2, _bg_col:ImVec4, _tint_col:ImVec4):Bool;
+	static function indent(indent_w:cpp.Float32):cpp.Void;
 	@:native("ImGui::ImageButton")
-	@:overload(function(_user_texture_id:ImTextureID, _size:ImVec2, _uv0:ImVec2, _uv1:ImVec2, _frame_padding:Int, _tint_col:ImVec4):Bool { })
-	@:overload(function(_user_texture_id:ImTextureID, _size:ImVec2, _uv0:ImVec2, _uv1:ImVec2, _tint_col:ImVec4):Bool { })
-	@:overload(function(_user_texture_id:ImTextureID, _size:ImVec2, _uv0:ImVec2, _uv1:ImVec2):Bool { })
-	@:overload(function(_user_texture_id:ImTextureID, _size:ImVec2, _uv1:ImVec2):Bool { })
-	@:overload(function(_user_texture_id:ImTextureID, _size:ImVec2):Bool { })
-	static function imageButton(_user_texture_id:ImTextureID, _size:ImVec2, _uv0:ImVec2, _uv1:ImVec2, _frame_padding:Int, _bg_col:ImVec4, _tint_col:ImVec4):Bool;
+	@:overload(function(user_texture_id:ImTextureID, size:ImVec2, uv0:ImVec2, uv1:ImVec2, frame_padding:Int, tint_col:ImVec4):Bool { })
+	@:overload(function(user_texture_id:ImTextureID, size:ImVec2, uv0:ImVec2, uv1:ImVec2, tint_col:ImVec4):Bool { })
+	@:overload(function(user_texture_id:ImTextureID, size:ImVec2, uv0:ImVec2, uv1:ImVec2):Bool { })
+	@:overload(function(user_texture_id:ImTextureID, size:ImVec2, uv1:ImVec2):Bool { })
+	@:overload(function(user_texture_id:ImTextureID, size:ImVec2):Bool { })
+	static function imageButton(user_texture_id:ImTextureID, size:ImVec2, uv0:ImVec2, uv1:ImVec2, frame_padding:Int, bg_col:ImVec4, tint_col:ImVec4):Bool;
 	@:native("ImGui::Image")
-	@:overload(function(_user_texture_id:ImTextureID, _size:ImVec2, _uv0:ImVec2, _uv1:ImVec2, _tint_col:ImVec4):cpp.Void { })
-	@:overload(function(_user_texture_id:ImTextureID, _size:ImVec2, _uv0:ImVec2, _uv1:ImVec2):cpp.Void { })
-	@:overload(function(_user_texture_id:ImTextureID, _size:ImVec2, _uv1:ImVec2):cpp.Void { })
-	@:overload(function(_user_texture_id:ImTextureID, _size:ImVec2):cpp.Void { })
-	static function image(_user_texture_id:ImTextureID, _size:ImVec2, _uv0:ImVec2, _uv1:ImVec2, _tint_col:ImVec4, _border_col:ImVec4):cpp.Void;
-	@:native("ImGui::ImUpperPowerOfTwo")
-	static function imUpperPowerOfTwo(_v:Int):Int;
-	@:native("ImGui::ImTriangleContainsPoint")
-	static function imTriangleContainsPoint(_a:ImVec2, _b:ImVec2, _c:ImVec2, _p:ImVec2):Bool;
-	@:native("ImGui::ImTriangleClosestPoint")
-	static function imTriangleClosestPoint(_pOut:cpp.Star<ImVec2>, _a:ImVec2, _b:ImVec2, _c:ImVec2, _p:ImVec2):cpp.Void;
-	@:native("ImGui::ImTriangleBarycentricCoords")
-	static function imTriangleBarycentricCoords(_a:ImVec2, _b:ImVec2, _c:ImVec2, _p:ImVec2, _out_u:imguicpp.FloatPointer, _out_v:imguicpp.FloatPointer, _out_w:imguicpp.FloatPointer):cpp.Void;
-	@:native("ImGui::ImTriangleArea")
-	static function imTriangleArea(_a:ImVec2, _b:ImVec2, _c:ImVec2):cpp.Float32;
-	@:native("ImGui::ImTextStrToUtf8")
-	static function imTextStrToUtf8(_buf:cpp.Star<cpp.Char>, _buf_size:Int, _in_text:cpp.Star<ImWchar>, _in_text_end:cpp.Star<ImWchar>):Int;
-	@:native("ImGui::ImTextStrFromUtf8")
-	@:overload(function(_buf:cpp.Star<ImWchar>, _buf_size:Int, _in_text:imguicpp.utils.VarConstCharStar, _in_text_end:imguicpp.utils.VarConstCharStar):Int { })
-	static function imTextStrFromUtf8(_buf:cpp.Star<ImWchar>, _buf_size:Int, _in_text:imguicpp.utils.VarConstCharStar, _in_text_end:imguicpp.utils.VarConstCharStar, _in_remaining:cpp.Star<cpp.RawConstPointer<cpp.Char>>):Int;
-	@:native("ImGui::ImTextCountUtf8BytesFromStr")
-	static function imTextCountUtf8BytesFromStr(_in_text:cpp.Star<ImWchar>, _in_text_end:cpp.Star<ImWchar>):Int;
-	@:native("ImGui::ImTextCountUtf8BytesFromChar")
-	static function imTextCountUtf8BytesFromChar(_in_text:imguicpp.utils.VarConstCharStar, _in_text_end:imguicpp.utils.VarConstCharStar):Int;
-	@:native("ImGui::ImTextCountCharsFromUtf8")
-	static function imTextCountCharsFromUtf8(_in_text:imguicpp.utils.VarConstCharStar, _in_text_end:imguicpp.utils.VarConstCharStar):Int;
-	@:native("ImGui::ImTextCharFromUtf8")
-	static function imTextCharFromUtf8(_out_char:cpp.Star<UInt>, _in_text:imguicpp.utils.VarConstCharStar, _in_text_end:imguicpp.utils.VarConstCharStar):Int;
-	@:native("ImGui::ImStrnicmp")
-	static function imStrnicmp(_str1:imguicpp.utils.VarConstCharStar, _str2:imguicpp.utils.VarConstCharStar, _count:cpp.SizeT):Int;
-	@:native("ImGui::ImStrncpy")
-	static function imStrncpy(_dst:cpp.Star<cpp.Char>, _src:imguicpp.utils.VarConstCharStar, _count:cpp.SizeT):cpp.Void;
-	@:native("ImGui::ImStrlenW")
-	static function imStrlenW(_str:cpp.Star<ImWchar>):Int;
-	@:native("ImGui::ImStristr")
-	static function imStristr(_haystack:imguicpp.utils.VarConstCharStar, _haystack_end:imguicpp.utils.VarConstCharStar, _needle:imguicpp.utils.VarConstCharStar, _needle_end:imguicpp.utils.VarConstCharStar):imguicpp.utils.VarConstCharStar;
-	@:native("ImGui::ImStricmp")
-	static function imStricmp(_str1:imguicpp.utils.VarConstCharStar, _str2:imguicpp.utils.VarConstCharStar):Int;
-	@:native("ImGui::ImStreolRange")
-	static function imStreolRange(_str:imguicpp.utils.VarConstCharStar, _str_end:imguicpp.utils.VarConstCharStar):imguicpp.utils.VarConstCharStar;
-	@:native("ImGui::ImStrdupcpy")
-	static function imStrdupcpy(_dst:cpp.Star<cpp.Char>, _p_dst_size:cpp.Star<cpp.SizeT>, _str:imguicpp.utils.VarConstCharStar):cpp.Star<cpp.Char>;
-	@:native("ImGui::ImStrdup")
-	static function imStrdup(_str:imguicpp.utils.VarConstCharStar):cpp.Star<cpp.Char>;
-	@:native("ImGui::ImStrchrRange")
-	static function imStrchrRange(_str_begin:imguicpp.utils.VarConstCharStar, _str_end:imguicpp.utils.VarConstCharStar, _c:cpp.Char):imguicpp.utils.VarConstCharStar;
-	@:native("ImGui::ImStrbolW")
-	static function imStrbolW(_buf_mid_line:cpp.Star<ImWchar>, _buf_begin:cpp.Star<ImWchar>):cpp.Star<ImWchar>;
-	@:native("ImGui::ImStrTrimBlanks")
-	static function imStrTrimBlanks(_str:cpp.Star<cpp.Char>):cpp.Void;
-	@:native("ImGui::ImStrSkipBlank")
-	static function imStrSkipBlank(_str:imguicpp.utils.VarConstCharStar):imguicpp.utils.VarConstCharStar;
-	@:native("ImGui::ImSign")
-	@:overload(function(_x:Float):Float { })
-	static function imSign(_x:cpp.Float32):cpp.Float32;
-	@:native("ImGui::ImSaturate")
-	static function imSaturate(_f:cpp.Float32):cpp.Float32;
-	@:native("ImGui::ImRotate")
-	static function imRotate(_pOut:cpp.Star<ImVec2>, _v:ImVec2, _cos_a:cpp.Float32, _sin_a:cpp.Float32):cpp.Void;
-	@:native("ImGui::ImPow")
-	@:overload(function(_x:Float, _y:Float):Float { })
-	static function imPow(_x:cpp.Float32, _y:cpp.Float32):cpp.Float32;
-	@:native("ImGui::ImParseFormatTrimDecorations")
-	static function imParseFormatTrimDecorations(_format:imguicpp.utils.VarConstCharStar, _buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT):imguicpp.utils.VarConstCharStar;
-	@:native("ImGui::ImParseFormatPrecision")
-	static function imParseFormatPrecision(_format:imguicpp.utils.VarConstCharStar, _default_value:Int):Int;
-	@:native("ImGui::ImParseFormatFindStart")
-	static function imParseFormatFindStart(_format:imguicpp.utils.VarConstCharStar):imguicpp.utils.VarConstCharStar;
-	@:native("ImGui::ImParseFormatFindEnd")
-	static function imParseFormatFindEnd(_format:imguicpp.utils.VarConstCharStar):imguicpp.utils.VarConstCharStar;
-	@:native("ImGui::ImMul")
-	static function imMul(_pOut:cpp.Star<ImVec2>, _lhs:ImVec2, _rhs:ImVec2):cpp.Void;
-	@:native("ImGui::ImModPositive")
-	static function imModPositive(_a:Int, _b:Int):Int;
-	@:native("ImGui::ImMin")
-	static function imMin(_pOut:cpp.Star<ImVec2>, _lhs:ImVec2, _rhs:ImVec2):cpp.Void;
-	@:native("ImGui::ImMax")
-	static function imMax(_pOut:cpp.Star<ImVec2>, _lhs:ImVec2, _rhs:ImVec2):cpp.Void;
-	@:native("ImGui::ImLog")
-	@:overload(function(_x:Float):Float { })
-	static function imLog(_x:cpp.Float32):cpp.Float32;
-	@:native("ImGui::ImLinearSweep")
-	static function imLinearSweep(_current:cpp.Float32, _target:cpp.Float32, _speed:cpp.Float32):cpp.Float32;
-	@:native("ImGui::ImLineClosestPoint")
-	static function imLineClosestPoint(_pOut:cpp.Star<ImVec2>, _a:ImVec2, _b:ImVec2, _p:ImVec2):cpp.Void;
-	@:native("ImGui::ImLerp")
-	@:overload(function(_pOut:cpp.Star<ImVec2>, _a:ImVec2, _b:ImVec2, _t:ImVec2):cpp.Void { })
-	@:overload(function(_pOut:cpp.Star<ImVec4>, _a:ImVec4, _b:ImVec4, _t:cpp.Float32):cpp.Void { })
-	static function imLerp(_pOut:cpp.Star<ImVec2>, _a:ImVec2, _b:ImVec2, _t:cpp.Float32):cpp.Void;
-	@:native("ImGui::ImLengthSqr")
-	@:overload(function(_lhs:ImVec4):cpp.Float32 { })
-	static function imLengthSqr(_lhs:ImVec2):cpp.Float32;
-	@:native("ImGui::ImIsPowerOfTwo")
-	@:overload(function(_v:ImU64):Bool { })
-	static function imIsPowerOfTwo(_v:Int):Bool;
-	@:native("ImGui::ImInvLength")
-	static function imInvLength(_lhs:ImVec2, _fail_value:cpp.Float32):cpp.Float32;
-	@:native("ImGui::ImHashStr")
-	@:overload(function(_data:imguicpp.utils.VarConstCharStar, _seed:ImU32):ImGuiID { })
-	@:overload(function(_data:imguicpp.utils.VarConstCharStar):ImGuiID { })
-	static function imHashStr(_data:imguicpp.utils.VarConstCharStar, _data_size:cpp.SizeT, _seed:ImU32):ImGuiID;
-	@:native("ImGui::ImHashData")
-	@:overload(function(_data:imguicpp.VoidPointer, _data_size:cpp.SizeT):ImGuiID { })
-	static function imHashData(_data:imguicpp.VoidPointer, _data_size:cpp.SizeT, _seed:ImU32):ImGuiID;
-	@:native("ImGui::ImGetDirQuadrantFromDelta")
-	static function imGetDirQuadrantFromDelta(_dx:cpp.Float32, _dy:cpp.Float32):ImGuiDir;
-	@:native("ImGui::ImFormatStringV")
-	static function imFormatStringV(_buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT, _fmt:imguicpp.utils.VarConstCharStar, _args:cpp.VarArg):Int;
-	@:native("ImGui::ImFormatString")
-	static function imFormatString(_buf:cpp.Star<cpp.Char>, _buf_size:cpp.SizeT, _fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):Int;
-	@:native("ImGui::ImFontAtlasBuildWithStbTruetype")
-	static function imFontAtlasBuildWithStbTruetype(_atlas:cpp.Star<ImFontAtlas>):Bool;
-	@:native("ImGui::ImFontAtlasBuildSetupFont")
-	static function imFontAtlasBuildSetupFont(_atlas:cpp.Star<ImFontAtlas>, _font:cpp.Star<ImFont>, _font_config:cpp.Star<ImFontConfig>, _ascent:cpp.Float32, _descent:cpp.Float32):cpp.Void;
-	@:native("ImGui::ImFontAtlasBuildRender1bppRectFromString")
-	static function imFontAtlasBuildRender1bppRectFromString(_atlas:cpp.Star<ImFontAtlas>, _atlas_x:Int, _atlas_y:Int, _w:Int, _h:Int, _in_str:imguicpp.utils.VarConstCharStar, _in_marker_char:cpp.Char, _in_marker_pixel_value:cpp.UInt8):cpp.Void;
-	@:native("ImGui::ImFontAtlasBuildPackCustomRects")
-	static function imFontAtlasBuildPackCustomRects(_atlas:cpp.Star<ImFontAtlas>, _stbrp_context_opaque:imguicpp.VoidPointer):cpp.Void;
-	@:native("ImGui::ImFontAtlasBuildMultiplyRectAlpha8")
-	static function imFontAtlasBuildMultiplyRectAlpha8(_table:imguicpp.CharPointer, _pixels:imguicpp.CharPointer, _x:Int, _y:Int, _w:Int, _h:Int, _stride:Int):cpp.Void;
-	@:native("ImGui::ImFontAtlasBuildMultiplyCalcLookupTable")
-	static function imFontAtlasBuildMultiplyCalcLookupTable(_out_table:imguicpp.CharPointer, _in_multiply_factor:cpp.Float32):cpp.Void;
-	@:native("ImGui::ImFontAtlasBuildInit")
-	static function imFontAtlasBuildInit(_atlas:cpp.Star<ImFontAtlas>):cpp.Void;
-	@:native("ImGui::ImFontAtlasBuildFinish")
-	static function imFontAtlasBuildFinish(_atlas:cpp.Star<ImFontAtlas>):cpp.Void;
-	@:native("ImGui::ImFloor")
-	@:overload(function(_pOut:cpp.Star<ImVec2>, _v:ImVec2):cpp.Void { })
-	static function imFloor(_f:cpp.Float32):cpp.Float32;
-	@:native("ImGui::ImFileWrite")
-	static function imFileWrite(_data:imguicpp.VoidPointer, _size:ImU64, _count:ImU64, _file:ImFileHandle):ImU64;
-	@:native("ImGui::ImFileRead")
-	static function imFileRead(_data:imguicpp.VoidPointer, _size:ImU64, _count:ImU64, _file:ImFileHandle):ImU64;
-	@:native("ImGui::ImFileOpen")
-	static function imFileOpen(_filename:imguicpp.utils.VarConstCharStar, _mode:imguicpp.utils.VarConstCharStar):ImFileHandle;
-	@:native("ImGui::ImFileLoadToMemory")
-	@:overload(function(_filename:imguicpp.utils.VarConstCharStar, _mode:imguicpp.utils.VarConstCharStar, _padding_bytes:Int):imguicpp.VoidPointer { })
-	@:overload(function(_filename:imguicpp.utils.VarConstCharStar, _mode:imguicpp.utils.VarConstCharStar):imguicpp.VoidPointer { })
-	static function imFileLoadToMemory(_filename:imguicpp.utils.VarConstCharStar, _mode:imguicpp.utils.VarConstCharStar, _out_file_size:cpp.Star<cpp.SizeT>, _padding_bytes:Int):imguicpp.VoidPointer;
-	@:native("ImGui::ImFileGetSize")
-	static function imFileGetSize(_file:ImFileHandle):ImU64;
-	@:native("ImGui::ImFileClose")
-	static function imFileClose(_file:ImFileHandle):Bool;
-	@:native("ImGui::ImDot")
-	static function imDot(_a:ImVec2, _b:ImVec2):cpp.Float32;
-	@:native("ImGui::ImClamp")
-	static function imClamp(_pOut:cpp.Star<ImVec2>, _v:ImVec2, _mn:ImVec2, _mx:ImVec2):cpp.Void;
-	@:native("ImGui::ImCharIsBlankW")
-	static function imCharIsBlankW(_c:UInt):Bool;
-	@:native("ImGui::ImCharIsBlankA")
-	static function imCharIsBlankA(_c:cpp.Char):Bool;
-	@:native("ImGui::ImBitArrayTestBit")
-	static function imBitArrayTestBit(_arr:cpp.Star<ImU32>, _n:Int):Bool;
-	@:native("ImGui::ImBitArraySetBitRange")
-	static function imBitArraySetBitRange(_arr:cpp.Star<ImU32>, _n:Int, _n2:Int):cpp.Void;
-	@:native("ImGui::ImBitArraySetBit")
-	static function imBitArraySetBit(_arr:cpp.Star<ImU32>, _n:Int):cpp.Void;
-	@:native("ImGui::ImBitArrayClearBit")
-	static function imBitArrayClearBit(_arr:cpp.Star<ImU32>, _n:Int):cpp.Void;
-	@:native("ImGui::ImBezierQuadraticCalc")
-	static function imBezierQuadraticCalc(_pOut:cpp.Star<ImVec2>, _p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _t:cpp.Float32):cpp.Void;
-	@:native("ImGui::ImBezierCubicClosestPointCasteljau")
-	static function imBezierCubicClosestPointCasteljau(_pOut:cpp.Star<ImVec2>, _p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _p:ImVec2, _tess_tol:cpp.Float32):cpp.Void;
-	@:native("ImGui::ImBezierCubicClosestPoint")
-	static function imBezierCubicClosestPoint(_pOut:cpp.Star<ImVec2>, _p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _p:ImVec2, _num_segments:Int):cpp.Void;
-	@:native("ImGui::ImBezierCubicCalc")
-	static function imBezierCubicCalc(_pOut:cpp.Star<ImVec2>, _p1:ImVec2, _p2:ImVec2, _p3:ImVec2, _p4:ImVec2, _t:cpp.Float32):cpp.Void;
-	@:native("ImGui::ImAlphaBlendColors")
-	static function imAlphaBlendColors(_col_a:ImU32, _col_b:ImU32):ImU32;
-	@:native("ImGui::ImAbs")
-	@:overload(function(_x:Float):Float { })
-	static function imAbs(_x:cpp.Float32):cpp.Float32;
+	@:overload(function(user_texture_id:ImTextureID, size:ImVec2, uv0:ImVec2, uv1:ImVec2, tint_col:ImVec4):cpp.Void { })
+	@:overload(function(user_texture_id:ImTextureID, size:ImVec2, uv0:ImVec2, uv1:ImVec2):cpp.Void { })
+	@:overload(function(user_texture_id:ImTextureID, size:ImVec2, uv1:ImVec2):cpp.Void { })
+	@:overload(function(user_texture_id:ImTextureID, size:ImVec2):cpp.Void { })
+	static function image(user_texture_id:ImTextureID, size:ImVec2, uv0:ImVec2, uv1:ImVec2, tint_col:ImVec4, border_col:ImVec4):cpp.Void;
 	@:native("ImGui::GetWindowWidth")
 	static function getWindowWidth():cpp.Float32;
 	@:native("ImGui::GetWindowSize")
-	static function getWindowSize(_pOut:cpp.Star<ImVec2>):cpp.Void;
-	@:native("ImGui::GetWindowScrollbarRect")
-	static function getWindowScrollbarRect(_pOut:cpp.Star<ImRect>, _window:cpp.Star<ImGuiWindow>, _axis:ImGuiAxis):cpp.Void;
-	@:native("ImGui::GetWindowScrollbarID")
-	static function getWindowScrollbarID(_window:cpp.Star<ImGuiWindow>, _axis:ImGuiAxis):ImGuiID;
-	@:native("ImGui::GetWindowResizeID")
-	static function getWindowResizeID(_window:cpp.Star<ImGuiWindow>, _n:Int):ImGuiID;
+	static function getWindowSize(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetWindowPos")
-	static function getWindowPos(_pOut:cpp.Star<ImVec2>):cpp.Void;
+	static function getWindowPos(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetWindowHeight")
 	static function getWindowHeight():cpp.Float32;
 	@:native("ImGui::GetWindowDrawList")
@@ -4831,17 +4343,13 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("ImGui::GetWindowContentRegionWidth")
 	static function getWindowContentRegionWidth():cpp.Float32;
 	@:native("ImGui::GetWindowContentRegionMin")
-	static function getWindowContentRegionMin(_pOut:cpp.Star<ImVec2>):cpp.Void;
+	static function getWindowContentRegionMin(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetWindowContentRegionMax")
-	static function getWindowContentRegionMax(_pOut:cpp.Star<ImVec2>):cpp.Void;
-	@:native("ImGui::GetWindowAllowedExtentRect")
-	static function getWindowAllowedExtentRect(_pOut:cpp.Star<ImRect>, _window:cpp.Star<ImGuiWindow>):cpp.Void;
+	static function getWindowContentRegionMax(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetVersion")
 	static function getVersion():imguicpp.utils.VarConstCharStar;
 	@:native("ImGui::GetTreeNodeToLabelSpacing")
 	static function getTreeNodeToLabelSpacing():cpp.Float32;
-	@:native("ImGui::GetTopMostPopupModal")
-	static function getTopMostPopupModal():cpp.Star<ImGuiWindow>;
 	@:native("ImGui::GetTime")
 	static function getTime():Float;
 	@:native("ImGui::GetTextLineHeightWithSpacing")
@@ -4849,9 +4357,9 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("ImGui::GetTextLineHeight")
 	static function getTextLineHeight():cpp.Float32;
 	@:native("ImGui::GetStyleColorVec4")
-	static function getStyleColorVec4(_idx:ImGuiCol):cpp.Reference<ImVec4>;
+	static function getStyleColorVec4(idx:ImGuiCol):cpp.Reference<ImVec4>;
 	@:native("ImGui::GetStyleColorName")
-	static function getStyleColorName(_idx:ImGuiCol):imguicpp.utils.VarConstCharStar;
+	static function getStyleColorName(idx:ImGuiCol):imguicpp.utils.VarConstCharStar;
 	@:native("ImGui::GetStyle")
 	static function getStyle():cpp.Reference<ImGuiStyle>;
 	@:native("ImGui::GetStateStorage")
@@ -4864,52 +4372,32 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	static function getScrollMaxY():cpp.Float32;
 	@:native("ImGui::GetScrollMaxX")
 	static function getScrollMaxX():cpp.Float32;
-	@:native("ImGui::GetNavInputAmount2d")
-	@:overload(function(_pOut:cpp.Star<ImVec2>, _dir_sources:ImGuiNavDirSourceFlags, _mode:ImGuiInputReadMode, _slow_factor:cpp.Float32):cpp.Void { })
-	@:overload(function(_pOut:cpp.Star<ImVec2>, _dir_sources:ImGuiNavDirSourceFlags, _mode:ImGuiInputReadMode):cpp.Void { })
-	static function getNavInputAmount2d(_pOut:cpp.Star<ImVec2>, _dir_sources:ImGuiNavDirSourceFlags, _mode:ImGuiInputReadMode, _slow_factor:cpp.Float32, _fast_factor:cpp.Float32):cpp.Void;
-	@:native("ImGui::GetNavInputAmount")
-	static function getNavInputAmount(_n:ImGuiNavInput, _mode:ImGuiInputReadMode):cpp.Float32;
 	@:native("ImGui::GetMousePosOnOpeningCurrentPopup")
-	static function getMousePosOnOpeningCurrentPopup(_pOut:cpp.Star<ImVec2>):cpp.Void;
+	static function getMousePosOnOpeningCurrentPopup(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetMousePos")
-	static function getMousePos(_pOut:cpp.Star<ImVec2>):cpp.Void;
+	static function getMousePos(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetMouseDragDelta")
-	@:overload(function(_pOut:cpp.Star<ImVec2>, _lock_threshold:cpp.Float32):cpp.Void { })
-	@:overload(function(_pOut:cpp.Star<ImVec2>):cpp.Void { })
-	static function getMouseDragDelta(_pOut:cpp.Star<ImVec2>, _button:ImGuiMouseButton, _lock_threshold:cpp.Float32):cpp.Void;
+	@:overload(function(pOut:cpp.Star<ImVec2>, lock_threshold:cpp.Float32):cpp.Void { })
+	@:overload(function(pOut:cpp.Star<ImVec2>):cpp.Void { })
+	static function getMouseDragDelta(pOut:cpp.Star<ImVec2>, button:ImGuiMouseButton, lock_threshold:cpp.Float32):cpp.Void;
 	@:native("ImGui::GetMouseCursor")
 	static function getMouseCursor():ImGuiMouseCursor;
-	@:native("ImGui::GetMergedKeyModFlags")
-	static function getMergedKeyModFlags():ImGuiKeyModFlags;
 	@:native("ImGui::GetKeyPressedAmount")
-	static function getKeyPressedAmount(_key_index:Int, _repeat_delay:cpp.Float32, _rate:cpp.Float32):Int;
+	static function getKeyPressedAmount(key_index:Int, repeat_delay:cpp.Float32, rate:cpp.Float32):Int;
 	@:native("ImGui::GetKeyIndex")
-	static function getKeyIndex(_imgui_key:ImGuiKey):Int;
-	@:native("ImGui::GetItemsFlags")
-	static function getItemsFlags():ImGuiItemFlags;
-	@:native("ImGui::GetItemStatusFlags")
-	static function getItemStatusFlags():ImGuiItemStatusFlags;
+	static function getKeyIndex(imgui_key:ImGuiKey):Int;
 	@:native("ImGui::GetItemRectSize")
-	static function getItemRectSize(_pOut:cpp.Star<ImVec2>):cpp.Void;
+	static function getItemRectSize(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetItemRectMin")
-	static function getItemRectMin(_pOut:cpp.Star<ImVec2>):cpp.Void;
+	static function getItemRectMin(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetItemRectMax")
-	static function getItemRectMax(_pOut:cpp.Star<ImVec2>):cpp.Void;
-	@:native("ImGui::GetItemID")
-	static function getItemID():ImGuiID;
-	@:native("ImGui::GetInputTextState")
-	static function getInputTextState(_id:ImGuiID):cpp.Star<ImGuiInputTextState>;
+	static function getItemRectMax(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetIO")
 	static function getIO():cpp.Reference<ImGuiIO>;
-	@:native("ImGui::GetIDWithSeed")
-	static function getIDWithSeed(_str_id_begin:imguicpp.utils.VarConstCharStar, _str_id_end:imguicpp.utils.VarConstCharStar, _seed:ImGuiID):ImGuiID;
-	@:native("ImGui::GetID")
-	@:overload(function(_str_id_begin:imguicpp.utils.VarConstCharStar, _str_id_end:imguicpp.utils.VarConstCharStar):ImGuiID { })
-	@:overload(function(_ptr_id:imguicpp.VoidPointer):ImGuiID { })
-	static function getID(_str_id:imguicpp.utils.VarConstCharStar):ImGuiID;
-	@:native("ImGui::GetHoveredID")
-	static function getHoveredID():ImGuiID;
+	@:native("ImGui::linc_GetID")
+	@:overload(function(str_id_begin:imguicpp.utils.VarConstCharStar, str_id_end:imguicpp.utils.VarConstCharStar):ImGuiID { })
+	@:overload(function(ptr_id:imguicpp.VoidPointer):ImGuiID { })
+	static function getID(str_id:imguicpp.utils.VarConstCharStar):ImGuiID;
 	@:native("ImGui::GetFrameHeightWithSpacing")
 	static function getFrameHeightWithSpacing():cpp.Float32;
 	@:native("ImGui::GetFrameHeight")
@@ -4917,113 +4405,54 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("ImGui::GetFrameCount")
 	static function getFrameCount():Int;
 	@:native("ImGui::GetForegroundDrawList")
-	@:overload(function(_window:cpp.Star<ImGuiWindow>):cpp.Star<ImDrawList> { })
 	static function getForegroundDrawList():cpp.Star<ImDrawList>;
 	@:native("ImGui::GetFontTexUvWhitePixel")
-	static function getFontTexUvWhitePixel(_pOut:cpp.Star<ImVec2>):cpp.Void;
+	static function getFontTexUvWhitePixel(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetFontSize")
 	static function getFontSize():cpp.Float32;
 	@:native("ImGui::GetFont")
 	static function getFont():cpp.Star<ImFont>;
-	@:native("ImGui::GetFocusedFocusScope")
-	static function getFocusedFocusScope():ImGuiID;
-	@:native("ImGui::GetFocusScope")
-	static function getFocusScope():ImGuiID;
-	@:native("ImGui::GetFocusID")
-	static function getFocusID():ImGuiID;
 	@:native("ImGui::GetDrawListSharedData")
 	static function getDrawListSharedData():cpp.Star<ImDrawListSharedData>;
 	@:native("ImGui::GetDrawData")
 	static function getDrawData():cpp.Star<ImDrawData>;
 	@:native("ImGui::GetDragDropPayload")
 	static function getDragDropPayload():cpp.Star<ImGuiPayload>;
-	@:native("ImGui::GetDefaultFont")
-	static function getDefaultFont():cpp.Star<ImFont>;
 	@:native("ImGui::GetCursorStartPos")
-	static function getCursorStartPos(_pOut:cpp.Star<ImVec2>):cpp.Void;
+	static function getCursorStartPos(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetCursorScreenPos")
-	static function getCursorScreenPos(_pOut:cpp.Star<ImVec2>):cpp.Void;
+	static function getCursorScreenPos(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetCursorPosY")
 	static function getCursorPosY():cpp.Float32;
 	@:native("ImGui::GetCursorPosX")
 	static function getCursorPosX():cpp.Float32;
 	@:native("ImGui::GetCursorPos")
-	static function getCursorPos(_pOut:cpp.Star<ImVec2>):cpp.Void;
-	@:native("ImGui::GetCurrentWindowRead")
-	static function getCurrentWindowRead():cpp.Star<ImGuiWindow>;
-	@:native("ImGui::GetCurrentWindow")
-	static function getCurrentWindow():cpp.Star<ImGuiWindow>;
+	static function getCursorPos(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetCurrentContext")
 	static function getCurrentContext():cpp.Star<ImGuiContext>;
-	@:native("ImGui::GetContentRegionMaxAbs")
-	static function getContentRegionMaxAbs(_pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetContentRegionMax")
-	static function getContentRegionMax(_pOut:cpp.Star<ImVec2>):cpp.Void;
+	static function getContentRegionMax(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetContentRegionAvail")
-	static function getContentRegionAvail(_pOut:cpp.Star<ImVec2>):cpp.Void;
-	@:native("ImGui::GetColumnsID")
-	static function getColumnsID(_str_id:imguicpp.utils.VarConstCharStar, _count:Int):ImGuiID;
+	static function getContentRegionAvail(pOut:cpp.Star<ImVec2>):cpp.Void;
 	@:native("ImGui::GetColumnsCount")
 	static function getColumnsCount():Int;
 	@:native("ImGui::GetColumnWidth")
 	@:overload(function():cpp.Float32 { })
-	static function getColumnWidth(_column_index:Int):cpp.Float32;
-	@:native("ImGui::GetColumnOffsetFromNorm")
-	static function getColumnOffsetFromNorm(_columns:cpp.Star<ImGuiOldColumns>, _offset_norm:cpp.Float32):cpp.Float32;
+	static function getColumnWidth(column_index:Int):cpp.Float32;
 	@:native("ImGui::GetColumnOffset")
 	@:overload(function():cpp.Float32 { })
-	static function getColumnOffset(_column_index:Int):cpp.Float32;
-	@:native("ImGui::GetColumnNormFromOffset")
-	static function getColumnNormFromOffset(_columns:cpp.Star<ImGuiOldColumns>, _offset:cpp.Float32):cpp.Float32;
+	static function getColumnOffset(column_index:Int):cpp.Float32;
 	@:native("ImGui::GetColumnIndex")
 	static function getColumnIndex():Int;
 	@:native("ImGui::GetColorU32")
-	@:overload(function(_idx:ImGuiCol):ImU32 { })
-	@:overload(function(_col:ImVec4):ImU32 { })
-	@:overload(function(_col:ImU32):ImU32 { })
-	static function getColorU32(_idx:ImGuiCol, _alpha_mul:cpp.Float32):ImU32;
+	@:overload(function(idx:ImGuiCol):ImU32 { })
+	@:overload(function(col:ImVec4):ImU32 { })
+	@:overload(function(col:ImU32):ImU32 { })
+	static function getColorU32(idx:ImGuiCol, alpha_mul:cpp.Float32):ImU32;
 	@:native("ImGui::GetClipboardText")
 	static function getClipboardText():imguicpp.utils.VarConstCharStar;
 	@:native("ImGui::GetBackgroundDrawList")
 	static function getBackgroundDrawList():cpp.Star<ImDrawList>;
-	@:native("ImGui::GetActiveID")
-	static function getActiveID():ImGuiID;
-	@:native("ImGui::GcCompactTransientWindowBuffers")
-	static function gcCompactTransientWindowBuffers(_window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::GcCompactTransientMiscBuffers")
-	static function gcCompactTransientMiscBuffers():cpp.Void;
-	@:native("ImGui::GcAwakeTransientWindowBuffers")
-	static function gcAwakeTransientWindowBuffers(_window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::FocusableItemUnregister")
-	static function focusableItemUnregister(_window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::FocusableItemRegister")
-	static function focusableItemRegister(_window:cpp.Star<ImGuiWindow>, _id:ImGuiID):Bool;
-	@:native("ImGui::FocusWindow")
-	static function focusWindow(_window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::FocusTopMostWindowUnderOne")
-	static function focusTopMostWindowUnderOne(_under_this_window:cpp.Star<ImGuiWindow>, _ignore_window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::FindWindowSettings")
-	static function findWindowSettings(_id:ImGuiID):cpp.Star<ImGuiWindowSettings>;
-	@:native("ImGui::FindWindowByName")
-	static function findWindowByName(_name:imguicpp.utils.VarConstCharStar):cpp.Star<ImGuiWindow>;
-	@:native("ImGui::FindWindowByID")
-	static function findWindowByID(_id:ImGuiID):cpp.Star<ImGuiWindow>;
-	@:native("ImGui::FindSettingsHandler")
-	static function findSettingsHandler(_type_name:imguicpp.utils.VarConstCharStar):cpp.Star<ImGuiSettingsHandler>;
-	@:native("ImGui::FindRenderedTextEnd")
-	@:overload(function(_text:imguicpp.utils.VarConstCharStar):imguicpp.utils.VarConstCharStar { })
-	static function findRenderedTextEnd(_text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar):imguicpp.utils.VarConstCharStar;
-	@:native("ImGui::FindOrCreateWindowSettings")
-	static function findOrCreateWindowSettings(_name:imguicpp.utils.VarConstCharStar):cpp.Star<ImGuiWindowSettings>;
-	@:native("ImGui::FindOrCreateColumns")
-	static function findOrCreateColumns(_window:cpp.Star<ImGuiWindow>, _id:ImGuiID):cpp.Star<ImGuiOldColumns>;
-	@:native("ImGui::FindBestWindowPosForPopupEx")
-	static function findBestWindowPosForPopupEx(_pOut:cpp.Star<ImVec2>, _ref_pos:ImVec2, _size:ImVec2, _last_dir:cpp.Star<ImGuiDir>, _r_outer:ImRect, _r_avoid:ImRect, _policy:ImGuiPopupPositionPolicy):cpp.Void;
-	@:native("ImGui::FindBestWindowPosForPopup")
-	static function findBestWindowPosForPopup(_pOut:cpp.Star<ImVec2>, _window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::ErrorCheckEndFrameRecover")
-	@:overload(function(_log_callback:ImGuiErrorLogCallback):cpp.Void { })
-	static function errorCheckEndFrameRecover(_log_callback:ImGuiErrorLogCallback, _user_data:imguicpp.VoidPointer):cpp.Void;
 	@:native("ImGui::EndTooltip")
 	static function endTooltip():cpp.Void;
 	@:native("ImGui::EndTable")
@@ -5050,8 +4479,6 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	static function endDragDropSource():cpp.Void;
 	@:native("ImGui::EndCombo")
 	static function endCombo():cpp.Void;
-	@:native("ImGui::EndColumns")
-	static function endColumns():cpp.Void;
 	@:native("ImGui::EndChildFrame")
 	static function endChildFrame():cpp.Void;
 	@:native("ImGui::EndChild")
@@ -5059,408 +4486,298 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("ImGui::End")
 	static function end():cpp.Void;
 	@:native("ImGui::Dummy")
-	static function dummy(_size:ImVec2):cpp.Void;
-	@:native("ImGui::DragScalarN")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _components:Int, _v_speed:cpp.Float32, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _components:Int, _v_speed:cpp.Float32, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _components:Int, _v_speed:cpp.Float32, _p_min:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _components:Int, _v_speed:cpp.Float32):Bool { })
-	static function dragScalarN(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _components:Int, _v_speed:cpp.Float32, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::DragScalar")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _v_speed:cpp.Float32, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _v_speed:cpp.Float32, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _v_speed:cpp.Float32, _p_min:imguicpp.VoidPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _v_speed:cpp.Float32):Bool { })
-	static function dragScalar(_label:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _v_speed:cpp.Float32, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::DragIntRange2")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.IntPointer, _v_current_max:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar, _format_max:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.IntPointer, _v_current_max:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int, _format_max:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.IntPointer, _v_current_max:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.IntPointer, _v_current_max:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.IntPointer, _v_current_max:imguicpp.IntPointer, _v_speed:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.IntPointer, _v_current_max:imguicpp.IntPointer):Bool { })
-	static function dragIntRange2(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.IntPointer, _v_current_max:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar, _format_max:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::DragInt4")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer):Bool { })
-	static function dragInt4(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::DragInt3")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer):Bool { })
-	static function dragInt3(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::DragInt2")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer):Bool { })
-	static function dragInt2(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::DragInt")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer):Bool { })
-	static function dragInt(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.IntPointer, _v_speed:cpp.Float32, _v_min:Int, _v_max:Int, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::DragFloatRange2")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.FloatPointer, _v_current_max:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar, _format_max:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.FloatPointer, _v_current_max:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32, _format_max:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.FloatPointer, _v_current_max:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.FloatPointer, _v_current_max:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.FloatPointer, _v_current_max:imguicpp.FloatPointer, _v_speed:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.FloatPointer, _v_current_max:imguicpp.FloatPointer):Bool { })
-	static function dragFloatRange2(_label:imguicpp.utils.VarConstCharStar, _v_current_min:imguicpp.FloatPointer, _v_current_max:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar, _format_max:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::DragFloat4")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer):Bool { })
-	static function dragFloat4(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::DragFloat3")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer):Bool { })
-	static function dragFloat3(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::DragFloat2")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer):Bool { })
-	static function dragFloat2(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::DragFloat")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer):Bool { })
-	static function dragFloat(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.FloatPointer, _v_speed:cpp.Float32, _v_min:cpp.Float32, _v_max:cpp.Float32, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
-	@:native("ImGui::DragBehavior")
-	static function dragBehavior(_id:ImGuiID, _data_type:ImGuiDataType, _p_v:imguicpp.VoidPointer, _v_speed:cpp.Float32, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar, _flags:ImGuiSliderFlags):Bool;
+	static function dummy(size:ImVec2):cpp.Void;
+	@:native("ImGui::linc_DragScalarN")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, components:Int, v_speed:cpp.Float32, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, components:Int, v_speed:cpp.Float32, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, components:Int, v_speed:cpp.Float32, p_min:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, components:Int, v_speed:cpp.Float32):Bool { })
+	static function dragScalarN(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, components:Int, v_speed:cpp.Float32, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_DragScalar")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, v_speed:cpp.Float32, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, v_speed:cpp.Float32, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, v_speed:cpp.Float32, p_min:imguicpp.VoidPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, v_speed:cpp.Float32):Bool { })
+	static function dragScalar(label:imguicpp.utils.VarConstCharStar, data_type:ImGuiDataType, p_data:imguicpp.VoidPointer, v_speed:cpp.Float32, p_min:imguicpp.VoidPointer, p_max:imguicpp.VoidPointer, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_DragIntRange2")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.IntPointer, v_current_max:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar, format_max:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.IntPointer, v_current_max:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int, format_max:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.IntPointer, v_current_max:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.IntPointer, v_current_max:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.IntPointer, v_current_max:imguicpp.IntPointer, v_speed:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.IntPointer, v_current_max:imguicpp.IntPointer):Bool { })
+	static function dragIntRange2(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.IntPointer, v_current_max:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar, format_max:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_DragInt4")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer):Bool { })
+	static function dragInt4(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_DragInt3")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer):Bool { })
+	static function dragInt3(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_DragInt2")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer):Bool { })
+	static function dragInt2(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_DragInt")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer):Bool { })
+	static function dragInt(label:imguicpp.utils.VarConstCharStar, v:imguicpp.IntPointer, v_speed:cpp.Float32, v_min:Int, v_max:Int, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_DragFloatRange2")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.FloatPointer, v_current_max:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar, format_max:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.FloatPointer, v_current_max:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32, format_max:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.FloatPointer, v_current_max:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.FloatPointer, v_current_max:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.FloatPointer, v_current_max:imguicpp.FloatPointer, v_speed:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.FloatPointer, v_current_max:imguicpp.FloatPointer):Bool { })
+	static function dragFloatRange2(label:imguicpp.utils.VarConstCharStar, v_current_min:imguicpp.FloatPointer, v_current_max:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar, format_max:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_DragFloat4")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer):Bool { })
+	static function dragFloat4(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_DragFloat3")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer):Bool { })
+	static function dragFloat3(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_DragFloat2")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer):Bool { })
+	static function dragFloat2(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
+	@:native("ImGui::linc_DragFloat")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer):Bool { })
+	static function dragFloat(label:imguicpp.utils.VarConstCharStar, v:imguicpp.FloatPointer, v_speed:cpp.Float32, v_min:cpp.Float32, v_max:cpp.Float32, format:imguicpp.utils.VarConstCharStar, flags:ImGuiSliderFlags):Bool;
 	@:native("ImGui::DestroyContext")
 	@:overload(function():cpp.Void { })
-	static function destroyContext(_ctx:cpp.Star<ImGuiContext>):cpp.Void;
-	@:native("ImGui::DebugStartItemPicker")
-	static function debugStartItemPicker():cpp.Void;
-	@:native("ImGui::DebugNodeWindowsList")
-	static function debugNodeWindowsList(_windows:ImVectorImGuiWindowPtrPointer, _label:imguicpp.utils.VarConstCharStar):cpp.Void;
-	@:native("ImGui::DebugNodeWindowSettings")
-	static function debugNodeWindowSettings(_settings:cpp.Star<ImGuiWindowSettings>):cpp.Void;
-	@:native("ImGui::DebugNodeWindow")
-	static function debugNodeWindow(_window:cpp.Star<ImGuiWindow>, _label:imguicpp.utils.VarConstCharStar):cpp.Void;
-	@:native("ImGui::DebugNodeTableSettings")
-	static function debugNodeTableSettings(_settings:cpp.Star<ImGuiTableSettings>):cpp.Void;
-	@:native("ImGui::DebugNodeTable")
-	static function debugNodeTable(_table:cpp.Star<ImGuiTable>):cpp.Void;
-	@:native("ImGui::DebugNodeTabBar")
-	static function debugNodeTabBar(_tab_bar:cpp.Star<ImGuiTabBar>, _label:imguicpp.utils.VarConstCharStar):cpp.Void;
-	@:native("ImGui::DebugNodeStorage")
-	static function debugNodeStorage(_storage:cpp.Star<ImGuiStorage>, _label:imguicpp.utils.VarConstCharStar):cpp.Void;
-	@:native("ImGui::DebugNodeDrawList")
-	static function debugNodeDrawList(_window:cpp.Star<ImGuiWindow>, _draw_list:cpp.Star<ImDrawList>, _label:imguicpp.utils.VarConstCharStar):cpp.Void;
-	@:native("ImGui::DebugNodeDrawCmdShowMeshAndBoundingBox")
-	static function debugNodeDrawCmdShowMeshAndBoundingBox(_window:cpp.Star<ImGuiWindow>, _draw_list:cpp.Star<ImDrawList>, _draw_cmd:cpp.Star<ImDrawCmd>, _show_mesh:Bool, _show_aabb:Bool):cpp.Void;
-	@:native("ImGui::DebugNodeColumns")
-	static function debugNodeColumns(_columns:cpp.Star<ImGuiOldColumns>):cpp.Void;
-	@:native("ImGui::DebugDrawItemRect")
-	@:overload(function():cpp.Void { })
-	static function debugDrawItemRect(_col:ImU32):cpp.Void;
+	static function destroyContext(ctx:cpp.Star<ImGuiContext>):cpp.Void;
 	@:native("ImGui::DebugCheckVersionAndDataLayout")
-	static function debugCheckVersionAndDataLayout(_version_str:imguicpp.utils.VarConstCharStar, _sz_io:cpp.SizeT, _sz_style:cpp.SizeT, _sz_vec2:cpp.SizeT, _sz_vec4:cpp.SizeT, _sz_drawvert:cpp.SizeT, _sz_drawidx:cpp.SizeT):Bool;
-	@:native("ImGui::DataTypeGetInfo")
-	static function dataTypeGetInfo(_data_type:ImGuiDataType):cpp.Star<ImGuiDataTypeInfo>;
-	@:native("ImGui::DataTypeFormatString")
-	static function dataTypeFormatString(_buf:cpp.Star<cpp.Char>, _buf_size:Int, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar):Int;
-	@:native("ImGui::DataTypeCompare")
-	static function dataTypeCompare(_data_type:ImGuiDataType, _arg_1:imguicpp.VoidPointer, _arg_2:imguicpp.VoidPointer):Int;
-	@:native("ImGui::DataTypeClamp")
-	static function dataTypeClamp(_data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _p_min:imguicpp.VoidPointer, _p_max:imguicpp.VoidPointer):Bool;
-	@:native("ImGui::DataTypeApplyOpFromText")
-	static function dataTypeApplyOpFromText(_buf:imguicpp.utils.VarConstCharStar, _initial_value_buf:imguicpp.utils.VarConstCharStar, _data_type:ImGuiDataType, _p_data:imguicpp.VoidPointer, _format:imguicpp.utils.VarConstCharStar):Bool;
-	@:native("ImGui::DataTypeApplyOp")
-	static function dataTypeApplyOp(_data_type:ImGuiDataType, _op:Int, _output:imguicpp.VoidPointer, _arg_1:imguicpp.VoidPointer, _arg_2:imguicpp.VoidPointer):cpp.Void;
-	@:native("ImGui::CreateNewWindowSettings")
-	static function createNewWindowSettings(_name:imguicpp.utils.VarConstCharStar):cpp.Star<ImGuiWindowSettings>;
+	static function debugCheckVersionAndDataLayout(version_str:imguicpp.utils.VarConstCharStar, sz_io:cpp.SizeT, sz_style:cpp.SizeT, sz_vec2:cpp.SizeT, sz_vec4:cpp.SizeT, sz_drawvert:cpp.SizeT, sz_drawidx:cpp.SizeT):Bool;
 	@:native("ImGui::CreateContext")
 	@:overload(function():cpp.Star<ImGuiContext> { })
-	static function createContext(_shared_font_atlas:cpp.Star<ImFontAtlas>):cpp.Star<ImGuiContext>;
-	@:native("ImGui::Combo")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _current_item:imguicpp.IntPointer, _items:cpp.RawPointer<imguicpp.utils.VarConstCharStar>, _items_count:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _current_item:imguicpp.IntPointer, _items_separated_by_zeros:imguicpp.utils.VarConstCharStar, _popup_max_height_in_items:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _current_item:imguicpp.IntPointer, _items_separated_by_zeros:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _current_item:imguicpp.IntPointer, _items_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int, cpp.Star<cpp.RawConstPointer<cpp.Char>>) -> Bool>, _data:imguicpp.VoidPointer, _items_count:Int, _popup_max_height_in_items:Int):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _current_item:imguicpp.IntPointer, _items_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int, cpp.Star<cpp.RawConstPointer<cpp.Char>>) -> Bool>, _data:imguicpp.VoidPointer, _items_count:Int):Bool { })
-	static function combo(_label:imguicpp.utils.VarConstCharStar, _current_item:imguicpp.IntPointer, _items:cpp.RawPointer<imguicpp.utils.VarConstCharStar>, _items_count:Int, _popup_max_height_in_items:Int):Bool;
+	static function createContext(shared_font_atlas:cpp.Star<ImFontAtlas>):cpp.Star<ImGuiContext>;
+	@:native("ImGui::linc_Combo")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, current_item:imguicpp.IntPointer, items:cpp.RawPointer<imguicpp.utils.VarConstCharStar>, items_count:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, current_item:imguicpp.IntPointer, items_separated_by_zeros:imguicpp.utils.VarConstCharStar, popup_max_height_in_items:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, current_item:imguicpp.IntPointer, items_separated_by_zeros:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, current_item:imguicpp.IntPointer, items_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int, cpp.Star<cpp.RawConstPointer<cpp.Char>>) -> Bool>, data:imguicpp.VoidPointer, items_count:Int, popup_max_height_in_items:Int):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, current_item:imguicpp.IntPointer, items_getter:cpp.Callable<(cpp.Star<cpp.Void>, Int, cpp.Star<cpp.RawConstPointer<cpp.Char>>) -> Bool>, data:imguicpp.VoidPointer, items_count:Int):Bool { })
+	static function combo(label:imguicpp.utils.VarConstCharStar, current_item:imguicpp.IntPointer, items:cpp.RawPointer<imguicpp.utils.VarConstCharStar>, items_count:Int, popup_max_height_in_items:Int):Bool;
 	@:native("ImGui::Columns")
-	@:overload(function(_count:Int, _id:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	@:overload(function(_id:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	@:overload(function(count:Int, id:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	@:overload(function(id:imguicpp.utils.VarConstCharStar):cpp.Void { })
 	@:overload(function():cpp.Void { })
-	static function columns(_count:Int, _id:imguicpp.utils.VarConstCharStar, _border:Bool):cpp.Void;
-	@:native("ImGui::ColorTooltip")
-	static function colorTooltip(_text:imguicpp.utils.VarConstCharStar, _col:imguicpp.FloatPointer, _flags:ImGuiColorEditFlags):cpp.Void;
-	@:native("ImGui::ColorPickerOptionsPopup")
-	static function colorPickerOptionsPopup(_ref_col:imguicpp.FloatPointer, _flags:ImGuiColorEditFlags):cpp.Void;
-	@:native("ImGui::ColorPicker4")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _col:imguicpp.FloatPointer, _ref_col:imguicpp.FloatPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _col:imguicpp.FloatPointer):Bool { })
-	static function colorPicker4(_label:imguicpp.utils.VarConstCharStar, _col:imguicpp.FloatPointer, _flags:ImGuiColorEditFlags, _ref_col:imguicpp.FloatPointer):Bool;
-	@:native("ImGui::ColorPicker3")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _col:imguicpp.FloatPointer):Bool { })
-	static function colorPicker3(_label:imguicpp.utils.VarConstCharStar, _col:imguicpp.FloatPointer, _flags:ImGuiColorEditFlags):Bool;
-	@:native("ImGui::ColorEditOptionsPopup")
-	static function colorEditOptionsPopup(_col:imguicpp.FloatPointer, _flags:ImGuiColorEditFlags):cpp.Void;
-	@:native("ImGui::ColorEdit4")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _col:imguicpp.FloatPointer):Bool { })
-	static function colorEdit4(_label:imguicpp.utils.VarConstCharStar, _col:imguicpp.FloatPointer, _flags:ImGuiColorEditFlags):Bool;
-	@:native("ImGui::ColorEdit3")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _col:imguicpp.FloatPointer):Bool { })
-	static function colorEdit3(_label:imguicpp.utils.VarConstCharStar, _col:imguicpp.FloatPointer, _flags:ImGuiColorEditFlags):Bool;
+	static function columns(count:Int, id:imguicpp.utils.VarConstCharStar, border:Bool):cpp.Void;
+	@:native("ImGui::linc_ColorPicker4")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, col:imguicpp.FloatPointer, ref_col:imguicpp.FloatPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, col:imguicpp.FloatPointer):Bool { })
+	static function colorPicker4(label:imguicpp.utils.VarConstCharStar, col:imguicpp.FloatPointer, flags:ImGuiColorEditFlags, ref_col:imguicpp.FloatPointer):Bool;
+	@:native("ImGui::linc_ColorPicker3")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, col:imguicpp.FloatPointer):Bool { })
+	static function colorPicker3(label:imguicpp.utils.VarConstCharStar, col:imguicpp.FloatPointer, flags:ImGuiColorEditFlags):Bool;
+	@:native("ImGui::linc_ColorEdit4")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, col:imguicpp.FloatPointer):Bool { })
+	static function colorEdit4(label:imguicpp.utils.VarConstCharStar, col:imguicpp.FloatPointer, flags:ImGuiColorEditFlags):Bool;
+	@:native("ImGui::linc_ColorEdit3")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, col:imguicpp.FloatPointer):Bool { })
+	static function colorEdit3(label:imguicpp.utils.VarConstCharStar, col:imguicpp.FloatPointer, flags:ImGuiColorEditFlags):Bool;
 	@:native("ImGui::ColorConvertU32ToFloat4")
-	static function colorConvertU32ToFloat4(_pOut:cpp.Star<ImVec4>, _in:ImU32):cpp.Void;
-	@:native("ImGui::ColorConvertRGBtoHSV")
-	static function colorConvertRGBtoHSV(_r:cpp.Float32, _g:cpp.Float32, _b:cpp.Float32, _out_h:imguicpp.FloatPointer, _out_s:imguicpp.FloatPointer, _out_v:imguicpp.FloatPointer):cpp.Void;
-	@:native("ImGui::ColorConvertHSVtoRGB")
-	static function colorConvertHSVtoRGB(_h:cpp.Float32, _s:cpp.Float32, _v:cpp.Float32, _out_r:imguicpp.FloatPointer, _out_g:imguicpp.FloatPointer, _out_b:imguicpp.FloatPointer):cpp.Void;
+	static function colorConvertU32ToFloat4(pOut:cpp.Star<ImVec4>, _in:ImU32):cpp.Void;
+	@:native("ImGui::linc_ColorConvertRGBtoHSV")
+	static function colorConvertRGBtoHSV(r:cpp.Float32, g:cpp.Float32, b:cpp.Float32, out_h:imguicpp.FloatPointer, out_s:imguicpp.FloatPointer, out_v:imguicpp.FloatPointer):cpp.Void;
+	@:native("ImGui::linc_ColorConvertHSVtoRGB")
+	static function colorConvertHSVtoRGB(h:cpp.Float32, s:cpp.Float32, v:cpp.Float32, out_r:imguicpp.FloatPointer, out_g:imguicpp.FloatPointer, out_b:imguicpp.FloatPointer):cpp.Void;
 	@:native("ImGui::ColorConvertFloat4ToU32")
 	static function colorConvertFloat4ToU32(_in:ImVec4):ImU32;
 	@:native("ImGui::ColorButton")
-	@:overload(function(_desc_id:imguicpp.utils.VarConstCharStar, _col:ImVec4, _size:ImVec2):Bool { })
-	@:overload(function(_desc_id:imguicpp.utils.VarConstCharStar, _col:ImVec4):Bool { })
-	static function colorButton(_desc_id:imguicpp.utils.VarConstCharStar, _col:ImVec4, _flags:ImGuiColorEditFlags, _size:ImVec2):Bool;
-	@:native("ImGui::CollapsingHeader")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _p_visible:imguicpp.BoolPointer, _flags:ImGuiTreeNodeFlags):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _p_visible:imguicpp.BoolPointer):Bool { })
-	static function collapsingHeader(_label:imguicpp.utils.VarConstCharStar, _flags:ImGuiTreeNodeFlags):Bool;
-	@:native("ImGui::CollapseButton")
-	static function collapseButton(_id:ImGuiID, _pos:ImVec2):Bool;
-	@:native("ImGui::ClosePopupsOverWindow")
-	static function closePopupsOverWindow(_ref_window:cpp.Star<ImGuiWindow>, _restore_focus_to_window_under_popup:Bool):cpp.Void;
-	@:native("ImGui::ClosePopupToLevel")
-	static function closePopupToLevel(_remaining:Int, _restore_focus_to_window_under_popup:Bool):cpp.Void;
+	@:overload(function(desc_id:imguicpp.utils.VarConstCharStar, col:ImVec4, size:ImVec2):Bool { })
+	@:overload(function(desc_id:imguicpp.utils.VarConstCharStar, col:ImVec4):Bool { })
+	static function colorButton(desc_id:imguicpp.utils.VarConstCharStar, col:ImVec4, flags:ImGuiColorEditFlags, size:ImVec2):Bool;
+	@:native("ImGui::linc_CollapsingHeader")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, p_visible:imguicpp.BoolPointer, flags:ImGuiTreeNodeFlags):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, p_visible:imguicpp.BoolPointer):Bool { })
+	static function collapsingHeader(label:imguicpp.utils.VarConstCharStar, flags:ImGuiTreeNodeFlags):Bool;
 	@:native("ImGui::CloseCurrentPopup")
 	static function closeCurrentPopup():cpp.Void;
-	@:native("ImGui::CloseButton")
-	static function closeButton(_id:ImGuiID, _pos:ImVec2):Bool;
-	@:native("ImGui::ClearIniSettings")
-	static function clearIniSettings():cpp.Void;
-	@:native("ImGui::ClearDragDrop")
-	static function clearDragDrop():cpp.Void;
-	@:native("ImGui::ClearActiveID")
-	static function clearActiveID():cpp.Void;
-	@:native("ImGui::CheckboxFlags")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _flags:cpp.Star<UInt>, _flags_value:UInt):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _flags:cpp.Star<ImS64>, _flags_value:ImS64):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _flags:cpp.Star<ImU64>, _flags_value:ImU64):Bool { })
-	static function checkboxFlags(_label:imguicpp.utils.VarConstCharStar, _flags:imguicpp.IntPointer, _flags_value:Int):Bool;
-	@:native("ImGui::Checkbox")
-	static function checkbox(_label:imguicpp.utils.VarConstCharStar, _v:imguicpp.BoolPointer):Bool;
+	@:native("ImGui::linc_CheckboxFlags")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, flags:cpp.Star<UInt>, flags_value:UInt):Bool { })
+	static function checkboxFlags(label:imguicpp.utils.VarConstCharStar, flags:imguicpp.IntPointer, flags_value:Int):Bool;
+	@:native("ImGui::linc_Checkbox")
+	static function checkbox(label:imguicpp.utils.VarConstCharStar, v:imguicpp.BoolPointer):Bool;
 	@:native("ImGui::CaptureMouseFromApp")
 	@:overload(function():cpp.Void { })
-	static function captureMouseFromApp(_want_capture_mouse_value:Bool):cpp.Void;
+	static function captureMouseFromApp(want_capture_mouse_value:Bool):cpp.Void;
 	@:native("ImGui::CaptureKeyboardFromApp")
 	@:overload(function():cpp.Void { })
-	static function captureKeyboardFromApp(_want_capture_keyboard_value:Bool):cpp.Void;
-	@:native("ImGui::CallContextHooks")
-	static function callContextHooks(_context:cpp.Star<ImGuiContext>, _type:ImGuiContextHookType):cpp.Void;
-	@:native("ImGui::CalcWrapWidthForPos")
-	static function calcWrapWidthForPos(_pos:ImVec2, _wrap_pos_x:cpp.Float32):cpp.Float32;
-	@:native("ImGui::CalcWindowNextAutoFitSize")
-	static function calcWindowNextAutoFitSize(_pOut:cpp.Star<ImVec2>, _window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::CalcTypematicRepeatAmount")
-	static function calcTypematicRepeatAmount(_t0:cpp.Float32, _t1:cpp.Float32, _repeat_delay:cpp.Float32, _repeat_rate:cpp.Float32):Int;
+	static function captureKeyboardFromApp(want_capture_keyboard_value:Bool):cpp.Void;
 	@:native("ImGui::CalcTextSize")
-	@:overload(function(_pOut:cpp.Star<ImVec2>, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _wrap_width:cpp.Float32):cpp.Void { })
-	@:overload(function(_pOut:cpp.Star<ImVec2>, _text:imguicpp.utils.VarConstCharStar, _wrap_width:cpp.Float32):cpp.Void { })
-	@:overload(function(_pOut:cpp.Star<ImVec2>, _text:imguicpp.utils.VarConstCharStar):cpp.Void { })
-	static function calcTextSize(_pOut:cpp.Star<ImVec2>, _text:imguicpp.utils.VarConstCharStar, _text_end:imguicpp.utils.VarConstCharStar, _hide_text_after_double_hash:Bool, _wrap_width:cpp.Float32):cpp.Void;
-	@:native("ImGui::CalcListClipping")
-	static function calcListClipping(_items_count:Int, _items_height:cpp.Float32, _out_items_display_start:imguicpp.IntPointer, _out_items_display_end:imguicpp.IntPointer):cpp.Void;
+	@:overload(function(pOut:cpp.Star<ImVec2>, text:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar, wrap_width:cpp.Float32):cpp.Void { })
+	@:overload(function(pOut:cpp.Star<ImVec2>, text:imguicpp.utils.VarConstCharStar, wrap_width:cpp.Float32):cpp.Void { })
+	@:overload(function(pOut:cpp.Star<ImVec2>, text:imguicpp.utils.VarConstCharStar):cpp.Void { })
+	static function calcTextSize(pOut:cpp.Star<ImVec2>, text:imguicpp.utils.VarConstCharStar, text_end:imguicpp.utils.VarConstCharStar, hide_text_after_double_hash:Bool, wrap_width:cpp.Float32):cpp.Void;
+	@:native("ImGui::linc_CalcListClipping")
+	static function calcListClipping(items_count:Int, items_height:cpp.Float32, out_items_display_start:imguicpp.IntPointer, out_items_display_end:imguicpp.IntPointer):cpp.Void;
 	@:native("ImGui::CalcItemWidth")
 	static function calcItemWidth():cpp.Float32;
-	@:native("ImGui::CalcItemSize")
-	static function calcItemSize(_pOut:cpp.Star<ImVec2>, _size:ImVec2, _default_w:cpp.Float32, _default_h:cpp.Float32):cpp.Void;
-	@:native("ImGui::ButtonEx")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _size_arg:ImVec2):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar):Bool { })
-	static function buttonEx(_label:imguicpp.utils.VarConstCharStar, _size_arg:ImVec2, _flags:ImGuiButtonFlags):Bool;
-	@:native("ImGui::ButtonBehavior")
-	@:overload(function(_bb:ImRect, _id:ImGuiID, _out_hovered:imguicpp.BoolPointer, _out_held:imguicpp.BoolPointer):Bool { })
-	static function buttonBehavior(_bb:ImRect, _id:ImGuiID, _out_hovered:imguicpp.BoolPointer, _out_held:imguicpp.BoolPointer, _flags:ImGuiButtonFlags):Bool;
 	@:native("ImGui::Button")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar):Bool { })
-	static function button(_label:imguicpp.utils.VarConstCharStar, _size:ImVec2):Bool;
+	@:overload(function(label:imguicpp.utils.VarConstCharStar):Bool { })
+	static function button(label:imguicpp.utils.VarConstCharStar, size:ImVec2):Bool;
 	@:native("ImGui::BulletTextV")
-	static function bulletTextV(_fmt:imguicpp.utils.VarConstCharStar, _args:cpp.VarArg):cpp.Void;
-	@:native("ImGui::BulletText")
-	static function bulletText(_fmt:imguicpp.utils.VarConstCharStar, _vargs:cpp.VarArg):cpp.Void;
+	static function bulletTextV(fmt:imguicpp.utils.VarConstCharStar, args:cpp.VarArg):cpp.Void;
+	@:native("ImGui::linc_BulletText")
+	@:overload(function(fmt:imguicpp.utils.VarConstCharStar, vargs:cpp.VarArg):cpp.Void { })
+	static function bulletText(fmt:imguicpp.utils.VarConstCharStar):cpp.Void;
 	@:native("ImGui::Bullet")
 	static function bullet():cpp.Void;
-	@:native("ImGui::BringWindowToFocusFront")
-	static function bringWindowToFocusFront(_window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::BringWindowToDisplayFront")
-	static function bringWindowToDisplayFront(_window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::BringWindowToDisplayBack")
-	static function bringWindowToDisplayBack(_window:cpp.Star<ImGuiWindow>):cpp.Void;
-	@:native("ImGui::BeginTooltipEx")
-	static function beginTooltipEx(_extra_flags:ImGuiWindowFlags, _tooltip_flags:ImGuiTooltipFlags):cpp.Void;
 	@:native("ImGui::BeginTooltip")
 	static function beginTooltip():cpp.Void;
-	@:native("ImGui::BeginTableEx")
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar, _id:ImGuiID, _columns_count:Int, _outer_size:ImVec2, _inner_width:cpp.Float32):Bool { })
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar, _id:ImGuiID, _columns_count:Int, _outer_size:ImVec2):Bool { })
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar, _id:ImGuiID, _columns_count:Int):Bool { })
-	static function beginTableEx(_name:imguicpp.utils.VarConstCharStar, _id:ImGuiID, _columns_count:Int, _flags:ImGuiTableFlags, _outer_size:ImVec2, _inner_width:cpp.Float32):Bool;
 	@:native("ImGui::BeginTable")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar, _column:Int, _outer_size:ImVec2, _inner_width:cpp.Float32):Bool { })
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar, _column:Int, _outer_size:ImVec2):Bool { })
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar, _column:Int):Bool { })
-	static function beginTable(_str_id:imguicpp.utils.VarConstCharStar, _column:Int, _flags:ImGuiTableFlags, _outer_size:ImVec2, _inner_width:cpp.Float32):Bool;
-	@:native("ImGui::BeginTabItem")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _p_open:imguicpp.BoolPointer):Bool { })
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar):Bool { })
-	static function beginTabItem(_label:imguicpp.utils.VarConstCharStar, _p_open:imguicpp.BoolPointer, _flags:ImGuiTabItemFlags):Bool;
-	@:native("ImGui::BeginTabBarEx")
-	static function beginTabBarEx(_tab_bar:cpp.Star<ImGuiTabBar>, _bb:ImRect, _flags:ImGuiTabBarFlags):Bool;
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar, column:Int, outer_size:ImVec2, inner_width:cpp.Float32):Bool { })
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar, column:Int, outer_size:ImVec2):Bool { })
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar, column:Int):Bool { })
+	static function beginTable(str_id:imguicpp.utils.VarConstCharStar, column:Int, flags:ImGuiTableFlags, outer_size:ImVec2, inner_width:cpp.Float32):Bool;
+	@:native("ImGui::linc_BeginTabItem")
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, p_open:imguicpp.BoolPointer):Bool { })
+	@:overload(function(label:imguicpp.utils.VarConstCharStar):Bool { })
+	static function beginTabItem(label:imguicpp.utils.VarConstCharStar, p_open:imguicpp.BoolPointer, flags:ImGuiTabItemFlags):Bool;
 	@:native("ImGui::BeginTabBar")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar):Bool { })
-	static function beginTabBar(_str_id:imguicpp.utils.VarConstCharStar, _flags:ImGuiTabBarFlags):Bool;
-	@:native("ImGui::BeginPopupModal")
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar, _p_open:imguicpp.BoolPointer):Bool { })
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar):Bool { })
-	static function beginPopupModal(_name:imguicpp.utils.VarConstCharStar, _p_open:imguicpp.BoolPointer, _flags:ImGuiWindowFlags):Bool;
-	@:native("ImGui::BeginPopupEx")
-	static function beginPopupEx(_id:ImGuiID, _extra_flags:ImGuiWindowFlags):Bool;
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar):Bool { })
+	static function beginTabBar(str_id:imguicpp.utils.VarConstCharStar, flags:ImGuiTabBarFlags):Bool;
+	@:native("ImGui::linc_BeginPopupModal")
+	@:overload(function(name:imguicpp.utils.VarConstCharStar, p_open:imguicpp.BoolPointer):Bool { })
+	@:overload(function(name:imguicpp.utils.VarConstCharStar):Bool { })
+	static function beginPopupModal(name:imguicpp.utils.VarConstCharStar, p_open:imguicpp.BoolPointer, flags:ImGuiWindowFlags):Bool;
 	@:native("ImGui::BeginPopupContextWindow")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar):Bool { })
 	@:overload(function():Bool { })
-	static function beginPopupContextWindow(_str_id:imguicpp.utils.VarConstCharStar, _popup_flags:ImGuiPopupFlags):Bool;
+	static function beginPopupContextWindow(str_id:imguicpp.utils.VarConstCharStar, popup_flags:ImGuiPopupFlags):Bool;
 	@:native("ImGui::BeginPopupContextVoid")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar):Bool { })
 	@:overload(function():Bool { })
-	static function beginPopupContextVoid(_str_id:imguicpp.utils.VarConstCharStar, _popup_flags:ImGuiPopupFlags):Bool;
+	static function beginPopupContextVoid(str_id:imguicpp.utils.VarConstCharStar, popup_flags:ImGuiPopupFlags):Bool;
 	@:native("ImGui::BeginPopupContextItem")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar):Bool { })
 	@:overload(function():Bool { })
-	static function beginPopupContextItem(_str_id:imguicpp.utils.VarConstCharStar, _popup_flags:ImGuiPopupFlags):Bool;
+	static function beginPopupContextItem(str_id:imguicpp.utils.VarConstCharStar, popup_flags:ImGuiPopupFlags):Bool;
 	@:native("ImGui::BeginPopup")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar):Bool { })
-	static function beginPopup(_str_id:imguicpp.utils.VarConstCharStar, _flags:ImGuiWindowFlags):Bool;
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar):Bool { })
+	static function beginPopup(str_id:imguicpp.utils.VarConstCharStar, flags:ImGuiWindowFlags):Bool;
 	@:native("ImGui::BeginMenuBar")
 	static function beginMenuBar():Bool;
 	@:native("ImGui::BeginMenu")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar):Bool { })
-	static function beginMenu(_label:imguicpp.utils.VarConstCharStar, _enabled:Bool):Bool;
+	@:overload(function(label:imguicpp.utils.VarConstCharStar):Bool { })
+	static function beginMenu(label:imguicpp.utils.VarConstCharStar, enabled:Bool):Bool;
 	@:native("ImGui::BeginMainMenuBar")
 	static function beginMainMenuBar():Bool;
 	@:native("ImGui::BeginGroup")
 	static function beginGroup():cpp.Void;
-	@:native("ImGui::BeginDragDropTargetCustom")
-	static function beginDragDropTargetCustom(_bb:ImRect, _id:ImGuiID):Bool;
 	@:native("ImGui::BeginDragDropTarget")
 	static function beginDragDropTarget():Bool;
 	@:native("ImGui::BeginDragDropSource")
 	@:overload(function():Bool { })
-	static function beginDragDropSource(_flags:ImGuiDragDropFlags):Bool;
+	static function beginDragDropSource(flags:ImGuiDragDropFlags):Bool;
 	@:native("ImGui::BeginCombo")
-	@:overload(function(_label:imguicpp.utils.VarConstCharStar, _preview_value:imguicpp.utils.VarConstCharStar):Bool { })
-	static function beginCombo(_label:imguicpp.utils.VarConstCharStar, _preview_value:imguicpp.utils.VarConstCharStar, _flags:ImGuiComboFlags):Bool;
-	@:native("ImGui::BeginColumns")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar, _count:Int):cpp.Void { })
-	static function beginColumns(_str_id:imguicpp.utils.VarConstCharStar, _count:Int, _flags:ImGuiOldColumnFlags):cpp.Void;
+	@:overload(function(label:imguicpp.utils.VarConstCharStar, preview_value:imguicpp.utils.VarConstCharStar):Bool { })
+	static function beginCombo(label:imguicpp.utils.VarConstCharStar, preview_value:imguicpp.utils.VarConstCharStar, flags:ImGuiComboFlags):Bool;
 	@:native("ImGui::BeginChildFrame")
-	@:overload(function(_id:ImGuiID, _size:ImVec2):Bool { })
-	static function beginChildFrame(_id:ImGuiID, _size:ImVec2, _flags:ImGuiWindowFlags):Bool;
-	@:native("ImGui::BeginChildEx")
-	static function beginChildEx(_name:imguicpp.utils.VarConstCharStar, _id:ImGuiID, _size_arg:ImVec2, _border:Bool, _flags:ImGuiWindowFlags):Bool;
+	@:overload(function(id:ImGuiID, size:ImVec2):Bool { })
+	static function beginChildFrame(id:ImGuiID, size:ImVec2, flags:ImGuiWindowFlags):Bool;
 	@:native("ImGui::BeginChild")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar, _size:ImVec2, _flags:ImGuiWindowFlags):Bool { })
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar, _size:ImVec2):Bool { })
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar):Bool { })
-	@:overload(function(_id:ImGuiID, _size:ImVec2, _border:Bool, _flags:ImGuiWindowFlags):Bool { })
-	@:overload(function(_id:ImGuiID, _size:ImVec2, _flags:ImGuiWindowFlags):Bool { })
-	@:overload(function(_id:ImGuiID, _size:ImVec2):Bool { })
-	@:overload(function(_id:ImGuiID):Bool { })
-	static function beginChild(_str_id:imguicpp.utils.VarConstCharStar, _size:ImVec2, _border:Bool, _flags:ImGuiWindowFlags):Bool;
-	@:native("ImGui::Begin")
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar, _p_open:imguicpp.BoolPointer):Bool { })
-	@:overload(function(_name:imguicpp.utils.VarConstCharStar):Bool { })
-	static function begin(_name:imguicpp.utils.VarConstCharStar, _p_open:imguicpp.BoolPointer, _flags:ImGuiWindowFlags):Bool;
-	@:native("ImGui::ArrowButtonEx")
-	@:overload(function(_str_id:imguicpp.utils.VarConstCharStar, _dir:ImGuiDir, _size_arg:ImVec2):Bool { })
-	static function arrowButtonEx(_str_id:imguicpp.utils.VarConstCharStar, _dir:ImGuiDir, _size_arg:ImVec2, _flags:ImGuiButtonFlags):Bool;
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar, size:ImVec2, flags:ImGuiWindowFlags):Bool { })
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar, size:ImVec2):Bool { })
+	@:overload(function(str_id:imguicpp.utils.VarConstCharStar):Bool { })
+	@:overload(function(id:ImGuiID, size:ImVec2, border:Bool, flags:ImGuiWindowFlags):Bool { })
+	@:overload(function(id:ImGuiID, size:ImVec2, flags:ImGuiWindowFlags):Bool { })
+	@:overload(function(id:ImGuiID, size:ImVec2):Bool { })
+	@:overload(function(id:ImGuiID):Bool { })
+	static function beginChild(str_id:imguicpp.utils.VarConstCharStar, size:ImVec2, border:Bool, flags:ImGuiWindowFlags):Bool;
+	@:native("ImGui::linc_Begin")
+	@:overload(function(name:imguicpp.utils.VarConstCharStar, p_open:imguicpp.BoolPointer):Bool { })
+	@:overload(function(name:imguicpp.utils.VarConstCharStar):Bool { })
+	static function begin(name:imguicpp.utils.VarConstCharStar, p_open:imguicpp.BoolPointer, flags:ImGuiWindowFlags):Bool;
 	@:native("ImGui::ArrowButton")
-	static function arrowButton(_str_id:imguicpp.utils.VarConstCharStar, _dir:ImGuiDir):Bool;
+	static function arrowButton(str_id:imguicpp.utils.VarConstCharStar, dir:ImGuiDir):Bool;
 	@:native("ImGui::AlignTextToFramePadding")
 	static function alignTextToFramePadding():cpp.Void;
-	@:native("ImGui::AddContextHook")
-	static function addContextHook(_context:cpp.Star<ImGuiContext>, _hook:cpp.Star<ImGuiContextHook>):cpp.Void;
-	@:native("ImGui::ActivateItem")
-	static function activateItem(_id:ImGuiID):cpp.Void;
 	@:native("ImGui::AcceptDragDropPayload")
-	@:overload(function(_type:imguicpp.utils.VarConstCharStar):cpp.Star<ImGuiPayload> { })
-	static function acceptDragDropPayload(_type:imguicpp.utils.VarConstCharStar, _flags:ImGuiDragDropFlags):cpp.Star<ImGuiPayload>;
+	@:overload(function(type:imguicpp.utils.VarConstCharStar):cpp.Star<ImGuiPayload> { })
+	static function acceptDragDropPayload(type:imguicpp.utils.VarConstCharStar, flags:ImGuiDragDropFlags):cpp.Star<ImGuiPayload>;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector") extern class ImVector<T> {
-	@:native("Data")
+	@:native('Data')
 	var data : cpp.RawPointer<T>;
 	@:native("swap")
-	function swap(_rhs:cpp.Star<ImVector<T>>):cpp.Void;
+	function swap(rhs:cpp.Star<ImVector<T>>):cpp.Void;
 	@:native("size_in_bytes")
 	function size_in_bytes():Int;
 	@:native("size")
 	function size():Int;
 	@:native("shrink")
-	function shrink(_new_size:Int):cpp.Void;
+	function shrink(new_size:Int):cpp.Void;
 	@:native("resize")
-	@:overload(function(_new_size:Int, _v:T):cpp.Void { })
-	function resize(_new_size:Int):cpp.Void;
+	@:overload(function(new_size:Int, v:T):cpp.Void { })
+	function resize(new_size:Int):cpp.Void;
 	@:native("reserve")
-	function reserve(_new_capacity:Int):cpp.Void;
+	function reserve(new_capacity:Int):cpp.Void;
 	@:native("push_front")
-	function push_front(_v:T):cpp.Void;
+	function push_front(v:T):cpp.Void;
 	@:native("push_back")
-	function push_back(_v:T):cpp.Void;
+	function push_back(v:T):cpp.Void;
 	@:native("pop_back")
 	function pop_back():cpp.Void;
 	@:native("max_size")
 	function max_size():Int;
 	@:native("insert")
-	function insert(_it:cpp.Star<T>, _v:T):cpp.Star<T>;
+	function insert(it:cpp.Star<T>, v:T):cpp.Star<T>;
 	@:native("index_from_ptr")
-	function index_from_ptr(_it:cpp.Star<T>):Int;
+	function index_from_ptr(it:cpp.Star<T>):Int;
 	@:native("front")
 	@:overload(function():cpp.Reference<T> { })
 	function front():cpp.Reference<T>;
 	@:native("find_erase_unsorted")
-	function find_erase_unsorted(_v:T):Bool;
+	function find_erase_unsorted(v:T):Bool;
 	@:native("find_erase")
-	function find_erase(_v:T):Bool;
+	function find_erase(v:T):Bool;
 	@:native("find")
-	@:overload(function(_v:T):cpp.Star<T> { })
-	function find(_v:T):cpp.Star<T>;
+	@:overload(function(v:T):cpp.Star<T> { })
+	function find(v:T):cpp.Star<T>;
 	@:native("erase_unsorted")
-	function erase_unsorted(_it:cpp.Star<T>):cpp.Star<T>;
+	function erase_unsorted(it:cpp.Star<T>):cpp.Star<T>;
 	@:native("erase")
-	@:overload(function(_it:cpp.Star<T>, _it_last:cpp.Star<T>):cpp.Star<T> { })
-	function erase(_it:cpp.Star<T>):cpp.Star<T>;
+	@:overload(function(it:cpp.Star<T>, it_last:cpp.Star<T>):cpp.Star<T> { })
+	function erase(it:cpp.Star<T>):cpp.Star<T>;
 	@:native("end")
 	@:overload(function():cpp.Star<T> { })
 	function end():cpp.Star<T>;
 	@:native("empty")
 	function empty():Bool;
 	@:native("contains")
-	function contains(_v:T):Bool;
+	function contains(v:T):Bool;
 	@:native("clear")
 	function clear():cpp.Void;
 	@:native("capacity")
@@ -5472,270 +4789,270 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:overload(function():cpp.Reference<T> { })
 	function back():cpp.Reference<T>;
 	@:native("_grow_capacity")
-	function _grow_capacity(_sz:Int):Int;
+	function _grow_capacity(sz:Int):Int;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiWindow*>") extern class ImVectorImGuiWindowPointer extends ImVector<cpp.Star<ImGuiWindow>> {
 	@:native("ImVector<ImGuiWindow*>")
-	@:overload(function(_src:ImVectorImGuiWindowPointer):ImVectorImGuiWindowPointer { })
+	@:overload(function(src:ImVectorImGuiWindowPointer):ImVectorImGuiWindowPointer { })
 	static function create():ImVectorImGuiWindowPointer;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<float>") extern class ImVectorfloat extends ImVector<cpp.Float32> {
 	@:native("ImVector<float>")
-	@:overload(function(_src:ImVectorfloat):ImVectorfloat { })
+	@:overload(function(src:ImVectorfloat):ImVectorfloat { })
 	static function create():ImVectorfloat;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiID>") extern class ImVectorImGuiID extends ImVector<ImGuiID> {
 	@:native("ImVector<ImGuiID>")
-	@:overload(function(_src:ImVectorImGuiID):ImVectorImGuiID { })
+	@:overload(function(src:ImVectorImGuiID):ImVectorImGuiID { })
 	static function create():ImVectorImGuiID;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiOldColumns>") extern class ImVectorImGuiOldColumns extends ImVector<ImGuiOldColumns> {
 	@:native("ImVector<ImGuiOldColumns>")
-	@:overload(function(_src:ImVectorImGuiOldColumns):ImVectorImGuiOldColumns { })
+	@:overload(function(src:ImVectorImGuiOldColumns):ImVectorImGuiOldColumns { })
 	static function create():ImVectorImGuiOldColumns;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiTextRange>") extern class ImVectorImGuiTextRange extends ImVector<ImGuiTextRange> {
 	@:native("ImVector<ImGuiTextRange>")
-	@:overload(function(_src:ImVectorImGuiTextRange):ImVectorImGuiTextRange { })
+	@:overload(function(src:ImVectorImGuiTextRange):ImVectorImGuiTextRange { })
 	static function create():ImVectorImGuiTextRange;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<char>") extern class ImVectorchar extends ImVector<cpp.Char> {
 	@:native("ImVector<char>")
-	@:overload(function(_src:ImVectorchar):ImVectorchar { })
+	@:overload(function(src:ImVectorchar):ImVectorchar { })
 	static function create():ImVectorchar;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiTableColumn>") extern class ImVectorImGuiTableColumn extends ImVector<ImGuiTableColumn> {
 	@:native("ImVector<ImGuiTableColumn>")
-	@:overload(function(_src:ImVectorImGuiTableColumn):ImVectorImGuiTableColumn { })
+	@:overload(function(src:ImVectorImGuiTableColumn):ImVectorImGuiTableColumn { })
 	static function create():ImVectorImGuiTableColumn;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiTableColumnIdx>") extern class ImVectorImGuiTableColumnIdx extends ImVector<ImGuiTableColumnIdx> {
 	@:native("ImVector<ImGuiTableColumnIdx>")
-	@:overload(function(_src:ImVectorImGuiTableColumnIdx):ImVectorImGuiTableColumnIdx { })
+	@:overload(function(src:ImVectorImGuiTableColumnIdx):ImVectorImGuiTableColumnIdx { })
 	static function create():ImVectorImGuiTableColumnIdx;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiTableCellData>") extern class ImVectorImGuiTableCellData extends ImVector<ImGuiTableCellData> {
 	@:native("ImVector<ImGuiTableCellData>")
-	@:overload(function(_src:ImVectorImGuiTableCellData):ImVectorImGuiTableCellData { })
+	@:overload(function(src:ImVectorImGuiTableCellData):ImVectorImGuiTableCellData { })
 	static function create():ImVectorImGuiTableCellData;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiTableColumnSortSpecs>") extern class ImVectorImGuiTableColumnSortSpecs extends ImVector<ImGuiTableColumnSortSpecs> {
 	@:native("ImVector<ImGuiTableColumnSortSpecs>")
-	@:overload(function(_src:ImVectorImGuiTableColumnSortSpecs):ImVectorImGuiTableColumnSortSpecs { })
+	@:overload(function(src:ImVectorImGuiTableColumnSortSpecs):ImVectorImGuiTableColumnSortSpecs { })
 	static function create():ImVectorImGuiTableColumnSortSpecs;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiTabItem>") extern class ImVectorImGuiTabItem extends ImVector<ImGuiTabItem> {
 	@:native("ImVector<ImGuiTabItem>")
-	@:overload(function(_src:ImVectorImGuiTabItem):ImVectorImGuiTabItem { })
+	@:overload(function(src:ImVectorImGuiTabItem):ImVectorImGuiTabItem { })
 	static function create():ImVectorImGuiTabItem;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiStoragePair>") extern class ImVectorImGuiStoragePair extends ImVector<ImGuiStoragePair> {
 	@:native("ImVector<ImGuiStoragePair>")
-	@:overload(function(_src:ImVectorImGuiStoragePair):ImVectorImGuiStoragePair { })
+	@:overload(function(src:ImVectorImGuiStoragePair):ImVectorImGuiStoragePair { })
 	static function create():ImVectorImGuiStoragePair;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiOldColumnData>") extern class ImVectorImGuiOldColumnData extends ImVector<ImGuiOldColumnData> {
 	@:native("ImVector<ImGuiOldColumnData>")
-	@:overload(function(_src:ImVectorImGuiOldColumnData):ImVectorImGuiOldColumnData { })
+	@:overload(function(src:ImVectorImGuiOldColumnData):ImVectorImGuiOldColumnData { })
 	static function create():ImVectorImGuiOldColumnData;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImWchar>") extern class ImVectorImWchar extends ImVector<ImWchar> {
 	@:native("ImVector<ImWchar>")
-	@:overload(function(_src:ImVectorImWchar):ImVectorImWchar { })
+	@:overload(function(src:ImVectorImWchar):ImVectorImWchar { })
 	static function create():ImVectorImWchar;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiColorMod>") extern class ImVectorImGuiColorMod extends ImVector<ImGuiColorMod> {
 	@:native("ImVector<ImGuiColorMod>")
-	@:overload(function(_src:ImVectorImGuiColorMod):ImVectorImGuiColorMod { })
+	@:overload(function(src:ImVectorImGuiColorMod):ImVectorImGuiColorMod { })
 	static function create():ImVectorImGuiColorMod;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiStyleMod>") extern class ImVectorImGuiStyleMod extends ImVector<ImGuiStyleMod> {
 	@:native("ImVector<ImGuiStyleMod>")
-	@:overload(function(_src:ImVectorImGuiStyleMod):ImVectorImGuiStyleMod { })
+	@:overload(function(src:ImVectorImGuiStyleMod):ImVectorImGuiStyleMod { })
 	static function create():ImVectorImGuiStyleMod;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImFont*>") extern class ImVectorImFontPointer extends ImVector<cpp.Star<ImFont>> {
 	@:native("ImVector<ImFont*>")
-	@:overload(function(_src:ImVectorImFontPointer):ImVectorImFontPointer { })
+	@:overload(function(src:ImVectorImFontPointer):ImVectorImFontPointer { })
 	static function create():ImVectorImFontPointer;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiItemFlags>") extern class ImVectorImGuiItemFlags extends ImVector<ImGuiItemFlags> {
 	@:native("ImVector<ImGuiItemFlags>")
-	@:overload(function(_src:ImVectorImGuiItemFlags):ImVectorImGuiItemFlags { })
+	@:overload(function(src:ImVectorImGuiItemFlags):ImVectorImGuiItemFlags { })
 	static function create():ImVectorImGuiItemFlags;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiGroupData>") extern class ImVectorImGuiGroupData extends ImVector<ImGuiGroupData> {
 	@:native("ImVector<ImGuiGroupData>")
-	@:overload(function(_src:ImVectorImGuiGroupData):ImVectorImGuiGroupData { })
+	@:overload(function(src:ImVectorImGuiGroupData):ImVectorImGuiGroupData { })
 	static function create():ImVectorImGuiGroupData;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiPopupData>") extern class ImVectorImGuiPopupData extends ImVector<ImGuiPopupData> {
 	@:native("ImVector<ImGuiPopupData>")
-	@:overload(function(_src:ImVectorImGuiPopupData):ImVectorImGuiPopupData { })
+	@:overload(function(src:ImVectorImGuiPopupData):ImVectorImGuiPopupData { })
 	static function create():ImVectorImGuiPopupData;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<unsigned char>") extern class ImVectorunsignedchar extends ImVector<cpp.UInt8> {
 	@:native("ImVector<unsigned char>")
-	@:overload(function(_src:ImVectorunsignedchar):ImVectorunsignedchar { })
+	@:overload(function(src:ImVectorunsignedchar):ImVectorunsignedchar { })
 	static function create():ImVectorunsignedchar;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiTable>") extern class ImVectorImGuiTable extends ImVector<ImGuiTable> {
 	@:native("ImVector<ImGuiTable>")
-	@:overload(function(_src:ImVectorImGuiTable):ImVectorImGuiTable { })
+	@:overload(function(src:ImVectorImGuiTable):ImVectorImGuiTable { })
 	static function create():ImVectorImGuiTable;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiPtrOrIndex>") extern class ImVectorImGuiPtrOrIndex extends ImVector<ImGuiPtrOrIndex> {
 	@:native("ImVector<ImGuiPtrOrIndex>")
-	@:overload(function(_src:ImVectorImGuiPtrOrIndex):ImVectorImGuiPtrOrIndex { })
+	@:overload(function(src:ImVectorImGuiPtrOrIndex):ImVectorImGuiPtrOrIndex { })
 	static function create():ImVectorImGuiPtrOrIndex;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImDrawChannel>") extern class ImVectorImDrawChannel extends ImVector<ImDrawChannel> {
 	@:native("ImVector<ImDrawChannel>")
-	@:overload(function(_src:ImVectorImDrawChannel):ImVectorImDrawChannel { })
+	@:overload(function(src:ImVectorImDrawChannel):ImVectorImDrawChannel { })
 	static function create():ImVectorImDrawChannel;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiTabBar>") extern class ImVectorImGuiTabBar extends ImVector<ImGuiTabBar> {
 	@:native("ImVector<ImGuiTabBar>")
-	@:overload(function(_src:ImVectorImGuiTabBar):ImVectorImGuiTabBar { })
+	@:overload(function(src:ImVectorImGuiTabBar):ImVectorImGuiTabBar { })
 	static function create():ImVectorImGuiTabBar;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiShrinkWidthItem>") extern class ImVectorImGuiShrinkWidthItem extends ImVector<ImGuiShrinkWidthItem> {
 	@:native("ImVector<ImGuiShrinkWidthItem>")
-	@:overload(function(_src:ImVectorImGuiShrinkWidthItem):ImVectorImGuiShrinkWidthItem { })
+	@:overload(function(src:ImVectorImGuiShrinkWidthItem):ImVectorImGuiShrinkWidthItem { })
 	static function create():ImVectorImGuiShrinkWidthItem;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiSettingsHandler>") extern class ImVectorImGuiSettingsHandler extends ImVector<ImGuiSettingsHandler> {
 	@:native("ImVector<ImGuiSettingsHandler>")
-	@:overload(function(_src:ImVectorImGuiSettingsHandler):ImVectorImGuiSettingsHandler { })
+	@:overload(function(src:ImVectorImGuiSettingsHandler):ImVectorImGuiSettingsHandler { })
 	static function create():ImVectorImGuiSettingsHandler;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiWindowSettings>") extern class ImVectorImGuiWindowSettings extends ImVector<ImGuiWindowSettings> {
 	@:native("ImVector<ImGuiWindowSettings>")
-	@:overload(function(_src:ImVectorImGuiWindowSettings):ImVectorImGuiWindowSettings { })
+	@:overload(function(src:ImVectorImGuiWindowSettings):ImVectorImGuiWindowSettings { })
 	static function create():ImVectorImGuiWindowSettings;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiTableSettings>") extern class ImVectorImGuiTableSettings extends ImVector<ImGuiTableSettings> {
 	@:native("ImVector<ImGuiTableSettings>")
-	@:overload(function(_src:ImVectorImGuiTableSettings):ImVectorImGuiTableSettings { })
+	@:overload(function(src:ImVectorImGuiTableSettings):ImVectorImGuiTableSettings { })
 	static function create():ImVectorImGuiTableSettings;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiContextHook>") extern class ImVectorImGuiContextHook extends ImVector<ImGuiContextHook> {
 	@:native("ImVector<ImGuiContextHook>")
-	@:overload(function(_src:ImVectorImGuiContextHook):ImVectorImGuiContextHook { })
+	@:overload(function(src:ImVectorImGuiContextHook):ImVectorImGuiContextHook { })
 	static function create():ImVectorImGuiContextHook;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImU32>") extern class ImVectorImU32 extends ImVector<ImU32> {
 	@:native("ImVector<ImU32>")
-	@:overload(function(_src:ImVectorImU32):ImVectorImU32 { })
+	@:overload(function(src:ImVectorImU32):ImVectorImU32 { })
 	static function create():ImVectorImU32;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImFontAtlasCustomRect>") extern class ImVectorImFontAtlasCustomRect extends ImVector<ImFontAtlasCustomRect> {
 	@:native("ImVector<ImFontAtlasCustomRect>")
-	@:overload(function(_src:ImVectorImFontAtlasCustomRect):ImVectorImFontAtlasCustomRect { })
+	@:overload(function(src:ImVectorImFontAtlasCustomRect):ImVectorImFontAtlasCustomRect { })
 	static function create():ImVectorImFontAtlasCustomRect;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImFontConfig>") extern class ImVectorImFontConfig extends ImVector<ImFontConfig> {
 	@:native("ImVector<ImFontConfig>")
-	@:overload(function(_src:ImVectorImFontConfig):ImVectorImFontConfig { })
+	@:overload(function(src:ImVectorImFontConfig):ImVectorImFontConfig { })
 	static function create():ImVectorImFontConfig;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImFontGlyph>") extern class ImVectorImFontGlyph extends ImVector<ImFontGlyph> {
 	@:native("ImVector<ImFontGlyph>")
-	@:overload(function(_src:ImVectorImFontGlyph):ImVectorImFontGlyph { })
+	@:overload(function(src:ImVectorImFontGlyph):ImVectorImFontGlyph { })
 	static function create():ImVectorImFontGlyph;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImDrawCmd>") extern class ImVectorImDrawCmd extends ImVector<ImDrawCmd> {
 	@:native("ImVector<ImDrawCmd>")
-	@:overload(function(_src:ImVectorImDrawCmd):ImVectorImDrawCmd { })
+	@:overload(function(src:ImVectorImDrawCmd):ImVectorImDrawCmd { })
 	static function create():ImVectorImDrawCmd;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImDrawIdx>") extern class ImVectorImDrawIdx extends ImVector<ImDrawIdx> {
 	@:native("ImVector<ImDrawIdx>")
-	@:overload(function(_src:ImVectorImDrawIdx):ImVectorImDrawIdx { })
+	@:overload(function(src:ImVectorImDrawIdx):ImVectorImDrawIdx { })
 	static function create():ImVectorImDrawIdx;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImDrawVert>") extern class ImVectorImDrawVert extends ImVector<ImDrawVert> {
 	@:native("ImVector<ImDrawVert>")
-	@:overload(function(_src:ImVectorImDrawVert):ImVectorImDrawVert { })
+	@:overload(function(src:ImVectorImDrawVert):ImVectorImDrawVert { })
 	static function create():ImVectorImDrawVert;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImVec4>") extern class ImVectorImVec4 extends ImVector<ImVec4> {
 	@:native("ImVector<ImVec4>")
-	@:overload(function(_src:ImVectorImVec4):ImVectorImVec4 { })
+	@:overload(function(src:ImVectorImVec4):ImVectorImVec4 { })
 	static function create():ImVectorImVec4;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImTextureID>") extern class ImVectorImTextureID extends ImVector<ImTextureID> {
 	@:native("ImVector<ImTextureID>")
-	@:overload(function(_src:ImVectorImTextureID):ImVectorImTextureID { })
+	@:overload(function(src:ImVectorImTextureID):ImVectorImTextureID { })
 	static function create():ImVectorImTextureID;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImVec2>") extern class ImVectorImVec2 extends ImVector<ImVec2> {
 	@:native("ImVector<ImVec2>")
-	@:overload(function(_src:ImVectorImVec2):ImVectorImVec2 { })
+	@:overload(function(src:ImVectorImVec2):ImVectorImVec2 { })
 	static function create():ImVectorImVec2;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImDrawList*>") extern class ImVectorImDrawListPointer extends ImVector<cpp.Star<ImDrawList>> {
 	@:native("ImVector<ImDrawList*>")
-	@:overload(function(_src:ImVectorImDrawListPointer):ImVectorImDrawListPointer { })
+	@:overload(function(src:ImVectorImDrawListPointer):ImVectorImDrawListPointer { })
 	static function create():ImVectorImDrawListPointer;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiWindowPtr*>") extern class ImVectorImGuiWindowPtrPointer extends ImVector<cpp.Star<ImGuiWindowPtr>> {
 	@:native("ImVector<ImGuiWindowPtr*>")
-	@:overload(function(_src:ImVectorImGuiWindowPtrPointer):ImVectorImGuiWindowPtrPointer { })
+	@:overload(function(src:ImVectorImGuiWindowPtrPointer):ImVectorImGuiWindowPtrPointer { })
 	static function create():ImVectorImGuiWindowPtrPointer;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImGuiTextRange*>") extern class ImVectorImGuiTextRangePointer extends ImVector<cpp.Star<ImGuiTextRange>> {
 	@:native("ImVector<ImGuiTextRange*>")
-	@:overload(function(_src:ImVectorImGuiTextRangePointer):ImVectorImGuiTextRangePointer { })
+	@:overload(function(src:ImVectorImGuiTextRangePointer):ImVectorImGuiTextRangePointer { })
 	static function create():ImVectorImGuiTextRangePointer;
 }
 
 @:keep @:structAccess @:include("imgui.h") @:native("ImVector<ImWchar*>") extern class ImVectorImWcharPointer extends ImVector<cpp.Star<ImWchar>> {
 	@:native("ImVector<ImWchar*>")
-	@:overload(function(_src:ImVectorImWcharPointer):ImVectorImWcharPointer { })
+	@:overload(function(src:ImVectorImWcharPointer):ImVectorImWcharPointer { })
 	static function create():ImVectorImWcharPointer;
 }
 
