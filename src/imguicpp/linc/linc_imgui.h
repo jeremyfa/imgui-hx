@@ -126,6 +126,8 @@ namespace ImGui {
 
     ImGuiID linc_GetID(const void* ptr_id);
 
+    void linc_End();
+
     bool linc_DragScalarN(const char* label, ImGuiDataType data_type, void* p_data, int components, float v_speed, const void* p_min=NULL, const void* p_max=NULL, const char* format=NULL, ImGuiSliderFlags flags=0);
 
     bool linc_DragScalar(const char* label, ImGuiDataType data_type, void* p_data, float v_speed, const void* p_min=NULL, const void* p_max=NULL, const char* format=NULL, ImGuiSliderFlags flags=0);

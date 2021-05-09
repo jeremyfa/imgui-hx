@@ -356,6 +356,11 @@ namespace ImGui {
         return _res;
     }
 
+    void linc_End() {
+        ImGui::End();
+        if (linc_Address_sync != NULL) (*linc_Address_sync)();
+    }
+
     bool linc_DragScalarN(const char* label, ImGuiDataType data_type, void* p_data, int components, float v_speed, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags) {
         bool _res = ImGui::DragScalarN(label,data_type,p_data,components,v_speed,p_min,p_max,format,flags);
         if (linc_Address_sync != NULL) (*linc_Address_sync)();

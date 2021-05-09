@@ -4483,7 +4483,7 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	static function endChildFrame():cpp.Void;
 	@:native("ImGui::EndChild")
 	static function endChild():cpp.Void;
-	@:native("ImGui::End")
+	@:native("ImGui::linc_End")
 	static function end():cpp.Void;
 	@:native("ImGui::Dummy")
 	static function dummy(size:ImVec2):cpp.Void;

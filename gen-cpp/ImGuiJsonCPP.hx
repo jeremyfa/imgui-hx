@@ -435,6 +435,9 @@ class ImGuiJsonCPP
                 needsWrapping = true;
             }
         }
+        else if (fn.funcname == 'End') {
+            needsWrapping = true;
+        }
         else {
             for (arg in fn.argsT) {
                 var parsedType = parseNativeString(arg.type);

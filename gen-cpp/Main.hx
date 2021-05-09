@@ -55,8 +55,6 @@ class Main
 
         File.saveContent('src/imguicpp/ImGui.hx', buffer.toString());
 
-        //var imguiH = File.getContent('lib/cimgui/imgui/imgui.h').replace('\r','').split('\n');
-
         var wrappedMethods = reader.retrieveTopLevelWrappedMethods();
         var headerData = new StringBuf();
         var implData = new StringBuf();
@@ -173,46 +171,9 @@ ${implData.toString()}
 }
 ';
 
-File.saveContent('src/imguicpp/linc/linc_imgui.h', lincImguiH);
-File.saveContent('src/imguicpp/linc/linc_imgui.cpp', lincImguiCPP);
-
-        // for (wrappedName in wrappedNames) {
-        //     for (line in imguiH) {
-        //         line = line.trim();
-        //         if (line.startsWith('IMGUI_API ')) {
-        //             var parenIndex = line.indexOf('(');
-        //             if (parenIndex != -1) {
-        //                 var section = line.substr(0, parenIndex);
-        //                 if (section.endsWith(' $wrappedName')) {
-        //                     var info = extractImGuiHeaderAPI(line);
-        //                 }
-        //             }
-        //         }
-        //     }
-        // }
+        File.saveContent('src/imguicpp/linc/linc_imgui.h', lincImguiH);
+        File.saveContent('src/imguicpp/linc/linc_imgui.cpp', lincImguiCPP);
 
     }
-
-    // static var RE_IMGUI_API = ~/IMGUI_API\s+/;
-
-    // static var RE_SIGNATURE = ~/^([a-zA-Z0-9_\*\s]+)\s+([a-zA-Z0-9_]+)\((.*?)\);/;
-
-    // static function extractImGuiHeaderAPI(line:String) {
-
-    //     line = line.trim();
-    //     line = RE_IMGUI_API.replace(line, '').trim();
-    //     if (RE_SIGNATURE.match(line)) {
-    //         trace('type=${RE_SIGNATURE.matched(1).trim()} name=${RE_SIGNATURE.matched(2).trim()} args=${RE_SIGNATURE.matched(3).trim()}');
-    //     }
-    //     else {
-    //         throw 'Failed to parse line: $line';
-    //     }
-    //     return {
-    //         type: RE_SIGNATURE.matched(1).trim(),
-    //         name: RE_SIGNATURE.matched(2).trim(),
-    //         args: RE_SIGNATURE.matched(2).trim()
-    //     };
-
-    // }
 
 }
