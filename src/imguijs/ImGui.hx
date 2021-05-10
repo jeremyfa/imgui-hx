@@ -5454,7 +5454,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 }
 
 @:keep @:native("ImVector") extern class ImVector<T> {
-	@:native("Data")
+	@:native('Data')
 	var data : imguijs.RawPointer<T>;
 	@:native("swap")
 	function swap(rhs:ImVector<T>):Void;

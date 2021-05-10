@@ -26,7 +26,7 @@ class Float32ArrayHolder {
     public var value:Array<Float32> = null;
     public function new(original:Array<Float>) {
         this.original = original;
-        this.value = @:privateAccess Address._readFloatArray(original);
+        this.value = @:privateAccess Helpers._readFloatArray(original);
     }
 }
 
@@ -37,15 +37,15 @@ class IntHolder {
 #end
 
 @:headerInclude("linc_imgui.h")
-class Address {
+class Helpers {
 
     macro public static function fromBool(value:ExprOf<Bool>):Expr {
 
         return macro {
-            var _val:imguicpp.Address.BoolHolder = {
+            var _val:imguicpp.Helpers.BoolHolder = {
                 value: $value
             };
-            imguicpp.Address.pushCallback(function() {
+            imguicpp.Helpers.pushCallback(function() {
                 $value = _val.value;
             });
             imguicpp.utils.VarPointer.addressOf(_val.value);
@@ -62,10 +62,10 @@ class Address {
     macro public static function fromInt(value:ExprOf<Int>):Expr {
 
         return macro {
-            var _val:imguicpp.Address.IntHolder = {
+            var _val:imguicpp.Helpers.IntHolder = {
                 value: $value
             };
-            imguicpp.Address.pushCallback(function() {
+            imguicpp.Helpers.pushCallback(function() {
                 $value = _val.value;
             });
             imguicpp.utils.VarPointer.addressOf(_val.value);
@@ -82,10 +82,10 @@ class Address {
     macro public static function fromFloat(value:ExprOf<Float>):Expr {
 
         return macro {
-            var _val:imguicpp.Address.Float32Holder = {
+            var _val:imguicpp.Helpers.Float32Holder = {
                 value: $value
             };
-            imguicpp.Address.pushCallback(function() {
+            imguicpp.Helpers.pushCallback(function() {
                 $value = _val.value;
             });
             imguicpp.utils.VarPointer.addressOf(_val.value);
@@ -97,9 +97,9 @@ class Address {
 
         // Convert the original array into Float32 array, then update original array if it has changed.
         return macro {
-            var _val = new imguicpp.Address.Float32ArrayHolder($value);
-            imguicpp.Address.pushCallback(function() {
-                imguicpp.Address._updateFloatArray(_val.original, _val.value);
+            var _val = new imguicpp.Helpers.Float32ArrayHolder($value);
+            imguicpp.Helpers.pushCallback(function() {
+                imguicpp.Helpers._updateFloatArray(_val.original, _val.value);
             });
             imguicpp.utils.VarPointer.arrayElem(_val.value, 0);
         };
@@ -151,9 +151,9 @@ class Address {
 
     @:noCompletion public static function pushCallback(cb:Void->Void):Void {
 
-        if (untyped __cpp__('ImGui::linc_Address_sync == NULL')) {
-            var func = cpp.Callable.fromStaticFunction(Address.sync);
-            untyped __cpp__('ImGui::linc_Address_sync = {0}', func);
+        if (untyped __cpp__('ImGui::linc_Helpers_flushCallbacks == NULL')) {
+            var func = cpp.Callable.fromStaticFunction(Helpers.flushCallbacks);
+            untyped __cpp__('ImGui::linc_Helpers_flushCallbacks = {0}', func);
         }
 
         if (_pendingCallbacks == null)
@@ -162,7 +162,7 @@ class Address {
 
     }
 
-    @:noCompletion public static function sync():Void {
+    @:noCompletion public static function flushCallbacks():Void {
 
         if (_pendingCallbacks != null) {
             while (_pendingCallbacks.length > 0) {

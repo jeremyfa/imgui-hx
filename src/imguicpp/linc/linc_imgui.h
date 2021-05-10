@@ -8,7 +8,7 @@
 
 namespace ImGui {
 
-    extern void (*linc_Address_sync)(void);
+    extern void (*linc_Helpers_flushCallbacks)(void);
 
     bool linc_VSliderScalar(const char* label, const ImVec2& size, ImGuiDataType data_type, void* p_data, const void* p_min, const void* p_max, const char* format=NULL, ImGuiSliderFlags flags=0);
 

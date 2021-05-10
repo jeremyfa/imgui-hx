@@ -6,7 +6,7 @@ import haxe.io.BytesData;
 import haxe.macro.Context;
 import haxe.macro.Expr;
 
-class Address {
+class Helpers {
 
     macro public static function fromBool(value:ExprOf<Bool>):Expr {
 

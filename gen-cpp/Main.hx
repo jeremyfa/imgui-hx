@@ -126,7 +126,7 @@ class Main
             implData.newline();
             implData.tabSpaces();
             implData.tabSpaces();
-            implData.add('if (linc_Address_sync != NULL) (*linc_Address_sync)();');
+            implData.add('if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();');
             if (method.ret != 'void') {
                 implData.newline();
                 implData.tabSpaces();
@@ -151,7 +151,7 @@ class Main
 
 namespace ImGui {
 
-    extern void (*linc_Address_sync)(void);
+    extern void (*linc_Helpers_flushCallbacks)(void);
 
 ${headerData.toString()}
 
@@ -164,7 +164,7 @@ ${headerData.toString()}
 
 namespace ImGui {
 
-    void (*linc_Address_sync)(void) = NULL;
+    void (*linc_Helpers_flushCallbacks)(void) = NULL;
 
 ${implData.toString()}
 
