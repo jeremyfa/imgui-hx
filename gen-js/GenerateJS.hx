@@ -4,8 +4,9 @@ import sys.io.File;
 import ImGuiJsonJS;
 
 using StringBufChainer;
+using StringTools;
 
-class Main
+class GenerateJS
 {
     static function main()
     {
@@ -97,5 +98,45 @@ typedef BoolPointer = Dynamic;
         }
 
         File.saveContent('src/imguijs/ImGui.hx', buffer.toString());
+
+        var constructibleTypes = [];
+        for (fn in reader.retrieveAllConstructors()) {
+            var type = fn.funcname;
+            if (type == 'ImVector')
+                type = 'ImVector<T>';
+            if (!constructibleTypes.contains(type)) {
+                constructibleTypes.push(type);
+            }
+        }
+        
+        var rootImGuiHx = [];
+        var inJsBlock = false;
+        var didDumpTypedefs = false;
+        for (line in File.getContent('src/imgui/ImGui.hx').replace('\r','').split('\n')) {
+            if (!inJsBlock) {
+                if (!didDumpTypedefs && line.trim() == '#if js') {
+                    rootImGuiHx.push(line);
+                    inJsBlock = true;
+                    didDumpTypedefs = true;
+
+                    rootImGuiHx.push('typedef ImGui = imguijs.ImGui;');
+                    for (type in constructibleTypes) {
+                        rootImGuiHx.push('typedef ' + type + ' = imguijs.ImGui.' + type + ';');
+                    }
+                }
+                else {
+                    rootImGuiHx.push(line);
+                }
+            }
+            else {
+                if (line.trim() == '#end') {
+                    inJsBlock = false;
+                    rootImGuiHx.push(line);
+                }
+            }
+        }
+        var isWindows:Bool = (Sys.systemName() == 'Windows');
+        File.saveContent('src/imgui/ImGui.hx', rootImGuiHx.join(isWindows ? '\r\n' : '\n'));
+
     }
 }

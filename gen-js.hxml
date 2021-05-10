@@ -4,4 +4,4 @@
 -lib safety
 -lib json2object
 
---run Main
+--run GenerateJS

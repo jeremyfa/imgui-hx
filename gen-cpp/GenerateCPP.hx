@@ -6,7 +6,7 @@ import ImGuiJsonCPP;
 using StringBufChainer;
 using StringTools;
 
-class Main
+class GenerateCPP
 {
     static function main()
     {
@@ -173,6 +173,45 @@ ${implData.toString()}
 
         File.saveContent('src/imguicpp/linc/linc_imgui.h', lincImguiH);
         File.saveContent('src/imguicpp/linc/linc_imgui.cpp', lincImguiCPP);
+
+        var constructibleTypes = [];
+        for (fn in reader.retrieveAllConstructors()) {
+            var type = fn.funcname;
+            if (type == 'ImVector')
+                type = 'ImVector<T>';
+            if (!constructibleTypes.contains(type)) {
+                constructibleTypes.push(type);
+            }
+        }
+        
+        var rootImGuiHx = [];
+        var inJsBlock = false;
+        var didDumpTypedefs = false;
+        for (line in File.getContent('src/imgui/ImGui.hx').replace('\r','').split('\n')) {
+            if (!inJsBlock) {
+                if (!didDumpTypedefs && line.trim() == '#if cpp') {
+                    rootImGuiHx.push(line);
+                    inJsBlock = true;
+                    didDumpTypedefs = true;
+
+                    rootImGuiHx.push('typedef ImGui = imguicpp.ImGui;');
+                    for (type in constructibleTypes) {
+                        rootImGuiHx.push('typedef ' + type + ' = imguicpp.ImGui.' + type + ';');
+                    }
+                }
+                else {
+                    rootImGuiHx.push(line);
+                }
+            }
+            else {
+                if (line.trim() == '#end') {
+                    inJsBlock = false;
+                    rootImGuiHx.push(line);
+                }
+            }
+        }
+        var isWindows:Bool = (Sys.systemName() == 'Windows');
+        File.saveContent('src/imgui/ImGui.hx', rootImGuiHx.join(isWindows ? '\r\n' : '\n'));
 
     }
 

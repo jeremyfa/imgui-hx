@@ -2,67 +2,11 @@
 import json2object.JsonParser;
 import haxe.macro.Expr;
 import haxe.macro.Context;
+import ImGuiJsonTypes;
 
 using StringTools;
 using Lambda;
 using Safety;
-
-typedef JsonEnum = {
-    calc_value : Int,
-    name       : String,
-    value      : String
-};
-typedef JsonStruct = {
-    var name : String;
-    var type : String;
-    @:default(0)
-    var size : Int;
-    @:default('')
-    var template_type : String;
-};
-typedef JsonEnumStruct = {
-    var enums : Map<String, Array<JsonEnum>>;
-    var structs : Map<String, Array<JsonStruct>>;
-}
-typedef JsonFunctionArg = {
-    var name : String;
-    var type : String;
-    @:default('')
-    var signature : String;
-}
-typedef JsonFunction = {
-    var args : String;
-    var argsT : Array<JsonFunctionArg>;
-    var argsoriginal : String;
-    var call_args : String;
-    var cimguiname : String;
-    var ov_cimguiname : String;
-    var funcname : String;
-    var stname : String;
-    var signature : String;
-
-    @:default([])
-    var defaults : Map<String, String>;
-
-    @:default(false)
-    var constructor : Bool;
-
-    @:default(false)
-    var destructor : Bool;
-
-    @:default(false)
-    var templatedgen : Bool;
-    @:default(false)
-    var templated : Bool;
-    var ?isvararg : String;
-    var ?retref : String;
-    var ?namespace : String;
-    var ?ret : String;
-    var ?retorig : String;
-    var ?location : String;
-}
-typedef JsonDefinitions = Map<String, Array<JsonFunction>>;
-typedef JsonTypedef = Map<String, String>;
 
 class ImGuiJsonCPP
 {
@@ -469,6 +413,25 @@ class ImGuiJsonCPP
             for (overloadedFn in overloads)
             {
                 if (topLevelFunctionNeedsWrapping(overloadedFn)) {
+                    result.push(overloadedFn);
+                }
+            }
+        }
+
+        return result;
+
+    }
+
+    public function retrieveAllConstructors() : Array<JsonFunction> {
+
+        var filteredDefinitions = definitions.map(f -> f.filter(i -> i.stname != '' && (i.location != null && i.location.startsWith('imgui:'))));
+        var result = [];
+
+        for (overloads in filteredDefinitions.filter(a -> a.length > 0))
+        {
+            for (overloadedFn in overloads)
+            {
+                if (overloadedFn.constructor) {
                     result.push(overloadedFn);
                 }
             }

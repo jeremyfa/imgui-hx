@@ -957,8 +957,13 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("w")
 	var w : imguijs.Float32;
 	@:native("ImVec4")
-	@:overload(function(_x:imguijs.Float32, _y:imguijs.Float32, _z:imguijs.Float32, _w:imguijs.Float32):ImVec4 { })
-	static function create():ImVec4;
+	static inline extern overload function create(_x:imguijs.Float32, _y:imguijs.Float32, _z:imguijs.Float32, _w:imguijs.Float32):ImVec4 {
+		return js.Syntax.code("new ImGui.ImVec4({0}, {1}, {2}, {3})", _x, _y, _z, _w);
+	}
+	@:native("ImVec4")
+	static inline extern overload function create():ImVec4 {
+		return js.Syntax.code("new ImGui.ImVec4()");
+	}
 }
 
 @:keep @:native("ImVec2ih") extern class ImVec2ih {
@@ -967,9 +972,17 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("y")
 	var y : imguijs.Int16;
 	@:native("ImVec2ih")
-	@:overload(function(_x:imguijs.Int16, _y:imguijs.Int16):ImVec2ih { })
-	@:overload(function(rhs:ImVec2):ImVec2ih { })
-	static function create():ImVec2ih;
+	static inline extern overload function create(_x:imguijs.Int16, _y:imguijs.Int16):ImVec2ih {
+		return js.Syntax.code("new ImGui.ImVec2ih({0}, {1})", _x, _y);
+	}
+	@:native("ImVec2ih")
+	static inline extern overload function create(rhs:ImVec2):ImVec2ih {
+		return js.Syntax.code("new ImGui.ImVec2ih({0})", rhs);
+	}
+	@:native("ImVec2ih")
+	static inline extern overload function create():ImVec2ih {
+		return js.Syntax.code("new ImGui.ImVec2ih()");
+	}
 }
 
 @:keep @:native("ImVec2") extern class ImVec2 {
@@ -978,16 +991,26 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("y")
 	var y : imguijs.Float32;
 	@:native("ImVec2")
-	@:overload(function(_x:imguijs.Float32, _y:imguijs.Float32):ImVec2 { })
-	static function create():ImVec2;
+	static inline extern overload function create(_x:imguijs.Float32, _y:imguijs.Float32):ImVec2 {
+		return js.Syntax.code("new ImGui.ImVec2({0}, {1})", _x, _y);
+	}
+	@:native("ImVec2")
+	static inline extern overload function create():ImVec2 {
+		return js.Syntax.code("new ImGui.ImVec2()");
+	}
 }
 
 @:keep @:native("ImVec1") extern class ImVec1 {
 	@:native("x")
 	var x : imguijs.Float32;
 	@:native("ImVec1")
-	@:overload(function(_x:imguijs.Float32):ImVec1 { })
-	static function create():ImVec1;
+	static inline extern overload function create(_x:imguijs.Float32):ImVec1 {
+		return js.Syntax.code("new ImGui.ImVec1({0})", _x);
+	}
+	@:native("ImVec1")
+	static inline extern overload function create():ImVec1 {
+		return js.Syntax.code("new ImGui.ImVec1()");
+	}
 }
 
 @:keep @:native("ImRect") extern class ImRect {
@@ -1008,10 +1031,21 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("IsInverted")
 	function isInverted():Bool;
 	@:native("ImRect")
-	@:overload(function(min:ImVec2, max:ImVec2):ImRect { })
-	@:overload(function(v:ImVec4):ImRect { })
-	@:overload(function(x1:imguijs.Float32, y1:imguijs.Float32, x2:imguijs.Float32, y2:imguijs.Float32):ImRect { })
-	static function create():ImRect;
+	static inline extern overload function create(min:ImVec2, max:ImVec2):ImRect {
+		return js.Syntax.code("new ImGui.ImRect({0}, {1})", min, max);
+	}
+	@:native("ImRect")
+	static inline extern overload function create(v:ImVec4):ImRect {
+		return js.Syntax.code("new ImGui.ImRect({0})", v);
+	}
+	@:native("ImRect")
+	static inline extern overload function create(x1:imguijs.Float32, y1:imguijs.Float32, x2:imguijs.Float32, y2:imguijs.Float32):ImRect {
+		return js.Syntax.code("new ImGui.ImRect({0}, {1}, {2}, {3})", x1, y1, x2, y2);
+	}
+	@:native("ImRect")
+	static inline extern overload function create():ImRect {
+		return js.Syntax.code("new ImGui.ImRect()");
+	}
 	@:native("GetWidth")
 	function getWidth():imguijs.Float32;
 	@:native("GetTR")
@@ -1142,7 +1176,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("WantApply")
 	var wantApply : Bool;
 	@:native("ImGuiWindowSettings")
-	static function create():ImGuiWindowSettings;
+	static inline extern overload function create():ImGuiWindowSettings {
+		return js.Syntax.code("new ImGui.ImGuiWindowSettings()");
+	}
 	@:native("GetName")
 	function getName():imguijs.Char;
 }
@@ -1321,7 +1357,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("MenuBarHeight")
 	function menuBarHeight():imguijs.Float32;
 	@:native("ImGuiWindow")
-	static function create(context:ImGuiContext, name:String):ImGuiWindow;
+	static inline extern overload function create(context:ImGuiContext, name:String):ImGuiWindow {
+		return js.Syntax.code("new ImGui.ImGuiWindow({0}, {1})", context, name);
+	}
 	@:native("GetIDNoKeepAlive")
 	@:overload(function(str:String):ImGuiID { })
 	@:overload(function(ptr:imguijs.VoidPointer):ImGuiID { })
@@ -1348,8 +1386,13 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("empty")
 	function empty():Bool;
 	@:native("ImGuiTextRange")
-	@:overload(function(_b:String, _e:String):ImGuiTextRange { })
-	static function create():ImGuiTextRange;
+	static inline extern overload function create(_b:String, _e:String):ImGuiTextRange {
+		return js.Syntax.code("new ImGui.ImGuiTextRange({0}, {1})", _b, _e);
+	}
+	@:native("ImGuiTextRange")
+	static inline extern overload function create():ImGuiTextRange {
+		return js.Syntax.code("new ImGui.ImGuiTextRange()");
+	}
 }
 
 @:keep @:native("ImGuiTextFilter") extern class ImGuiTextFilter {
@@ -1365,8 +1408,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("IsActive")
 	function isActive():Bool;
 	@:native("ImGuiTextFilter")
-	@:overload(function():ImGuiTextFilter { })
-	static function create(default_filter:String):ImGuiTextFilter;
+	static inline extern overload function create(default_filter:String):ImGuiTextFilter {
+		return js.Syntax.code("new ImGui.ImGuiTextFilter({0})", default_filter);
+	}
 	@:native("Draw")
 	@:overload(function(width:imguijs.Float32):Bool { })
 	@:overload(function():Bool { })
@@ -1402,7 +1446,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(str:String):Void { })
 	function append(str:String, str_end:String):Void;
 	@:native("ImGuiTextBuffer")
-	static function create():ImGuiTextBuffer;
+	static inline extern overload function create():ImGuiTextBuffer {
+		return js.Syntax.code("new ImGui.ImGuiTextBuffer()");
+	}
 }
 
 @:keep @:native("ImGuiTableSortSpecs") extern class ImGuiTableSortSpecs {
@@ -1413,7 +1459,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("SpecsDirty")
 	var specsDirty : Bool;
 	@:native("ImGuiTableSortSpecs")
-	static function create():ImGuiTableSortSpecs;
+	static inline extern overload function create():ImGuiTableSortSpecs {
+		return js.Syntax.code("new ImGui.ImGuiTableSortSpecs()");
+	}
 }
 
 @:keep @:native("ImGuiTableSettings") extern class ImGuiTableSettings {
@@ -1430,7 +1478,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("WantApply")
 	var wantApply : Bool;
 	@:native("ImGuiTableSettings")
-	static function create():ImGuiTableSettings;
+	static inline extern overload function create():ImGuiTableSettings {
+		return js.Syntax.code("new ImGui.ImGuiTableSettings()");
+	}
 	@:native("GetColumnSettings")
 	function getColumnSettings():ImGuiTableColumnSettings;
 }
@@ -1445,7 +1495,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("SortDirection")
 	var sortDirection : ImGuiSortDirection;
 	@:native("ImGuiTableColumnSortSpecs")
-	static function create():ImGuiTableColumnSortSpecs;
+	static inline extern overload function create():ImGuiTableColumnSortSpecs {
+		return js.Syntax.code("new ImGui.ImGuiTableColumnSortSpecs()");
+	}
 }
 
 @:keep @:native("ImGuiTableColumnSettings") extern class ImGuiTableColumnSettings {
@@ -1466,7 +1518,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("IsStretch")
 	var isStretch : ImU8;
 	@:native("ImGuiTableColumnSettings")
-	static function create():ImGuiTableColumnSettings;
+	static inline extern overload function create():ImGuiTableColumnSettings {
+		return js.Syntax.code("new ImGui.ImGuiTableColumnSettings()");
+	}
 }
 
 @:keep @:native("ImGuiTableColumn") extern class ImGuiTableColumn {
@@ -1551,7 +1605,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("SortDirectionsAvailList")
 	var sortDirectionsAvailList : ImU8;
 	@:native("ImGuiTableColumn")
-	static function create():ImGuiTableColumn;
+	static inline extern overload function create():ImGuiTableColumn {
+		return js.Syntax.code("new ImGui.ImGuiTableColumn()");
+	}
 }
 
 @:keep @:native("ImGuiTableCellData") extern class ImGuiTableCellData {
@@ -1783,7 +1839,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("HostSkipItems")
 	var hostSkipItems : Bool;
 	@:native("ImGuiTable")
-	static function create():ImGuiTable;
+	static inline extern overload function create():ImGuiTable {
+		return js.Syntax.code("new ImGui.ImGuiTable()");
+	}
 }
 
 @:keep @:native("ImGuiTabItem") extern class ImGuiTabItem {
@@ -1810,7 +1868,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("WantClose")
 	var wantClose : Bool;
 	@:native("ImGuiTabItem")
-	static function create():ImGuiTabItem;
+	static inline extern overload function create():ImGuiTabItem {
+		return js.Syntax.code("new ImGui.ImGuiTabItem()");
+	}
 }
 
 @:keep @:native("ImGuiTabBar") extern class ImGuiTabBar {
@@ -1877,7 +1937,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("TabsNames")
 	var tabsNames : ImGuiTextBuffer;
 	@:native("ImGuiTabBar")
-	static function create():ImGuiTabBar;
+	static inline extern overload function create():ImGuiTabBar {
+		return js.Syntax.code("new ImGui.ImGuiTabBar()");
+	}
 	@:native("GetTabOrder")
 	function getTabOrder(tab:ImGuiTabItem):Int;
 	@:native("GetTabName")
@@ -1888,9 +1950,17 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("VarIdx")
 	var varIdx : ImGuiStyleVar;
 	@:native("ImGuiStyleMod")
-	@:overload(function(idx:ImGuiStyleVar, v:imguijs.Float32):ImGuiStyleMod { })
-	@:overload(function(idx:ImGuiStyleVar, v:ImVec2):ImGuiStyleMod { })
-	static function create(idx:ImGuiStyleVar, v:Int):ImGuiStyleMod;
+	static inline extern overload function create(idx:ImGuiStyleVar, v:imguijs.Float32):ImGuiStyleMod {
+		return js.Syntax.code("new ImGui.ImGuiStyleMod({0}, {1})", idx, v);
+	}
+	@:native("ImGuiStyleMod")
+	static inline extern overload function create(idx:ImGuiStyleVar, v:ImVec2):ImGuiStyleMod {
+		return js.Syntax.code("new ImGui.ImGuiStyleMod({0}, {1})", idx, v);
+	}
+	@:native("ImGuiStyleMod")
+	static inline extern overload function create(idx:ImGuiStyleVar, v:Int):ImGuiStyleMod {
+		return js.Syntax.code("new ImGui.ImGuiStyleMod({0}, {1})", idx, v);
+	}
 }
 
 @:keep @:native("ImGuiStyle") extern class ImGuiStyle {
@@ -1977,16 +2047,26 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("ScaleAllSizes")
 	function scaleAllSizes(scale_factor:imguijs.Float32):Void;
 	@:native("ImGuiStyle")
-	static function create():ImGuiStyle;
+	static inline extern overload function create():ImGuiStyle {
+		return js.Syntax.code("new ImGui.ImGuiStyle()");
+	}
 }
 
 @:keep @:native("ImGuiStoragePair") extern class ImGuiStoragePair {
 	@:native("key")
 	var key : ImGuiID;
 	@:native("ImGuiStoragePair")
-	@:overload(function(_key:ImGuiID, _val_f:imguijs.Float32):ImGuiStoragePair { })
-	@:overload(function(_key:ImGuiID, _val_p:imguijs.VoidPointer):ImGuiStoragePair { })
-	static function create(_key:ImGuiID, _val_i:Int):ImGuiStoragePair;
+	static inline extern overload function create(_key:ImGuiID, _val_f:imguijs.Float32):ImGuiStoragePair {
+		return js.Syntax.code("new ImGui.ImGuiStoragePair({0}, {1})", _key, _val_f);
+	}
+	@:native("ImGuiStoragePair")
+	static inline extern overload function create(_key:ImGuiID, _val_p:imguijs.VoidPointer):ImGuiStoragePair {
+		return js.Syntax.code("new ImGui.ImGuiStoragePair({0}, {1})", _key, _val_p);
+	}
+	@:native("ImGuiStoragePair")
+	static inline extern overload function create(_key:ImGuiID, _val_i:Int):ImGuiStoragePair {
+		return js.Syntax.code("new ImGui.ImGuiStoragePair({0}, {1})", _key, _val_i);
+	}
 }
 
 @:keep @:native("ImGuiStorage") extern class ImGuiStorage {
@@ -2049,7 +2129,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("SetToCurrentState")
 	function setToCurrentState():Void;
 	@:native("ImGuiStackSizes")
-	static function create():ImGuiStackSizes;
+	static inline extern overload function create():ImGuiStackSizes {
+		return js.Syntax.code("new ImGui.ImGuiStackSizes()");
+	}
 	@:native("CompareWithCurrentState")
 	function compareWithCurrentState():Void;
 }
@@ -2092,7 +2174,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("UserData")
 	var userData : imguijs.VoidPointer;
 	@:native("ImGuiSettingsHandler")
-	static function create():ImGuiSettingsHandler;
+	static inline extern overload function create():ImGuiSettingsHandler {
+		return js.Syntax.code("new ImGui.ImGuiSettingsHandler()");
+	}
 }
 
 @:keep @:native("ImGuiPtrOrIndex") extern class ImGuiPtrOrIndex {
@@ -2101,8 +2185,13 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("Index")
 	var index : Int;
 	@:native("ImGuiPtrOrIndex")
-	@:overload(function(index:Int):ImGuiPtrOrIndex { })
-	static function create(ptr:imguijs.VoidPointer):ImGuiPtrOrIndex;
+	static inline extern overload function create(index:Int):ImGuiPtrOrIndex {
+		return js.Syntax.code("new ImGui.ImGuiPtrOrIndex({0})", index);
+	}
+	@:native("ImGuiPtrOrIndex")
+	static inline extern overload function create(ptr:imguijs.VoidPointer):ImGuiPtrOrIndex {
+		return js.Syntax.code("new ImGui.ImGuiPtrOrIndex({0})", ptr);
+	}
 }
 
 @:keep @:native("ImGuiPopupData") extern class ImGuiPopupData {
@@ -2121,7 +2210,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("OpenMousePos")
 	var openMousePos : ImVec2;
 	@:native("ImGuiPopupData")
-	static function create():ImGuiPopupData;
+	static inline extern overload function create():ImGuiPopupData {
+		return js.Syntax.code("new ImGui.ImGuiPopupData()");
+	}
 }
 
 @:keep @:native("ImGuiPayload") extern class ImGuiPayload {
@@ -2148,7 +2239,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("IsDataType")
 	function isDataType(type:String):Bool;
 	@:native("ImGuiPayload")
-	static function create():ImGuiPayload;
+	static inline extern overload function create():ImGuiPayload {
+		return js.Syntax.code("new ImGui.ImGuiPayload()");
+	}
 	@:native("Clear")
 	function clear():Void;
 }
@@ -2157,7 +2250,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("RefFrame")
 	var refFrame : Int;
 	@:native("ImGuiOnceUponAFrame")
-	static function create():ImGuiOnceUponAFrame;
+	static inline extern overload function create():ImGuiOnceUponAFrame {
+		return js.Syntax.code("new ImGui.ImGuiOnceUponAFrame()");
+	}
 }
 
 @:keep @:native("ImGuiOldColumns") extern class ImGuiOldColumns {
@@ -2196,7 +2291,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("Splitter")
 	var splitter : ImDrawListSplitter;
 	@:native("ImGuiOldColumns")
-	static function create():ImGuiOldColumns;
+	static inline extern overload function create():ImGuiOldColumns {
+		return js.Syntax.code("new ImGui.ImGuiOldColumns()");
+	}
 }
 
 @:keep @:native("ImGuiOldColumnData") extern class ImGuiOldColumnData {
@@ -2209,7 +2306,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("ClipRect")
 	var clipRect : ImRect;
 	@:native("ImGuiOldColumnData")
-	static function create():ImGuiOldColumnData;
+	static inline extern overload function create():ImGuiOldColumnData {
+		return js.Syntax.code("new ImGui.ImGuiOldColumnData()");
+	}
 }
 
 @:keep @:native("ImGuiNextWindowData") extern class ImGuiNextWindowData {
@@ -2244,7 +2343,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("MenuBarOffsetMinVal")
 	var menuBarOffsetMinVal : ImVec2;
 	@:native("ImGuiNextWindowData")
-	static function create():ImGuiNextWindowData;
+	static inline extern overload function create():ImGuiNextWindowData {
+		return js.Syntax.code("new ImGui.ImGuiNextWindowData()");
+	}
 	@:native("ClearFlags")
 	function clearFlags():Void;
 }
@@ -2261,7 +2362,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("OpenVal")
 	var openVal : Bool;
 	@:native("ImGuiNextItemData")
-	static function create():ImGuiNextItemData;
+	static inline extern overload function create():ImGuiNextItemData {
+		return js.Syntax.code("new ImGui.ImGuiNextItemData()");
+	}
 	@:native("ClearFlags")
 	function clearFlags():Void;
 }
@@ -2282,7 +2385,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("RectRel")
 	var rectRel : ImRect;
 	@:native("ImGuiNavMoveResult")
-	static function create():ImGuiNavMoveResult;
+	static inline extern overload function create():ImGuiNavMoveResult {
+		return js.Syntax.code("new ImGui.ImGuiNavMoveResult()");
+	}
 	@:native("Clear")
 	function clear():Void;
 }
@@ -2303,7 +2408,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("ShowTablesRectsType")
 	var showTablesRectsType : Int;
 	@:native("ImGuiMetricsConfig")
-	static function create():ImGuiMetricsConfig;
+	static inline extern overload function create():ImGuiMetricsConfig {
+		return js.Syntax.code("new ImGui.ImGuiMetricsConfig()");
+	}
 }
 
 @:keep @:native("ImGuiMenuColumns") extern class ImGuiMenuColumns {
@@ -2320,7 +2427,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("Update")
 	function update(count:Int, spacing:imguijs.Float32, clear:Bool):Void;
 	@:native("ImGuiMenuColumns")
-	static function create():ImGuiMenuColumns;
+	static inline extern overload function create():ImGuiMenuColumns {
+		return js.Syntax.code("new ImGui.ImGuiMenuColumns()");
+	}
 	@:native("DeclColumns")
 	function declColumns(w0:imguijs.Float32, w1:imguijs.Float32, w2:imguijs.Float32):imguijs.Float32;
 	@:native("CalcExtraSpace")
@@ -2345,7 +2454,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("Step")
 	function step():Bool;
 	@:native("ImGuiListClipper")
-	static function create():ImGuiListClipper;
+	static inline extern overload function create():ImGuiListClipper {
+		return js.Syntax.code("new ImGui.ImGuiListClipper()");
+	}
 	@:native("End")
 	function end():Void;
 	@:native("Begin")
@@ -2365,7 +2476,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("Restore")
 	function restore():Void;
 	@:native("ImGuiLastItemDataBackup")
-	static function create():ImGuiLastItemDataBackup;
+	static inline extern overload function create():ImGuiLastItemDataBackup {
+		return js.Syntax.code("new ImGui.ImGuiLastItemDataBackup()");
+	}
 	@:native("Backup")
 	function backup():Void;
 }
@@ -2408,7 +2521,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("OnKeyPressed")
 	function onKeyPressed(key:Int):Void;
 	@:native("ImGuiInputTextState")
-	static function create():ImGuiInputTextState;
+	static inline extern overload function create():ImGuiInputTextState {
+		return js.Syntax.code("new ImGui.ImGuiInputTextState()");
+	}
 	@:native("HasSelection")
 	function hasSelection():Bool;
 	@:native("GetUndoAvailCount")
@@ -2458,7 +2573,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(pos:Int, text:String):Void { })
 	function insertChars(pos:Int, text:String, text_end:String):Void;
 	@:native("ImGuiInputTextCallbackData")
-	static function create():ImGuiInputTextCallbackData;
+	static inline extern overload function create():ImGuiInputTextCallbackData {
+		return js.Syntax.code("new ImGui.ImGuiInputTextCallbackData()");
+	}
 	@:native("HasSelection")
 	function hasSelection():Bool;
 	@:native("DeleteChars")
@@ -2629,7 +2746,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("InputQueueCharacters")
 	var inputQueueCharacters : ImVectorImWchar;
 	@:native("ImGuiIO")
-	static function create():ImGuiIO;
+	static inline extern overload function create():ImGuiIO {
+		return js.Syntax.code("new ImGui.ImGuiIO()");
+	}
 	@:native("ClearInputCharacters")
 	function clearInputCharacters():Void;
 	@:native("AddInputCharactersUTF8")
@@ -2689,7 +2808,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("UserData")
 	var userData : imguijs.VoidPointer;
 	@:native("ImGuiContextHook")
-	static function create():ImGuiContextHook;
+	static inline extern overload function create():ImGuiContextHook {
+		return js.Syntax.code("new ImGui.ImGuiContextHook()");
+	}
 }
 
 @:keep @:native("ImGuiContext") extern class ImGuiContext {
@@ -3104,7 +3225,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("TempBuffer")
 	var tempBuffer : imguijs.Char;
 	@:native("ImGuiContext")
-	static function create(shared_font_atlas:ImFontAtlas):ImGuiContext;
+	static inline extern overload function create(shared_font_atlas:ImFontAtlas):ImGuiContext {
+		return js.Syntax.code("new ImGui.ImGuiContext({0})", shared_font_atlas);
+	}
 }
 
 @:keep @:native("ImGuiColorMod") extern class ImGuiColorMod {
@@ -3120,7 +3243,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("SetBit")
 	function setBit(n:imguijs.SizeT):Void;
 	@:native("ImFontGlyphRangesBuilder")
-	static function create():ImFontGlyphRangesBuilder;
+	static inline extern overload function create():ImFontGlyphRangesBuilder {
+		return js.Syntax.code("new ImGui.ImFontGlyphRangesBuilder()");
+	}
 	@:native("GetBit")
 	function getBit(n:imguijs.SizeT):Bool;
 	@:native("Clear")
@@ -3201,7 +3326,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("DstFont")
 	var dstFont : ImFont;
 	@:native("ImFontConfig")
-	static function create():ImFontConfig;
+	static inline extern overload function create():ImFontConfig {
+		return js.Syntax.code("new ImGui.ImFontConfig()");
+	}
 }
 
 @:keep @:native("ImFontAtlasCustomRect") extern class ImFontAtlasCustomRect {
@@ -3224,7 +3351,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("IsPacked")
 	function isPacked():Bool;
 	@:native("ImFontAtlasCustomRect")
-	static function create():ImFontAtlasCustomRect;
+	static inline extern overload function create():ImFontAtlasCustomRect {
+		return js.Syntax.code("new ImGui.ImFontAtlasCustomRect()");
+	}
 }
 
 @:keep @:native("ImFontAtlas") extern class ImFontAtlas {
@@ -3267,7 +3396,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("IsBuilt")
 	function isBuilt():Bool;
 	@:native("ImFontAtlas")
-	static function create():ImFontAtlas;
+	static inline extern overload function create():ImFontAtlas {
+		return js.Syntax.code("new ImGui.ImFontAtlas()");
+	}
 	@:native("GetTexDataAsRGBA32")
 	@:overload(function(out_pixels:imguijs.Star<imguijs.Star<imguijs.UInt8>>, out_width:imguijs.IntPointer, out_height:imguijs.IntPointer):Void { })
 	function getTexDataAsRGBA32(out_pixels:imguijs.Star<imguijs.Star<imguijs.UInt8>>, out_width:imguijs.IntPointer, out_height:imguijs.IntPointer, out_bytes_per_pixel:imguijs.IntPointer):Void;
@@ -3384,7 +3515,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("IsGlyphRangeUnused")
 	function isGlyphRangeUnused(c_begin:UInt, c_last:UInt):Bool;
 	@:native("ImFont")
-	static function create():ImFont;
+	static inline extern overload function create():ImFont {
+		return js.Syntax.code("new ImGui.ImFont()");
+	}
 	@:native("GrowIndex")
 	function growIndex(new_size:Int):Void;
 	@:native("GetDebugName")
@@ -3435,7 +3568,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("Merge")
 	function merge(draw_list:ImDrawList):Void;
 	@:native("ImDrawListSplitter")
-	static function create():ImDrawListSplitter;
+	static inline extern overload function create():ImDrawListSplitter {
+		return js.Syntax.code("new ImGui.ImDrawListSplitter()");
+	}
 	@:native("ClearFreeMemory")
 	function clearFreeMemory():Void;
 	@:native("Clear")
@@ -3466,7 +3601,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("SetCircleSegmentMaxError")
 	function setCircleSegmentMaxError(max_error:imguijs.Float32):Void;
 	@:native("ImDrawListSharedData")
-	static function create():ImDrawListSharedData;
+	static inline extern overload function create():ImDrawListSharedData {
+		return js.Syntax.code("new ImGui.ImDrawListSharedData()");
+	}
 }
 
 @:keep @:native("ImDrawList") extern class ImDrawList {
@@ -3566,7 +3703,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(center:ImVec2, radius:imguijs.Float32, a_min:imguijs.Float32, a_max:imguijs.Float32):Void { })
 	function pathArcTo(center:ImVec2, radius:imguijs.Float32, a_min:imguijs.Float32, a_max:imguijs.Float32, num_segments:Int):Void;
 	@:native("ImDrawList")
-	static function create(shared_data:ImDrawListSharedData):ImDrawList;
+	static inline extern overload function create(shared_data:ImDrawListSharedData):ImDrawList {
+		return js.Syntax.code("new ImGui.ImDrawList({0})", shared_data);
+	}
 	@:native("GetClipRectMin")
 	function getClipRectMin(pOut:ImVec2, self:ImDrawList):Void;
 	@:native("GetClipRectMax")
@@ -3684,7 +3823,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("ScaleClipRects")
 	function scaleClipRects(fb_scale:ImVec2):Void;
 	@:native("ImDrawData")
-	static function create():ImDrawData;
+	static inline extern overload function create():ImDrawData {
+		return js.Syntax.code("new ImGui.ImDrawData()");
+	}
 	@:native("DeIndexAllBuffers")
 	function deIndexAllBuffers():Void;
 	@:native("Clear")
@@ -3716,7 +3857,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("UserCallbackData")
 	var userCallbackData : imguijs.VoidPointer;
 	@:native("ImDrawCmd")
-	static function create():ImDrawCmd;
+	static inline extern overload function create():ImDrawCmd {
+		return js.Syntax.code("new ImGui.ImDrawCmd()");
+	}
 }
 
 @:keep @:native("ImDrawChannel") extern class ImDrawChannel {
@@ -3733,13 +3876,25 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(h:imguijs.Float32, s:imguijs.Float32, v:imguijs.Float32):Void { })
 	function setHSV(h:imguijs.Float32, s:imguijs.Float32, v:imguijs.Float32, a:imguijs.Float32):Void;
 	@:native("ImColor")
-	@:overload(function(r:Int, g:Int, b:Int, a:Int):ImColor { })
-	@:overload(function(r:Int, g:Int, b:Int):ImColor { })
-	@:overload(function(rgba:ImU32):ImColor { })
-	@:overload(function(r:imguijs.Float32, g:imguijs.Float32, b:imguijs.Float32, a:imguijs.Float32):ImColor { })
-	@:overload(function(r:imguijs.Float32, g:imguijs.Float32, b:imguijs.Float32):ImColor { })
-	@:overload(function(col:ImVec4):ImColor { })
-	static function create():ImColor;
+	static inline extern overload function create(r:Int, g:Int, b:Int, a:Int):ImColor {
+		return js.Syntax.code("new ImGui.ImColor({0}, {1}, {2}, {3})", r, g, b, a);
+	}
+	@:native("ImColor")
+	static inline extern overload function create(rgba:ImU32):ImColor {
+		return js.Syntax.code("new ImGui.ImColor({0})", rgba);
+	}
+	@:native("ImColor")
+	static inline extern overload function create(r:imguijs.Float32, g:imguijs.Float32, b:imguijs.Float32, a:imguijs.Float32):ImColor {
+		return js.Syntax.code("new ImGui.ImColor({0}, {1}, {2}, {3})", r, g, b, a);
+	}
+	@:native("ImColor")
+	static inline extern overload function create(col:ImVec4):ImColor {
+		return js.Syntax.code("new ImGui.ImColor({0})", col);
+	}
+	@:native("ImColor")
+	static inline extern overload function create():ImColor {
+		return js.Syntax.code("new ImGui.ImColor()");
+	}
 	@:native("HSV")
 	@:overload(function(pOut:ImColor, h:imguijs.Float32, s:imguijs.Float32, v:imguijs.Float32):Void { })
 	function hSV(pOut:ImColor, h:imguijs.Float32, s:imguijs.Float32, v:imguijs.Float32, a:imguijs.Float32):Void;
@@ -3779,19 +3934,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(label:String, size:ImVec2, v:imguijs.FloatPointer, v_min:imguijs.Float32, v_max:imguijs.Float32, format:String):Bool { })
 	@:overload(function(label:String, size:ImVec2, v:imguijs.FloatPointer, v_min:imguijs.Float32, v_max:imguijs.Float32):Bool { })
 	static function vSliderFloat(label:String, size:ImVec2, v:imguijs.FloatPointer, v_min:imguijs.Float32, v_max:imguijs.Float32, format:String, flags:ImGuiSliderFlags):Bool;
-	@:native("UpdateWindowParentAndRootLinks")
-	static function updateWindowParentAndRootLinks(window:ImGuiWindow, flags:ImGuiWindowFlags, parent_window:ImGuiWindow):Void;
-	@:native("UpdateMouseMovingWindowNewFrame")
-	static function updateMouseMovingWindowNewFrame():Void;
-	@:native("UpdateMouseMovingWindowEndFrame")
-	static function updateMouseMovingWindowEndFrame():Void;
-	@:native("UpdateHoveredWindowAndCaptureFlags")
-	static function updateHoveredWindowAndCaptureFlags():Void;
 	@:native("Unindent")
 	@:overload(function():Void { })
 	static function unindent(indent_w:imguijs.Float32):Void;
-	@:native("TreePushOverrideID")
-	static function treePushOverrideID(id:ImGuiID):Void;
 	@:native("TreePush")
 	@:overload(function(ptr_id:imguijs.VoidPointer):Void { })
 	@:overload(function():Void { })
@@ -3809,12 +3954,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(str_id:String, flags:ImGuiTreeNodeFlags, fmt:String, vargs:haxe.extern.Rest<Dynamic>):Bool { })
 	@:overload(function(ptr_id:imguijs.VoidPointer, flags:ImGuiTreeNodeFlags, fmt:String, vargs:haxe.extern.Rest<Dynamic>):Bool { })
 	static function treeNodeEx(label:String, flags:ImGuiTreeNodeFlags):Bool;
-	@:native("TreeNodeBehaviorIsOpen")
-	@:overload(function(id:ImGuiID):Bool { })
-	static function treeNodeBehaviorIsOpen(id:ImGuiID, flags:ImGuiTreeNodeFlags):Bool;
-	@:native("TreeNodeBehavior")
-	@:overload(function(id:ImGuiID, flags:ImGuiTreeNodeFlags, label:String):Bool { })
-	static function treeNodeBehavior(id:ImGuiID, flags:ImGuiTreeNodeFlags, label:String, label_end:String):Bool;
 	@:native("TreeNode")
 	@:overload(function(str_id:String, fmt:String, vargs:haxe.extern.Rest<Dynamic>):Bool { })
 	@:overload(function(ptr_id:imguijs.VoidPointer, fmt:String, vargs:haxe.extern.Rest<Dynamic>):Bool { })
@@ -3828,10 +3967,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("TextUnformatted")
 	@:overload(function(text:String):Void { })
 	static function textUnformatted(text:String, text_end:String):Void;
-	@:native("TextEx")
-	@:overload(function(text:String, text_end:String):Void { })
-	@:overload(function(text:String):Void { })
-	static function textEx(text:String, text_end:String, flags:ImGuiTextFlags):Void;
 	@:native("TextDisabledV")
 	static function textDisabledV(fmt:String, args:haxe.extern.Rest<Dynamic>):Void;
 	@:native("TextDisabled")
@@ -3842,75 +3977,24 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function textColored(col:ImVec4, fmt:String, vargs:haxe.extern.Rest<Dynamic>):Void;
 	@:native("Text")
 	static function text(fmt:String, vargs:haxe.extern.Rest<Dynamic>):Void;
-	@:native("TempInputText")
-	static function tempInputText(bb:ImRect, id:ImGuiID, label:String, buf:imguijs.Char, buf_size:Int, flags:ImGuiInputTextFlags):Bool;
-	@:native("TempInputScalar")
-	@:overload(function(bb:ImRect, id:ImGuiID, label:String, data_type:ImGuiDataType, p_data:imguijs.VoidPointer, format:String, p_clamp_min:imguijs.VoidPointer):Bool { })
-	@:overload(function(bb:ImRect, id:ImGuiID, label:String, data_type:ImGuiDataType, p_data:imguijs.VoidPointer, format:String):Bool { })
-	static function tempInputScalar(bb:ImRect, id:ImGuiID, label:String, data_type:ImGuiDataType, p_data:imguijs.VoidPointer, format:String, p_clamp_min:imguijs.VoidPointer, p_clamp_max:imguijs.VoidPointer):Bool;
-	@:native("TempInputIsActive")
-	static function tempInputIsActive(id:ImGuiID):Bool;
-	@:native("TableUpdateLayout")
-	static function tableUpdateLayout(table:ImGuiTable):Void;
-	@:native("TableUpdateColumnsWeightFromWidth")
-	static function tableUpdateColumnsWeightFromWidth(table:ImGuiTable):Void;
-	@:native("TableUpdateBorders")
-	static function tableUpdateBorders(table:ImGuiTable):Void;
-	@:native("TableSortSpecsSanitize")
-	static function tableSortSpecsSanitize(table:ImGuiTable):Void;
-	@:native("TableSortSpecsBuild")
-	static function tableSortSpecsBuild(table:ImGuiTable):Void;
 	@:native("TableSetupScrollFreeze")
 	static function tableSetupScrollFreeze(cols:Int, rows:Int):Void;
-	@:native("TableSetupDrawChannels")
-	static function tableSetupDrawChannels(table:ImGuiTable):Void;
 	@:native("TableSetupColumn")
 	@:overload(function(label:String, init_width_or_weight:imguijs.Float32, user_id:ImU32):Void { })
 	@:overload(function(label:String, user_id:ImU32):Void { })
 	@:overload(function(label:String):Void { })
 	static function tableSetupColumn(label:String, flags:ImGuiTableColumnFlags, init_width_or_weight:imguijs.Float32, user_id:ImU32):Void;
-	@:native("TableSettingsInstallHandler")
-	static function tableSettingsInstallHandler(context:ImGuiContext):Void;
-	@:native("TableSettingsFindByID")
-	static function tableSettingsFindByID(id:ImGuiID):ImGuiTableSettings;
-	@:native("TableSettingsCreate")
-	static function tableSettingsCreate(id:ImGuiID, columns_count:Int):ImGuiTableSettings;
-	@:native("TableSetColumnWidthAutoSingle")
-	static function tableSetColumnWidthAutoSingle(table:ImGuiTable, column_n:Int):Void;
-	@:native("TableSetColumnWidthAutoAll")
-	static function tableSetColumnWidthAutoAll(table:ImGuiTable):Void;
-	@:native("TableSetColumnWidth")
-	static function tableSetColumnWidth(column_n:Int, width:imguijs.Float32):Void;
-	@:native("TableSetColumnSortDirection")
-	static function tableSetColumnSortDirection(column_n:Int, sort_direction:ImGuiSortDirection, append_to_sort_specs:Bool):Void;
 	@:native("TableSetColumnIndex")
 	static function tableSetColumnIndex(column_n:Int):Bool;
 	@:native("TableSetBgColor")
 	@:overload(function(target:ImGuiTableBgTarget, color:ImU32):Void { })
 	static function tableSetBgColor(target:ImGuiTableBgTarget, color:ImU32, column_n:Int):Void;
-	@:native("TableSaveSettings")
-	static function tableSaveSettings(table:ImGuiTable):Void;
-	@:native("TableResetSettings")
-	static function tableResetSettings(table:ImGuiTable):Void;
-	@:native("TableRemove")
-	static function tableRemove(table:ImGuiTable):Void;
-	@:native("TablePushBackgroundChannel")
-	static function tablePushBackgroundChannel():Void;
-	@:native("TablePopBackgroundChannel")
-	static function tablePopBackgroundChannel():Void;
-	@:native("TableOpenContextMenu")
-	@:overload(function():Void { })
-	static function tableOpenContextMenu(column_n:Int):Void;
 	@:native("TableNextRow")
 	@:overload(function(row_flags:ImGuiTableRowFlags):Void { })
 	@:overload(function():Void { })
 	static function tableNextRow(row_flags:ImGuiTableRowFlags, min_row_height:imguijs.Float32):Void;
 	@:native("TableNextColumn")
 	static function tableNextColumn():Bool;
-	@:native("TableMergeDrawChannels")
-	static function tableMergeDrawChannels(table:ImGuiTable):Void;
-	@:native("TableLoadSettings")
-	static function tableLoadSettings(table:ImGuiTable):Void;
 	@:native("TableHeadersRow")
 	static function tableHeadersRow():Void;
 	@:native("TableHeader")
@@ -3919,22 +4003,8 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function tableGetSortSpecs():ImGuiTableSortSpecs;
 	@:native("TableGetRowIndex")
 	static function tableGetRowIndex():Int;
-	@:native("TableGetMaxColumnWidth")
-	static function tableGetMaxColumnWidth(table:ImGuiTable, column_n:Int):imguijs.Float32;
-	@:native("TableGetHoveredColumn")
-	static function tableGetHoveredColumn():Int;
-	@:native("TableGetHeaderRowHeight")
-	static function tableGetHeaderRowHeight():imguijs.Float32;
-	@:native("TableGetColumnWidthAuto")
-	static function tableGetColumnWidthAuto(table:ImGuiTable, column:ImGuiTableColumn):imguijs.Float32;
-	@:native("TableGetColumnResizeID")
-	@:overload(function(table:ImGuiTable, column_n:Int):ImGuiID { })
-	static function tableGetColumnResizeID(table:ImGuiTable, column_n:Int, instance_no:Int):ImGuiID;
-	@:native("TableGetColumnNextSortDirection")
-	static function tableGetColumnNextSortDirection(column:ImGuiTableColumn):ImGuiSortDirection;
 	@:native("TableGetColumnName")
 	@:overload(function():String { })
-	@:overload(function(table:ImGuiTable, column_n:Int):String { })
 	static function tableGetColumnName(column_n:Int):String;
 	@:native("TableGetColumnIndex")
 	static function tableGetColumnIndex():Int;
@@ -3943,55 +4013,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function tableGetColumnFlags(column_n:Int):ImGuiTableColumnFlags;
 	@:native("TableGetColumnCount")
 	static function tableGetColumnCount():Int;
-	@:native("TableGetCellBgRect")
-	static function tableGetCellBgRect(pOut:ImRect, table:ImGuiTable, column_n:Int):Void;
-	@:native("TableGetBoundSettings")
-	static function tableGetBoundSettings(table:ImGuiTable):ImGuiTableSettings;
-	@:native("TableGcCompactTransientBuffers")
-	static function tableGcCompactTransientBuffers(table:ImGuiTable):Void;
-	@:native("TableGcCompactSettings")
-	static function tableGcCompactSettings():Void;
-	@:native("TableFixColumnSortDirection")
-	static function tableFixColumnSortDirection(table:ImGuiTable, column:ImGuiTableColumn):Void;
-	@:native("TableFindByID")
-	static function tableFindByID(id:ImGuiID):ImGuiTable;
-	@:native("TableEndRow")
-	static function tableEndRow(table:ImGuiTable):Void;
-	@:native("TableEndCell")
-	static function tableEndCell(table:ImGuiTable):Void;
-	@:native("TableDrawContextMenu")
-	static function tableDrawContextMenu(table:ImGuiTable):Void;
-	@:native("TableDrawBorders")
-	static function tableDrawBorders(table:ImGuiTable):Void;
-	@:native("TableBeginRow")
-	static function tableBeginRow(table:ImGuiTable):Void;
-	@:native("TableBeginInitMemory")
-	static function tableBeginInitMemory(table:ImGuiTable, columns_count:Int):Void;
-	@:native("TableBeginCell")
-	static function tableBeginCell(table:ImGuiTable, column_n:Int):Void;
-	@:native("TableBeginApplyRequests")
-	static function tableBeginApplyRequests(table:ImGuiTable):Void;
-	@:native("TabItemLabelAndCloseButton")
-	static function tabItemLabelAndCloseButton(draw_list:ImDrawList, bb:ImRect, flags:ImGuiTabItemFlags, frame_padding:ImVec2, label:String, tab_id:ImGuiID, close_button_id:ImGuiID, is_contents_visible:Bool, out_just_closed:imguijs.BoolPointer, out_text_clipped:imguijs.BoolPointer):Void;
-	@:native("TabItemEx")
-	static function tabItemEx(tab_bar:ImGuiTabBar, label:String, p_open:imguijs.BoolPointer, flags:ImGuiTabItemFlags):Bool;
-	@:native("TabItemCalcSize")
-	static function tabItemCalcSize(pOut:ImVec2, label:String, has_close_button:Bool):Void;
 	@:native("TabItemButton")
 	@:overload(function(label:String):Bool { })
 	static function tabItemButton(label:String, flags:ImGuiTabItemFlags):Bool;
-	@:native("TabItemBackground")
-	static function tabItemBackground(draw_list:ImDrawList, bb:ImRect, flags:ImGuiTabItemFlags, col:ImU32):Void;
-	@:native("TabBarRemoveTab")
-	static function tabBarRemoveTab(tab_bar:ImGuiTabBar, tab_id:ImGuiID):Void;
-	@:native("TabBarQueueReorder")
-	static function tabBarQueueReorder(tab_bar:ImGuiTabBar, tab:ImGuiTabItem, dir:Int):Void;
-	@:native("TabBarProcessReorder")
-	static function tabBarProcessReorder(tab_bar:ImGuiTabBar):Bool;
-	@:native("TabBarFindTabByID")
-	static function tabBarFindTabByID(tab_bar:ImGuiTabBar, tab_id:ImGuiID):ImGuiTabItem;
-	@:native("TabBarCloseTab")
-	static function tabBarCloseTab(tab_bar:ImGuiTabBar, tab:ImGuiTabItem):Void;
 	@:native("StyleColorsLight")
 	@:overload(function():Void { })
 	static function styleColorsLight(dst:ImGuiStyle):Void;
@@ -4001,12 +4025,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("StyleColorsClassic")
 	@:overload(function():Void { })
 	static function styleColorsClassic(dst:ImGuiStyle):Void;
-	@:native("StartMouseMovingWindow")
-	static function startMouseMovingWindow(window:ImGuiWindow):Void;
-	@:native("SplitterBehavior")
-	@:overload(function(bb:ImRect, id:ImGuiID, axis:ImGuiAxis, size1:imguijs.FloatPointer, size2:imguijs.FloatPointer, min_size1:imguijs.Float32, min_size2:imguijs.Float32, hover_visibility_delay:imguijs.Float32):Bool { })
-	@:overload(function(bb:ImRect, id:ImGuiID, axis:ImGuiAxis, size1:imguijs.FloatPointer, size2:imguijs.FloatPointer, min_size1:imguijs.Float32, min_size2:imguijs.Float32):Bool { })
-	static function splitterBehavior(bb:ImRect, id:ImGuiID, axis:ImGuiAxis, size1:imguijs.FloatPointer, size2:imguijs.FloatPointer, min_size1:imguijs.Float32, min_size2:imguijs.Float32, hover_extend:imguijs.Float32, hover_visibility_delay:imguijs.Float32):Bool;
 	@:native("Spacing")
 	static function spacing():Void;
 	@:native("SmallButton")
@@ -4051,18 +4069,12 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(label:String, v:imguijs.FloatPointer, v_min:imguijs.Float32, v_max:imguijs.Float32, format:String):Bool { })
 	@:overload(function(label:String, v:imguijs.FloatPointer, v_min:imguijs.Float32, v_max:imguijs.Float32):Bool { })
 	static function sliderFloat(label:String, v:imguijs.FloatPointer, v_min:imguijs.Float32, v_max:imguijs.Float32, format:String, flags:ImGuiSliderFlags):Bool;
-	@:native("SliderBehavior")
-	static function sliderBehavior(bb:ImRect, id:ImGuiID, data_type:ImGuiDataType, p_v:imguijs.VoidPointer, p_min:imguijs.VoidPointer, p_max:imguijs.VoidPointer, format:String, flags:ImGuiSliderFlags, out_grab_bb:ImRect):Bool;
 	@:native("SliderAngle")
 	@:overload(function(label:String, v_rad:imguijs.FloatPointer, v_degrees_min:imguijs.Float32, v_degrees_max:imguijs.Float32, format:String):Bool { })
 	@:overload(function(label:String, v_rad:imguijs.FloatPointer, v_degrees_min:imguijs.Float32, v_degrees_max:imguijs.Float32):Bool { })
 	@:overload(function(label:String, v_rad:imguijs.FloatPointer, v_degrees_min:imguijs.Float32):Bool { })
 	@:overload(function(label:String, v_rad:imguijs.FloatPointer):Bool { })
 	static function sliderAngle(label:String, v_rad:imguijs.FloatPointer, v_degrees_min:imguijs.Float32, v_degrees_max:imguijs.Float32, format:String, flags:ImGuiSliderFlags):Bool;
-	@:native("Shutdown")
-	static function shutdown(context:ImGuiContext):Void;
-	@:native("ShrinkWidths")
-	static function shrinkWidths(items:ImGuiShrinkWidthItem, count:Int, width_excess:imguijs.Float32):Void;
 	@:native("ShowUserGuide")
 	static function showUserGuide():Void;
 	@:native("ShowStyleSelector")
@@ -4081,26 +4093,16 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("ShowAboutWindow")
 	@:overload(function():Void { })
 	static function showAboutWindow(p_open:imguijs.BoolPointer):Void;
-	@:native("ShadeVertsLinearUV")
-	static function shadeVertsLinearUV(draw_list:ImDrawList, vert_start_idx:Int, vert_end_idx:Int, a:ImVec2, b:ImVec2, uv_a:ImVec2, uv_b:ImVec2, clamp:Bool):Void;
-	@:native("ShadeVertsLinearColorGradientKeepAlpha")
-	static function shadeVertsLinearColorGradientKeepAlpha(draw_list:ImDrawList, vert_start_idx:Int, vert_end_idx:Int, gradient_p0:ImVec2, gradient_p1:ImVec2, col0:ImU32, col1:ImU32):Void;
 	@:native("SetWindowSize")
 	@:overload(function(size:ImVec2):Void { })
 	@:overload(function(name:String, size:ImVec2, cond:ImGuiCond):Void { })
 	@:overload(function(name:String, size:ImVec2):Void { })
-	@:overload(function(window:ImGuiWindow, size:ImVec2, cond:ImGuiCond):Void { })
-	@:overload(function(window:ImGuiWindow, size:ImVec2):Void { })
 	static function setWindowSize(size:ImVec2, cond:ImGuiCond):Void;
 	@:native("SetWindowPos")
 	@:overload(function(pos:ImVec2):Void { })
 	@:overload(function(name:String, pos:ImVec2, cond:ImGuiCond):Void { })
 	@:overload(function(name:String, pos:ImVec2):Void { })
-	@:overload(function(window:ImGuiWindow, pos:ImVec2, cond:ImGuiCond):Void { })
-	@:overload(function(window:ImGuiWindow, pos:ImVec2):Void { })
 	static function setWindowPos(pos:ImVec2, cond:ImGuiCond):Void;
-	@:native("SetWindowHitTestHole")
-	static function setWindowHitTestHole(window:ImGuiWindow, pos:ImVec2, size:ImVec2):Void;
 	@:native("SetWindowFontScale")
 	static function setWindowFontScale(scale:imguijs.Float32):Void;
 	@:native("SetWindowFocus")
@@ -4110,11 +4112,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(collapsed:Bool):Void { })
 	@:overload(function(name:String, collapsed:Bool, cond:ImGuiCond):Void { })
 	@:overload(function(name:String, collapsed:Bool):Void { })
-	@:overload(function(window:ImGuiWindow, collapsed:Bool, cond:ImGuiCond):Void { })
-	@:overload(function(window:ImGuiWindow, collapsed:Bool):Void { })
 	static function setWindowCollapsed(collapsed:Bool, cond:ImGuiCond):Void;
-	@:native("SetWindowClipRectBeforeSetChannel")
-	static function setWindowClipRectBeforeSetChannel(window:ImGuiWindow, clip_rect:ImRect):Void;
 	@:native("SetTooltipV")
 	static function setTooltipV(fmt:String, args:haxe.extern.Rest<Dynamic>):Void;
 	@:native("SetTooltip")
@@ -4124,10 +4122,8 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("SetStateStorage")
 	static function setStateStorage(storage:ImGuiStorage):Void;
 	@:native("SetScrollY")
-	@:overload(function(window:ImGuiWindow, scroll_y:imguijs.Float32):Void { })
 	static function setScrollY(scroll_y:imguijs.Float32):Void;
 	@:native("SetScrollX")
-	@:overload(function(window:ImGuiWindow, scroll_x:imguijs.Float32):Void { })
 	static function setScrollX(scroll_x:imguijs.Float32):Void;
 	@:native("SetScrollHereY")
 	@:overload(function():Void { })
@@ -4137,11 +4133,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function setScrollHereX(center_x_ratio:imguijs.Float32):Void;
 	@:native("SetScrollFromPosY")
 	@:overload(function(local_y:imguijs.Float32):Void { })
-	@:overload(function(window:ImGuiWindow, local_y:imguijs.Float32, center_y_ratio:imguijs.Float32):Void { })
 	static function setScrollFromPosY(local_y:imguijs.Float32, center_y_ratio:imguijs.Float32):Void;
 	@:native("SetScrollFromPosX")
 	@:overload(function(local_x:imguijs.Float32):Void { })
-	@:overload(function(window:ImGuiWindow, local_x:imguijs.Float32, center_x_ratio:imguijs.Float32):Void { })
 	static function setScrollFromPosX(local_x:imguijs.Float32, center_x_ratio:imguijs.Float32):Void;
 	@:native("SetNextWindowSizeConstraints")
 	@:overload(function(size_min:ImVec2, size_max:ImVec2, custom_callback_data:imguijs.VoidPointer):Void { })
@@ -4150,8 +4144,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("SetNextWindowSize")
 	@:overload(function(size:ImVec2):Void { })
 	static function setNextWindowSize(size:ImVec2, cond:ImGuiCond):Void;
-	@:native("SetNextWindowScroll")
-	static function setNextWindowScroll(scroll:ImVec2):Void;
 	@:native("SetNextWindowPos")
 	@:overload(function(pos:ImVec2, pivot:ImVec2):Void { })
 	@:overload(function(pos:ImVec2):Void { })
@@ -4170,27 +4162,15 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("SetNextItemOpen")
 	@:overload(function(is_open:Bool):Void { })
 	static function setNextItemOpen(is_open:Bool, cond:ImGuiCond):Void;
-	@:native("SetNavIDWithRectRel")
-	static function setNavIDWithRectRel(id:ImGuiID, nav_layer:Int, focus_scope_id:ImGuiID, rect_rel:ImRect):Void;
-	@:native("SetNavID")
-	static function setNavID(id:ImGuiID, nav_layer:Int, focus_scope_id:ImGuiID):Void;
 	@:native("SetMouseCursor")
 	static function setMouseCursor(cursor_type:ImGuiMouseCursor):Void;
-	@:native("SetLastItemData")
-	static function setLastItemData(window:ImGuiWindow, item_id:ImGuiID, status_flags:ImGuiItemStatusFlags, item_rect:ImRect):Void;
 	@:native("SetKeyboardFocusHere")
 	@:overload(function():Void { })
 	static function setKeyboardFocusHere(offset:Int):Void;
-	@:native("SetItemUsingMouseWheel")
-	static function setItemUsingMouseWheel():Void;
 	@:native("SetItemDefaultFocus")
 	static function setItemDefaultFocus():Void;
 	@:native("SetItemAllowOverlap")
 	static function setItemAllowOverlap():Void;
-	@:native("SetHoveredID")
-	static function setHoveredID(id:ImGuiID):Void;
-	@:native("SetFocusID")
-	static function setFocusID(id:ImGuiID, window:ImGuiWindow):Void;
 	@:native("SetDragDropPayload")
 	@:overload(function(type:String, data:imguijs.VoidPointer, sz:imguijs.SizeT):Bool { })
 	static function setDragDropPayload(type:String, data:imguijs.VoidPointer, sz:imguijs.SizeT, cond:ImGuiCond):Bool;
@@ -4202,8 +4182,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function setCursorPosX(local_x:imguijs.Float32):Void;
 	@:native("SetCursorPos")
 	static function setCursorPos(local_pos:ImVec2):Void;
-	@:native("SetCurrentFont")
-	static function setCurrentFont(font:ImFont):Void;
 	@:native("SetCurrentContext")
 	static function setCurrentContext(ctx:ImGuiContext):Void;
 	@:native("SetColumnWidth")
@@ -4217,10 +4195,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("SetAllocatorFunctions")
 	@:overload(function(alloc_func:imguijs.Callable<(imguijs.SizeT, Dynamic) -> imguijs.VoidPointer>, free_func:imguijs.Callable<(Dynamic, Dynamic) -> Void>):Void { })
 	static function setAllocatorFunctions(alloc_func:imguijs.Callable<(imguijs.SizeT, Dynamic) -> imguijs.VoidPointer>, free_func:imguijs.Callable<(Dynamic, Dynamic) -> Void>, user_data:imguijs.VoidPointer):Void;
-	@:native("SetActiveID")
-	static function setActiveID(id:ImGuiID, window:ImGuiWindow):Void;
-	@:native("SeparatorEx")
-	static function separatorEx(flags:ImGuiSeparatorFlags):Void;
 	@:native("Separator")
 	static function separator():Void;
 	@:native("Selectable")
@@ -4231,12 +4205,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(label:String, p_selected:imguijs.BoolPointer, size:ImVec2):Bool { })
 	@:overload(function(label:String, p_selected:imguijs.BoolPointer):Bool { })
 	static function selectable(label:String, selected:Bool, flags:ImGuiSelectableFlags, size:ImVec2):Bool;
-	@:native("ScrollbarEx")
-	static function scrollbarEx(bb:ImRect, id:ImGuiID, axis:ImGuiAxis, p_scroll_v:imguijs.FloatPointer, avail_v:imguijs.Float32, contents_v:imguijs.Float32, rounding_corners:ImDrawCornerFlags):Bool;
-	@:native("Scrollbar")
-	static function scrollbar(axis:ImGuiAxis):Void;
-	@:native("ScrollToBringRectIntoView")
-	static function scrollToBringRectIntoView(pOut:ImVec2, window:ImGuiWindow, item_rect:ImRect):Void;
 	@:native("SaveIniSettingsToMemory")
 	@:overload(function():String { })
 	static function saveIniSettingsToMemory(out_ini_size:imguijs.SizeT):String;
@@ -4249,51 +4217,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("ResetMouseDragDelta")
 	@:overload(function():Void { })
 	static function resetMouseDragDelta(button:ImGuiMouseButton):Void;
-	@:native("RenderTextWrapped")
-	static function renderTextWrapped(pos:ImVec2, text:String, text_end:String, wrap_width:imguijs.Float32):Void;
-	@:native("RenderTextEllipsis")
-	static function renderTextEllipsis(draw_list:ImDrawList, pos_min:ImVec2, pos_max:ImVec2, clip_max_x:imguijs.Float32, ellipsis_max_x:imguijs.Float32, text:String, text_end:String, text_size_if_known:ImVec2):Void;
-	@:native("RenderTextClippedEx")
-	@:overload(function(draw_list:ImDrawList, pos_min:ImVec2, pos_max:ImVec2, text:String, text_end:String, text_size_if_known:ImVec2, clip_rect:ImRect):Void { })
-	@:overload(function(draw_list:ImDrawList, pos_min:ImVec2, pos_max:ImVec2, text:String, text_end:String, text_size_if_known:ImVec2):Void { })
-	static function renderTextClippedEx(draw_list:ImDrawList, pos_min:ImVec2, pos_max:ImVec2, text:String, text_end:String, text_size_if_known:ImVec2, align:ImVec2, clip_rect:ImRect):Void;
-	@:native("RenderTextClipped")
-	@:overload(function(pos_min:ImVec2, pos_max:ImVec2, text:String, text_end:String, text_size_if_known:ImVec2, clip_rect:ImRect):Void { })
-	@:overload(function(pos_min:ImVec2, pos_max:ImVec2, text:String, text_end:String, text_size_if_known:ImVec2):Void { })
-	static function renderTextClipped(pos_min:ImVec2, pos_max:ImVec2, text:String, text_end:String, text_size_if_known:ImVec2, align:ImVec2, clip_rect:ImRect):Void;
-	@:native("RenderText")
-	@:overload(function(pos:ImVec2, text:String, text_end:String):Void { })
-	@:overload(function(pos:ImVec2, text:String):Void { })
-	static function renderText(pos:ImVec2, text:String, text_end:String, hide_text_after_hash:Bool):Void;
-	@:native("RenderRectFilledWithHole")
-	static function renderRectFilledWithHole(draw_list:ImDrawList, outer:ImRect, inner:ImRect, col:ImU32, rounding:imguijs.Float32):Void;
-	@:native("RenderRectFilledRangeH")
-	static function renderRectFilledRangeH(draw_list:ImDrawList, rect:ImRect, col:ImU32, x_start_norm:imguijs.Float32, x_end_norm:imguijs.Float32, rounding:imguijs.Float32):Void;
-	@:native("RenderNavHighlight")
-	@:overload(function(bb:ImRect, id:ImGuiID):Void { })
-	static function renderNavHighlight(bb:ImRect, id:ImGuiID, flags:ImGuiNavHighlightFlags):Void;
-	@:native("RenderMouseCursor")
-	static function renderMouseCursor(draw_list:ImDrawList, pos:ImVec2, scale:imguijs.Float32, mouse_cursor:ImGuiMouseCursor, col_fill:ImU32, col_border:ImU32, col_shadow:ImU32):Void;
-	@:native("RenderFrameBorder")
-	@:overload(function(p_min:ImVec2, p_max:ImVec2):Void { })
-	static function renderFrameBorder(p_min:ImVec2, p_max:ImVec2, rounding:imguijs.Float32):Void;
-	@:native("RenderFrame")
-	@:overload(function(p_min:ImVec2, p_max:ImVec2, fill_col:ImU32, rounding:imguijs.Float32):Void { })
-	@:overload(function(p_min:ImVec2, p_max:ImVec2, fill_col:ImU32):Void { })
-	static function renderFrame(p_min:ImVec2, p_max:ImVec2, fill_col:ImU32, border:Bool, rounding:imguijs.Float32):Void;
-	@:native("RenderColorRectWithAlphaCheckerboard")
-	@:overload(function(draw_list:ImDrawList, p_min:ImVec2, p_max:ImVec2, fill_col:ImU32, grid_step:imguijs.Float32, grid_off:ImVec2, rounding_corners_flags:Int):Void { })
-	@:overload(function(draw_list:ImDrawList, p_min:ImVec2, p_max:ImVec2, fill_col:ImU32, grid_step:imguijs.Float32, grid_off:ImVec2):Void { })
-	static function renderColorRectWithAlphaCheckerboard(draw_list:ImDrawList, p_min:ImVec2, p_max:ImVec2, fill_col:ImU32, grid_step:imguijs.Float32, grid_off:ImVec2, rounding:imguijs.Float32, rounding_corners_flags:Int):Void;
-	@:native("RenderCheckMark")
-	static function renderCheckMark(draw_list:ImDrawList, pos:ImVec2, col:ImU32, sz:imguijs.Float32):Void;
-	@:native("RenderBullet")
-	static function renderBullet(draw_list:ImDrawList, pos:ImVec2, col:ImU32):Void;
-	@:native("RenderArrowPointingAt")
-	static function renderArrowPointingAt(draw_list:ImDrawList, pos:ImVec2, half_sz:ImVec2, direction:ImGuiDir, col:ImU32):Void;
-	@:native("RenderArrow")
-	@:overload(function(draw_list:ImDrawList, pos:ImVec2, col:ImU32, dir:ImGuiDir):Void { })
-	static function renderArrow(draw_list:ImDrawList, pos:ImVec2, col:ImU32, dir:ImGuiDir, scale:imguijs.Float32):Void;
 	@:native("Render")
 	static function render():Void;
 	@:native("RadioButton")
@@ -4308,14 +4231,8 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("PushStyleColor")
 	@:overload(function(idx:ImGuiCol, col:ImVec4):Void { })
 	static function pushStyleColor(idx:ImGuiCol, col:ImU32):Void;
-	@:native("PushOverrideID")
-	static function pushOverrideID(id:ImGuiID):Void;
-	@:native("PushMultiItemsWidths")
-	static function pushMultiItemsWidths(components:Int, width_full:imguijs.Float32):Void;
 	@:native("PushItemWidth")
 	static function pushItemWidth(item_width:imguijs.Float32):Void;
-	@:native("PushItemFlag")
-	static function pushItemFlag(option:ImGuiItemFlags, enabled:Bool):Void;
 	@:native("PushID")
 	@:overload(function(str_id_begin:String, str_id_end:String):Void { })
 	@:overload(function(ptr_id:imguijs.VoidPointer):Void { })
@@ -4323,12 +4240,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function pushID(str_id:String):Void;
 	@:native("PushFont")
 	static function pushFont(font:ImFont):Void;
-	@:native("PushFocusScope")
-	static function pushFocusScope(id:ImGuiID):Void;
-	@:native("PushColumnsBackground")
-	static function pushColumnsBackground():Void;
-	@:native("PushColumnClipRect")
-	static function pushColumnClipRect(column_index:Int):Void;
 	@:native("PushClipRect")
 	static function pushClipRect(clip_rect_min:ImVec2, clip_rect_max:ImVec2, intersect_with_current_clip_rect:Bool):Void;
 	@:native("PushButtonRepeat")
@@ -4349,16 +4260,10 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function popStyleColor(count:Int):Void;
 	@:native("PopItemWidth")
 	static function popItemWidth():Void;
-	@:native("PopItemFlag")
-	static function popItemFlag():Void;
 	@:native("PopID")
 	static function popID():Void;
 	@:native("PopFont")
 	static function popFont():Void;
-	@:native("PopFocusScope")
-	static function popFocusScope():Void;
-	@:native("PopColumnsBackground")
-	static function popColumnsBackground():Void;
 	@:native("PopClipRect")
 	static function popClipRect():Void;
 	@:native("PopButtonRepeat")
@@ -4393,15 +4298,10 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(label:String, values_getter:imguijs.Callable<(Dynamic, Int) -> imguijs.Float32>, data:imguijs.VoidPointer, values_count:Int, values_offset:Int):Void { })
 	@:overload(function(label:String, values_getter:imguijs.Callable<(Dynamic, Int) -> imguijs.Float32>, data:imguijs.VoidPointer, values_count:Int):Void { })
 	static function plotHistogram(label:String, values:imguijs.FloatPointer, values_count:Int, values_offset:Int, overlay_text:String, scale_min:imguijs.Float32, scale_max:imguijs.Float32, graph_size:ImVec2, stride:Int):Void;
-	@:native("PlotEx")
-	static function plotEx(plot_type:ImGuiPlotType, label:String, values_getter:imguijs.Callable<(Dynamic, Int) -> imguijs.Float32>, data:imguijs.VoidPointer, values_count:Int, values_offset:Int, overlay_text:String, scale_min:imguijs.Float32, scale_max:imguijs.Float32, frame_size:ImVec2):Int;
 	@:native("OpenPopupOnItemClick")
 	@:overload(function(str_id:String):Void { })
 	@:overload(function():Void { })
 	static function openPopupOnItemClick(str_id:String, popup_flags:ImGuiPopupFlags):Void;
-	@:native("OpenPopupEx")
-	@:overload(function(id:ImGuiID):Void { })
-	static function openPopupEx(id:ImGuiID, popup_flags:ImGuiPopupFlags):Void;
 	@:native("OpenPopup")
 	@:overload(function(str_id:String):Void { })
 	static function openPopup(str_id:String, popup_flags:ImGuiPopupFlags):Void;
@@ -4411,16 +4311,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function newLine():Void;
 	@:native("NewFrame")
 	static function newFrame():Void;
-	@:native("NavMoveRequestTryWrapping")
-	static function navMoveRequestTryWrapping(window:ImGuiWindow, move_flags:ImGuiNavMoveFlags):Void;
-	@:native("NavMoveRequestForward")
-	static function navMoveRequestForward(move_dir:ImGuiDir, clip_dir:ImGuiDir, bb_rel:ImRect, move_flags:ImGuiNavMoveFlags):Void;
-	@:native("NavMoveRequestCancel")
-	static function navMoveRequestCancel():Void;
-	@:native("NavMoveRequestButNoResultYet")
-	static function navMoveRequestButNoResultYet():Bool;
-	@:native("NavInitWindow")
-	static function navInitWindow(window:ImGuiWindow, force_reinit:Bool):Void;
 	@:native("MenuItem")
 	@:overload(function(label:String, shortcut:String, selected:Bool):Bool { })
 	@:overload(function(label:String, shortcut:String):Bool { })
@@ -4432,11 +4322,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function memFree(ptr:imguijs.VoidPointer):Void;
 	@:native("MemAlloc")
 	static function memAlloc(size:imguijs.SizeT):imguijs.VoidPointer;
-	@:native("MarkItemEdited")
-	static function markItemEdited(id:ImGuiID):Void;
-	@:native("MarkIniSettingsDirty")
-	@:overload(function(window:ImGuiWindow):Void { })
-	static function markIniSettingsDirty():Void;
 	@:native("LogToTTY")
 	@:overload(function():Void { })
 	static function logToTTY(auto_open_depth:Int):Void;
@@ -4447,20 +4332,12 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("LogToClipboard")
 	@:overload(function():Void { })
 	static function logToClipboard(auto_open_depth:Int):Void;
-	@:native("LogToBuffer")
-	@:overload(function():Void { })
-	static function logToBuffer(auto_open_depth:Int):Void;
 	@:native("LogText")
 	static function logText(fmt:String, vargs:haxe.extern.Rest<Dynamic>):Void;
-	@:native("LogRenderedText")
-	@:overload(function(ref_pos:ImVec2, text:String):Void { })
-	static function logRenderedText(ref_pos:ImVec2, text:String, text_end:String):Void;
 	@:native("LogFinish")
 	static function logFinish():Void;
 	@:native("LogButtons")
 	static function logButtons():Void;
-	@:native("LogBegin")
-	static function logBegin(type:ImGuiLogType, auto_open_depth:Int):Void;
 	@:native("LoadIniSettingsFromMemory")
 	@:overload(function(ini_data:String):Void { })
 	static function loadIniSettingsFromMemory(ini_data:String, ini_size:imguijs.SizeT):Void;
@@ -4482,20 +4359,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function labelTextV(label:String, fmt:String, args:haxe.extern.Rest<Dynamic>):Void;
 	@:native("LabelText")
 	static function labelText(label:String, fmt:String, vargs:haxe.extern.Rest<Dynamic>):Void;
-	@:native("KeepAliveID")
-	static function keepAliveID(id:ImGuiID):Void;
-	@:native("ItemSize")
-	@:overload(function(size:ImVec2):Void { })
-	@:overload(function(bb:ImRect, text_baseline_y:imguijs.Float32):Void { })
-	@:overload(function(bb:ImRect):Void { })
-	static function itemSize(size:ImVec2, text_baseline_y:imguijs.Float32):Void;
-	@:native("ItemHoverable")
-	static function itemHoverable(bb:ImRect, id:ImGuiID):Bool;
-	@:native("ItemAdd")
-	@:overload(function(bb:ImRect, id:ImGuiID):Bool { })
-	static function itemAdd(bb:ImRect, id:ImGuiID, nav_bb:ImRect):Bool;
-	@:native("IsWindowNavFocusable")
-	static function isWindowNavFocusable(window:ImGuiWindow):Bool;
 	@:native("IsWindowHovered")
 	@:overload(function():Bool { })
 	static function isWindowHovered(flags:ImGuiHoveredFlags):Bool;
@@ -4504,23 +4367,14 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function isWindowFocused(flags:ImGuiFocusedFlags):Bool;
 	@:native("IsWindowCollapsed")
 	static function isWindowCollapsed():Bool;
-	@:native("IsWindowChildOf")
-	static function isWindowChildOf(window:ImGuiWindow, potential_parent:ImGuiWindow):Bool;
 	@:native("IsWindowAppearing")
 	static function isWindowAppearing():Bool;
-	@:native("IsWindowAbove")
-	static function isWindowAbove(potential_above:ImGuiWindow, potential_below:ImGuiWindow):Bool;
 	@:native("IsRectVisible")
 	@:overload(function(rect_min:ImVec2, rect_max:ImVec2):Bool { })
 	static function isRectVisible(size:ImVec2):Bool;
 	@:native("IsPopupOpen")
 	@:overload(function(str_id:String):Bool { })
-	@:overload(function(id:ImGuiID, popup_flags:ImGuiPopupFlags):Bool { })
 	static function isPopupOpen(str_id:String, flags:ImGuiPopupFlags):Bool;
-	@:native("IsNavInputTest")
-	static function isNavInputTest(n:ImGuiNavInput, rm:ImGuiInputReadMode):Bool;
-	@:native("IsNavInputDown")
-	static function isNavInputDown(n:ImGuiNavInput):Bool;
 	@:native("IsMouseReleased")
 	static function isMouseReleased(button:ImGuiMouseButton):Bool;
 	@:native("IsMousePosValid")
@@ -4532,9 +4386,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("IsMouseDragging")
 	@:overload(function(button:ImGuiMouseButton):Bool { })
 	static function isMouseDragging(button:ImGuiMouseButton, lock_threshold:imguijs.Float32):Bool;
-	@:native("IsMouseDragPastThreshold")
-	@:overload(function(button:ImGuiMouseButton):Bool { })
-	static function isMouseDragPastThreshold(button:ImGuiMouseButton, lock_threshold:imguijs.Float32):Bool;
 	@:native("IsMouseDown")
 	static function isMouseDown(button:ImGuiMouseButton):Bool;
 	@:native("IsMouseDoubleClicked")
@@ -4544,9 +4395,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function isMouseClicked(button:ImGuiMouseButton, repeat:Bool):Bool;
 	@:native("IsKeyReleased")
 	static function isKeyReleased(user_key_index:Int):Bool;
-	@:native("IsKeyPressedMap")
-	@:overload(function(key:ImGuiKey):Bool { })
-	static function isKeyPressedMap(key:ImGuiKey, repeat:Bool):Bool;
 	@:native("IsKeyPressed")
 	@:overload(function(user_key_index:Int):Bool { })
 	static function isKeyPressed(user_key_index:Int, repeat:Bool):Bool;
@@ -4554,8 +4402,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function isKeyDown(user_key_index:Int):Bool;
 	@:native("IsItemVisible")
 	static function isItemVisible():Bool;
-	@:native("IsItemToggledSelection")
-	static function isItemToggledSelection():Bool;
 	@:native("IsItemToggledOpen")
 	static function isItemToggledOpen():Bool;
 	@:native("IsItemHovered")
@@ -4576,10 +4422,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function isItemActive():Bool;
 	@:native("IsItemActivated")
 	static function isItemActivated():Bool;
-	@:native("IsDragDropPayloadBeingAccepted")
-	static function isDragDropPayloadBeingAccepted():Bool;
-	@:native("IsClippedEx")
-	static function isClippedEx(bb:ImRect, id:ImGuiID, clip_even_when_logged:Bool):Bool;
 	@:native("IsAnyMouseDown")
 	static function isAnyMouseDown():Bool;
 	@:native("IsAnyItemHovered")
@@ -4588,12 +4430,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function isAnyItemFocused():Bool;
 	@:native("IsAnyItemActive")
 	static function isAnyItemActive():Bool;
-	@:native("IsActiveIdUsingNavInput")
-	static function isActiveIdUsingNavInput(input:ImGuiNavInput):Bool;
-	@:native("IsActiveIdUsingNavDir")
-	static function isActiveIdUsingNavDir(dir:ImGuiDir):Bool;
-	@:native("IsActiveIdUsingKey")
-	static function isActiveIdUsingKey(key:ImGuiKey):Bool;
 	@:native("InvisibleButton")
 	@:overload(function(str_id:String, size:ImVec2):Bool { })
 	static function invisibleButton(str_id:String, size:ImVec2, flags:ImGuiButtonFlags):Bool;
@@ -4608,10 +4444,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(label:String, buf:imguijs.Char, buf_size:imguijs.SizeT, user_data:imguijs.VoidPointer):Bool { })
 	@:overload(function(label:String, buf:imguijs.Char, buf_size:imguijs.SizeT):Bool { })
 	static function inputTextMultiline(label:String, buf:imguijs.Char, buf_size:imguijs.SizeT, size:ImVec2, flags:ImGuiInputTextFlags, callback:ImGuiInputTextCallback, user_data:imguijs.VoidPointer):Bool;
-	@:native("InputTextEx")
-	@:overload(function(label:String, hint:String, buf:imguijs.Char, buf_size:Int, size_arg:ImVec2, flags:ImGuiInputTextFlags, user_data:imguijs.VoidPointer):Bool { })
-	@:overload(function(label:String, hint:String, buf:imguijs.Char, buf_size:Int, size_arg:ImVec2, flags:ImGuiInputTextFlags):Bool { })
-	static function inputTextEx(label:String, hint:String, buf:imguijs.Char, buf_size:Int, size_arg:ImVec2, flags:ImGuiInputTextFlags, callback:ImGuiInputTextCallback, user_data:imguijs.VoidPointer):Bool;
 	@:native("InputText")
 	@:overload(function(label:String, buf:imguijs.Char, buf_size:imguijs.SizeT, flags:ImGuiInputTextFlags, user_data:imguijs.VoidPointer):Bool { })
 	@:overload(function(label:String, buf:imguijs.Char, buf_size:imguijs.SizeT, user_data:imguijs.VoidPointer):Bool { })
@@ -4667,13 +4499,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(label:String, v:Float, step_fast:Float):Bool { })
 	@:overload(function(label:String, v:Float):Bool { })
 	static function inputDouble(label:String, v:Float, step:Float, step_fast:Float, format:String, flags:ImGuiInputTextFlags):Bool;
-	@:native("Initialize")
-	static function initialize(context:ImGuiContext):Void;
 	@:native("Indent")
 	@:overload(function():Void { })
 	static function indent(indent_w:imguijs.Float32):Void;
-	@:native("ImageButtonEx")
-	static function imageButtonEx(id:ImGuiID, texture_id:ImTextureID, size:ImVec2, uv0:ImVec2, uv1:ImVec2, padding:ImVec2, bg_col:ImVec4, tint_col:ImVec4):Bool;
 	@:native("ImageButton")
 	@:overload(function(user_texture_id:ImTextureID, size:ImVec2, uv0:ImVec2, uv1:ImVec2, frame_padding:Int, tint_col:ImVec4):Bool { })
 	@:overload(function(user_texture_id:ImTextureID, size:ImVec2, uv0:ImVec2, uv1:ImVec2, tint_col:ImVec4):Bool { })
@@ -4687,183 +4515,10 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(user_texture_id:ImTextureID, size:ImVec2, uv1:ImVec2):Void { })
 	@:overload(function(user_texture_id:ImTextureID, size:ImVec2):Void { })
 	static function image(user_texture_id:ImTextureID, size:ImVec2, uv0:ImVec2, uv1:ImVec2, tint_col:ImVec4, border_col:ImVec4):Void;
-	@:native("ImUpperPowerOfTwo")
-	static function imUpperPowerOfTwo(v:Int):Int;
-	@:native("ImTriangleContainsPoint")
-	static function imTriangleContainsPoint(a:ImVec2, b:ImVec2, c:ImVec2, p:ImVec2):Bool;
-	@:native("ImTriangleClosestPoint")
-	static function imTriangleClosestPoint(pOut:ImVec2, a:ImVec2, b:ImVec2, c:ImVec2, p:ImVec2):Void;
-	@:native("ImTriangleBarycentricCoords")
-	static function imTriangleBarycentricCoords(a:ImVec2, b:ImVec2, c:ImVec2, p:ImVec2, out_u:imguijs.FloatPointer, out_v:imguijs.FloatPointer, out_w:imguijs.FloatPointer):Void;
-	@:native("ImTriangleArea")
-	static function imTriangleArea(a:ImVec2, b:ImVec2, c:ImVec2):imguijs.Float32;
-	@:native("ImTextStrToUtf8")
-	static function imTextStrToUtf8(buf:imguijs.Char, buf_size:Int, in_text:ImWchar, in_text_end:ImWchar):Int;
-	@:native("ImTextStrFromUtf8")
-	@:overload(function(buf:ImWchar, buf_size:Int, in_text:String, in_text_end:String):Int { })
-	static function imTextStrFromUtf8(buf:ImWchar, buf_size:Int, in_text:String, in_text_end:String, in_remaining:imguijs.RawConstPointer<imguijs.Char>):Int;
-	@:native("ImTextCountUtf8BytesFromStr")
-	static function imTextCountUtf8BytesFromStr(in_text:ImWchar, in_text_end:ImWchar):Int;
-	@:native("ImTextCountUtf8BytesFromChar")
-	static function imTextCountUtf8BytesFromChar(in_text:String, in_text_end:String):Int;
-	@:native("ImTextCountCharsFromUtf8")
-	static function imTextCountCharsFromUtf8(in_text:String, in_text_end:String):Int;
-	@:native("ImTextCharFromUtf8")
-	static function imTextCharFromUtf8(out_char:UInt, in_text:String, in_text_end:String):Int;
-	@:native("ImStrnicmp")
-	static function imStrnicmp(str1:String, str2:String, count:imguijs.SizeT):Int;
-	@:native("ImStrncpy")
-	static function imStrncpy(dst:imguijs.Char, src:String, count:imguijs.SizeT):Void;
-	@:native("ImStrlenW")
-	static function imStrlenW(str:ImWchar):Int;
-	@:native("ImStristr")
-	static function imStristr(haystack:String, haystack_end:String, needle:String, needle_end:String):String;
-	@:native("ImStricmp")
-	static function imStricmp(str1:String, str2:String):Int;
-	@:native("ImStreolRange")
-	static function imStreolRange(str:String, str_end:String):String;
-	@:native("ImStrdupcpy")
-	static function imStrdupcpy(dst:imguijs.Char, p_dst_size:imguijs.SizeT, str:String):imguijs.Char;
-	@:native("ImStrdup")
-	static function imStrdup(str:String):imguijs.Char;
-	@:native("ImStrchrRange")
-	static function imStrchrRange(str_begin:String, str_end:String, c:imguijs.Char):String;
-	@:native("ImStrbolW")
-	static function imStrbolW(buf_mid_line:ImWchar, buf_begin:ImWchar):ImWchar;
-	@:native("ImStrTrimBlanks")
-	static function imStrTrimBlanks(str:imguijs.Char):Void;
-	@:native("ImStrSkipBlank")
-	static function imStrSkipBlank(str:String):String;
-	@:native("ImSign")
-	@:overload(function(x:Float):Float { })
-	static function imSign(x:imguijs.Float32):imguijs.Float32;
-	@:native("ImSaturate")
-	static function imSaturate(f:imguijs.Float32):imguijs.Float32;
-	@:native("ImRotate")
-	static function imRotate(pOut:ImVec2, v:ImVec2, cos_a:imguijs.Float32, sin_a:imguijs.Float32):Void;
-	@:native("ImPow")
-	@:overload(function(x:Float, y:Float):Float { })
-	static function imPow(x:imguijs.Float32, y:imguijs.Float32):imguijs.Float32;
-	@:native("ImParseFormatTrimDecorations")
-	static function imParseFormatTrimDecorations(format:String, buf:imguijs.Char, buf_size:imguijs.SizeT):String;
-	@:native("ImParseFormatPrecision")
-	static function imParseFormatPrecision(format:String, default_value:Int):Int;
-	@:native("ImParseFormatFindStart")
-	static function imParseFormatFindStart(format:String):String;
-	@:native("ImParseFormatFindEnd")
-	static function imParseFormatFindEnd(format:String):String;
-	@:native("ImMul")
-	static function imMul(pOut:ImVec2, lhs:ImVec2, rhs:ImVec2):Void;
-	@:native("ImModPositive")
-	static function imModPositive(a:Int, b:Int):Int;
-	@:native("ImMin")
-	static function imMin(pOut:ImVec2, lhs:ImVec2, rhs:ImVec2):Void;
-	@:native("ImMax")
-	static function imMax(pOut:ImVec2, lhs:ImVec2, rhs:ImVec2):Void;
-	@:native("ImLog")
-	@:overload(function(x:Float):Float { })
-	static function imLog(x:imguijs.Float32):imguijs.Float32;
-	@:native("ImLinearSweep")
-	static function imLinearSweep(current:imguijs.Float32, target:imguijs.Float32, speed:imguijs.Float32):imguijs.Float32;
-	@:native("ImLineClosestPoint")
-	static function imLineClosestPoint(pOut:ImVec2, a:ImVec2, b:ImVec2, p:ImVec2):Void;
-	@:native("ImLerp")
-	@:overload(function(pOut:ImVec2, a:ImVec2, b:ImVec2, t:ImVec2):Void { })
-	@:overload(function(pOut:ImVec4, a:ImVec4, b:ImVec4, t:imguijs.Float32):Void { })
-	static function imLerp(pOut:ImVec2, a:ImVec2, b:ImVec2, t:imguijs.Float32):Void;
-	@:native("ImLengthSqr")
-	@:overload(function(lhs:ImVec4):imguijs.Float32 { })
-	static function imLengthSqr(lhs:ImVec2):imguijs.Float32;
-	@:native("ImIsPowerOfTwo")
-	@:overload(function(v:ImU64):Bool { })
-	static function imIsPowerOfTwo(v:Int):Bool;
-	@:native("ImInvLength")
-	static function imInvLength(lhs:ImVec2, fail_value:imguijs.Float32):imguijs.Float32;
-	@:native("ImHashStr")
-	@:overload(function(data:String, seed:ImU32):ImGuiID { })
-	@:overload(function(data:String):ImGuiID { })
-	static function imHashStr(data:String, data_size:imguijs.SizeT, seed:ImU32):ImGuiID;
-	@:native("ImHashData")
-	@:overload(function(data:imguijs.VoidPointer, data_size:imguijs.SizeT):ImGuiID { })
-	static function imHashData(data:imguijs.VoidPointer, data_size:imguijs.SizeT, seed:ImU32):ImGuiID;
-	@:native("ImGetDirQuadrantFromDelta")
-	static function imGetDirQuadrantFromDelta(dx:imguijs.Float32, dy:imguijs.Float32):ImGuiDir;
-	@:native("ImFormatStringV")
-	static function imFormatStringV(buf:imguijs.Char, buf_size:imguijs.SizeT, fmt:String, args:haxe.extern.Rest<Dynamic>):Int;
-	@:native("ImFormatString")
-	static function imFormatString(buf:imguijs.Char, buf_size:imguijs.SizeT, fmt:String, vargs:haxe.extern.Rest<Dynamic>):Int;
-	@:native("ImFontAtlasBuildWithStbTruetype")
-	static function imFontAtlasBuildWithStbTruetype(atlas:ImFontAtlas):Bool;
-	@:native("ImFontAtlasBuildSetupFont")
-	static function imFontAtlasBuildSetupFont(atlas:ImFontAtlas, font:ImFont, font_config:ImFontConfig, ascent:imguijs.Float32, descent:imguijs.Float32):Void;
-	@:native("ImFontAtlasBuildRender1bppRectFromString")
-	static function imFontAtlasBuildRender1bppRectFromString(atlas:ImFontAtlas, atlas_x:Int, atlas_y:Int, w:Int, h:Int, in_str:String, in_marker_char:imguijs.Char, in_marker_pixel_value:imguijs.UInt8):Void;
-	@:native("ImFontAtlasBuildPackCustomRects")
-	static function imFontAtlasBuildPackCustomRects(atlas:ImFontAtlas, stbrp_context_opaque:imguijs.VoidPointer):Void;
-	@:native("ImFontAtlasBuildMultiplyRectAlpha8")
-	static function imFontAtlasBuildMultiplyRectAlpha8(table:imguijs.CharPointer, pixels:imguijs.CharPointer, x:Int, y:Int, w:Int, h:Int, stride:Int):Void;
-	@:native("ImFontAtlasBuildMultiplyCalcLookupTable")
-	static function imFontAtlasBuildMultiplyCalcLookupTable(out_table:imguijs.CharPointer, in_multiply_factor:imguijs.Float32):Void;
-	@:native("ImFontAtlasBuildInit")
-	static function imFontAtlasBuildInit(atlas:ImFontAtlas):Void;
-	@:native("ImFontAtlasBuildFinish")
-	static function imFontAtlasBuildFinish(atlas:ImFontAtlas):Void;
-	@:native("ImFloor")
-	@:overload(function(pOut:ImVec2, v:ImVec2):Void { })
-	static function imFloor(f:imguijs.Float32):imguijs.Float32;
-	@:native("ImFileWrite")
-	static function imFileWrite(data:imguijs.VoidPointer, size:ImU64, count:ImU64, file:ImFileHandle):ImU64;
-	@:native("ImFileRead")
-	static function imFileRead(data:imguijs.VoidPointer, size:ImU64, count:ImU64, file:ImFileHandle):ImU64;
-	@:native("ImFileOpen")
-	static function imFileOpen(filename:String, mode:String):ImFileHandle;
-	@:native("ImFileLoadToMemory")
-	@:overload(function(filename:String, mode:String, padding_bytes:Int):imguijs.VoidPointer { })
-	@:overload(function(filename:String, mode:String):imguijs.VoidPointer { })
-	static function imFileLoadToMemory(filename:String, mode:String, out_file_size:imguijs.SizeT, padding_bytes:Int):imguijs.VoidPointer;
-	@:native("ImFileGetSize")
-	static function imFileGetSize(file:ImFileHandle):ImU64;
-	@:native("ImFileClose")
-	static function imFileClose(file:ImFileHandle):Bool;
-	@:native("ImDot")
-	static function imDot(a:ImVec2, b:ImVec2):imguijs.Float32;
-	@:native("ImClamp")
-	static function imClamp(pOut:ImVec2, v:ImVec2, mn:ImVec2, mx:ImVec2):Void;
-	@:native("ImCharIsBlankW")
-	static function imCharIsBlankW(c:UInt):Bool;
-	@:native("ImCharIsBlankA")
-	static function imCharIsBlankA(c:imguijs.Char):Bool;
-	@:native("ImBitArrayTestBit")
-	static function imBitArrayTestBit(arr:ImU32, n:Int):Bool;
-	@:native("ImBitArraySetBitRange")
-	static function imBitArraySetBitRange(arr:ImU32, n:Int, n2:Int):Void;
-	@:native("ImBitArraySetBit")
-	static function imBitArraySetBit(arr:ImU32, n:Int):Void;
-	@:native("ImBitArrayClearBit")
-	static function imBitArrayClearBit(arr:ImU32, n:Int):Void;
-	@:native("ImBezierQuadraticCalc")
-	static function imBezierQuadraticCalc(pOut:ImVec2, p1:ImVec2, p2:ImVec2, p3:ImVec2, t:imguijs.Float32):Void;
-	@:native("ImBezierCubicClosestPointCasteljau")
-	static function imBezierCubicClosestPointCasteljau(pOut:ImVec2, p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2, p:ImVec2, tess_tol:imguijs.Float32):Void;
-	@:native("ImBezierCubicClosestPoint")
-	static function imBezierCubicClosestPoint(pOut:ImVec2, p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2, p:ImVec2, num_segments:Int):Void;
-	@:native("ImBezierCubicCalc")
-	static function imBezierCubicCalc(pOut:ImVec2, p1:ImVec2, p2:ImVec2, p3:ImVec2, p4:ImVec2, t:imguijs.Float32):Void;
-	@:native("ImAlphaBlendColors")
-	static function imAlphaBlendColors(col_a:ImU32, col_b:ImU32):ImU32;
-	@:native("ImAbs")
-	@:overload(function(x:Float):Float { })
-	static function imAbs(x:imguijs.Float32):imguijs.Float32;
 	@:native("GetWindowWidth")
 	static function getWindowWidth():imguijs.Float32;
 	@:native("GetWindowSize")
 	static function getWindowSize(pOut:ImVec2):Void;
-	@:native("GetWindowScrollbarRect")
-	static function getWindowScrollbarRect(pOut:ImRect, window:ImGuiWindow, axis:ImGuiAxis):Void;
-	@:native("GetWindowScrollbarID")
-	static function getWindowScrollbarID(window:ImGuiWindow, axis:ImGuiAxis):ImGuiID;
-	@:native("GetWindowResizeID")
-	static function getWindowResizeID(window:ImGuiWindow, n:Int):ImGuiID;
 	@:native("GetWindowPos")
 	static function getWindowPos(pOut:ImVec2):Void;
 	@:native("GetWindowHeight")
@@ -4876,14 +4531,10 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function getWindowContentRegionMin(pOut:ImVec2):Void;
 	@:native("GetWindowContentRegionMax")
 	static function getWindowContentRegionMax(pOut:ImVec2):Void;
-	@:native("GetWindowAllowedExtentRect")
-	static function getWindowAllowedExtentRect(pOut:ImRect, window:ImGuiWindow):Void;
 	@:native("GetVersion")
 	static function getVersion():String;
 	@:native("GetTreeNodeToLabelSpacing")
 	static function getTreeNodeToLabelSpacing():imguijs.Float32;
-	@:native("GetTopMostPopupModal")
-	static function getTopMostPopupModal():ImGuiWindow;
 	@:native("GetTime")
 	static function getTime():Float;
 	@:native("GetTextLineHeightWithSpacing")
@@ -4906,12 +4557,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function getScrollMaxY():imguijs.Float32;
 	@:native("GetScrollMaxX")
 	static function getScrollMaxX():imguijs.Float32;
-	@:native("GetNavInputAmount2d")
-	@:overload(function(pOut:ImVec2, dir_sources:ImGuiNavDirSourceFlags, mode:ImGuiInputReadMode, slow_factor:imguijs.Float32):Void { })
-	@:overload(function(pOut:ImVec2, dir_sources:ImGuiNavDirSourceFlags, mode:ImGuiInputReadMode):Void { })
-	static function getNavInputAmount2d(pOut:ImVec2, dir_sources:ImGuiNavDirSourceFlags, mode:ImGuiInputReadMode, slow_factor:imguijs.Float32, fast_factor:imguijs.Float32):Void;
-	@:native("GetNavInputAmount")
-	static function getNavInputAmount(n:ImGuiNavInput, mode:ImGuiInputReadMode):imguijs.Float32;
 	@:native("GetMousePosOnOpeningCurrentPopup")
 	static function getMousePosOnOpeningCurrentPopup(pOut:ImVec2):Void;
 	@:native("GetMousePos")
@@ -4922,36 +4567,22 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function getMouseDragDelta(pOut:ImVec2, button:ImGuiMouseButton, lock_threshold:imguijs.Float32):Void;
 	@:native("GetMouseCursor")
 	static function getMouseCursor():ImGuiMouseCursor;
-	@:native("GetMergedKeyModFlags")
-	static function getMergedKeyModFlags():ImGuiKeyModFlags;
 	@:native("GetKeyPressedAmount")
 	static function getKeyPressedAmount(key_index:Int, repeat_delay:imguijs.Float32, rate:imguijs.Float32):Int;
 	@:native("GetKeyIndex")
 	static function getKeyIndex(imgui_key:ImGuiKey):Int;
-	@:native("GetItemsFlags")
-	static function getItemsFlags():ImGuiItemFlags;
-	@:native("GetItemStatusFlags")
-	static function getItemStatusFlags():ImGuiItemStatusFlags;
 	@:native("GetItemRectSize")
 	static function getItemRectSize(pOut:ImVec2):Void;
 	@:native("GetItemRectMin")
 	static function getItemRectMin(pOut:ImVec2):Void;
 	@:native("GetItemRectMax")
 	static function getItemRectMax(pOut:ImVec2):Void;
-	@:native("GetItemID")
-	static function getItemID():ImGuiID;
-	@:native("GetInputTextState")
-	static function getInputTextState(id:ImGuiID):ImGuiInputTextState;
 	@:native("GetIO")
 	static function getIO():ImGuiIO;
-	@:native("GetIDWithSeed")
-	static function getIDWithSeed(str_id_begin:String, str_id_end:String, seed:ImGuiID):ImGuiID;
 	@:native("GetID")
 	@:overload(function(str_id_begin:String, str_id_end:String):ImGuiID { })
 	@:overload(function(ptr_id:imguijs.VoidPointer):ImGuiID { })
 	static function getID(str_id:String):ImGuiID;
-	@:native("GetHoveredID")
-	static function getHoveredID():ImGuiID;
 	@:native("GetFrameHeightWithSpacing")
 	static function getFrameHeightWithSpacing():imguijs.Float32;
 	@:native("GetFrameHeight")
@@ -4959,7 +4590,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("GetFrameCount")
 	static function getFrameCount():Int;
 	@:native("GetForegroundDrawList")
-	@:overload(function(window:ImGuiWindow):ImDrawList { })
 	static function getForegroundDrawList():ImDrawList;
 	@:native("GetFontTexUvWhitePixel")
 	static function getFontTexUvWhitePixel(pOut:ImVec2):Void;
@@ -4967,20 +4597,12 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function getFontSize():imguijs.Float32;
 	@:native("GetFont")
 	static function getFont():ImFont;
-	@:native("GetFocusedFocusScope")
-	static function getFocusedFocusScope():ImGuiID;
-	@:native("GetFocusScope")
-	static function getFocusScope():ImGuiID;
-	@:native("GetFocusID")
-	static function getFocusID():ImGuiID;
 	@:native("GetDrawListSharedData")
 	static function getDrawListSharedData():ImDrawListSharedData;
 	@:native("GetDrawData")
 	static function getDrawData():ImDrawData;
 	@:native("GetDragDropPayload")
 	static function getDragDropPayload():ImGuiPayload;
-	@:native("GetDefaultFont")
-	static function getDefaultFont():ImFont;
 	@:native("GetCursorStartPos")
 	static function getCursorStartPos(pOut:ImVec2):Void;
 	@:native("GetCursorScreenPos")
@@ -4991,32 +4613,20 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function getCursorPosX():imguijs.Float32;
 	@:native("GetCursorPos")
 	static function getCursorPos(pOut:ImVec2):Void;
-	@:native("GetCurrentWindowRead")
-	static function getCurrentWindowRead():ImGuiWindow;
-	@:native("GetCurrentWindow")
-	static function getCurrentWindow():ImGuiWindow;
 	@:native("GetCurrentContext")
 	static function getCurrentContext():ImGuiContext;
-	@:native("GetContentRegionMaxAbs")
-	static function getContentRegionMaxAbs(pOut:ImVec2):Void;
 	@:native("GetContentRegionMax")
 	static function getContentRegionMax(pOut:ImVec2):Void;
 	@:native("GetContentRegionAvail")
 	static function getContentRegionAvail(pOut:ImVec2):Void;
-	@:native("GetColumnsID")
-	static function getColumnsID(str_id:String, count:Int):ImGuiID;
 	@:native("GetColumnsCount")
 	static function getColumnsCount():Int;
 	@:native("GetColumnWidth")
 	@:overload(function():imguijs.Float32 { })
 	static function getColumnWidth(column_index:Int):imguijs.Float32;
-	@:native("GetColumnOffsetFromNorm")
-	static function getColumnOffsetFromNorm(columns:ImGuiOldColumns, offset_norm:imguijs.Float32):imguijs.Float32;
 	@:native("GetColumnOffset")
 	@:overload(function():imguijs.Float32 { })
 	static function getColumnOffset(column_index:Int):imguijs.Float32;
-	@:native("GetColumnNormFromOffset")
-	static function getColumnNormFromOffset(columns:ImGuiOldColumns, offset:imguijs.Float32):imguijs.Float32;
 	@:native("GetColumnIndex")
 	static function getColumnIndex():Int;
 	@:native("GetColorU32")
@@ -5028,44 +4638,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function getClipboardText():String;
 	@:native("GetBackgroundDrawList")
 	static function getBackgroundDrawList():ImDrawList;
-	@:native("GetActiveID")
-	static function getActiveID():ImGuiID;
-	@:native("GcCompactTransientWindowBuffers")
-	static function gcCompactTransientWindowBuffers(window:ImGuiWindow):Void;
-	@:native("GcCompactTransientMiscBuffers")
-	static function gcCompactTransientMiscBuffers():Void;
-	@:native("GcAwakeTransientWindowBuffers")
-	static function gcAwakeTransientWindowBuffers(window:ImGuiWindow):Void;
-	@:native("FocusableItemUnregister")
-	static function focusableItemUnregister(window:ImGuiWindow):Void;
-	@:native("FocusableItemRegister")
-	static function focusableItemRegister(window:ImGuiWindow, id:ImGuiID):Bool;
-	@:native("FocusWindow")
-	static function focusWindow(window:ImGuiWindow):Void;
-	@:native("FocusTopMostWindowUnderOne")
-	static function focusTopMostWindowUnderOne(under_this_window:ImGuiWindow, ignore_window:ImGuiWindow):Void;
-	@:native("FindWindowSettings")
-	static function findWindowSettings(id:ImGuiID):ImGuiWindowSettings;
-	@:native("FindWindowByName")
-	static function findWindowByName(name:String):ImGuiWindow;
-	@:native("FindWindowByID")
-	static function findWindowByID(id:ImGuiID):ImGuiWindow;
-	@:native("FindSettingsHandler")
-	static function findSettingsHandler(type_name:String):ImGuiSettingsHandler;
-	@:native("FindRenderedTextEnd")
-	@:overload(function(text:String):String { })
-	static function findRenderedTextEnd(text:String, text_end:String):String;
-	@:native("FindOrCreateWindowSettings")
-	static function findOrCreateWindowSettings(name:String):ImGuiWindowSettings;
-	@:native("FindOrCreateColumns")
-	static function findOrCreateColumns(window:ImGuiWindow, id:ImGuiID):ImGuiOldColumns;
-	@:native("FindBestWindowPosForPopupEx")
-	static function findBestWindowPosForPopupEx(pOut:ImVec2, ref_pos:ImVec2, size:ImVec2, last_dir:ImGuiDir, r_outer:ImRect, r_avoid:ImRect, policy:ImGuiPopupPositionPolicy):Void;
-	@:native("FindBestWindowPosForPopup")
-	static function findBestWindowPosForPopup(pOut:ImVec2, window:ImGuiWindow):Void;
-	@:native("ErrorCheckEndFrameRecover")
-	@:overload(function(log_callback:ImGuiErrorLogCallback):Void { })
-	static function errorCheckEndFrameRecover(log_callback:ImGuiErrorLogCallback, user_data:imguijs.VoidPointer):Void;
 	@:native("EndTooltip")
 	static function endTooltip():Void;
 	@:native("EndTable")
@@ -5092,8 +4664,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function endDragDropSource():Void;
 	@:native("EndCombo")
 	static function endCombo():Void;
-	@:native("EndColumns")
-	static function endColumns():Void;
 	@:native("EndChildFrame")
 	static function endChildFrame():Void;
 	@:native("EndChild")
@@ -5186,52 +4756,11 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(label:String, v:imguijs.FloatPointer, v_speed:imguijs.Float32):Bool { })
 	@:overload(function(label:String, v:imguijs.FloatPointer):Bool { })
 	static function dragFloat(label:String, v:imguijs.FloatPointer, v_speed:imguijs.Float32, v_min:imguijs.Float32, v_max:imguijs.Float32, format:String, flags:ImGuiSliderFlags):Bool;
-	@:native("DragBehavior")
-	static function dragBehavior(id:ImGuiID, data_type:ImGuiDataType, p_v:imguijs.VoidPointer, v_speed:imguijs.Float32, p_min:imguijs.VoidPointer, p_max:imguijs.VoidPointer, format:String, flags:ImGuiSliderFlags):Bool;
 	@:native("DestroyContext")
 	@:overload(function():Void { })
 	static function destroyContext(ctx:ImGuiContext):Void;
-	@:native("DebugStartItemPicker")
-	static function debugStartItemPicker():Void;
-	@:native("DebugNodeWindowsList")
-	static function debugNodeWindowsList(windows:ImVectorImGuiWindowPtrPointer, label:String):Void;
-	@:native("DebugNodeWindowSettings")
-	static function debugNodeWindowSettings(settings:ImGuiWindowSettings):Void;
-	@:native("DebugNodeWindow")
-	static function debugNodeWindow(window:ImGuiWindow, label:String):Void;
-	@:native("DebugNodeTableSettings")
-	static function debugNodeTableSettings(settings:ImGuiTableSettings):Void;
-	@:native("DebugNodeTable")
-	static function debugNodeTable(table:ImGuiTable):Void;
-	@:native("DebugNodeTabBar")
-	static function debugNodeTabBar(tab_bar:ImGuiTabBar, label:String):Void;
-	@:native("DebugNodeStorage")
-	static function debugNodeStorage(storage:ImGuiStorage, label:String):Void;
-	@:native("DebugNodeDrawList")
-	static function debugNodeDrawList(window:ImGuiWindow, draw_list:ImDrawList, label:String):Void;
-	@:native("DebugNodeDrawCmdShowMeshAndBoundingBox")
-	static function debugNodeDrawCmdShowMeshAndBoundingBox(window:ImGuiWindow, draw_list:ImDrawList, draw_cmd:ImDrawCmd, show_mesh:Bool, show_aabb:Bool):Void;
-	@:native("DebugNodeColumns")
-	static function debugNodeColumns(columns:ImGuiOldColumns):Void;
-	@:native("DebugDrawItemRect")
-	@:overload(function():Void { })
-	static function debugDrawItemRect(col:ImU32):Void;
 	@:native("DebugCheckVersionAndDataLayout")
 	static function debugCheckVersionAndDataLayout(version_str:String, sz_io:imguijs.SizeT, sz_style:imguijs.SizeT, sz_vec2:imguijs.SizeT, sz_vec4:imguijs.SizeT, sz_drawvert:imguijs.SizeT, sz_drawidx:imguijs.SizeT):Bool;
-	@:native("DataTypeGetInfo")
-	static function dataTypeGetInfo(data_type:ImGuiDataType):ImGuiDataTypeInfo;
-	@:native("DataTypeFormatString")
-	static function dataTypeFormatString(buf:imguijs.Char, buf_size:Int, data_type:ImGuiDataType, p_data:imguijs.VoidPointer, format:String):Int;
-	@:native("DataTypeCompare")
-	static function dataTypeCompare(data_type:ImGuiDataType, arg_1:imguijs.VoidPointer, arg_2:imguijs.VoidPointer):Int;
-	@:native("DataTypeClamp")
-	static function dataTypeClamp(data_type:ImGuiDataType, p_data:imguijs.VoidPointer, p_min:imguijs.VoidPointer, p_max:imguijs.VoidPointer):Bool;
-	@:native("DataTypeApplyOpFromText")
-	static function dataTypeApplyOpFromText(buf:String, initial_value_buf:String, data_type:ImGuiDataType, p_data:imguijs.VoidPointer, format:String):Bool;
-	@:native("DataTypeApplyOp")
-	static function dataTypeApplyOp(data_type:ImGuiDataType, op:Int, output:imguijs.VoidPointer, arg_1:imguijs.VoidPointer, arg_2:imguijs.VoidPointer):Void;
-	@:native("CreateNewWindowSettings")
-	static function createNewWindowSettings(name:String):ImGuiWindowSettings;
 	@:native("CreateContext")
 	@:overload(function():ImGuiContext { })
 	static function createContext(shared_font_atlas:ImFontAtlas):ImGuiContext;
@@ -5247,10 +4776,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(id:String):Void { })
 	@:overload(function():Void { })
 	static function columns(count:Int, id:String, border:Bool):Void;
-	@:native("ColorTooltip")
-	static function colorTooltip(text:String, col:imguijs.FloatPointer, flags:ImGuiColorEditFlags):Void;
-	@:native("ColorPickerOptionsPopup")
-	static function colorPickerOptionsPopup(ref_col:imguijs.FloatPointer, flags:ImGuiColorEditFlags):Void;
 	@:native("ColorPicker4")
 	@:overload(function(label:String, col:imguijs.FloatPointer, ref_col:imguijs.FloatPointer):Bool { })
 	@:overload(function(label:String, col:imguijs.FloatPointer):Bool { })
@@ -5258,8 +4783,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("ColorPicker3")
 	@:overload(function(label:String, col:imguijs.FloatPointer):Bool { })
 	static function colorPicker3(label:String, col:imguijs.FloatPointer, flags:ImGuiColorEditFlags):Bool;
-	@:native("ColorEditOptionsPopup")
-	static function colorEditOptionsPopup(col:imguijs.FloatPointer, flags:ImGuiColorEditFlags):Void;
 	@:native("ColorEdit4")
 	@:overload(function(label:String, col:imguijs.FloatPointer):Bool { })
 	static function colorEdit4(label:String, col:imguijs.FloatPointer, flags:ImGuiColorEditFlags):Bool;
@@ -5283,26 +4806,10 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(label:String, p_visible:imguijs.BoolPointer, flags:ImGuiTreeNodeFlags):Bool { })
 	@:overload(function(label:String, p_visible:imguijs.BoolPointer):Bool { })
 	static function collapsingHeader(label:String, flags:ImGuiTreeNodeFlags):Bool;
-	@:native("CollapseButton")
-	static function collapseButton(id:ImGuiID, pos:ImVec2):Bool;
-	@:native("ClosePopupsOverWindow")
-	static function closePopupsOverWindow(ref_window:ImGuiWindow, restore_focus_to_window_under_popup:Bool):Void;
-	@:native("ClosePopupToLevel")
-	static function closePopupToLevel(remaining:Int, restore_focus_to_window_under_popup:Bool):Void;
 	@:native("CloseCurrentPopup")
 	static function closeCurrentPopup():Void;
-	@:native("CloseButton")
-	static function closeButton(id:ImGuiID, pos:ImVec2):Bool;
-	@:native("ClearIniSettings")
-	static function clearIniSettings():Void;
-	@:native("ClearDragDrop")
-	static function clearDragDrop():Void;
-	@:native("ClearActiveID")
-	static function clearActiveID():Void;
 	@:native("CheckboxFlags")
 	@:overload(function(label:String, flags:UInt, flags_value:UInt):Bool { })
-	@:overload(function(label:String, flags:ImS64, flags_value:ImS64):Bool { })
-	@:overload(function(label:String, flags:ImU64, flags_value:ImU64):Bool { })
 	static function checkboxFlags(label:String, flags:imguijs.IntPointer, flags_value:Int):Bool;
 	@:native("Checkbox")
 	static function checkbox(label:String, v:imguijs.BoolPointer):Bool;
@@ -5312,14 +4819,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("CaptureKeyboardFromApp")
 	@:overload(function():Void { })
 	static function captureKeyboardFromApp(want_capture_keyboard_value:Bool):Void;
-	@:native("CallContextHooks")
-	static function callContextHooks(context:ImGuiContext, type:ImGuiContextHookType):Void;
-	@:native("CalcWrapWidthForPos")
-	static function calcWrapWidthForPos(pos:ImVec2, wrap_pos_x:imguijs.Float32):imguijs.Float32;
-	@:native("CalcWindowNextAutoFitSize")
-	static function calcWindowNextAutoFitSize(pOut:ImVec2, window:ImGuiWindow):Void;
-	@:native("CalcTypematicRepeatAmount")
-	static function calcTypematicRepeatAmount(t0:imguijs.Float32, t1:imguijs.Float32, repeat_delay:imguijs.Float32, repeat_rate:imguijs.Float32):Int;
 	@:native("CalcTextSize")
 	@:overload(function(pOut:ImVec2, text:String, text_end:String, wrap_width:imguijs.Float32):Void { })
 	@:overload(function(pOut:ImVec2, text:String, wrap_width:imguijs.Float32):Void { })
@@ -5329,15 +4828,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function calcListClipping(items_count:Int, items_height:imguijs.Float32, out_items_display_start:imguijs.IntPointer, out_items_display_end:imguijs.IntPointer):Void;
 	@:native("CalcItemWidth")
 	static function calcItemWidth():imguijs.Float32;
-	@:native("CalcItemSize")
-	static function calcItemSize(pOut:ImVec2, size:ImVec2, default_w:imguijs.Float32, default_h:imguijs.Float32):Void;
-	@:native("ButtonEx")
-	@:overload(function(label:String, size_arg:ImVec2):Bool { })
-	@:overload(function(label:String):Bool { })
-	static function buttonEx(label:String, size_arg:ImVec2, flags:ImGuiButtonFlags):Bool;
-	@:native("ButtonBehavior")
-	@:overload(function(bb:ImRect, id:ImGuiID, out_hovered:imguijs.BoolPointer, out_held:imguijs.BoolPointer):Bool { })
-	static function buttonBehavior(bb:ImRect, id:ImGuiID, out_hovered:imguijs.BoolPointer, out_held:imguijs.BoolPointer, flags:ImGuiButtonFlags):Bool;
 	@:native("Button")
 	@:overload(function(label:String):Bool { })
 	static function button(label:String, size:ImVec2):Bool;
@@ -5347,21 +4837,8 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function bulletText(fmt:String, vargs:haxe.extern.Rest<Dynamic>):Void;
 	@:native("Bullet")
 	static function bullet():Void;
-	@:native("BringWindowToFocusFront")
-	static function bringWindowToFocusFront(window:ImGuiWindow):Void;
-	@:native("BringWindowToDisplayFront")
-	static function bringWindowToDisplayFront(window:ImGuiWindow):Void;
-	@:native("BringWindowToDisplayBack")
-	static function bringWindowToDisplayBack(window:ImGuiWindow):Void;
-	@:native("BeginTooltipEx")
-	static function beginTooltipEx(extra_flags:ImGuiWindowFlags, tooltip_flags:ImGuiTooltipFlags):Void;
 	@:native("BeginTooltip")
 	static function beginTooltip():Void;
-	@:native("BeginTableEx")
-	@:overload(function(name:String, id:ImGuiID, columns_count:Int, outer_size:ImVec2, inner_width:imguijs.Float32):Bool { })
-	@:overload(function(name:String, id:ImGuiID, columns_count:Int, outer_size:ImVec2):Bool { })
-	@:overload(function(name:String, id:ImGuiID, columns_count:Int):Bool { })
-	static function beginTableEx(name:String, id:ImGuiID, columns_count:Int, flags:ImGuiTableFlags, outer_size:ImVec2, inner_width:imguijs.Float32):Bool;
 	@:native("BeginTable")
 	@:overload(function(str_id:String, column:Int, outer_size:ImVec2, inner_width:imguijs.Float32):Bool { })
 	@:overload(function(str_id:String, column:Int, outer_size:ImVec2):Bool { })
@@ -5371,8 +4848,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(label:String, p_open:imguijs.BoolPointer):Bool { })
 	@:overload(function(label:String):Bool { })
 	static function beginTabItem(label:String, p_open:imguijs.BoolPointer, flags:ImGuiTabItemFlags):Bool;
-	@:native("BeginTabBarEx")
-	static function beginTabBarEx(tab_bar:ImGuiTabBar, bb:ImRect, flags:ImGuiTabBarFlags):Bool;
 	@:native("BeginTabBar")
 	@:overload(function(str_id:String):Bool { })
 	static function beginTabBar(str_id:String, flags:ImGuiTabBarFlags):Bool;
@@ -5380,8 +4855,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(name:String, p_open:imguijs.BoolPointer):Bool { })
 	@:overload(function(name:String):Bool { })
 	static function beginPopupModal(name:String, p_open:imguijs.BoolPointer, flags:ImGuiWindowFlags):Bool;
-	@:native("BeginPopupEx")
-	static function beginPopupEx(id:ImGuiID, extra_flags:ImGuiWindowFlags):Bool;
 	@:native("BeginPopupContextWindow")
 	@:overload(function(str_id:String):Bool { })
 	@:overload(function():Bool { })
@@ -5406,8 +4879,6 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	static function beginMainMenuBar():Bool;
 	@:native("BeginGroup")
 	static function beginGroup():Void;
-	@:native("BeginDragDropTargetCustom")
-	static function beginDragDropTargetCustom(bb:ImRect, id:ImGuiID):Bool;
 	@:native("BeginDragDropTarget")
 	static function beginDragDropTarget():Bool;
 	@:native("BeginDragDropSource")
@@ -5416,14 +4887,9 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("BeginCombo")
 	@:overload(function(label:String, preview_value:String):Bool { })
 	static function beginCombo(label:String, preview_value:String, flags:ImGuiComboFlags):Bool;
-	@:native("BeginColumns")
-	@:overload(function(str_id:String, count:Int):Void { })
-	static function beginColumns(str_id:String, count:Int, flags:ImGuiOldColumnFlags):Void;
 	@:native("BeginChildFrame")
 	@:overload(function(id:ImGuiID, size:ImVec2):Bool { })
 	static function beginChildFrame(id:ImGuiID, size:ImVec2, flags:ImGuiWindowFlags):Bool;
-	@:native("BeginChildEx")
-	static function beginChildEx(name:String, id:ImGuiID, size_arg:ImVec2, border:Bool, flags:ImGuiWindowFlags):Bool;
 	@:native("BeginChild")
 	@:overload(function(str_id:String, size:ImVec2, flags:ImGuiWindowFlags):Bool { })
 	@:overload(function(str_id:String, size:ImVec2):Bool { })
@@ -5437,17 +4903,10 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:overload(function(name:String, p_open:imguijs.BoolPointer):Bool { })
 	@:overload(function(name:String):Bool { })
 	static function begin(name:String, p_open:imguijs.BoolPointer, flags:ImGuiWindowFlags):Bool;
-	@:native("ArrowButtonEx")
-	@:overload(function(str_id:String, dir:ImGuiDir, size_arg:ImVec2):Bool { })
-	static function arrowButtonEx(str_id:String, dir:ImGuiDir, size_arg:ImVec2, flags:ImGuiButtonFlags):Bool;
 	@:native("ArrowButton")
 	static function arrowButton(str_id:String, dir:ImGuiDir):Bool;
 	@:native("AlignTextToFramePadding")
 	static function alignTextToFramePadding():Void;
-	@:native("AddContextHook")
-	static function addContextHook(context:ImGuiContext, hook:ImGuiContextHook):Void;
-	@:native("ActivateItem")
-	static function activateItem(id:ImGuiID):Void;
 	@:native("AcceptDragDropPayload")
 	@:overload(function(type:String):ImGuiPayload { })
 	static function acceptDragDropPayload(type:String, flags:ImGuiDragDropFlags):ImGuiPayload;

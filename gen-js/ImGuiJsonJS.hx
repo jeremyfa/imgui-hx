@@ -1,66 +1,12 @@
 
+import haxe.macro.Context;
 import json2object.JsonParser;
 import haxe.macro.Expr;
+import ImGuiJsonTypes;
 
 using StringTools;
 using Lambda;
 using Safety;
-
-typedef JsonEnum = {
-    calc_value : Int,
-    name       : String,
-    value      : String
-};
-typedef JsonStruct = {
-    var name : String;
-    var type : String;
-    @:default(0)
-    var size : Int;
-    @:default('')
-    var template_type : String;
-};
-typedef JsonEnumStruct = {
-    var enums : Map<String, Array<JsonEnum>>;
-    var structs : Map<String, Array<JsonStruct>>;
-}
-typedef JsonFunctionArg = {
-    var name : String;
-    var type : String;
-    @:default('')
-    var signature : String;
-}
-typedef JsonFunction = {
-    var args : String;
-    var argsT : Array<JsonFunctionArg>;
-    var argsoriginal : String;
-    var call_args : String;
-    var cimguiname : String;
-    var ov_cimguiname : String;
-    var funcname : String;
-    var stname : String;
-    var signature : String;
-
-    @:default([])
-    var defaults : Map<String, String>;
-
-    @:default(false)
-    var constructor : Bool;
-
-    @:default(false)
-    var destructor : Bool;
-
-    @:default(false)
-    var templatedgen : Bool;
-    @:default(false)
-    var templated : Bool;
-    var ?isvararg : String;
-    var ?retref : String;
-    var ?namespace : String;
-    var ?ret : String;
-    var ?retorig : String;
-}
-typedef JsonDefinitions = Map<String, Array<JsonFunction>>;
-typedef JsonTypedef = Map<String, String>;
 
 class ImGuiJsonJS
 {
@@ -358,11 +304,11 @@ class ImGuiJsonJS
             final constructor : Field = {
                 name   : 'new',
                 pos    : null,
-                access : [ APublic ], kind: FFun(generateFunctionAst(null, false, [{
+                access : [ APublic ], kind: FFun(generateFunctionAst(null, null, false, [{
                     signature: null,
                     name: 'args',
                     type: '...'
-                }], false))
+                }], false, false))
             };
             constructor.meta = [
                 { name : ':native', pos : null, params : [ macro $i{ '"ImVector"' /*<$templatedType>"'*/ } ] },
@@ -416,7 +362,7 @@ class ImGuiJsonJS
     public function generateTopLevelFunctions() : TypeDefinition
     {
         final topLevelClass    = macro class ImGui { };
-        topLevelClass.fields   = generateFunctionFieldsArray(definitions.map(f -> f.filter(i -> i.stname == '')), true);
+        topLevelClass.fields   = generateFunctionFieldsArray(definitions.map(f -> f.filter(i -> i.stname == '' && (i.location != null && i.location.startsWith('imgui:')))), true);
         topLevelClass.isExtern = true;
         topLevelClass.meta     = [
             { name: ':keep', pos : null },
@@ -428,6 +374,25 @@ class ImGuiJsonJS
         ];
 
         return topLevelClass;
+    }
+
+    public function retrieveAllConstructors() : Array<JsonFunction> {
+
+        var filteredDefinitions = definitions.map(f -> f.filter(i -> i.stname != '' && (i.location != null && i.location.startsWith('imgui:'))));
+        var result = [];
+
+        for (overloads in filteredDefinitions.filter(a -> a.length > 0))
+        {
+            for (overloadedFn in overloads)
+            {
+                if (overloadedFn.constructor) {
+                    result.push(overloadedFn);
+                }
+            }
+        }
+
+        return result;
+
     }
 
     /**
@@ -454,15 +419,21 @@ class ImGuiJsonJS
                 }
                 else
                 {
-                    baseFn.meta.push({
-                        name   : ':overload',
-                        pos    : null,
-                        params : [ { pos: null, expr: EFunction(FAnonymous, generateFunctionAst(
-                            overloadedFn.constructor ? overloadedFn.stname : overloadedFn.retorig.or(overloadedFn.ret),
-                            overloadedFn.retref == '&',
-                            overloadedFn.argsT.copy(),
-                            true)) } ]
-                    });
+                    if (overloadedFn.constructor) {
+                        fields.push(generateFunction(overloadedFn, _isTopLevel, overloadedFn.constructor));
+                    }
+                    else {
+                        baseFn.meta.push({
+                            name   : ':overload',
+                            pos    : null,
+                            params : [ { pos: null, expr: EFunction(FAnonymous, generateFunctionAst(
+                                overloadedFn,
+                                overloadedFn.constructor ? overloadedFn.stname : overloadedFn.retorig.or(overloadedFn.ret),
+                                overloadedFn.retref == '&',
+                                overloadedFn.argsT.copy(),
+                                true, overloadedFn.constructor)) } ]
+                        });
+                    }
                 }
 
                 // For each overloaded function also look at the default values.
@@ -475,15 +446,21 @@ class ImGuiJsonJS
                 {
                     filtered.push(defaults.pop());
 
-                    baseFn.meta.push({
-                        name   : ':overload',
-                        pos    : null,
-                        params : [ { pos: null, expr: EFunction(FAnonymous, generateFunctionAst(
-                            overloadedFn.constructor ? overloadedFn.stname : overloadedFn.retorig.or(overloadedFn.ret),
-                            overloadedFn.retref == '&',
-                            overloadedFn.argsT.filter(i -> !filtered.has(i.name)),
-                            true)) } ]
-                    });
+                    if (overloadedFn.constructor) {
+                        // TODO?
+                    }
+                    else {
+                        baseFn.meta.push({
+                            name   : ':overload',
+                            pos    : null,
+                            params : [ { pos: null, expr: EFunction(FAnonymous, generateFunctionAst(
+                                overloadedFn,
+                                overloadedFn.constructor ? overloadedFn.stname : overloadedFn.retorig.or(overloadedFn.ret),
+                                overloadedFn.retref == '&',
+                                overloadedFn.argsT.filter(i -> !filtered.has(i.name)),
+                                true, overloadedFn.constructor)) } ]
+                        });
+                    }
                 }
             }
 
@@ -510,8 +487,8 @@ class ImGuiJsonJS
         return {
             name   : funcName,
             pos    : null,
-            access : _isTopLevel || _isConstructor ? [ AStatic ] : [],
-            kind   : FFun(generateFunctionAst(returnType, _function.retref == '&', _function.argsT.copy(), false)),
+            access : _isTopLevel ? [ AStatic ] : (_isConstructor ? [ AStatic, AInline, AExtern, AOverload ] : []),
+            kind   : FFun(generateFunctionAst(_function, returnType, _function.retref == '&', _function.argsT.copy(), _isConstructor, _isConstructor)),
             meta   : [
                 { name: ':native', pos : null, params: [ macro $i{ '"$nativeType"' } ] }
             ]
@@ -521,13 +498,15 @@ class ImGuiJsonJS
     /**
      * Generates an AST representation of a function.
      * AST representations do not contain a function name, this type is then wrapped in an anonymous and function expr or type definition.
+     * @param _function The related function.
      * @param _return String of the native return type.
      * @param _reference If the return type is a reference.
      * @param _args Array of arguments for this function.
      * @param _block If this function should be generated with an EBlock expr (needed for correct overload syntax).
+     * @param _wrapConstructor If this function is a wrapped constructor.
      * @return Function
      */
-    function generateFunctionAst(_return : String, _reference : Bool, _args : Array<JsonFunctionArg>, _block : Bool) : Function
+    function generateFunctionAst(_function : JsonFunction, _return : String, _reference : Bool, _args : Array<JsonFunctionArg>, _block : Bool, _wrapConstructor : Bool) : Function
     {
         // If the first argument is called 'self' then thats part of cimgui
         // we can safely remove it as we aren't using the c bindings code.
@@ -539,8 +518,34 @@ class ImGuiJsonJS
             }
         }
 
+        var funcExpr:Expr = { expr: EBlock([]), pos : null };
+
+        if (_wrapConstructor) {
+
+            var exprStr = '{';
+            exprStr += 'return js.Syntax.code("new ImGui.' + _function.funcname + '(';
+            for (i in 0..._args.length) {
+                var arg = _args[i];
+                if (i > 0) {
+                    exprStr += ', ';
+                }
+                exprStr += "{" + i + "}";
+            }
+            exprStr += ')"';
+            for (i in 0..._args.length) {
+                var arg = _args[i];
+                exprStr += ', ';
+                exprStr += getHaxefriendlyName(arg.name);
+            }
+            exprStr += ');';
+            exprStr += '}';
+
+            funcExpr = Context.parse(exprStr, Context.currentPos());
+
+        }
+
         return {
-            expr : _block ? { expr: EBlock([]), pos : null } : null,
+            expr : _block ? funcExpr : null,
             ret  : _return != null ? buildReturnType(parseNativeString(_return), _reference) : null,
             args : [ for (arg in _args) generateFunctionArg(arg.name, arg.type) ]
         }
