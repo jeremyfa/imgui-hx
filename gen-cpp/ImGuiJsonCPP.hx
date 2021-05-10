@@ -779,50 +779,8 @@ class ImGuiJsonCPP
             }
             while (defaultsForCall.length > 0);
             
-            /*
-            var i = 0;
-            while (defaultsForCall.length > 0) {
-                var optArg = defaultsForCall.pop();
-                if (i > 0) {
-                    exprStr += 'else ';
-                }
-                exprStr += 'if (' + getHaxefriendlyName(optArg) + ' != null) {';
-                exprStr += '_' + funcName + '(';
-                var n = 0;
-                for (arg in _args) {
-                    if (defaults.indexOf(arg.name) == -1 || defaultsForCall.indexOf(arg.name) != -1) {
-                        if (n > 0) {
-                            exprStr += ', ';
-                        }
-                        exprStr += getHaxefriendlyName(arg.name);
-                        n++;
-                    }
-                }
-                if (n > 0) {
-                    exprStr += ', ';
-                }
-                exprStr += getHaxefriendlyName(optArg);
-                exprStr += ');';
-                exprStr += '}';
-                i++;
-            }
-            exprStr += 'else {';
-            exprStr += '_' + funcName + '(';
-            var n = 0;
-            for (arg in _args) {
-                if (defaults.indexOf(arg.name) == -1) {
-                    if (n > 0) {
-                        exprStr += ', ';
-                    }
-                    exprStr += getHaxefriendlyName(arg.name);
-                    n++;
-                }
-            }
-            exprStr += ');';
-            exprStr += '}';
-            */
         }
-        exprStr += 'imguicpp.Address.sync();';
+        exprStr += 'imguicpp.Helpers.flushCallbacks();';
         if (!isVoid) {
             exprStr += 'return _res;';
         }
