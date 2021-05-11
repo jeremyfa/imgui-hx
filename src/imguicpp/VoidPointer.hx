@@ -24,6 +24,21 @@ abstract VoidPointer(cpp.Pointer<cpp.Void>) from cpp.Pointer<cpp.Void> to cpp.Po
         return new VoidPointer(VarPointer.addressOf(_bool).reinterpret());
     }
 
+    @:from public static inline function fromPointer<T>(_pointer : cpp.Pointer<T>)
+    {
+        return new VoidPointer(untyped __cpp__('(void*){0}', _pointer));
+    }
+
+    @:from public static inline function fromBytes(_bytes : haxe.io.Bytes)
+    {
+        return new VoidPointer(fromPointer(VarPointer.arrayElem(_bytes.getData(), 0)));
+    }
+
+    @:from public static inline function fromArray<T>(_array : Array<T>)
+    {
+        return new VoidPointer(fromPointer(VarPointer.arrayElem(_array, 0)));
+    }
+
     @:to public inline function toRaw() : cpp.RawPointer<cpp.Void>
     {
         return this.raw;
