@@ -413,6 +413,16 @@ class ImGuiJsonJS
 
             for (overloadedFn in overloads)
             {
+                // Needed to match actual bindings, which differ from cimgui
+                if (_isTopLevel) {
+                    if (overloadedFn.funcname.startsWith('GetItemRect')) {
+                        if (overloadedFn.ret == 'void' && overloadedFn.argsT.length == 1) {
+                            overloadedFn.ret = overloadedFn.argsT[0].type.replace('*','');
+                            overloadedFn.argsT = [];
+                        }
+                    }
+                }
+
                 if (baseFn == null)
                 {
                     baseFn = generateFunction(overloadedFn, _isTopLevel, overloadedFn.constructor);

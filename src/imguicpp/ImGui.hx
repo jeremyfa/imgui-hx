@@ -4387,11 +4387,11 @@ typedef ImDrawCallback = cpp.Callable<(cpp.Star<ImDrawList>, cpp.Star<ImDrawCmd>
 	@:native("ImGui::GetKeyIndex")
 	static function getKeyIndex(imgui_key:ImGuiKey):Int;
 	@:native("ImGui::GetItemRectSize")
-	static function getItemRectSize(pOut:cpp.Star<ImVec2>):cpp.Void;
+	static function getItemRectSize():ImVec2;
 	@:native("ImGui::GetItemRectMin")
-	static function getItemRectMin(pOut:cpp.Star<ImVec2>):cpp.Void;
+	static function getItemRectMin():ImVec2;
 	@:native("ImGui::GetItemRectMax")
-	static function getItemRectMax(pOut:cpp.Star<ImVec2>):cpp.Void;
+	static function getItemRectMax():ImVec2;
 	@:native("ImGui::GetIO")
 	static function getIO():cpp.Reference<ImGuiIO>;
 	@:native("ImGui::linc_GetID")

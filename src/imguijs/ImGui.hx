@@ -4572,11 +4572,11 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	@:native("GetKeyIndex")
 	static function getKeyIndex(imgui_key:ImGuiKey):Int;
 	@:native("GetItemRectSize")
-	static function getItemRectSize(pOut:ImVec2):Void;
+	static function getItemRectSize():ImVec2;
 	@:native("GetItemRectMin")
-	static function getItemRectMin(pOut:ImVec2):Void;
+	static function getItemRectMin():ImVec2;
 	@:native("GetItemRectMax")
-	static function getItemRectMax(pOut:ImVec2):Void;
+	static function getItemRectMax():ImVec2;
 	@:native("GetIO")
 	static function getIO():ImGuiIO;
 	@:native("GetID")
