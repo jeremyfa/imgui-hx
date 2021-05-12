@@ -99,13 +99,30 @@ typedef BoolPointer = Dynamic;
 
         File.saveContent('src/imguijs/ImGui.hx', buffer.toString());
 
-        var constructibleTypes = [];
+        var exposedTypes = [];
         for (fn in reader.retrieveAllConstructors()) {
             var type = fn.funcname;
             if (type == 'ImVector')
                 type = 'ImVector<T>';
-            if (!constructibleTypes.contains(type)) {
-                constructibleTypes.push(type);
+            if (!exposedTypes.contains(type)) {
+                exposedTypes.push(type);
+            }
+        }
+
+        for (type in reader.generateEnums()) {
+            if (!exposedTypes.contains(type.name)) {
+                exposedTypes.push(type.name);
+            }
+        }
+
+        for (type in [
+            'ImGuiWindowPtr', 'ImWchar32', 'ImWchar16', 'ImWchar', 'ImU8', 'ImU64', 'ImU32', 'ImU16', 'ImTextureID',
+            'ImS8', 'ImS64', 'ImS32', 'ImS16', 'ImPoolIdx', 'ImGuiTableDrawChannelIdx', 'ImGuiTableColumnIdx', 'ImGuiSizeCallback',
+            'ImGuiInputTextCallback', 'ImGuiID', 'ImGuiErrorLogCallback', 'ImGuiContextHookCallback', 'ImFileHandle',
+            'ImDrawIdx', 'ImDrawCallback'
+        ]) {
+            if (!exposedTypes.contains(type)) {
+                exposedTypes.push(type);
             }
         }
         
@@ -120,7 +137,7 @@ typedef BoolPointer = Dynamic;
                     didDumpTypedefs = true;
 
                     rootImGuiHx.push('typedef ImGui = imguijs.ImGui;');
-                    for (type in constructibleTypes) {
+                    for (type in exposedTypes) {
                         rootImGuiHx.push('typedef ' + type + ' = imguijs.ImGui.' + type + ';');
                     }
                 }
