@@ -35,7 +35,11 @@ This is a new binding so there's bound to be missing and / or non-working functi
 
 ### Setup in project/engine
 
-There is no setup guide at the moment, but if you want to setup and use Dear ImGui into your own project/engine, you could take a look at the [imgui plugin](https://github.com/ceramic-engine/ceramic/tree/master/plugins/imgui/runtime/src/ceramic) for ceramic engine, which contain code to make Dear ImGui work with both C++ and JS targets. When targetting C++, it is using Dear ImGui's built-in backend (SDL + opengl) which should make integration easier on your own engine, if based on opengl as well.
+There is no setup guide at the moment, but if you want to setup and use Dear ImGui into your own project/engine, you could take a look at the [imgui plugin](https://github.com/ceramic-engine/ceramic/tree/master/plugins/imgui/runtime/src/ceramic) for ceramic engine, which contain code to make Dear ImGui work with both C++ and JS targets.
+
+When targetting C++, it is using Dear ImGui's built-in backend (SDL + opengl) which should make integration easier on your own engine, if based on opengl as well.
+
+When targetting JS, it loads `imgui.umd.js` and `imgui_impl.umd.js` that you can find in [imgui-js dist directory](https://github.com/flyover/imgui-js/tree/08f05fb0f47e02978e4aa52e5a2b9b206e06998d/dist). These files are required as they contain Dear ImGui Web Assembly module.
 
 ImGui's Metal/DirectX backends are not handled in imgui-hx bindings yet, and when using SDL + opengl, it is expected that your project uses `linc_sdl` and `linc_opengl` libraries, but pull requests are welcome to make the bindings work with more various environments.
 
