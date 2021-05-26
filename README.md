@@ -32,3 +32,40 @@ Please note that javascript bindings are very recent and might not match exactly
 ### Reporting errors
 
 This is a new binding so there's bound to be missing and / or non-working functions and features. If you find them please create a new issue so it can be fixed. Pull Requests are also welcome.
+
+### Setup in project/engine
+
+There is no setup guide at the moment, but if you want to setup and use Dear ImGui into your own project/engine, you could take a look at the [imgui plugin](https://github.com/ceramic-engine/ceramic/tree/master/plugins/imgui/runtime/src/ceramic) for ceramic engine, which contain code to make Dear ImGui work with both C++ and JS targets. When targetting C++, it is using Dear ImGui's built-in backend (SDL + opengl) which should make integration easier on your own engine, if based on opengl as well.
+
+ImGui's Metal/DirectX backends are not handled in imgui-hx bindings yet, and when using SDL + opengl, it is expected that your project uses `linc_sdl` and `linc_opengl` libraries, but pull requests are welcome to make the bindings work with more various environments.
+
+Once everything is setup, you can, in any haxe file of your project:
+
+1. Import Dear ImGui and additional haxe helpers
+
+```haxe
+import imgui.ImGui;
+import imgui.Helpers.*;
+```
+
+2. Start creating UI by adding code that is executed at every frame of your app
+
+```haxe
+var someFloatValue:Float = 0.0;
+
+function someUpdateLoopMethod() {
+
+    // Create a small ImGui window to edit a float value
+
+    ImGui.begin('Hello');
+    
+    ImGui.sliderFloat('Some slider', fromFloat(someFloatValue), 0.0, 1.0);
+    
+    if (someFloatValue == 1.0) {
+        ImGui.text('Float value is at MAX (1.0)');
+    }
+    
+    ImGui.end();
+
+}
+```
