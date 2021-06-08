@@ -99,7 +99,7 @@ class Helpers {
         return macro {
             var _val = new imguicpp.Helpers.Float32ArrayHolder($value);
             imguicpp.Helpers.pushCallback(function() {
-                imguicpp.Helpers._updateFloatArray(_val.original, _val.value);
+                @:privateAccess imguicpp.Helpers._updateFloatArray(_val.original, _val.value);
             });
             imguicpp.utils.VarPointer.arrayElem(_val.value, 0);
         };
