@@ -16,15 +16,25 @@ namespace ImGui {
 
     bool linc_VSliderFloat(const char* label, const ImVec2& size, float* v, float v_min, float v_max, const char* format="%.3f", ImGuiSliderFlags flags=0);
 
+    void linc_TreePush(const char* str_id);
+
     void linc_TreePush(const void* ptr_id=NULL);
+
+    bool linc_TreeNodeV(const char* str_id, const char* fmt, va_list args);
 
     bool linc_TreeNodeV(const void* ptr_id, const char* fmt, va_list args);
 
+    bool linc_TreeNodeExV(const char* str_id, ImGuiTreeNodeFlags flags, const char* fmt, va_list args);
+
     bool linc_TreeNodeExV(const void* ptr_id, ImGuiTreeNodeFlags flags, const char* fmt, va_list args);
+
+    bool linc_TreeNodeEx(const char* label, ImGuiTreeNodeFlags flags=0);
 
     bool linc_TreeNodeEx(const char* str_id, ImGuiTreeNodeFlags flags, const char* fmt, ...);
 
     bool linc_TreeNodeEx(const void* ptr_id, ImGuiTreeNodeFlags flags, const char* fmt, ...);
+
+    bool linc_TreeNode(const char* label);
 
     bool linc_TreeNode(const char* str_id, const char* fmt, ...);
 
@@ -74,11 +84,21 @@ namespace ImGui {
 
     void linc_SetAllocatorFunctions(void*(*alloc_func)(size_t sz, void* user_data), void(*free_func)(void* ptr, void* user_data), void* user_data=NULL);
 
+    bool linc_Selectable(const char* label, bool selected=false, ImGuiSelectableFlags flags=0, const ImVec2& size=ImVec2(0, 0));
+
     bool linc_Selectable(const char* label, bool* p_selected, ImGuiSelectableFlags flags=0, const ImVec2& size=ImVec2(0, 0));
+
+    bool linc_RadioButton(const char* label, bool active);
 
     bool linc_RadioButton(const char* label, int* v, int v_button);
 
+    void linc_PushID(const char* str_id);
+
+    void linc_PushID(const char* str_id_begin, const char* str_id_end);
+
     void linc_PushID(const void* ptr_id);
+
+    void linc_PushID(int int_id);
 
     void linc_PlotLines(const char* label, const float* values, int values_count, int values_offset=0, const char* overlay_text=NULL, float scale_min=3.40282346638528859811704183484516925e+38F, float scale_max=3.40282346638528859811704183484516925e+38F, ImVec2 graph_size=ImVec2(0, 0), int stride=sizeof(float));
 
@@ -87,6 +107,8 @@ namespace ImGui {
     void linc_PlotHistogram(const char* label, const float* values, int values_count, int values_offset=0, const char* overlay_text=NULL, float scale_min=3.40282346638528859811704183484516925e+38F, float scale_max=3.40282346638528859811704183484516925e+38F, ImVec2 graph_size=ImVec2(0, 0), int stride=sizeof(float));
 
     void linc_PlotHistogram(const char* label, float(*values_getter)(void* data, int idx), void* data, int values_count, int values_offset=0, const char* overlay_text=NULL, float scale_min=3.40282346638528859811704183484516925e+38F, float scale_max=3.40282346638528859811704183484516925e+38F, ImVec2 graph_size=ImVec2(0, 0));
+
+    bool linc_MenuItem(const char* label, const char* shortcut=NULL, bool selected=false, bool enabled=true);
 
     bool linc_MenuItem(const char* label, const char* shortcut, bool* p_selected, bool enabled=true);
 
@@ -123,6 +145,10 @@ namespace ImGui {
     bool linc_InputFloat2(const char* label, float v[2], const char* format="%.3f", ImGuiInputTextFlags flags=0);
 
     bool linc_InputFloat(const char* label, float* v, float step=0.0f, float step_fast=0.0f, const char* format="%.3f", ImGuiInputTextFlags flags=0);
+
+    ImGuiID linc_GetID(const char* str_id);
+
+    ImGuiID linc_GetID(const char* str_id_begin, const char* str_id_end);
 
     ImGuiID linc_GetID(const void* ptr_id);
 
@@ -170,9 +196,13 @@ namespace ImGui {
 
     void linc_ColorConvertHSVtoRGB(float h, float s, float v, float& out_r, float& out_g, float& out_b);
 
+    bool linc_CollapsingHeader(const char* label, ImGuiTreeNodeFlags flags=0);
+
     bool linc_CollapsingHeader(const char* label, bool* p_visible, ImGuiTreeNodeFlags flags=0);
 
     bool linc_CheckboxFlags(const char* label, int* flags, int flags_value);
+
+    bool linc_CheckboxFlags(const char* label, unsigned int* flags, unsigned int flags_value);
 
     bool linc_Checkbox(const char* label, bool* v);
 

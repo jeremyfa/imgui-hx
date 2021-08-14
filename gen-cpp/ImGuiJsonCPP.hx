@@ -371,7 +371,7 @@ class ImGuiJsonCPP
         return topLevelClass;
     }
 
-    public function topLevelFunctionNeedsWrapping(fn : JsonFunction):Bool {
+    public function topLevelFunctionNeedsWrapping(fn : JsonFunction, ?list : Array<JsonFunction>):Bool {
 
         var needsWrapping = false;
         if (fn.argsT.length > 0 && fn.argsT[fn.argsT.length-1].type == '...') {
@@ -397,6 +397,18 @@ class ImGuiJsonCPP
                 }
             }
         }
+
+        if (!needsWrapping && list != null) {
+            for (item in list) {
+                if (item != fn && item.funcname == fn.funcname) {
+                    if (topLevelFunctionNeedsWrapping(item)) {
+                        needsWrapping = true;
+                        break;
+                    }
+                }
+            }
+        }
+
         return needsWrapping;
 
     }
@@ -412,7 +424,7 @@ class ImGuiJsonCPP
             var needsWrapping = false;
             for (overloadedFn in overloads)
             {
-                if (topLevelFunctionNeedsWrapping(overloadedFn)) {
+                if (topLevelFunctionNeedsWrapping(overloadedFn, overloads)) {
                     result.push(overloadedFn);
                 }
             }

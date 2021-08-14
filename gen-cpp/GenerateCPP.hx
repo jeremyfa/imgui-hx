@@ -70,25 +70,39 @@ class GenerateCPP
             headerData.newline();
             headerData.newline();
 
+            if (method.funcname == 'Selectable') {
+                trace(haxe.Json.stringify(method, null, '    '));
+            }
+
             var argsImpl = [];
             var lastArgName = null;
             var isVaArgs = false;
+            var argsOriginal = method.argsoriginal.split(',');
+            var argN = 0;
             for (arg in method.argsT) {
-                if (arg.type.endsWith(']')) {
-                    var index = arg.type.lastIndexOf('[');
-                    argsImpl.push(arg.type.substring(0, index) + ' ' + arg.name + arg.type.substring(index));
+                var argType = arg.type;
+                if (argsOriginal[argN].startsWith(argType)) {
+                    var afterType = argsOriginal[argN].substring(argType.length);
+                    if (afterType.startsWith('&')) {
+                        argType += '&';
+                    }
                 }
-                else if (arg.type.contains('(*)')) {
-                    argsImpl.push(arg.type.replace('(*)', '(*${arg.name})'));
+                if (argType.endsWith(']')) {
+                    var index = argType.lastIndexOf('[');
+                    argsImpl.push(argType.substring(0, index) + ' ' + arg.name + argType.substring(index));
                 }
-                else if (arg.type == '...') {
+                else if (argType.contains('(*)')) {
+                    argsImpl.push(argType.replace('(*)', '(*${arg.name})'));
+                }
+                else if (argType == '...') {
                     argsImpl.push('...');
                     isVaArgs = true;
                     lastArgName = method.argsT[method.argsT.length - 2].name;
                 }
                 else {
-                    argsImpl.push(arg.type + ' ' + arg.name);
+                    argsImpl.push(argType + ' ' + arg.name);
                 }
+                argN++;
             }
 
             implData.tabSpaces();

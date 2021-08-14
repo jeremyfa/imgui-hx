@@ -6,27 +6,38 @@ namespace ImGui {
 
     void (*linc_Helpers_flushCallbacks)(void) = NULL;
 
-    bool linc_VSliderScalar(const char* label, const ImVec2 size, ImGuiDataType data_type, void* p_data, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags) {
+    bool linc_VSliderScalar(const char* label, const ImVec2& size, ImGuiDataType data_type, void* p_data, const void* p_min, const void* p_max, const char* format, ImGuiSliderFlags flags) {
         bool _res = ImGui::VSliderScalar(label,size,data_type,p_data,p_min,p_max,format,flags);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
         return _res;
     }
 
-    bool linc_VSliderInt(const char* label, const ImVec2 size, int* v, int v_min, int v_max, const char* format, ImGuiSliderFlags flags) {
+    bool linc_VSliderInt(const char* label, const ImVec2& size, int* v, int v_min, int v_max, const char* format, ImGuiSliderFlags flags) {
         bool _res = ImGui::VSliderInt(label,size,v,v_min,v_max,format,flags);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
         return _res;
     }
 
-    bool linc_VSliderFloat(const char* label, const ImVec2 size, float* v, float v_min, float v_max, const char* format, ImGuiSliderFlags flags) {
+    bool linc_VSliderFloat(const char* label, const ImVec2& size, float* v, float v_min, float v_max, const char* format, ImGuiSliderFlags flags) {
         bool _res = ImGui::VSliderFloat(label,size,v,v_min,v_max,format,flags);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
         return _res;
     }
 
+    void linc_TreePush(const char* str_id) {
+        ImGui::TreePush(str_id);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+    }
+
     void linc_TreePush(const void* ptr_id) {
         ImGui::TreePush(ptr_id);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+    }
+
+    bool linc_TreeNodeV(const char* str_id, const char* fmt, va_list args) {
+        bool _res = ImGui::TreeNodeV(str_id,fmt,args);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+        return _res;
     }
 
     bool linc_TreeNodeV(const void* ptr_id, const char* fmt, va_list args) {
@@ -35,8 +46,20 @@ namespace ImGui {
         return _res;
     }
 
+    bool linc_TreeNodeExV(const char* str_id, ImGuiTreeNodeFlags flags, const char* fmt, va_list args) {
+        bool _res = ImGui::TreeNodeExV(str_id,flags,fmt,args);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+        return _res;
+    }
+
     bool linc_TreeNodeExV(const void* ptr_id, ImGuiTreeNodeFlags flags, const char* fmt, va_list args) {
         bool _res = ImGui::TreeNodeExV(ptr_id,flags,fmt,args);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+        return _res;
+    }
+
+    bool linc_TreeNodeEx(const char* label, ImGuiTreeNodeFlags flags) {
+        bool _res = ImGui::TreeNodeEx(label,flags);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
         return _res;
     }
@@ -53,6 +76,12 @@ namespace ImGui {
         va_list _args;
         va_start(_args, fmt);
         bool _res = ImGui::TreeNodeExV(ptr_id,flags,fmt,_args);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+        return _res;
+    }
+
+    bool linc_TreeNode(const char* label) {
+        bool _res = ImGui::TreeNode(label);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
         return _res;
     }
@@ -189,7 +218,7 @@ namespace ImGui {
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
     }
 
-    void linc_SetNextWindowSizeConstraints(const ImVec2 size_min, const ImVec2 size_max, ImGuiSizeCallback custom_callback, void* custom_callback_data) {
+    void linc_SetNextWindowSizeConstraints(const ImVec2 size_min, const ImVec2& size_max, ImGuiSizeCallback custom_callback, void* custom_callback_data) {
         ImGui::SetNextWindowSizeConstraints(size_min,size_max,custom_callback,custom_callback_data);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
     }
@@ -205,8 +234,20 @@ namespace ImGui {
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
     }
 
-    bool linc_Selectable(const char* label, bool* p_selected, ImGuiSelectableFlags flags, const ImVec2 size) {
+    bool linc_Selectable(const char* label, bool selected, ImGuiSelectableFlags flags, const ImVec2& size) {
+        bool _res = ImGui::Selectable(label,selected,flags,size);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+        return _res;
+    }
+
+    bool linc_Selectable(const char* label, bool* p_selected, ImGuiSelectableFlags flags, const ImVec2& size) {
         bool _res = ImGui::Selectable(label,p_selected,flags,size);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+        return _res;
+    }
+
+    bool linc_RadioButton(const char* label, bool active) {
+        bool _res = ImGui::RadioButton(label,active);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
         return _res;
     }
@@ -217,8 +258,23 @@ namespace ImGui {
         return _res;
     }
 
+    void linc_PushID(const char* str_id) {
+        ImGui::PushID(str_id);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+    }
+
+    void linc_PushID(const char* str_id_begin, const char* str_id_end) {
+        ImGui::PushID(str_id_begin,str_id_end);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+    }
+
     void linc_PushID(const void* ptr_id) {
         ImGui::PushID(ptr_id);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+    }
+
+    void linc_PushID(int int_id) {
+        ImGui::PushID(int_id);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
     }
 
@@ -240,6 +296,12 @@ namespace ImGui {
     void linc_PlotHistogram(const char* label, float(*values_getter)(void* data,int idx), void* data, int values_count, int values_offset, const char* overlay_text, float scale_min, float scale_max, ImVec2 graph_size) {
         ImGui::PlotHistogram(label,values_getter,data,values_count,values_offset,overlay_text,scale_min,scale_max,graph_size);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+    }
+
+    bool linc_MenuItem(const char* label, const char* shortcut, bool selected, bool enabled) {
+        bool _res = ImGui::MenuItem(label,shortcut,selected,enabled);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+        return _res;
     }
 
     bool linc_MenuItem(const char* label, const char* shortcut, bool* p_selected, bool enabled) {
@@ -278,7 +340,7 @@ namespace ImGui {
         return _res;
     }
 
-    bool linc_InputTextMultiline(const char* label, char* buf, size_t buf_size, const ImVec2 size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data) {
+    bool linc_InputTextMultiline(const char* label, char* buf, size_t buf_size, const ImVec2& size, ImGuiInputTextFlags flags, ImGuiInputTextCallback callback, void* user_data) {
         bool _res = ImGui::InputTextMultiline(label,buf,buf_size,size,flags,callback,user_data);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
         return _res;
@@ -346,6 +408,18 @@ namespace ImGui {
 
     bool linc_InputFloat(const char* label, float* v, float step, float step_fast, const char* format, ImGuiInputTextFlags flags) {
         bool _res = ImGui::InputFloat(label,v,step,step_fast,format,flags);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+        return _res;
+    }
+
+    ImGuiID linc_GetID(const char* str_id) {
+        ImGuiID _res = ImGui::GetID(str_id);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+        return _res;
+    }
+
+    ImGuiID linc_GetID(const char* str_id_begin, const char* str_id_end) {
+        ImGuiID _res = ImGui::GetID(str_id_begin,str_id_end);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
         return _res;
     }
@@ -485,6 +559,12 @@ namespace ImGui {
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
     }
 
+    bool linc_CollapsingHeader(const char* label, ImGuiTreeNodeFlags flags) {
+        bool _res = ImGui::CollapsingHeader(label,flags);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+        return _res;
+    }
+
     bool linc_CollapsingHeader(const char* label, bool* p_visible, ImGuiTreeNodeFlags flags) {
         bool _res = ImGui::CollapsingHeader(label,p_visible,flags);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
@@ -492,6 +572,12 @@ namespace ImGui {
     }
 
     bool linc_CheckboxFlags(const char* label, int* flags, int flags_value) {
+        bool _res = ImGui::CheckboxFlags(label,flags,flags_value);
+        if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
+        return _res;
+    }
+
+    bool linc_CheckboxFlags(const char* label, unsigned int* flags, unsigned int flags_value) {
         bool _res = ImGui::CheckboxFlags(label,flags,flags_value);
         if (linc_Helpers_flushCallbacks != NULL) (*linc_Helpers_flushCallbacks)();
         return _res;
