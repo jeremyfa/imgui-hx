@@ -34,8 +34,10 @@
         </section>
 
         <section if="linc_opengl">
-            <compilerflag value="-DIMGUI_IMPL_OPENGL_LOADER_GLEW" />
-            <compilerflag value="-I${LINC_IMGUI_PATH}../linc_opengl/lib/glew/include/" />
+            <section unless="android || ios || tvos">
+                <compilerflag value="-DIMGUI_IMPL_OPENGL_LOADER_GLEW" />
+                <compilerflag value="-I${LINC_IMGUI_PATH}../linc_opengl/lib/glew/include/" />
+            </section>
             <file name="${IMGUI}/backends/imgui_impl_opengl3.cpp" />
         </section>
 
