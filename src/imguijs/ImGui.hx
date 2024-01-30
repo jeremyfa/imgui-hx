@@ -92,7 +92,7 @@ typedef ImDrawIdx = imguijs.UInt16;
 
 typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 
-@:enum abstract ImGuiWindowFlags(Int) from Int to Int {
+enum abstract ImGuiWindowFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var NoTitleBar : Int = 1;
 	var NoResize : Int = 2;
@@ -125,7 +125,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var ChildMenu : Int = 268435456;
 }
 
-@:enum abstract ImGuiTreeNodeFlags(Int) from Int to Int {
+enum abstract ImGuiTreeNodeFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var Selected : Int = 1;
 	var Framed : Int = 2;
@@ -144,26 +144,26 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var CollapsingHeader : Int = 26;
 }
 
-@:enum abstract ImGuiTreeNodeFlagsPrivate(Int) from Int to Int {
+enum abstract ImGuiTreeNodeFlagsPrivate(Int) from Int to Int {
 	var ImGuiTreeNodeFlags_ClipLabelForTrailingButton : Int = 1048576;
 }
 
-@:enum abstract ImGuiTooltipFlags(Int) from Int to Int {
+enum abstract ImGuiTooltipFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var OverridePreviousTooltip : Int = 1;
 }
 
-@:enum abstract ImGuiTextFlags(Int) from Int to Int {
+enum abstract ImGuiTextFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var NoWidthForLargeClippedText : Int = 1;
 }
 
-@:enum abstract ImGuiTableRowFlags(Int) from Int to Int {
+enum abstract ImGuiTableRowFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var Headers : Int = 1;
 }
 
-@:enum abstract ImGuiTableFlags(Int) from Int to Int {
+enum abstract ImGuiTableFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var Resizable : Int = 1;
 	var Reorderable : Int = 2;
@@ -202,7 +202,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var SizingMask_ : Int = 57344;
 }
 
-@:enum abstract ImGuiTableColumnFlags(Int) from Int to Int {
+enum abstract ImGuiTableColumnFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var DefaultHide : Int = 1;
 	var DefaultSort : Int = 2;
@@ -230,14 +230,14 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var NoDirectResize_ : Int = 1073741824;
 }
 
-@:enum abstract ImGuiTableBgTarget(Int) from Int to Int {
+enum abstract ImGuiTableBgTarget(Int) from Int to Int {
 	var None : Int = 0;
 	var RowBg0 : Int = 1;
 	var RowBg1 : Int = 2;
 	var CellBg : Int = 3;
 }
 
-@:enum abstract ImGuiTabItemFlags(Int) from Int to Int {
+enum abstract ImGuiTabItemFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var UnsavedDocument : Int = 1;
 	var SetSelected : Int = 2;
@@ -249,12 +249,12 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var Trailing : Int = 128;
 }
 
-@:enum abstract ImGuiTabItemFlagsPrivate(Int) from Int to Int {
+enum abstract ImGuiTabItemFlagsPrivate(Int) from Int to Int {
 	var ImGuiTabItemFlags_NoCloseButton : Int = 1048576;
 	var ImGuiTabItemFlags_Button : Int = 2097152;
 }
 
-@:enum abstract ImGuiTabBarFlags(Int) from Int to Int {
+enum abstract ImGuiTabBarFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var Reorderable : Int = 1;
 	var AutoSelectNewTabs : Int = 2;
@@ -268,13 +268,13 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var FittingPolicyDefault_ : Int = 64;
 }
 
-@:enum abstract ImGuiTabBarFlagsPrivate(Int) from Int to Int {
+enum abstract ImGuiTabBarFlagsPrivate(Int) from Int to Int {
 	var ImGuiTabBarFlags_DockNode : Int = 1048576;
 	var ImGuiTabBarFlags_IsFocused : Int = 2097152;
 	var ImGuiTabBarFlags_SaveSettings : Int = 4194304;
 }
 
-@:enum abstract ImGuiStyleVar(Int) from Int to Int {
+enum abstract ImGuiStyleVar(Int) from Int to Int {
 	var Alpha : Int = 0;
 	var WindowPadding : Int = 1;
 	var WindowRounding : Int = 2;
@@ -302,13 +302,13 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var COUNT : Int = 24;
 }
 
-@:enum abstract ImGuiSortDirection(Int) from Int to Int {
+enum abstract ImGuiSortDirection(Int) from Int to Int {
 	var None : Int = 0;
 	var Ascending : Int = 1;
 	var Descending : Int = 2;
 }
 
-@:enum abstract ImGuiSliderFlags(Int) from Int to Int {
+enum abstract ImGuiSliderFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var AlwaysClamp : Int = 16;
 	var Logarithmic : Int = 32;
@@ -317,19 +317,19 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var InvalidMask_ : Int = 1879048207;
 }
 
-@:enum abstract ImGuiSliderFlagsPrivate(Int) from Int to Int {
+enum abstract ImGuiSliderFlagsPrivate(Int) from Int to Int {
 	var ImGuiSliderFlags_Vertical : Int = 1048576;
 	var ImGuiSliderFlags_ReadOnly : Int = 2097152;
 }
 
-@:enum abstract ImGuiSeparatorFlags(Int) from Int to Int {
+enum abstract ImGuiSeparatorFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var Horizontal : Int = 1;
 	var Vertical : Int = 2;
 	var SpanAllColumns : Int = 4;
 }
 
-@:enum abstract ImGuiSelectableFlags(Int) from Int to Int {
+enum abstract ImGuiSelectableFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var DontClosePopups : Int = 1;
 	var SpanAllColumns : Int = 2;
@@ -338,7 +338,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var AllowItemOverlap : Int = 16;
 }
 
-@:enum abstract ImGuiSelectableFlagsPrivate(Int) from Int to Int {
+enum abstract ImGuiSelectableFlagsPrivate(Int) from Int to Int {
 	var ImGuiSelectableFlags_NoHoldingActiveID : Int = 1048576;
 	var ImGuiSelectableFlags_SelectOnClick : Int = 2097152;
 	var ImGuiSelectableFlags_SelectOnRelease : Int = 4194304;
@@ -348,13 +348,13 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var ImGuiSelectableFlags_NoPadWithHalfSpacing : Int = 67108864;
 }
 
-@:enum abstract ImGuiPopupPositionPolicy(Int) from Int to Int {
+enum abstract ImGuiPopupPositionPolicy(Int) from Int to Int {
 	var _Default : Int = 0;
 	var _ComboBox : Int = 1;
 	var _Tooltip : Int = 2;
 }
 
-@:enum abstract ImGuiPopupFlags(Int) from Int to Int {
+enum abstract ImGuiPopupFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var MouseButtonLeft : Int = 0;
 	var MouseButtonRight : Int = 1;
@@ -368,12 +368,12 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var AnyPopup : Int = 384;
 }
 
-@:enum abstract ImGuiPlotType(Int) from Int to Int {
+enum abstract ImGuiPlotType(Int) from Int to Int {
 	var _Lines : Int = 0;
 	var _Histogram : Int = 1;
 }
 
-@:enum abstract ImGuiOldColumnFlags(Int) from Int to Int {
+enum abstract ImGuiOldColumnFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var NoBorder : Int = 1;
 	var NoResize : Int = 2;
@@ -382,7 +382,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var GrowParentContentsSize : Int = 16;
 }
 
-@:enum abstract ImGuiNextWindowDataFlags(Int) from Int to Int {
+enum abstract ImGuiNextWindowDataFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var HasPos : Int = 1;
 	var HasSize : Int = 2;
@@ -394,13 +394,13 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var HasScroll : Int = 128;
 }
 
-@:enum abstract ImGuiNextItemDataFlags(Int) from Int to Int {
+enum abstract ImGuiNextItemDataFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var HasWidth : Int = 1;
 	var HasOpen : Int = 2;
 }
 
-@:enum abstract ImGuiNavMoveFlags(Int) from Int to Int {
+enum abstract ImGuiNavMoveFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var LoopX : Int = 1;
 	var LoopY : Int = 2;
@@ -411,13 +411,13 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var ScrollToEdge : Int = 64;
 }
 
-@:enum abstract ImGuiNavLayer(Int) from Int to Int {
+enum abstract ImGuiNavLayer(Int) from Int to Int {
 	var _Main : Int = 0;
 	var _Menu : Int = 1;
 	var _COUNT : Int = 2;
 }
 
-@:enum abstract ImGuiNavInput(Int) from Int to Int {
+enum abstract ImGuiNavInput(Int) from Int to Int {
 	var Activate : Int = 0;
 	var Cancel : Int = 1;
 	var Input : Int = 2;
@@ -443,7 +443,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var InternalStart_ : Int = 16;
 }
 
-@:enum abstract ImGuiNavHighlightFlags(Int) from Int to Int {
+enum abstract ImGuiNavHighlightFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var TypeDefault : Int = 1;
 	var TypeThin : Int = 2;
@@ -451,20 +451,20 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var NoRounding : Int = 8;
 }
 
-@:enum abstract ImGuiNavForward(Int) from Int to Int {
+enum abstract ImGuiNavForward(Int) from Int to Int {
 	var _None : Int = 0;
 	var _ForwardQueued : Int = 1;
 	var _ForwardActive : Int = 2;
 }
 
-@:enum abstract ImGuiNavDirSourceFlags(Int) from Int to Int {
+enum abstract ImGuiNavDirSourceFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var Keyboard : Int = 1;
 	var PadDPad : Int = 2;
 	var PadLStick : Int = 4;
 }
 
-@:enum abstract ImGuiMouseCursor(Int) from Int to Int {
+enum abstract ImGuiMouseCursor(Int) from Int to Int {
 	var None : Int = -1;
 	var Arrow : Int = 0;
 	var TextInput : Int = 1;
@@ -478,14 +478,14 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var COUNT : Int = 9;
 }
 
-@:enum abstract ImGuiMouseButton(Int) from Int to Int {
+enum abstract ImGuiMouseButton(Int) from Int to Int {
 	var Left : Int = 0;
 	var Right : Int = 1;
 	var Middle : Int = 2;
 	var COUNT : Int = 5;
 }
 
-@:enum abstract ImGuiLogType(Int) from Int to Int {
+enum abstract ImGuiLogType(Int) from Int to Int {
 	var _None : Int = 0;
 	var _TTY : Int = 1;
 	var _File : Int = 2;
@@ -493,12 +493,12 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var _Clipboard : Int = 4;
 }
 
-@:enum abstract ImGuiLayoutType(Int) from Int to Int {
+enum abstract ImGuiLayoutType(Int) from Int to Int {
 	var Horizontal : Int = 0;
 	var Vertical : Int = 1;
 }
 
-@:enum abstract ImGuiKey(Int) from Int to Int {
+enum abstract ImGuiKey(Int) from Int to Int {
 	var Tab : Int = 0;
 	var LeftArrow : Int = 1;
 	var RightArrow : Int = 2;
@@ -524,7 +524,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var COUNT : Int = 22;
 }
 
-@:enum abstract ImGuiKeyModFlags(Int) from Int to Int {
+enum abstract ImGuiKeyModFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var Ctrl : Int = 1;
 	var Shift : Int = 2;
@@ -532,7 +532,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var Super : Int = 8;
 }
 
-@:enum abstract ImGuiItemStatusFlags(Int) from Int to Int {
+enum abstract ImGuiItemStatusFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var HoveredRect : Int = 1;
 	var HasDisplayRect : Int = 2;
@@ -543,7 +543,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var Deactivated : Int = 64;
 }
 
-@:enum abstract ImGuiItemFlags(Int) from Int to Int {
+enum abstract ImGuiItemFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var NoTabStop : Int = 1;
 	var ButtonRepeat : Int = 2;
@@ -556,7 +556,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var Default_ : Int = 0;
 }
 
-@:enum abstract ImGuiInputTextFlags(Int) from Int to Int {
+enum abstract ImGuiInputTextFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var CharsDecimal : Int = 1;
 	var CharsHexadecimal : Int = 2;
@@ -582,7 +582,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var NoMarkEdited : Int = 2097152;
 }
 
-@:enum abstract ImGuiInputSource(Int) from Int to Int {
+enum abstract ImGuiInputSource(Int) from Int to Int {
 	var _None : Int = 0;
 	var _Mouse : Int = 1;
 	var _Nav : Int = 2;
@@ -591,7 +591,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var _COUNT : Int = 5;
 }
 
-@:enum abstract ImGuiInputReadMode(Int) from Int to Int {
+enum abstract ImGuiInputReadMode(Int) from Int to Int {
 	var _Down : Int = 0;
 	var _Pressed : Int = 1;
 	var _Released : Int = 2;
@@ -600,7 +600,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var _RepeatFast : Int = 5;
 }
 
-@:enum abstract ImGuiHoveredFlags(Int) from Int to Int {
+enum abstract ImGuiHoveredFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var ChildWindows : Int = 1;
 	var RootWindow : Int = 2;
@@ -613,7 +613,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var RootAndChildWindows : Int = 3;
 }
 
-@:enum abstract ImGuiFocusedFlags(Int) from Int to Int {
+enum abstract ImGuiFocusedFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var ChildWindows : Int = 1;
 	var RootWindow : Int = 2;
@@ -621,7 +621,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var RootAndChildWindows : Int = 3;
 }
 
-@:enum abstract ImGuiDragDropFlags(Int) from Int to Int {
+enum abstract ImGuiDragDropFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var SourceNoPreviewTooltip : Int = 1;
 	var SourceNoDisableHover : Int = 2;
@@ -635,7 +635,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var AcceptPeekOnly : Int = 3072;
 }
 
-@:enum abstract ImGuiDir(Int) from Int to Int {
+enum abstract ImGuiDir(Int) from Int to Int {
 	var None : Int = -1;
 	var Left : Int = 0;
 	var Right : Int = 1;
@@ -644,7 +644,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var COUNT : Int = 4;
 }
 
-@:enum abstract ImGuiDataType(Int) from Int to Int {
+enum abstract ImGuiDataType(Int) from Int to Int {
 	var S8 : Int = 0;
 	var U8 : Int = 1;
 	var S16 : Int = 2;
@@ -658,13 +658,13 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var COUNT : Int = 10;
 }
 
-@:enum abstract ImGuiDataTypePrivate(Int) from Int to Int {
+enum abstract ImGuiDataTypePrivate(Int) from Int to Int {
 	var ImGuiDataType_String : Int = 11;
 	var ImGuiDataType_Pointer : Int = 12;
 	var ImGuiDataType_ID : Int = 13;
 }
 
-@:enum abstract ImGuiContextHookType(Int) from Int to Int {
+enum abstract ImGuiContextHookType(Int) from Int to Int {
 	var _NewFramePre : Int = 0;
 	var _NewFramePost : Int = 1;
 	var _EndFramePre : Int = 2;
@@ -674,7 +674,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var _Shutdown : Int = 6;
 }
 
-@:enum abstract ImGuiConfigFlags(Int) from Int to Int {
+enum abstract ImGuiConfigFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var NavEnableKeyboard : Int = 1;
 	var NavEnableGamepad : Int = 2;
@@ -686,7 +686,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var IsTouchScreen : Int = 2097152;
 }
 
-@:enum abstract ImGuiCond(Int) from Int to Int {
+enum abstract ImGuiCond(Int) from Int to Int {
 	var None : Int = 0;
 	var Always : Int = 1;
 	var Once : Int = 2;
@@ -694,7 +694,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var Appearing : Int = 8;
 }
 
-@:enum abstract ImGuiComboFlags(Int) from Int to Int {
+enum abstract ImGuiComboFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var PopupAlignLeft : Int = 1;
 	var HeightSmall : Int = 2;
@@ -706,7 +706,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var HeightMask_ : Int = 30;
 }
 
-@:enum abstract ImGuiColorEditFlags(Int) from Int to Int {
+enum abstract ImGuiColorEditFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var NoAlpha : Int = 2;
 	var NoPicker : Int = 4;
@@ -738,7 +738,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var _InputMask : Int = 402653184;
 }
 
-@:enum abstract ImGuiCol(Int) from Int to Int {
+enum abstract ImGuiCol(Int) from Int to Int {
 	var Text : Int = 0;
 	var TextDisabled : Int = 1;
 	var WindowBg : Int = 2;
@@ -795,7 +795,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var COUNT : Int = 53;
 }
 
-@:enum abstract ImGuiButtonFlags(Int) from Int to Int {
+enum abstract ImGuiButtonFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var MouseButtonLeft : Int = 1;
 	var MouseButtonRight : Int = 2;
@@ -804,7 +804,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var MouseButtonDefault_ : Int = 1;
 }
 
-@:enum abstract ImGuiButtonFlagsPrivate(Int) from Int to Int {
+enum abstract ImGuiButtonFlagsPrivate(Int) from Int to Int {
 	var ImGuiButtonFlags_PressedOnClick : Int = 16;
 	var ImGuiButtonFlags_PressedOnClickRelease : Int = 32;
 	var ImGuiButtonFlags_PressedOnClickReleaseAnywhere : Int = 64;
@@ -825,7 +825,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var ImGuiButtonFlags_PressedOnDefault_ : Int = 32;
 }
 
-@:enum abstract ImGuiBackendFlags(Int) from Int to Int {
+enum abstract ImGuiBackendFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var HasGamepad : Int = 1;
 	var HasMouseCursors : Int = 2;
@@ -833,20 +833,20 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var RendererHasVtxOffset : Int = 8;
 }
 
-@:enum abstract ImGuiAxis(Int) from Int to Int {
+enum abstract ImGuiAxis(Int) from Int to Int {
 	var _None : Int = -1;
 	var _X : Int = 0;
 	var _Y : Int = 1;
 }
 
-@:enum abstract ImFontAtlasFlags(Int) from Int to Int {
+enum abstract ImFontAtlasFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var NoPowerOfTwoHeight : Int = 1;
 	var NoMouseCursors : Int = 2;
 	var NoBakedLines : Int = 4;
 }
 
-@:enum abstract ImDrawListFlags(Int) from Int to Int {
+enum abstract ImDrawListFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var AntiAliasedLines : Int = 1;
 	var AntiAliasedLinesUseTex : Int = 2;
@@ -854,7 +854,7 @@ typedef ImDrawCallback = imguijs.Callable<(ImDrawList, ImDrawCmd) -> Void>;
 	var AllowVtxOffset : Int = 8;
 }
 
-@:enum abstract ImDrawCornerFlags(Int) from Int to Int {
+enum abstract ImDrawCornerFlags(Int) from Int to Int {
 	var None : Int = 0;
 	var TopLeft : Int = 1;
 	var TopRight : Int = 2;
