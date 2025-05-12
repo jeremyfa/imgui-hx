@@ -19,7 +19,7 @@
         <compilerflag value="-DIMGUI_DISABLE_OBSOLETE_FUNCTIONS"/>
         <compilerflag value="-I${LINC_IMGUI_PATH}lib/cimgui/imgui/" />
         <compilerflag value="-I${LINC_IMGUI_PATH}lib/cimgui/imgui/backends/" />
-        
+
         <file name="${IMGUI}/imgui.cpp" />
         <file name="${IMGUI}/imgui_draw.cpp" />
         <file name="${IMGUI}/imgui_demo.cpp" />
@@ -28,9 +28,14 @@
 
         <file name="${LINC_IMGUI_PATH}src/imguicpp/linc/linc_imgui.cpp" />
 
-        <section if="linc_sdl">
+        <section if="linc_sdl" unless="clay_sdl">
             <file name="${IMGUI}/backends/imgui_impl_sdl.cpp" />
             <compilerflag value="-I${LINC_IMGUI_PATH}../linc_sdl/lib/sdl/include/" />
+        </section>
+
+        <section if="clay_sdl">
+            <file name="${IMGUI}/backends/imgui_impl_sdl.cpp" />
+            <compilerflag value="-I${LINC_IMGUI_PATH}../SDL/include/" />
         </section>
 
         <section if="linc_opengl">
