@@ -1,75 +1,466 @@
-# Dear ImGui for Haxe
+# imgui-hx
 
-Haxe bindings for [Dear ImGui](https://github.com/ocornut/imgui).
+[Dear ImGui](https://github.com/ocornut/imgui) (docking branch) bindings for
+Haxe, generated from one metadata source and targeting **hxcpp**, **js/wasm**
+and **C#/Unity** with a single portable API. Built for the
+[ceramic](https://ceramic-engine.com) imgui plugin, usable standalone.
 
-This library is a continuation of the great work from @Aidan63 on [linc_imgui](https://github.com/Aidan63/linc_imgui).
+Current Dear ImGui version: **1.92.8-docking** (see `lib/imgui`).
 
----
+- [Using the API](#using-the-api)
+- [How each target works](#how-each-target-works)
+- [Repository layout](#repository-layout)
+- [Updating Dear ImGui](#updating-dear-imgui)
+- [Building the prebuilt artifacts](#building-the-prebuilt-artifacts)
+- [Tests](#tests)
+- [Using with ceramic](#using-with-ceramic)
+- [Limitations](#limitations)
 
-imgui-hx can currently be used with the following Haxe targets:
-- C++
-- Javascript (using [imgui-js](https://github.com/flyover/imgui-js))
+## Using the API
 
----
-### Install
-
-`haxelib git imgui-hx https://github.com/jeremyfa/imgui-hx`
-
-### Usage (C++)
-
-The API follows the ImGui C++ API with most functions and attributes having a haxe equivalent with the same name. When the API wants a ImTextureID (c++ void*) you can use the cpp.Pointer class and rawCast() / reinterpret() to convert to and from whatever classes your framework uses.
-
-For functions which take and modify a float (e.g. colour edits, float inputs / sliders) the float must be a cpp.Float32 type, not a default Haxe float. When creating types such as Vec2 and Vec4 the floats passed to the create method do not need to be explicitly defined as a cpp.Float32 since it is not permanently modifying that variable.
-
-### Usage (Javascript)
-
-Bindings are intended to be as close as possible to original C++ imgui implementation.
-
-That means it should be possible to write a single ImGui code that works seemlessly on both C++ and JS targets.
-
-Please note that javascript bindings are very recent and might not match exactly what is actually available from [imgui-js](https://github.com/flyover/imgui-js). That said, this should be iteratively improved in the future.
-
-### Reporting errors
-
-This is a new binding so there's bound to be missing and / or non-working functions and features. If you find them please create a new issue so it can be fixed. Pull Requests are also welcome.
-
-### Setup in project/engine
-
-There is no setup guide at the moment, but if you want to setup and use Dear ImGui into your own project/engine, you could take a look at the [imgui plugin](https://github.com/ceramic-engine/ceramic/tree/master/plugins/imgui/runtime/src/ceramic) for ceramic engine, which contain code to make Dear ImGui work with both C++ and JS targets.
-
-When targetting C++, it is using Dear ImGui's built-in backend (SDL + opengl) which should make integration easier on your own engine, if based on opengl as well.
-
-When targetting JS, it loads `imgui.umd.js` and `imgui_impl.umd.js` that you can find in [imgui-js dist directory](https://github.com/flyover/imgui-js/tree/08f05fb0f47e02978e4aa52e5a2b9b206e06998d/dist). These files are required as they contain Dear ImGui Web Assembly module.
-
-ImGui's Metal/DirectX backends are not handled in imgui-hx bindings yet, and when using SDL + opengl, it is expected that your project uses `linc_sdl` and `linc_opengl` libraries, but pull requests are welcome to make the bindings work with more various environments.
-
-Once everything is setup, you can, in any haxe file of your project:
-
-1. Import Dear ImGui and additional haxe helpers
+User code imports ONE module and stays target-agnostic:
 
 ```haxe
 import imgui.ImGui;
-import imgui.Helpers.*;
+
+var sliderValue:Float = 0.5;
+var checkValue:Bool = true;
+var name:String = 'player';
+var tint:Array<Float> = [1, 1, 1, 1];
+
+// in your update loop, between newFrame() and render():
+if (ImGui.begin('My window')) {
+    ImGui.text('Hello');
+    if (ImGui.button('Click me')) trace('clicked');
+
+    // Out-params take PLAIN LVALUES (locals, fields, array elements,
+    // properties with custom getters/setters):
+    ImGui.sliderFloat('A slider', sliderValue, 0.0, 1.0);
+    ImGui.checkbox('A checkbox', checkValue);
+    ImGui.inputText('Name', name, 64);   // 64 = max byte length (default 256)
+    ImGui.colorEdit4('Tint', tint);      // fixed float[4]: Array<Float> copied in/out
+}
+ImGui.end();
 ```
 
-2. Start creating UI by adding code that is executed at every frame of your app
+### How out-params work (widget macros)
+
+Functions with pointer out-params (`bool*`, `float*`, `char* buf`...) are
+generated as **macros** that splice the lvalue at the call site: read into a
+stack local, pass the local's native address, write back after the call.
+
+- **Zero allocation per frame**: no closures, no boxing, plain locals.
+- **Custom getters/setters are invoked** (e.g. `@observe` properties): the
+  address taken is always the local's, never the expression's.
+- **Write-back is compare-gated**: the setter only runs when ImGui actually
+  changed the value (no event spam every frame).
+- Receiver chains are evaluated once (`a.b().c.speed` reads and writes the
+  same object).
+
+For runtime indirection (choosing the target dynamically), pass a get/set
+closure instead; it is detected by type:
 
 ```haxe
-var someFloatValue:Float = 0.0;
-
-function someUpdateLoopMethod() {
-
-    // Create a small ImGui window to edit a float value
-
-    ImGui.begin('Hello');
-    
-    ImGui.sliderFloat('Some slider', fromFloat(someFloatValue), 0.0, 1.0);
-    
-    if (someFloatValue == 1.0) {
-        ImGui.text('Float value is at MAX (1.0)');
-    }
-    
-    ImGui.end();
-
-}
+var ref:imgui.FloatRef = (?v:Float) -> { if (v != null) model.set(v); return model.get(); }
+ImGui.sliderFloat('Dynamic', ref, 0, 1); // allocation is YOURS (cache the closure)
 ```
+
+`imgui.FloatRef`, `IntRef`, `BoolRef`, `StringRef` are `(?val:T)->T` typedefs.
+
+For the full story of how these lvalues travel through native memory on
+each target (stack pointers, wasm heap addresses, IntPtr...), see
+[Out-params and the widget macros](#out-params-and-the-widget-macros)
+below.
+
+### Textures
+
+`ImTextureID` is an opaque 64-bit id. With ceramic, the plugin maintains a
+registry so any `ceramic.Texture` can be displayed:
+
+```haxe
+ImGui.image(ceramic.ImGuiTextures.textureRef(myTexture), ImVec2.make(w, h));
+```
+
+Standalone integrations implement the ImGui 1.92 `ImTextureData` protocol
+(`RendererHasTextures` backend flag): each frame, walk `drawData.textures`
+and honor WantCreate/WantUpdates/WantDestroy.
+
+### What stays cpp-only
+
+Functions taking required callbacks or unbounded arrays keep raw cpp types
+in the facade (they compile only on hxcpp). Everything else (about 90% of
+the surface, including the whole demo window) is portable.
+
+## How each target works
+
+All three targets share the SAME ABI: the C API generated by
+[dear_bindings](https://github.com/dearimgui/dear_bindings) (`dcimgui`),
+vendored as committed artifacts in `lib/dcimgui/` (`.h`, `.cpp`, `.json`).
+On top of that C ABI, each target solves the same four problems with the
+tools it has: passing strings, passing/receiving small structs by value,
+OUT-PARAMS (`bool*`, `float*`, `char* buf`...), and accessing struct fields.
+This section describes each mechanism in enough detail to study the
+generated code.
+
+### The three "address" types
+
+The single most important thing to understand: every target represents a
+NATIVE MEMORY ADDRESS with a different Haxe type.
+
+| Target | Address type | What it really is |
+|---|---|---|
+| hxcpp | `cpp.RawPointer<T>` / `cpp.Star<T>` | a real C pointer |
+| js/wasm | `Int` | a BYTE OFFSET into the wasm linear memory (`Module.HEAPU8` and friends) |
+| C#/Unity | `Float` | a native pointer value stored in a double (53-bit mantissa covers user-space addresses on every supported platform), converted to `System.IntPtr` at the P/Invoke boundary |
+
+So when you see an out-value or a struct typed `Int` in `imguijs.ImGui`:
+yes, it is an address. Wasm32 pointers are 32-bit integers indexing the
+module's heap, and emscripten exposes that heap as typed views
+(`HEAPU8`, `HEAP32`, `HEAPF32`...). Reading a float at address `a` is
+literally `M.HEAPF32[a >> 2]` (see `imguijs.ImGuiJs.getF32`). The same
+logic on C# goes through tiny exported native helpers
+(`DCImGui.GetF32(IntPtr)` etc.) because C# cannot index foreign memory
+directly.
+
+Struct HANDLES follow the same rule: `imguijs.ImGui.ImVec2` and every other
+struct type is an `abstract(Int)` wrapping a heap address (an
+`abstract(Float)` on cs, an extern class over the real struct on cpp).
+Their field properties are inline calls to generated accessor exports
+(`_dcjs_ImVec2_get_x(addr)` ...), so `io.mousePos.x` never copies the
+struct: it reads 4 bytes at `addr + offsetof(x)`.
+
+### Out-params and the widget macros
+
+Functions with pointer out-params (`checkbox(label, bool*)`,
+`sliderFloat(label, float*)`, `inputText(label, char*, size)`...) are
+exposed as MACROS in the portable facade (`imgui.ImGui`), built by
+`src/imgui/macros/ImGuiMacros.hx`. At every call site the macro splices
+your lvalue into this pattern:
+
+```haxe
+// What you write:
+ImGui.sliderFloat('Speed', player.speed, 0, 1);
+
+// What the macro generates (conceptually):
+var tmp:Float = player.speed;        // read once (getters run here)
+<write tmp to native memory>
+var ret = <call native sliderFloat with the ADDRESS of that memory>
+var readBack = <read native memory>
+if (readBack != tmp) player.speed = readBack;  // compare-gated write-back
+ret;
+```
+
+The `<native memory>` part is where targets differ
+(`ImGuiMacros.build` dispatches to `buildCpp` or `buildScratch`):
+
+- **hxcpp** (`buildCpp`): no scratch at all for scalars. The temporary is a
+  plain C++ stack local and the macro passes
+  `cpp.Pointer.addressOf(tmp).ptr` directly. Primitive locals live on the
+  C++ stack (not the GC heap), so the pointer is stable for the duration of
+  the call.
+- **js and cs** (`buildScratch`, shared code): out-params go through
+  `numScratch`, a persistent 64-byte native block owned by the target
+  helper (`imguijs.ImGuiJs` / `imguics.ImGuiCs`), 8 BYTES PER SLOT: slot
+  `i` of a call is at `numScratch + i * 8` (so up to 8 out-params per
+  call, floats use `setF64/getF64` or `setF32`, ints `setI32`...). The
+  sequence is: write current value into the slot, pass the slot address
+  (`Int` on js, `Float` on cs), call, read the slot back, assign if
+  changed. The block is allocated ONCE at init (`M._malloc(64)` on js,
+  `Marshal.AllocHGlobal` via `DCImGui.Alloc(64)` on cs): zero garbage per
+  frame.
+
+The compare-gated write-back matters for two reasons: custom setters (e.g.
+observable properties) only run when ImGui actually changed the value, and
+receiver chains (`a.b().c.speed`) are evaluated once and reused for both
+the read and the conditional write.
+
+An optional out-param that you omit (like `begin()`'s `pOpen`) is passed as
+NULL (`null` / `0` / `IntPtr.Zero`); trailing omitted PLAIN args are
+dropped from the call entirely so the target module's own default values
+apply (important on cs where value-typed args cannot receive `null`).
+
+### Scratch memory inventory
+
+Everything below is allocated once and reused forever (grow-only when
+noted). None of it is thread-safe, and neither is Dear ImGui.
+
+| Purpose | hxcpp (`imguicpp.Marshal`) | js (`imguijs.ImGuiJs`) | cs (`imguics.ImGuiCs`) |
+|---|---|---|---|
+| Scalar out-params | C++ stack locals (no scratch) | `numScratch` 64 B, 8 slots | `numScratch` 64 B, 8 slots |
+| Fixed arrays (`float[2..4]`, `int[2..4]`) | `floatsA/B`, `intsA/B` 16 B each | `arrScratchA/B` 16 B each | `arrScratchA/B` 16 B each |
+| Dynamic arrays (plotLines...) | `dynFloats` grow-only realloc | `floatsDyn` grow-only | `floatsDyn` grow-only |
+| By-value struct RETURNS | not needed (real C++ returns) | `vecScratch` 16 B (see glue below) | not needed (P/Invoke marshals byval) |
+| Const strings (labels, formats) | none: `String.utf8_str()` pointer passed directly | `strBase` 16 KB bump region, reset at each call (`strReset()` then `str(s)` per string) | none: `[MarshalAs(LPUTF8Str)]` does it |
+| Editable text buffer (inputText) | `strBuf` grow-only | `bufBase` 1 KB grow-only | `bufAddr` 1 KB grow-only |
+
+Two float-array slots (`A`/`B`) exist because a few calls take two arrays
+at once. Fixed arrays are copied in before the call and copied back after
+(`loadFloats`/`storeFloats`), which is also how `colorEdit4(label,
+Array<Float>)` works.
+
+Editable text buffers deserve a note: ONE persistent buffer is enough for
+all inputText fields because ImGui only edits one text field at a time and
+the buffer content only matters for the duration of a single call. The
+Haxe string is encoded into the buffer (clamped to `maxLength` BYTES on a
+UTF-8 codepoint boundary), the native call edits it in place, and a cheap
+native-side comparison (`strcmp` / byte loop / `ReadUTF8` compare) decides
+whether a new Haxe String needs to be materialized at all.
+
+### hxcpp (`src/imguicpp/`)
+
+Compiled FROM SOURCE via `src/imguicpp/linc/linc_imgui.xml` (imgui + dcimgui
++ hand-written glue: clipboard callbacks, `dcimgui_extra_glue.cpp` for
+style colors). Bindings are inline `__cpp__` wrappers, which allows
+explicit C casts where C++ demands them (strong enums, const pointers,
+function pointers). Nothing to prebuild: works out of the box on desktop
+AND ios/android hxcpp builds.
+
+- Structs are extern classes over the REAL C structs; `ImVec2` crosses by
+  value natively; struct handles are `cpp.Star<T>` (typed pointers).
+- Beware the one hxcpp-specific rvalue rule: a function returning `ImVec2`
+  by value must be stored in a local before accessing `.x`/`.y` (the
+  facade's documented convention on all targets, for symmetry).
+- The scratch (`imguicpp.Marshal`) lives in unmanaged malloc memory so no
+  hxcpp GC interaction can ever invalidate a pointer mid-call.
+
+### js/wasm (`src/imguijs/`)
+
+Uses the emscripten-built module `lib/prebuilt/web/dcimgui.js` (single
+self-contained file, wasm embedded, works in browsers and node). Because
+the wasm C ABI cannot receive or return structs by value from JS, the
+generator also emits `lib/dcimgui/dcimgui_js_glue.cpp`: `dcjs_*` wrappers
+where:
+
+- every `ImVec2`/`ImVec4`/`ImTextureRef` PARAMETER is flattened into
+  scalars (`dcjs_ImGui_SetNextWindowPos(x, y, cond, px, py)`);
+- every by-value struct RETURN goes through an out-pointer: the binding
+  passes `vecScratch`, the glue writes the struct there, the Haxe side
+  reads the fields back (`getF32(vecScratch)`, `getF32(vecScratch + 4)`)
+  and builds the abstract value;
+- every struct FIELD gets a `_dcjs_Type_get_Field` / `set_Field` accessor
+  pair (plus `_dcjs_Type_ptr_Field` for embedded structs/vectors, returning
+  the field's ADDRESS, and `dcjs_sizeof_Type` helpers used by
+  `imgui.NativeStructs` to replicate C++ constructors with
+  `malloc + memset + defaults`).
+
+Other js-specific details:
+
+- strings marshal through the bump region: each binding starts with
+  `strReset()` and every string arg becomes `str(s)` (encode UTF-8 at the
+  bump offset, return the address). The region is call-scoped: 16 KB
+  covers any realistic call, and growth (rare) intentionally leaks the old
+  block since it cannot be freed mid-call.
+- `u64` (ImTextureID, ImGuiSelectionUserData...) crosses as `BigInt`
+  because the module is built with `-sWASM_BIGINT`: `u64(float)` converts
+  going in, `num64(bigint)` coming back. Haxe-side they are `Float`.
+- callbacks: `Module.addFunction(fn, signature)` turns a JS closure into a
+  callable wasm function pointer (the module is built with
+  `-sALLOW_TABLE_GROWTH`); see `imgui.ImGuiCallbacks`.
+- before any call, the module must be loaded:
+  `imguijs.ImGuiJs.init(module); // module = await DCImGui()`
+  (the ceramic plugin does it automatically at startup).
+
+### C#/Unity (`src/imguics/`)
+
+P/Invoke through the generated `src/imguics/DCImGui.cs` shim
+(`[DllImport("dcimgui")]`): C# marshals by-value structs
+(`[StructLayout(Sequential)]`), UTF-8 strings (`LPUTF8Str`) and bools
+(`I1`) natively, so calls hit the ORIGINAL dcimgui C functions, not the
+dcjs glue. The `dcjs_*` glue is still compiled into the native libs and
+used for three things only: struct FIELD access (same accessors as js),
+`sizeof` queries, and reading function-pointer fields.
+
+- Addresses are Haxe `Float`; `ImGuiCs.ptr(a)`/`addr(p)` convert to/from
+  `IntPtr` exactly once at the boundary. `getU32` fixes up the sign
+  (native helper returns a signed int).
+- Small C integer types get explicit casts at the boundary
+  (`toI8/toU8/toI16/toU16`), and `u64` fields cross as `Float` through
+  `toU64/from64`.
+- hxcs codegen gotchas are handled by the generator: no `inline` on
+  functions whose result may be discarded (CS0201), C# reserved parameter
+  names escaped with `@`, locals renamed to avoid collisions with inlined
+  code.
+- callbacks: static delegates + `Marshal.GetFunctionPointerForDelegate` in
+  the hand-written `DCImGuiCallbacks.cs` companion (with
+  `MonoPInvokeCallback` for IL2CPP); see `imgui.ImGuiCallbacks`.
+- requires `lib/prebuilt/<platform>/` native libraries next to the C# shim
+  and a one-time `imguics.ImGuiCs.init()` (the ceramic plugin does it).
+
+### Reading the generated code
+
+A good way to study all of this is to pick one function and compare its
+three implementations side by side in `src/imguicpp/ImGui.hx`,
+`src/imguijs/ImGui.hx` and `src/imguics/ImGui.hx` (they are generated by
+`gen/Gen.hx` from `lib/dcimgui/dcimgui.json`), plus its facade wrapper or
+macro in `src/imgui/ImGui.hx`. Suggested tour: `sliderFloat` (scalar
+out-param), `colorEdit4` (fixed array), `inputText` (text buffer),
+`getCursorScreenPos` (by-value struct return), `dockSpaceOverViewportEx`
+(pointer defaults), and the `ImGuiListClipper` statics + 
+`imgui.NativeStructs.createListClipper` (struct lifetime without a C++
+constructor).
+
+## Repository layout
+
+```
+lib/imgui/            Dear ImGui submodule (docking tag)
+lib/dear_bindings/    dear_bindings submodule (generator, python)
+lib/dcimgui/          COMMITTED generated C API (.h/.cpp/.json) + js glue + exports
+lib/prebuilt/         COMMITTED build artifacts (web wasm, per-platform native libs)
+gen/Gen.hx            THE generator (parses dcimgui.json, emits every layer)
+src/imgui/            portable facade + Ref typedefs + widget macro builder
+src/imguicpp/         hxcpp bindings + linc + Marshal
+src/imguijs/          js bindings + ImGuiJs runtime helper
+src/imguics/          cs bindings + DCImGui.cs shim + ImGuiCs runtime helper
+build/                artifact build scripts (see below)
+test/                 smoke tests (cpp, js, cs) + ceramic-demo project
+```
+
+Everything a consumer needs is committed: no python, emscripten or C++
+toolchain required unless you UPDATE the bindings.
+
+## Updating Dear ImGui
+
+One command does everything (bump, regenerate, rebuild what the host can
+build, run the smokes):
+
+```
+./build/update-bindings.sh v1.XX.Y-docking   # or no argument to just regenerate
+```
+
+It manages its own python venv for dear_bindings, rebuilds the web wasm
+module (if emscripten is available) and the host's native lib, then runs the
+three smoke tests. Native libs for OTHER platforms still need their
+respective hosts (see the table below). The manual steps, for reference:
+
+1. **Bump the submodule** (docking tags):
+
+   ```
+   cd lib/imgui
+   git fetch --depth 1 origin tag v1.XX.Y-docking
+   git checkout v1.XX.Y-docking
+   ```
+
+2. **Regenerate the dcimgui C API** (needs python 3 with the `ply` package):
+
+   ```
+   python3 -m venv .venv && .venv/bin/pip install ply
+   .venv/bin/python lib/dear_bindings/dear_bindings.py \
+       --generateunformattedfunctions \
+       -o lib/dcimgui/dcimgui lib/imgui/imgui.h
+   ```
+
+3. **Regenerate the Haxe bindings** (zero dependencies, runs in interp):
+
+   ```
+   cd gen && haxe gen.hxml
+   ```
+
+   This rewrites `src/imguicpp/ImGui.hx`, `src/imguijs/ImGui.hx`,
+   `src/imguics/ImGui.hx` + `DCImGui.hx` + `DCImGui.cs`, the facade
+   `src/imgui/ImGui.hx`, `lib/dcimgui/dcimgui_js_glue.cpp` and the exports
+   list. It prints per-layer counts: check them against the previous run.
+
+4. **Rebuild the prebuilt artifacts** (at least web + your dev platform).
+
+5. **Run the tests** (below). The demo window IS the test: it exercises most
+   of the API surface at runtime; a miswired binding crashes immediately.
+
+## Building the prebuilt artifacts
+
+| Script | Output | Requirements |
+|---|---|---|
+| `build/build-web.sh` | `lib/prebuilt/web/dcimgui.js` | emscripten (`emcc` in PATH or `EMSDK` env) |
+| `build/build-mac.sh` | `lib/prebuilt/mac/dcimgui.dylib` (universal) | Xcode command line tools |
+| `build/build-windows.bat` | `lib/prebuilt/windows/dcimgui.dll` (x64) | VS x64 dev prompt (`cl`) |
+| `build/build-linux.sh` | `lib/prebuilt/linux/libdcimgui.so` | g++ |
+| `build/build-ios.sh` | `lib/prebuilt/ios/dcimgui.xcframework` | Xcode (device + simulator) |
+| `build/build-android.sh` | `lib/prebuilt/android/<abi>/libdcimgui.so` | Android NDK (`ANDROID_NDK_ROOT`) |
+
+The native libs are only needed by the C#/Unity target (hxcpp compiles from
+source; web uses the wasm module). Artifacts are committed so they only need
+rebuilding when Dear ImGui is updated.
+
+## Tests
+
+```
+cd test/smoke    && haxe smoke.hxml && ./out/Smoke   # hxcpp, headless
+cd test/smoke-js && haxe smokejs.hxml && node run.js # js/wasm in node
+cd test/smoke-cs && haxe smokecs.hxml                # C# compile-check
+```
+
+All three drive the SAME portable facade: the demo window renders the same
+vertex count identically on every target, and each smoke also renders one
+headless frame of the full Haxe demo port (below) as a whole-port
+non-regression check. `test/ceramic-demo/` is a full ceramic project
+(clay mac/web + unity) with animated 2D content under the ImGui UI.
+
+## The Haxe demo port (`imgui.demo`)
+
+`src/imgui/demo/` is a full Haxe port of the official `imgui_demo.cpp`
+(docking branch), written exclusively against the portable `imgui.ImGui`
+facade, so it compiles and runs identically on hxcpp, js/wasm and C#/Unity:
+
+```haxe
+import imgui.demo.ImGuiDemo;
+
+// Anywhere between ImGui.newFrame() and ImGui.render():
+ImGuiDemo.showDemoWindow();
+```
+
+It serves two purposes:
+
+- an exhaustive cross-platform non-regression test of the bindings (every
+  widget, table, layout, popup, input and draw-list API path is exercised);
+- a reference example base for writing your own ImGui components in Haxe:
+  each section of the original demo has a matching class
+  (`DemoWindowWidgets`, `DemoWindowLayout`, `DemoWindowTables`,
+  `DemoStyleEditor`, the `DemoApp*` example apps, ...) that shows the
+  idiomatic Haxe translation of the C++ patterns (static locals as class
+  statics, lvalue widget macros, clippers, sort specs, drag and drop
+  payloads through native scratch memory, ...).
+
+`test/ceramic-demo/` displays the native demo (`ImGui.showDemoWindow()`) and
+the Haxe port side by side for direct visual comparison.
+
+C-callback based features (Console completion/history, InputText callbacks,
+custom resize constraints, combo getters, `BeginMultiSelect()` with
+`ImGuiSelectionBasicStorage`) are ported through the `imgui.ImGuiCallbacks`
+cross-target trampolines. A few sections remain ADAPTED and marked visibly in
+the UI: the assets browser box-select (still uses manual selection),
+`ImDrawList` AddCallback samplers and the font atlas UI
+(`ShowFontAtlas`/`ShowFontSelector`, which need the font atlas API).
+
+## Using with ceramic
+
+Enable the plugin in `ceramic.yml` (`plugins: [imgui]`) and call `ImGui.*`
+anywhere between updates: frame boundaries, input (mouse/keyboard/text/IME),
+clipboard (native), textures and rendering THROUGH ceramic's own pipeline
+are handled by the plugin. Check `ceramic.ImGuiSystem.shared.wantCaptureMouse`
+/ `wantCaptureKeyboard` to ignore UI-consumed input in your app.
+
+The exported projects are kept in sync automatically: every build ends with
+an `imgui setup` hook registered by the plugin, so there is no extra command
+to remember.
+
+- **web**: `ceramic clay build web` copies `dcimgui.js` into `project/web`
+  when it changed (manual equivalent: `ceramic imgui setup web`).
+- **unity**: `ceramic unity build unity` copies `DCImGui.cs`,
+  `DCImGuiExtra.cs`, `DCImGuiCallbacks.cs` and the prebuilt native libs into
+  `Assets/Plugins/DCImGui` when they changed (manual equivalent:
+  `ceramic imgui setup unity`).
+
+## Limitations
+
+- Printf-style variadics are not bound: format Haxe-side and use the clean
+  names (`ImGui.text(str)` binds the `*Unformatted` twins).
+- C callbacks are supported through `imgui.ImGuiCallbacks` trampolines
+  (InputText completion/history/edit/char-filter, size constraints, combo
+  getters, ImGuiSelectionBasicStorage adapter) on all three targets. Install
+  the Haxe handler right before the widget call and pass the returned pointer
+  to the `*Ex` binding. Other exotic callbacks (ImDrawList AddCallback...)
+  are not wired yet.
+- Multi-viewports (OS windows) are out of scope (single-viewport docking
+  works). `imgui_internal.h` is not bound.
+- Obsolete ImGui API is compiled out (`IMGUI_DISABLE_OBSOLETE_FUNCTIONS`).
+- `inputText` buffers are byte-sized (UTF-8): `maxLength` counts bytes, and
+  clamping happens on codepoint boundaries.

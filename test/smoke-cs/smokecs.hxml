@@ -1,0 +1,6 @@
+# cs-target smoke: compile-check the portable facade on hxcs
+-cp ../../src
+-cp .
+-main SmokeCs
+-cs out
+-D no-compilation

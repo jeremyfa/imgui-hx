@@ -1,0 +1,7 @@
+# Phase-1 smoke: compile Dear ImGui (docking) + dcimgui on hxcpp and
+# create/destroy a context through the C ABI.
+-cp ../../src
+-cp .
+-main Smoke
+-cpp out
+-D HXCPP_ARM64

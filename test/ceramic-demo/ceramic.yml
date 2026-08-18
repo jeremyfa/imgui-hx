@@ -1,0 +1,14 @@
+app:
+    package: dev.jeremyfa.imguidemo
+    name: imguidemo
+    displayName: imgui-demo
+    author: Jeremy Faivre
+    version: '1.0'
+
+    plugins:
+        - imgui
+
+    defines:
+        - ceramic_no_skip
+        - imgui_font: Roboto-Medium.ttf.bin
+        - imgui_font_fallback: Kosugi-Regular.ttf.bin

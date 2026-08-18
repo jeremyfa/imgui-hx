@@ -1,0 +1,5 @@
+# js-target smoke: compile the portable facade to js (node runs it via run.js)
+-cp ../../src
+-cp .
+-main SmokeJs
+-js out/smokejs.js

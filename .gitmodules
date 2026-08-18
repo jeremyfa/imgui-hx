@@ -1,6 +1,7 @@
-[submodule "lib/cimgui"]
-	path = lib/cimgui
-	url = https://github.com/cimgui/cimgui
-[submodule "lib/imgui-js"]
-	path = lib/imgui-js
-	url = https://github.com/flyover/imgui-js.git
+[submodule "lib/dear_bindings"]
+	path = lib/dear_bindings
+	url = https://github.com/dearimgui/dear_bindings.git
+[submodule "lib/imgui"]
+	path = lib/imgui
+	url = https://github.com/ocornut/imgui.git
+	branch = docking

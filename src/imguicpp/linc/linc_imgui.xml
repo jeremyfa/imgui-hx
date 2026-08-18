@@ -1,15 +1,31 @@
 <xml>
 
-    <!-- For a more in depth guide: https://github.com/snowkit/hxcpp-guide -->
-    <set name="IMGUI" value="${LINC_IMGUI_PATH}lib/cimgui/imgui" />
+    <!-- Dear ImGui (docking branch) + the dear_bindings C API (dcimgui), compiled from
+         source on every hxcpp target. No imgui_impl_* platform/renderer backends are
+         compiled anymore: rendering and input go through the engine (ceramic Renderable
+         + input bridge), which is what makes the plugin cross-backend. -->
+    <set name="IMGUI" value="${LINC_IMGUI_PATH}lib/imgui" />
+    <set name="DCIMGUI" value="${LINC_IMGUI_PATH}lib/dcimgui" />
 
     <files id="haxe">
 
         <!-- add files and flags to the haxe c++ build -->
 
         <compilerflag value="-I${LINC_IMGUI_PATH}src/imguicpp/linc/"/>
-        <compilerflag value="-I${LINC_IMGUI_PATH}lib/cimgui/imgui/" />
-        <compilerflag value="-I${LINC_IMGUI_PATH}lib/cimgui/imgui/backends/" />
+        <compilerflag value="-I${IMGUI}/" />
+        <compilerflag value="-I${DCIMGUI}/" />
+        <compilerflag value="-DIMGUI_DISABLE_OBSOLETE_FUNCTIONS"/>
+
+    </files>
+
+    <files id="__main__">
+
+        <!-- the entry-point translation unit includes the app class header too -->
+
+        <compilerflag value="-I${LINC_IMGUI_PATH}src/imguicpp/linc/"/>
+        <compilerflag value="-I${IMGUI}/" />
+        <compilerflag value="-I${DCIMGUI}/" />
+        <compilerflag value="-DIMGUI_DISABLE_OBSOLETE_FUNCTIONS"/>
 
     </files>
 
@@ -17,8 +33,8 @@
         <cache value="1" name="imgui" />
 
         <compilerflag value="-DIMGUI_DISABLE_OBSOLETE_FUNCTIONS"/>
-        <compilerflag value="-I${LINC_IMGUI_PATH}lib/cimgui/imgui/" />
-        <compilerflag value="-I${LINC_IMGUI_PATH}lib/cimgui/imgui/backends/" />
+        <compilerflag value="-I${IMGUI}/" />
+        <compilerflag value="-I${DCIMGUI}/" />
 
         <file name="${IMGUI}/imgui.cpp" />
         <file name="${IMGUI}/imgui_draw.cpp" />
@@ -26,26 +42,11 @@
         <file name="${IMGUI}/imgui_tables.cpp" />
         <file name="${IMGUI}/imgui_widgets.cpp" />
 
+        <file name="${DCIMGUI}/dcimgui.cpp" />
+        <file name="${DCIMGUI}/dcimgui_extra_glue.cpp" />
+        <file name="${DCIMGUI}/dcimgui_extra_ctors.cpp" />
+
         <file name="${LINC_IMGUI_PATH}src/imguicpp/linc/linc_imgui.cpp" />
-
-        <section if="linc_sdl" unless="clay_sdl">
-            <file name="${IMGUI}/backends/imgui_impl_sdl.cpp" />
-            <compilerflag value="-I${LINC_IMGUI_PATH}../linc_sdl/lib/sdl/include/" />
-        </section>
-
-        <section if="clay_sdl">
-            <file name="${IMGUI}/backends/imgui_impl_sdl.cpp" />
-            <compilerflag value="-I${LINC_IMGUI_PATH}../SDL/include/" />
-        </section>
-
-        <section if="linc_opengl">
-            <section unless="android || ios || tvos">
-                <compilerflag value="-DIMGUI_IMPL_OPENGL_LOADER_GLEW" />
-                <compilerflag value="-I${LINC_IMGUI_PATH}../linc_opengl/lib/glew/include/" />
-            </section>
-            <file name="${IMGUI}/backends/imgui_impl_opengl3.cpp" />
-        </section>
-
 
     </files>
 
