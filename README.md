@@ -510,6 +510,68 @@ to remember.
   `Assets/Plugins/DCImGui` when they changed (manual equivalent:
   `ceramic imgui setup unity`).
 
+## Layout persistence (ini settings)
+
+By default Dear ImGui reads and writes `imgui.ini` in the **process working
+directory** — inside the bundle for a packaged app, and nowhere useful on web.
+`io.IniFilename` is a `const char*` whose storage ImGui keeps a pointer to, so
+it cannot be assigned from the portable API; `imgui.ImGuiIniSettings` owns that
+string natively:
+
+```haxe
+// Persist the layout yourself (engine save system, database, ...)
+ImGuiIniSettings.disable();
+// ... later, when io.wantSaveIniSettings turns true:
+final data = ImGui.saveIniSettingsToMemory();
+// ... and at startup:
+ImGui.loadIniSettingsFromMemory(data);
+
+// Or just tell ImGui where its file lives
+ImGuiIniSettings.setFilename(myWritablePath + '/layout.ini');
+```
+
+With ini file IO off, ImGui raises `io.wantSaveIniSettings` when the layout
+changed (clear it yourself after saving). Leaving the default on is also what
+makes test runs non-deterministic: a layout left behind by a previous run
+changes what the next one renders.
+
+## Programmatic docking (DockBuilder)
+
+`imgui.ImGuiDockBuilder` builds a dock layout in code, so an app can ship a
+sensible default arrangement instead of opening every panel floating at the
+same spot. Backed by `lib/dcimgui/dcimgui_extra_dockbuilder.cpp` (a TU that
+includes `imgui_internal.h`), compiled into every target.
+
+```haxe
+// Once, when no layout exists yet (ImGui persists the user's own arrangement)
+final root = ImGui.getID('MyDockSpace');
+ImGuiDockBuilder.removeNode(root);
+ImGuiDockBuilder.addDockSpaceNode(root);
+ImGuiDockBuilder.setNodeSize(root, ImVec2.make(width, height));
+
+final left = ImGuiDockBuilder.splitNode(root, ImGuiDir.Left, 0.22);
+final rest = ImGuiDockBuilder.lastOppositeNode();
+
+ImGuiDockBuilder.dockWindow('Devices', left);
+ImGuiDockBuilder.dockWindow('Logs', rest);
+ImGuiDockBuilder.finish(root);
+```
+
+Notes:
+
+- `addDockSpaceNode()` rather than `addNode(id, ImGuiDockNodeFlags.DockSpace)`:
+  that flag is internal and absent from the public enum, so it is applied on
+  the native side — callers never hardcode its value.
+- `splitNode()` returns the piece at the given direction; the other piece comes
+  from `lastOppositeNode()` immediately after (a flat C ABI, no out-pointers to
+  marshal on three targets).
+- Size a node before splitting it: upstream warns that split ratios are
+  unreliable otherwise.
+- `finish()` closes the sequence; nothing applies reliably without it.
+- Wrappers are null-safe where upstream only asserts (asserts are compiled out
+  in the native builds): splitting a node that does not exist returns 0 instead
+  of crashing.
+
 ## Limitations
 
 - Printf-style variadics are not bound: format Haxe-side and use the clean
@@ -521,7 +583,11 @@ to remember.
   to the `*Ex` binding. Other exotic callbacks (ImDrawList AddCallback...)
   are not wired yet.
 - Multi-viewports (OS windows) are out of scope (single-viewport docking
-  works). `imgui_internal.h` is not bound.
+  works). `imgui_internal.h` is not bound, with one deliberate exception:
+  `imgui.ImGuiDockBuilder` exposes the DockBuilder subset (add/split/dock/
+  finish) through hand-written wrappers, because building a default layout in
+  code is otherwise impossible. It carries no upstream compatibility promise,
+  unlike the public API.
 - Obsolete ImGui API is compiled out (`IMGUI_DISABLE_OBSOLETE_FUNCTIONS`).
 - `inputText` buffers are byte-sized (UTF-8): `maxLength` counts bytes, and
   clamping happens on codepoint boundaries.

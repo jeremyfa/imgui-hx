@@ -18,6 +18,7 @@ g++ -I lib/imgui -I lib/dcimgui -DIMGUI_DISABLE_OBSOLETE_FUNCTIONS -DNDEBUG -O2 
     lib/imgui/imgui.cpp lib/imgui/imgui_demo.cpp lib/imgui/imgui_draw.cpp \
     lib/imgui/imgui_tables.cpp lib/imgui/imgui_widgets.cpp lib/dcimgui/dcimgui.cpp \
     lib/dcimgui/dcimgui_js_glue.cpp lib/dcimgui/dcimgui_extra_glue.cpp lib/dcimgui/dcimgui_extra_ctors.cpp \
+    lib/dcimgui/dcimgui_extra_dockbuilder.cpp \
     -o lib/prebuilt/linux/libdcimgui.so
 
 echo "Built lib/prebuilt/linux/libdcimgui.so"

@@ -40,6 +40,7 @@ cl /nologo /O2 /MT /EHsc /std:c++17 /utf-8 /DNDEBUG /DIMGUI_DISABLE_OBSOLETE_FUN
     /Fo"%OBJDIR%\\" ^
     lib\imgui\imgui.cpp lib\imgui\imgui_demo.cpp lib\imgui\imgui_draw.cpp ^
     lib\imgui\imgui_tables.cpp lib\imgui\imgui_widgets.cpp lib\dcimgui\dcimgui.cpp lib\dcimgui\dcimgui_js_glue.cpp lib\dcimgui\dcimgui_extra_glue.cpp lib\dcimgui\dcimgui_extra_ctors.cpp ^
+    lib\dcimgui\dcimgui_extra_dockbuilder.cpp ^
     /LD /Fe:lib\prebuilt\windows\dcimgui.dll ^
     /link /IMPLIB:"%OBJDIR%\dcimgui.lib"
 if errorlevel 1 (

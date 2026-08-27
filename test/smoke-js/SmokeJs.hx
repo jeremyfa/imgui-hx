@@ -1,6 +1,8 @@
 package;
 
 import imgui.ImGui;
+import imgui.ImGuiIniSettings;
+import imgui.ImGuiDockBuilder;
 
 /**
  * js-target smoke test: same coverage as the cpp Smoke, THROUGH THE SAME
@@ -30,7 +32,13 @@ class SmokeJs {
         checkCtorDefaults();
         var io = ImGui.getIO();
 
+        // No imgui.ini next to the test: these runs must be deterministic
+        // (a layout left behind by a previous run would change what renders)
+        ImGuiIniSettings.disable();
+
         io.displaySize = ImVec2.make(1280, 720);
+        // Docking on before the first frame: DockBuilder is exercised below
+        io.configFlags = io.configFlags | ImGuiConfigFlags.DockingEnable;
         io.deltaTime = 1.0 / 60.0;
         io.backendFlags = io.backendFlags | ImGuiBackendFlags.RendererHasTextures;
 
@@ -133,7 +141,10 @@ class SmokeJs {
         trace('Haxe demo vertices: ' + demoVtx);
         if (demoVtx < 500) throw 'Haxe demo rendered too few vertices (' + demoVtx + ')';
 
+        checkDockBuilder();
+
         ImGui.destroyContext(ctx);
+
         trace('OK');
 
     }
@@ -177,6 +188,49 @@ class SmokeJs {
         M._free(ref);
 
         trace('Ctor defaults OK');
+
+    }
+
+    /**
+     * DockBuilder through the hand-written dcx_ wrappers: same check as the
+     * hxcpp smoke test, so a wasm export that never made it into the module
+     * fails here instead of at runtime in an app.
+     */
+    static function checkDockBuilder():Void {
+
+        ImGui.newFrame();
+
+        final root = ImGui.getID('SmokeDockSpace');
+        ImGuiDockBuilder.removeNode(root);
+        final node = ImGuiDockBuilder.addDockSpaceNode(root);
+        if (node == 0) throw 'DockBuilder.addNode returned 0';
+        ImGuiDockBuilder.setNodeSize(node, ImVec2.make(1280, 720));
+
+        final left = ImGuiDockBuilder.splitNode(node, ImGuiDir.Left, 0.25);
+        final right = ImGuiDockBuilder.lastOppositeNode();
+        if (left == 0 || right == 0) throw 'DockBuilder.splitNode produced no ids (left=' + left + ' right=' + right + ')';
+        if (left == right) throw 'DockBuilder.splitNode returned the same id twice';
+
+        ImGuiDockBuilder.dockWindow('SmokeLeft', left);
+        ImGuiDockBuilder.dockWindow('SmokeRight', right);
+        ImGuiDockBuilder.finish(node);
+
+        trace('DockBuilder nodes: root=' + node + ' left=' + left + ' right=' + right);
+
+        var dockedCount = 0;
+        if (ImGui.begin('SmokeLeft')) {
+            if (ImGui.isWindowDocked()) dockedCount++;
+        }
+        ImGui.end();
+        if (ImGui.begin('SmokeRight')) {
+            if (ImGui.isWindowDocked()) dockedCount++;
+        }
+        ImGui.end();
+
+        ImGui.render();
+
+        trace('DockBuilder docked windows: ' + dockedCount + '/2');
+        if (dockedCount != 2) throw 'DockBuilder did not dock both windows (' + dockedCount + '/2)';
 
     }
 

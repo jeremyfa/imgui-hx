@@ -1,6 +1,8 @@
 package;
 
 import imgui.ImGui;
+import imgui.ImGuiIniSettings;
+import imgui.ImGuiDockBuilder;
 
 /**
  * cs-target smoke: COMPILE-CHECK of the same portable facade on hxcs
@@ -23,7 +25,13 @@ class SmokeCs {
         // Constructor-defaults drift check (compile check on cs; the runtime
         // path is exercised by the cpp and js smokes).
         checkCtorDefaults();
+
+        checkDockBuilder();
         var io = ImGui.getIO();
+
+        // No imgui.ini next to the test: these runs must be deterministic
+        // (a layout left behind by a previous run would change what renders)
+        ImGuiIniSettings.disable();
         io.displaySize = ImVec2.make(1280, 720);
         io.deltaTime = 1.0 / 60.0;
         io.backendFlags = io.backendFlags | ImGuiBackendFlags.RendererHasTextures;
@@ -75,6 +83,31 @@ class SmokeCs {
 
     }
 
+
+    /**
+     * DockBuilder facade on cs: compile-check of the P/Invoke branch (the
+     * runtime path runs inside Unity with the native lib, like the rest of
+     * this smoke).
+     */
+    static function checkDockBuilder():Void {
+
+        final root = ImGui.getID('SmokeDockSpace');
+        if (!ImGuiDockBuilder.nodeExists(root)) {
+            ImGuiDockBuilder.removeNode(root);
+        }
+        final node = ImGuiDockBuilder.addDockSpaceNode(root);
+        ImGuiDockBuilder.setNodePos(node, ImVec2.make(0, 0));
+        ImGuiDockBuilder.setNodeSize(node, ImVec2.make(1280, 720));
+        final left = ImGuiDockBuilder.splitNode(node, ImGuiDir.Left, 0.25);
+        final right = ImGuiDockBuilder.lastOppositeNode();
+        ImGuiDockBuilder.dockWindow('SmokeLeft', left);
+        ImGuiDockBuilder.dockWindow('SmokeRight', right);
+        ImGuiDockBuilder.removeNodeChildNodes(node);
+        ImGuiDockBuilder.finish(node);
+        final central = ImGuiDockBuilder.getCentralNode(node);
+        trace('DockBuilder ids: ' + node + ' ' + left + ' ' + right + ' ' + central);
+
+    }
 
     static function checkCtorDefaults():Void {
 

@@ -4,6 +4,7 @@
 // DCX_EXPORT comes from dcimgui_extra.h so the declarations there carry the
 // exact same linkage as the definitions below (MSVC C2375 otherwise).
 
+#include <string>
 #include "dcimgui_extra.h"
 
 extern "C" {
@@ -19,6 +20,21 @@ DCX_EXPORT void dcx_ImGuiStyle_SetColor(ImGuiStyle* style, int idx, float x, flo
     style->Colors[idx].y = y;
     style->Colors[idx].z = z;
     style->Colors[idx].w = w;
+}
+
+// Storage for io.IniFilename: ImGui keeps the pointer we hand it, so the
+// string has to outlive the call.
+static std::string dcx_iniFilename;
+
+DCX_EXPORT void dcx_SetIniFilename(const char* path) {
+    ImGuiIO* io = ImGui_GetIO();
+    if (path == NULL) {
+        dcx_iniFilename.clear();
+        io->IniFilename = NULL;
+        return;
+    }
+    dcx_iniFilename = path;
+    io->IniFilename = dcx_iniFilename.c_str();
 }
 
 DCX_EXPORT void dcx_ImGuiSelectionBasicStorage_SetAdapter(ImGuiSelectionBasicStorage* self, void* adapter) {

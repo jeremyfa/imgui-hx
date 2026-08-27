@@ -1,6 +1,8 @@
 package;
 
 import imgui.ImGui;
+import imgui.ImGuiIniSettings;
+import imgui.ImGuiDockBuilder;
 
 /**
  * Phase-2 smoke test: exercises the GENERATED externs end to end, headless -
@@ -19,6 +21,10 @@ class Smoke {
         var ctx = ImGui.createContext();
         var io = ImGui.getIO();
 
+        // No imgui.ini next to the test: these runs must be deterministic
+        // (a layout left behind by a previous run would change what renders)
+        ImGuiIniSettings.disable();
+
         // Constructor-defaults drift check: NativeStructs replicates C++
         // constructor semantics by hand (dcimgui structs have no ctor); an
         // upstream default change would otherwise fail SILENTLY (see the
@@ -28,6 +34,9 @@ class Smoke {
 
         io.displaySize = ImVec2.make(1280, 720);
         io.deltaTime = 1.0 / 60.0;
+        // Docking must be on before the first frame: DockBuilder is exercised
+        // at the end of this run and the dock context is primed per frame
+        io.configFlags = io.configFlags | ImGuiConfigFlags.DockingEnable;
         // We act as a 1.92-style renderer: font textures are delivered through
         // ImDrawData->Textures (ImTextureData protocol), no upfront atlas build.
         io.backendFlags = io.backendFlags | ImGuiBackendFlags.RendererHasTextures;
@@ -145,8 +154,57 @@ class Smoke {
         trace('Haxe demo vertices: ' + demoVtx);
         if (demoVtx < 500) throw 'Haxe demo rendered too few vertices (' + demoVtx + ')';
 
+        checkDockBuilder(io);
+
         ImGui.destroyContext(ctx);
         trace('OK');
+
+    }
+
+    /**
+     * DockBuilder (imgui_internal.h) exposed through the hand-written
+     * dcx_ wrappers: build a two-pane layout in code, dock a window into each
+     * pane and verify ImGui really placed them there. A miswired extern shows
+     * up here as a zero id or a window that never gets docked.
+     */
+    static function checkDockBuilder(io:ImGuiIO):Void {
+
+        ImGui.newFrame();
+
+        final root = ImGui.getID('SmokeDockSpace');
+        ImGuiDockBuilder.removeNode(root);
+        final node = ImGuiDockBuilder.addDockSpaceNode(root);
+        if (node == 0) throw 'DockBuilder.addNode returned 0';
+        ImGuiDockBuilder.setNodeSize(node, ImVec2.make(1280, 720));
+
+        final left = ImGuiDockBuilder.splitNode(node, ImGuiDir.Left, 0.25);
+        final right = ImGuiDockBuilder.lastOppositeNode();
+        if (left == 0 || right == 0) throw 'DockBuilder.splitNode produced no ids (left=' + left + ' right=' + right + ')';
+        if (left == right) throw 'DockBuilder.splitNode returned the same id twice';
+
+        ImGuiDockBuilder.dockWindow('SmokeLeft', left);
+        ImGuiDockBuilder.dockWindow('SmokeRight', right);
+        ImGuiDockBuilder.finish(node);
+
+        // The central node exists only when a split left one behind; either way
+        // the call must not crash and must return a plausible id
+        final central = ImGuiDockBuilder.getCentralNode(node);
+        trace('DockBuilder nodes: root=' + node + ' left=' + left + ' right=' + right + ' central=' + central);
+
+        var dockedCount = 0;
+        if (ImGui.begin('SmokeLeft')) {
+            if (ImGui.isWindowDocked()) dockedCount++;
+        }
+        ImGui.end();
+        if (ImGui.begin('SmokeRight')) {
+            if (ImGui.isWindowDocked()) dockedCount++;
+        }
+        ImGui.end();
+
+        ImGui.render();
+
+        trace('DockBuilder docked windows: ' + dockedCount + '/2');
+        if (dockedCount != 2) throw 'DockBuilder did not dock both windows (' + dockedCount + '/2)';
 
     }
 

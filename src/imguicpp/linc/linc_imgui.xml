@@ -45,6 +45,7 @@
         <file name="${DCIMGUI}/dcimgui.cpp" />
         <file name="${DCIMGUI}/dcimgui_extra_glue.cpp" />
         <file name="${DCIMGUI}/dcimgui_extra_ctors.cpp" />
+        <file name="${DCIMGUI}/dcimgui_extra_dockbuilder.cpp" />
 
         <file name="${LINC_IMGUI_PATH}src/imguicpp/linc/linc_imgui.cpp" />
 

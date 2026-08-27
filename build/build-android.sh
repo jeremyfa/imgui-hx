@@ -27,6 +27,7 @@ lib/dcimgui/dcimgui.cpp
 lib/dcimgui/dcimgui_js_glue.cpp
 lib/dcimgui/dcimgui_extra_glue.cpp
 lib/dcimgui/dcimgui_extra_ctors.cpp
+lib/dcimgui/dcimgui_extra_dockbuilder.cpp
 "
 FLAGS="-I lib/imgui -I lib/dcimgui -DIMGUI_DISABLE_OBSOLETE_FUNCTIONS -DNDEBUG -O2 -fvisibility=default -fPIC -std=c++17 -static-libstdc++"
 

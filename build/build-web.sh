@@ -37,6 +37,7 @@ lib/dcimgui/dcimgui.cpp
 lib/dcimgui/dcimgui_js_glue.cpp
 lib/dcimgui/dcimgui_extra_glue.cpp
 lib/dcimgui/dcimgui_extra_ctors.cpp
+lib/dcimgui/dcimgui_extra_dockbuilder.cpp
 "
 
 # Core exports (the generated glue functions are EMSCRIPTEN_KEEPALIVE; the
