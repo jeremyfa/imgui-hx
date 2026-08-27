@@ -549,6 +549,22 @@ ImGuiStyleExtra.setNextFrameFontSizeBase(ImGui.getStyle(), size);
 Setting `style.fontSizeBase` directly is still right *before* the first frame,
 or from code that runs outside `newFrame()`/`render()`.
 
+## Clipboard rerouting
+
+ImGui's own clipboard only reaches the OS where it has a platform backend; on
+js/wasm its default is an internal buffer that never touches the system
+clipboard. Route it through the host instead (after `createContext`):
+
+```haxe
+ImGuiClipboard.setHandlers(
+    () -> myEngine.clipboard.getText(),
+    text -> myEngine.clipboard.setText(text)
+);
+```
+
+Covers `Get/SetClipboardText` and copy/paste inside `InputText` widgets.
+hxcpp and js/wasm; not wired on C#/Unity yet.
+
 ## Programmatic docking (DockBuilder)
 
 `imgui.ImGuiDockBuilder` builds a dock layout in code, so an app can ship a

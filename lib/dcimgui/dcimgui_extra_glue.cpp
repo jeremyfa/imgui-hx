@@ -26,6 +26,32 @@ DCX_EXPORT void dcx_ImGuiStyle_SetNextFrameFontSizeBase(ImGuiStyle* style, float
     style->_NextFrameFontSizeBase = size;
 }
 
+// Clipboard rerouting: ImGui's clipboard goes through PlatformIO function
+// pointers. Bindable targets cannot assign those fields directly, so this
+// registers flat C callbacks (js: Module.addFunction trampolines).
+typedef const char* (*dcx_ClipboardGetFn)(void);
+typedef void (*dcx_ClipboardSetFn)(const char* text);
+static dcx_ClipboardGetFn dcx_clipboardGet = NULL;
+static dcx_ClipboardSetFn dcx_clipboardSet = NULL;
+
+static const char* dcx_Platform_GetClipboardText(ImGuiContext* ctx) {
+    (void)ctx;
+    return dcx_clipboardGet != NULL ? dcx_clipboardGet() : NULL;
+}
+
+static void dcx_Platform_SetClipboardText(ImGuiContext* ctx, const char* text) {
+    (void)ctx;
+    if (dcx_clipboardSet != NULL) dcx_clipboardSet(text);
+}
+
+DCX_EXPORT void dcx_SetClipboardHandlers(dcx_ClipboardGetFn get, dcx_ClipboardSetFn set) {
+    dcx_clipboardGet = get;
+    dcx_clipboardSet = set;
+    ImGuiPlatformIO* platformIO = ImGui_GetPlatformIO();
+    platformIO->Platform_GetClipboardTextFn = dcx_Platform_GetClipboardText;
+    platformIO->Platform_SetClipboardTextFn = dcx_Platform_SetClipboardText;
+}
+
 // Storage for io.IniFilename: ImGui keeps the pointer we hand it, so the
 // string has to outlive the call.
 static std::string dcx_iniFilename;

@@ -4,6 +4,7 @@ import imgui.ImGui;
 import imgui.ImGuiIniSettings;
 import imgui.ImGuiDockBuilder;
 import imgui.ImGuiStyleExtra;
+import imgui.ImGuiClipboard;
 
 /**
  * Phase-2 smoke test: exercises the GENERATED externs end to end, headless -
@@ -157,6 +158,7 @@ class Smoke {
 
         checkDockBuilder(io);
         checkNextFrameFontSize();
+        checkClipboard();
 
         ImGui.destroyContext(ctx);
         trace('OK');
@@ -170,6 +172,27 @@ class Smoke {
      * through the field ImGui keeps for that case; check the rendered size
      * really follows, and that the plain assignment really does not.
      */
+    /**
+     * Clipboard rerouting: install host handlers and check both directions -
+     * ImGui.setClipboardText must reach the setter, ImGui.getClipboardText
+     * must come from the getter (on js, ImGui's default is an internal buffer
+     * that never touches the system clipboard, which is why hosts reroute it).
+     */
+    static function checkClipboard():Void {
+
+        var received:String = null;
+        var provided = 'from-host-clipboard';
+        ImGuiClipboard.setHandlers(() -> provided, text -> received = text);
+
+        ImGui.setClipboardText('to-host-clipboard');
+        final got = ImGui.getClipboardText();
+
+        trace('Clipboard: set -> "' + received + '", get -> "' + got + '"');
+        if (received != 'to-host-clipboard') throw 'clipboard setter never received the text';
+        if (got != 'from-host-clipboard') throw 'clipboard getter was not used';
+
+    }
+
     static function checkNextFrameFontSize():Void {
 
         ImGui.newFrame();

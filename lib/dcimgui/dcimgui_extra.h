@@ -51,6 +51,13 @@ DCX_EXPORT void dcx_ImGuiSelectionBasicStorage_Construct(void* self);
     directory — inside the .app bundle on macOS, and nowhere useful on web. */
 void dcx_SetIniFilename(const char* path);
 
+/** Routes ImGui's clipboard (copy/paste in InputText, SetClipboardText...)
+    through flat C callbacks - the PlatformIO function-pointer fields cannot be
+    assigned from bindable targets. Pass NULLs to leave ImGui's default. */
+typedef const char* (*dcx_ClipboardGetFn)(void);
+typedef void (*dcx_ClipboardSetFn)(const char* text);
+void dcx_SetClipboardHandlers(dcx_ClipboardGetFn get, dcx_ClipboardSetFn set);
+
 /** Requests a base font size that takes effect at the next frame.
     Assigning `style.FontSizeBase` between NewFrame() and Render() does nothing:
     ImGui restores that field from the frame's own value while building it
