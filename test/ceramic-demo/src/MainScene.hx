@@ -6,6 +6,7 @@ import ceramic.Scene;
 import ceramic.Visual;
 import ceramic.Shortcuts.*;
 import imgui.ImGui;
+import imgui.ImGuiStyleExtra;
 import imgui.ImGuiFonts;
 import imgui.ImGuiThemes;
 
@@ -41,6 +42,7 @@ class MainScene extends Scene {
     var cousineFont:ImGuiFontPtr = #if cpp null #else cast 0 #end;
     var proggyFont:ImGuiFontPtr = #if cpp null #else cast 0 #end;
     var perWindowFontSize:Float = 15.0;
+    var globalFontSize:Float = 0.0;
 
     // Ceramic visuals in imgui state
     var showVisualsWindow:Bool = true;
@@ -195,7 +197,12 @@ class MainScene extends Scene {
 
         // --- Global font size ---
         ImGui.separatorText('Global font size');
-        ImGui.sliderFloatEx('style.FontSizeBase', style.fontSizeBase, 10.0, 30.0, '%.0f');
+        // Assigning style.fontSizeBase here would be dropped: ImGui restores it
+        // from the frame's own value while building the frame
+        if (globalFontSize <= 0) globalFontSize = style.fontSizeBase;
+        if (ImGui.sliderFloatEx('style.FontSizeBase', globalFontSize, 10.0, 30.0, '%.0f')) {
+            ImGuiStyleExtra.setNextFrameFontSizeBase(style, globalFontSize);
+        }
         ImGui.sameLine();
         imgui.demo.ImGuiDemo.helpMarker('With ImGui 1.92 dynamic fonts, TTF fonts are re-rasterized at any size: no blurry scaling.');
 
