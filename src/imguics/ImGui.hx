@@ -3120,7 +3120,7 @@ abstract ImDrawList(Float) from Float to Float {
     public static function pathRect(self:ImDrawList, rectMin:ImVec2, rectMax:ImVec2, rounding:Float = 0.0, flags:Int = 0):Void {
         imguics.DCImGui.ImDrawList_PathRect(imguics.ImGuiCs.ptr(self), rectMin, rectMax, rounding, flags);
     }
-    public static function addCallbackEx(self:ImDrawList, callback:Float, userdata:Float = 0, userdataSize:Int):Void {
+    public static function addCallbackEx(self:ImDrawList, callback:Float, userdata:Float = 0, userdataSize:Int = 0):Void {
         imguics.DCImGui.ImDrawList_AddCallbackEx(imguics.ImGuiCs.ptr(self), imguics.ImGuiCs.ptr(callback), imguics.ImGuiCs.ptr(userdata), imguics.ImGuiCs.ptr(userdataSize));
     }
     public static function addCallback(self:ImDrawList, callback:Float):Void {
@@ -5252,7 +5252,7 @@ class ImGui {
     public static function loadIniSettingsFromDisk(iniFilename:String):Void {
         imguics.DCImGui.ImGui_LoadIniSettingsFromDisk(iniFilename);
     }
-    public static function loadIniSettingsFromMemory(iniData:String, iniSize:Int):Void {
+    public static function loadIniSettingsFromMemory(iniData:String, iniSize:Int = 0):Void {
         imguics.DCImGui.ImGui_LoadIniSettingsFromMemory(iniData, imguics.ImGuiCs.ptr(iniSize));
     }
     public static function saveIniSettingsToDisk(iniFilename:String):Void {

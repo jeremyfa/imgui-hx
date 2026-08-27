@@ -4912,7 +4912,7 @@ class ImGui {
     extern inline public static function loadIniSettingsFromDisk(iniFilename:String):Void {
         imguics.ImGui.loadIniSettingsFromDisk(iniFilename);
     }
-    extern inline public static function loadIniSettingsFromMemory(iniData:String, iniSize:Int):Void {
+    extern inline public static function loadIniSettingsFromMemory(iniData:String, iniSize:Int = 0):Void {
         imguics.ImGui.loadIniSettingsFromMemory(iniData, iniSize);
     }
     extern inline public static function saveIniSettingsToDisk(iniFilename:String):Void {

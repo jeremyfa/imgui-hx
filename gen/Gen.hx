@@ -1869,9 +1869,13 @@ class Gen {
                 continue;
             }
             if (resolved == 'size_t') {
-                parts.push('$aName:Int');
+                // By-value machine word, passed through the IntPtr-shaped shim
+                // (same width, sign irrelevant at the ABI level).
+                var def = haxeDefault(a, 'Int');
+                var decl = def != null ? '$aName:Int = $def' : '$aName:Int';
+                parts.push(decl);
                 callArgs.push('imguics.ImGuiCs.ptr($aName)');
-                fParts.push('$aName:Int');
+                fParts.push(decl);
                 fNames.push(aName);
                 continue;
             }
