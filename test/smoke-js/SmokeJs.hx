@@ -3,6 +3,7 @@ package;
 import imgui.ImGui;
 import imgui.ImGuiIniSettings;
 import imgui.ImGuiDockBuilder;
+import imgui.ImGuiStyleExtra;
 
 /**
  * js-target smoke test: same coverage as the cpp Smoke, THROUGH THE SAME
@@ -142,6 +143,7 @@ class SmokeJs {
         if (demoVtx < 500) throw 'Haxe demo rendered too few vertices (' + demoVtx + ')';
 
         checkDockBuilder();
+        checkNextFrameFontSize();
 
         ImGui.destroyContext(ctx);
 
@@ -188,6 +190,38 @@ class SmokeJs {
         M._free(ref);
 
         trace('Ctor defaults OK');
+
+    }
+
+    /**
+     * `style.fontSizeBase` assigned from inside a frame is restored by ImGui
+     * while it builds that frame, so a size slider (which can only run inside
+     * one) never has an effect. `ImGuiStyleExtra.setNextFrameFontSizeBase` goes
+     * through the field ImGui keeps for that case; check the rendered size
+     * really follows, and that the plain assignment really does not.
+     */
+    static function checkNextFrameFontSize():Void {
+
+        ImGui.newFrame();
+        final initial = ImGui.getFontSize();
+        // The assignment a UI would naively make, and lose
+        ImGui.getStyle().fontSizeBase = initial + 9;
+        ImGui.render();
+
+        ImGui.newFrame();
+        final afterPlainAssign = ImGui.getFontSize();
+        ImGuiStyleExtra.setNextFrameFontSizeBase(ImGui.getStyle(), initial + 9);
+        ImGui.render();
+
+        ImGui.newFrame();
+        final afterRequest = ImGui.getFontSize();
+        // Back to where we started, so the rest of the harness is unaffected
+        ImGuiStyleExtra.setNextFrameFontSizeBase(ImGui.getStyle(), initial);
+        ImGui.render();
+
+        trace('Font size: initial=' + initial + ' after plain assign=' + afterPlainAssign + ' after request=' + afterRequest);
+        if (afterPlainAssign != initial) throw 'assigning style.fontSizeBase inside a frame unexpectedly took effect';
+        if (afterRequest != initial + 9) throw 'setNextFrameFontSizeBase had no effect (' + afterRequest + ' instead of ' + (initial + 9) + ')';
 
     }
 

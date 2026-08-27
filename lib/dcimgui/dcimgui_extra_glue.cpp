@@ -22,6 +22,10 @@ DCX_EXPORT void dcx_ImGuiStyle_SetColor(ImGuiStyle* style, int idx, float x, flo
     style->Colors[idx].w = w;
 }
 
+DCX_EXPORT void dcx_ImGuiStyle_SetNextFrameFontSizeBase(ImGuiStyle* style, float size) {
+    style->_NextFrameFontSizeBase = size;
+}
+
 // Storage for io.IniFilename: ImGui keeps the pointer we hand it, so the
 // string has to outlive the call.
 static std::string dcx_iniFilename;

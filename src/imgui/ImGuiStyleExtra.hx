@@ -3,9 +3,9 @@ package imgui;
 import imgui.ImGui;
 
 /**
- * Portable access to `style.Colors[idx]` (a C array field, not bindable by
- * the generator). Backed by the hand-written dcimgui_extra_glue.cpp helpers,
- * compiled into every target.
+ * Portable access to the parts of `ImGuiStyle` the generator cannot bind: the
+ * `Colors[]` C array, and the next-frame font size. Backed by the hand-written
+ * dcimgui_extra_glue.cpp helpers, compiled into every target.
  */
 #if (cpp && !macro)
 @:cppInclude('linc_imgui.h')
@@ -35,6 +35,28 @@ class ImGuiStyleExtra {
         return v;
         #else
         return cast null;
+        #end
+    }
+
+    /**
+     * Set the base font size, taking effect at the next frame.
+     *
+     * Assigning `style.fontSizeBase` from inside a frame does nothing: ImGui
+     * restores that field from the frame's own value as it builds it, so the
+     * one place a size slider can run is the one place the assignment is lost.
+     * This goes through the separate field ImGui keeps for the purpose (the one
+     * its own style editor uses).
+     *
+     * A size of 0 means "leave it alone" to ImGui, so it is ignored here.
+     */
+    public static function setNextFrameFontSizeBase(style:#if cpp cpp.Star<ImGuiStyle> #else ImGuiStyle #end, size:Float):Void {
+        if (size <= 0) return;
+        #if cpp
+        untyped __cpp__('dcx_ImGuiStyle_SetNextFrameFontSizeBase({0}, (float){1})', style, size);
+        #elseif js
+        imguijs.ImGuiJs.M._dcx_ImGuiStyle_SetNextFrameFontSizeBase((style:Int), size);
+        #elseif cs
+        imguics.DCImGuiExtra.dcx_ImGuiStyle_SetNextFrameFontSizeBase(imguics.ImGuiCs.ptr((style:Float)), size);
         #end
     }
 

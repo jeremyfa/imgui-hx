@@ -51,6 +51,15 @@ DCX_EXPORT void dcx_ImGuiSelectionBasicStorage_Construct(void* self);
     directory — inside the .app bundle on macOS, and nowhere useful on web. */
 void dcx_SetIniFilename(const char* path);
 
+/** Requests a base font size that takes effect at the next frame.
+    Assigning `style.FontSizeBase` between NewFrame() and Render() does nothing:
+    ImGui restores that field from the frame's own value while building it
+    (UpdateCurrentFontSize), so a UI that changes the size while it is being
+    drawn — the only place a slider can run — would never see an effect. ImGui
+    keeps a separate field for exactly this case, which its own style editor
+    uses; it is underscore-prefixed, hence absent from the generated bindings. */
+void dcx_ImGuiStyle_SetNextFrameFontSizeBase(ImGuiStyle* style, float size);
+
 // DockBuilder: the programmatic docking API lives in imgui_internal.h, which
 // dear_bindings does not process. These wrappers expose the subset needed to
 // build a default layout (add a node, split it, dock windows into the pieces),

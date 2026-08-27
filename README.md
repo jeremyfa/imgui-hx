@@ -535,6 +535,20 @@ changed (clear it yourself after saving). Leaving the default on is also what
 makes test runs non-deterministic: a layout left behind by a previous run
 changes what the next one renders.
 
+## Changing the font size at runtime
+
+`style.fontSizeBase` assigned from **inside** a frame does nothing: ImGui
+restores that field from the frame's own value while building it, so the one
+place a size slider can run is the one place the assignment is lost. Go through
+the field ImGui keeps for that case (the one its own style editor uses):
+
+```haxe
+ImGuiStyleExtra.setNextFrameFontSizeBase(ImGui.getStyle(), size);
+```
+
+Setting `style.fontSizeBase` directly is still right *before* the first frame,
+or from code that runs outside `newFrame()`/`render()`.
+
 ## Programmatic docking (DockBuilder)
 
 `imgui.ImGuiDockBuilder` builds a dock layout in code, so an app can ship a

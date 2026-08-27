@@ -12,6 +12,9 @@ public static class DCImGuiExtra {
     public static extern void dcx_ImGuiStyle_SetColor(System.IntPtr style, int idx, float x, float y, float z, float w);
 
     [DllImport("dcimgui", CallingConvention = CallingConvention.Cdecl)]
+    public static extern void dcx_ImGuiStyle_SetNextFrameFontSizeBase(System.IntPtr style, float size);
+
+    [DllImport("dcimgui", CallingConvention = CallingConvention.Cdecl)]
     public static extern void dcx_ImGuiSelectionBasicStorage_SetAdapter(System.IntPtr self, System.IntPtr adapter);
 
     [DllImport("dcimgui", CallingConvention = CallingConvention.Cdecl)]
