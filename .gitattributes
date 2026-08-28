@@ -1,0 +1,15 @@
+# Scoped to the CI stamp inputs, nothing else. build/stamp.sh digests the
+# lib/dcimgui/ sources and the build scripts to decide whether lib/prebuilt/ is
+# stale: those bytes must be identical on every checkout, on every OS, whatever
+# the user's core.autocrlf, otherwise the digest flaps and the windows artifact
+# would be seen as stale on every single push.
+#
+# Everything else in the repo keeps git's default behavior. Note that lib/imgui
+# and lib/dear_bindings are submodules, i.e. separate repositories with their
+# own .gitattributes: nothing here applies to them.
+/build/** -text
+/lib/dcimgui/** -text
+
+# Committed build artifacts: never treat as text, and never try to auto-merge
+# them (a merged binary is a corrupt binary, so surface the conflict instead).
+/lib/prebuilt/** binary -diff -merge

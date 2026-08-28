@@ -360,12 +360,37 @@ respective hosts (see the table below). The manual steps, for reference:
    `src/imgui/ImGui.hx`, `lib/dcimgui/dcimgui_js_glue.cpp` and the exports
    list. It prints per-layer counts: check them against the previous run.
 
-4. **Rebuild the prebuilt artifacts** (at least web + your dev platform).
+4. **Commit the regenerated bindings.** You do NOT need to rebuild the binaries
+   on six machines: CI rebuilds every stale platform on push and hands you the
+   result as artifacts to commit (see below). Build locally only when you want
+   to test before pushing.
 
 5. **Run the tests** (below). The demo window IS the test: it exercises most
    of the API surface at runtime; a miswired binding crashes immediately.
 
-## Building the prebuilt artifacts
+## The prebuilt artifacts
+
+The native libs are only needed by the C#/Unity target (hxcpp compiles from
+source; web uses the wasm module). They are committed, so a consumer needs no
+python, emscripten or C++ toolchain.
+
+**CI builds, you commit.** `.github/workflows/prebuilt.yml` rebuilds every stale
+platform on push, verifies the result, and uploads it as workflow artifacts (one
+per platform, plus a merged `prebuilt-all`). It never pushes binaries itself:
+a full set weighs ~15 MB and every commit stays in git history forever, so
+landing them is a deliberate, manual act:
+
+```bash
+# download and extract the run's `prebuilt-all` artifact, then:
+build/apply-prebuilt.sh ~/Downloads/prebuilt-all
+git diff --stat lib/prebuilt
+git add lib/prebuilt && git commit -m 'Update prebuilt binaries'
+```
+
+Each artifact tar carries its `stamp.txt`, so once committed the next run
+reports everything fresh and builds nothing. Until then, a stale platform is
+rebuilt on every push: that is the accepted cost of keeping binaries out of
+automated commits.
 
 | Script | Output | Requirements |
 |---|---|---|
@@ -376,9 +401,45 @@ respective hosts (see the table below). The manual steps, for reference:
 | `build/build-ios.sh` | `lib/prebuilt/ios/dcimgui.xcframework` | Xcode (device + simulator) |
 | `build/build-android.sh` | `lib/prebuilt/android/<abi>/libdcimgui.so` | Android NDK (`ANDROID_NDK_ROOT`) |
 
-The native libs are only needed by the C#/Unity target (hxcpp compiles from
-source; web uses the wasm module). Artifacts are committed so they only need
-rebuilding when Dear ImGui is updated.
+### How staleness is decided
+
+These artifacts are not reproducible bit for bit (embedded timestamps and paths,
+the code signature, emcc embedding a base64 wasm), so comparing rebuilt bytes to
+committed bytes would report "changed" on every run. Instead `build/stamp.sh`
+digests the **inputs** (the `lib/imgui` commit, the compiled `lib/dcimgui/`
+sources, the platform's build script, and its pins in `build/toolchains.env`) and
+stores the result in `lib/prebuilt/<platform>/stamp.txt`.
+
+`lib/prebuilt/**` is deliberately **not** an input to its own stamp. That is what
+makes the whole thing idempotent: the commit CI makes cannot invalidate the stamp
+it just wrote, so the next run finds everything fresh and does nothing.
+
+Useful commands:
+
+```bash
+build/ci-stale-platforms.sh          # what is out of date, and why
+build/stamp.sh mac                   # the expected digest for one platform
+build/ci-verify.sh mac               # check a built artifact (arch, exports, loads)
+```
+
+To force a rebuild: bump `COMMON_BUILD_REVISION` in `build/toolchains.env`, or run
+the workflow manually with `platforms: all`. Bumping a toolchain pin (say
+`WEB_EMSDK`) invalidates only the platforms it affects.
+
+### Notes per platform
+
+* **Toolchain versions and runner images are pinned** in `build/toolchains.env`
+  and are part of the stamp, so an image upgrade cannot silently change the bytes
+  we ship.
+* **mac** is signed with a Developer ID and notarized by CI. Without the signing
+  secrets the mac platform is skipped rather than rebuilt, so an unsigned dylib
+  can never replace the committed one.
+* **mac/linux** pin their deployment floor on purpose: `MAC_MIN_OS` (an unpinned
+  build inherits the build machine's SDK and then refuses to load on anything
+  older), and linux builds on the oldest supported runner with
+  `-static-libstdc++` to avoid an avoidable glibc/GLIBCXX floor.
+* **iOS** ships static `.a` slices, which are not code signed: they get linked
+  into the consumer's app, which is what carries the signature.
 
 ## Tests
 

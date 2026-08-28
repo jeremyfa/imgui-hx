@@ -24,11 +24,18 @@ lib/dcimgui/dcimgui_extra_glue.cpp
 lib/dcimgui/dcimgui_extra_ctors.cpp
 "
 
+# Deployment target MUST be pinned: without it, clang stamps the SDK of whatever
+# machine happens to build, and the dylib then refuses to load on anything older
+# (the previously committed artifact ended up with minos 26.0, i.e. macOS 26+ only).
+MAC_MIN_OS="${MAC_MIN_OS:-11.0}"
+
 FLAGS="-I lib/imgui -I lib/dcimgui -DIMGUI_DISABLE_OBSOLETE_FUNCTIONS -DNDEBUG -O2 -fvisibility=default -std=c++17"
 
 clang++ $FLAGS $SOURCES -arch arm64 -arch x86_64 -dynamiclib \
+    -mmacosx-version-min="$MAC_MIN_OS" \
     -install_name @rpath/dcimgui.dylib \
     -o lib/prebuilt/mac/dcimgui.dylib
 
 echo "Built lib/prebuilt/mac/dcimgui.dylib ($(du -h lib/prebuilt/mac/dcimgui.dylib | cut -f1))"
 lipo -info lib/prebuilt/mac/dcimgui.dylib
+otool -l lib/prebuilt/mac/dcimgui.dylib | awk '/LC_BUILD_VERSION/{f=1} f&&/minos/{print "  minos "$2; exit}'

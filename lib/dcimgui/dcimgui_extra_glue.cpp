@@ -1,14 +1,8 @@
 // Hand-written extra glue (see dcimgui_extra.h). Compiled into every target
 // (linc XML for hxcpp, build-web.sh for wasm, build-*.sh for the Unity libs).
-
-#ifdef __EMSCRIPTEN__
-#include <emscripten.h>
-#define DCX_EXPORT EMSCRIPTEN_KEEPALIVE
-#elif defined(_WIN32)
-#define DCX_EXPORT __declspec(dllexport)
-#else
-#define DCX_EXPORT __attribute__((visibility("default")))
-#endif
+//
+// DCX_EXPORT comes from dcimgui_extra.h so the declarations there carry the
+// exact same linkage as the definitions below (MSVC C2375 otherwise).
 
 #include "dcimgui_extra.h"
 

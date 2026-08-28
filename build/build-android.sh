@@ -37,5 +37,9 @@ for ABI_TARGET in "arm64-v8a aarch64-linux-android" "armeabi-v7a armv7a-linux-an
     mkdir -p "lib/prebuilt/android/$ABI"
     "$TOOLCHAIN/clang++" --target=$TARGET$API $FLAGS $SOURCES -shared \
         -o "lib/prebuilt/android/$ABI/libdcimgui.so"
-    echo "Built lib/prebuilt/android/$ABI/libdcimgui.so"
+    # Strip: the NDK's prebuilt libc++/libunwind pulled in by -static-libstdc++
+    # carry debug sections (~1.3 MB per ABI). Dead weight in a committed
+    # artifact, in git history, and in every consumer's APK.
+    "$TOOLCHAIN/llvm-strip" --strip-unneeded "lib/prebuilt/android/$ABI/libdcimgui.so"
+    echo "Built lib/prebuilt/android/$ABI/libdcimgui.so ($(du -h "lib/prebuilt/android/$ABI/libdcimgui.so" | cut -f1))"
 done

@@ -1,0 +1,343 @@
+name: Prebuilt binaries
+
+# The C#/Unity target does not compile dcimgui from source (unlike hxcpp): it
+# P/Invokes a native library per platform. Those libraries live committed in
+# lib/prebuilt/, and this workflow builds them.
+#
+# On each push it works out which platforms are stale, rebuilds only those,
+# verifies what came out, and uploads the result as workflow artifacts (one per
+# platform, plus a merged prebuilt-all). It NEVER commits binaries itself: a
+# full set weighs ~15 MB and every commit stays in git history forever, so
+# landing them is a deliberate, manual act:
+#
+#   download prebuilt-all from the run, then
+#   build/apply-prebuilt.sh <downloaded dir>   # review, git add, commit
+#
+# Staleness is decided by an INPUT digest (build/stamp.sh), never by comparing
+# the produced bytes, because none of these artifacts is reproducible bit for
+# bit. Each artifact tar carries the lib/prebuilt/<platform>/stamp.txt that goes
+# with it, so once the maintainer commits the artifacts, the next run finds
+# every stamp fresh and builds nothing. Until they are committed, a stale
+# platform is rebuilt on every push: that is the accepted cost of keeping
+# binaries out of automated commits.
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      platforms:
+        description: 'stale (default), all, or a comma separated list'
+        default: 'stale'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prebuilt-${{ github.ref }}
+  # Cancelling only ever discards build work and its artifacts, nothing is
+  # written anywhere, so a superseded run is safe to kill.
+  cancel-in-progress: true
+
+# Secrets safety: the Apple signing secrets are referenced ONLY in steps gated
+# on HAS_SIGNING, which is false for every pull_request event. On a fork PR
+# GitHub does not expose secrets at all and the token is read only; the gate
+# additionally keeps same repo PRs away from the certificate. So a malicious PR
+# editing this workflow or the build scripts runs with nothing to steal, and
+# nothing here ever pushes: the workflow's only output is artifacts.
+
+jobs:
+
+  plan:
+    runs-on: ubuntu-24.04
+    env:
+      # Without a certificate we must not rebuild mac at all: committing an
+      # unsigned dylib would downgrade the committed one, and building it
+      # without committing would leave its stamp stale forever, so mac would be
+      # rebuilt on every single push.
+      HAS_SIGNING: ${{ secrets.APPLE_CERTIFICATE_P12 != '' && github.event_name != 'pull_request' }}
+    outputs:
+      matrix: ${{ steps.detect.outputs.matrix }}
+      any: ${{ steps.detect.outputs.any }}
+      platforms: ${{ steps.detect.outputs.platforms }}
+    steps:
+
+      # No submodules: build/stamp.sh reads the imgui commit from the gitlink,
+      # which keeps this job down to a few seconds on the common "nothing to do"
+      # path.
+      - uses: actions/checkout@v4
+
+      - name: Detect stale platforms
+        id: detect
+        env:
+          PLATFORMS: ${{ inputs.platforms || 'stale' }}
+        run: build/ci-stale-platforms.sh
+
+  build:
+    needs: plan
+    # Mandatory: fromJSON('{"include":[]}') does not produce an empty matrix, it
+    # fails the job. "Nothing is stale" is the common case, so without this guard
+    # the steady state of the repo would be a red run on every push.
+    if: needs.plan.outputs.any == 'true'
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    env:
+      HAS_SIGNING: ${{ secrets.APPLE_CERTIFICATE_P12 != '' && github.event_name != 'pull_request' }}
+    steps:
+
+      - uses: actions/checkout@v4
+
+      # Only lib/imgui is needed to compile; lib/dear_bindings is only used to
+      # regenerate the bindings.
+      - name: Checkout imgui
+        run: git submodule update --init --depth 1 lib/imgui
+
+      - name: Load toolchain pins
+        shell: bash
+        run: |
+          platform='${{ matrix.platform }}'
+          PLATFORM=$(printf '%s' "$platform" | tr '[:lower:]' '[:upper:]')
+          # Strip the quotes of multi valued entries: GITHUB_ENV takes the value
+          # literally, quotes included.
+          grep -E "^(COMMON|$PLATFORM)_" build/toolchains.env \
+            | sed 's/="\(.*\)"$/=\1/' >> "$GITHUB_ENV"
+
+      - name: Setup emscripten
+        if: matrix.platform == 'web'
+        shell: bash
+        run: |
+          git clone --depth 1 https://github.com/emscripten-core/emsdk.git "$RUNNER_TEMP/emsdk"
+          cd "$RUNNER_TEMP/emsdk"
+          ./emsdk install "$WEB_EMSDK"
+          ./emsdk activate "$WEB_EMSDK"
+          echo "EMSDK=$RUNNER_TEMP/emsdk" >> "$GITHUB_ENV"
+
+      - name: Setup Android NDK
+        if: matrix.platform == 'android'
+        shell: bash
+        run: |
+          ndk="$ANDROID_SDK_ROOT/ndk/$ANDROID_NDK"
+          if [ ! -d "$ndk" ]; then
+            yes | "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" "ndk;$ANDROID_NDK" >/dev/null
+          fi
+          [ -d "$ndk" ] || { echo "NDK $ANDROID_NDK unavailable, bump build/toolchains.env" >&2; exit 1; }
+          echo "ANDROID_NDK_ROOT=$ndk" >> "$GITHUB_ENV"
+
+      - name: Build
+        if: matrix.platform != 'windows'
+        shell: bash
+        run: build/build-${{ matrix.platform }}.sh
+
+      - name: Build (windows)
+        if: matrix.platform == 'windows'
+        shell: cmd
+        run: |
+          for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath`) do set VSPATH=%%i
+          if not defined VSPATH exit /b 1
+          call "%VSPATH%\VC\Auxiliary\Build\vcvars64.bat" || exit /b 1
+          call build\build-windows.bat || exit /b 1
+
+      - name: Install Apple certificate
+        if: matrix.platform == 'mac' && env.HAS_SIGNING == 'true'
+        env:
+          APPLE_CERTIFICATE_P12: ${{ secrets.APPLE_CERTIFICATE_P12 }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+        run: |
+          CERT_PATH=$RUNNER_TEMP/certificate.p12
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+          KEYCHAIN_PASSWORD=$(openssl rand -hex 12)
+          echo -n "$APPLE_CERTIFICATE_P12" | base64 --decode -o $CERT_PATH
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security import $CERT_PATH -P "$APPLE_CERTIFICATE_PASSWORD" \
+            -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security set-key-partition-list -S apple-tool:,apple: \
+            -k "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security list-keychains -d user -s $KEYCHAIN_PATH login.keychain
+
+      - name: Sign the dylib
+        if: matrix.platform == 'mac' && env.HAS_SIGNING == 'true'
+        run: |
+          # No --entitlements: this is a library, not an executable.
+          codesign --force --options runtime --timestamp \
+            --sign "Developer ID Application" \
+            lib/prebuilt/mac/dcimgui.dylib
+          codesign --verify --strict --verbose=2 lib/prebuilt/mac/dcimgui.dylib
+          codesign -dvv lib/prebuilt/mac/dcimgui.dylib 2>&1 | grep 'Authority=Developer ID'
+
+      - name: Notarize the dylib
+        if: matrix.platform == 'mac' && env.HAS_SIGNING == 'true'
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          # A bare dylib cannot be stapled (only .app/.pkg/.dmg can), so this
+          # registers the binary with Apple; what the consumer actually relies on
+          # is the Developer ID signature plus the hardened runtime above.
+          ditto -c -k lib/prebuilt/mac/dcimgui.dylib "$RUNNER_TEMP/dcimgui.zip"
+          xcrun notarytool submit "$RUNNER_TEMP/dcimgui.zip" \
+            --apple-id "$APPLE_ID" \
+            --password "$APPLE_ID_PASSWORD" \
+            --team-id "$APPLE_TEAM_ID" \
+            --wait --timeout 15m
+
+      - name: Cleanup keychain
+        if: ${{ always() && matrix.platform == 'mac' && env.HAS_SIGNING == 'true' }}
+        run: security delete-keychain $RUNNER_TEMP/app-signing.keychain-db 2>/dev/null || true
+
+      # The gate that gives the stamp its meaning. Nothing runs after the commit
+      # lands (a GITHUB_TOKEN push triggers no workflow), so this is the only
+      # validation these binaries will ever get.
+      - name: Verify outputs
+        shell: bash
+        run: build/ci-verify.sh ${{ matrix.platform }}
+
+      - name: Write stamp
+        shell: bash
+        run: |
+          mkdir -p 'lib/prebuilt/${{ matrix.platform }}'
+          # Computed once, on Linux, by the plan job: no Windows or macOS runner
+          # ever hashes a source file, so the digest cannot become platform
+          # dependent (a CRLF checkout would otherwise never agree with LF).
+          printf '%s\n' '${{ matrix.stamp }}' > 'lib/prebuilt/${{ matrix.platform }}/stamp.txt'
+
+      # tar, not raw files: the artifact round trip drops unix modes, excludes
+      # dotfiles, and roots the archive at the least common ancestor of whatever
+      # matched. An explicit allowlist also keeps MSVC's .lib/.exp and any stray
+      # object file out of the commit.
+      - name: Package
+        shell: bash
+        run: |
+          platform='${{ matrix.platform }}'
+          PLATFORM=$(printf '%s' "$platform" | tr '[:lower:]' '[:upper:]')
+          # The allowlist comes from toolchains.env, already loaded into the
+          # environment above, so the output list has a single definition.
+          eval "outputs=\${${PLATFORM}_OUTPUTS}"
+          # On the windows runner RUNNER_TEMP is a D:\... path, and GNU tar
+          # parses the drive colon as a remote host ("Cannot connect to D").
+          # cygpath only exists in git-bash, which is exactly where the
+          # conversion is needed.
+          tarfile="$RUNNER_TEMP/$platform.tar"
+          if command -v cygpath >/dev/null 2>&1; then
+            tarfile=$(cygpath -u "$tarfile")
+          fi
+          tar -C lib/prebuilt -cf "$tarfile" \
+            $outputs "$platform/stamp.txt"
+          tar -tf "$tarfile"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: prebuilt-${{ matrix.platform }}
+          path: ${{ runner.temp }}/${{ matrix.platform }}.tar
+          if-no-files-found: error
+          overwrite: true
+          retention-days: 14
+
+  # One artifact holding every platform built by this run, so updating
+  # lib/prebuilt/ manually is a single download (see build/apply-prebuilt.sh).
+  # !cancelled(): if one platform failed, the merged artifact still carries the
+  # ones that succeeded.
+  merge-artifacts:
+    needs: [plan, build]
+    if: ${{ !cancelled() && needs.plan.outputs.any == 'true' }}
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/upload-artifact/merge@v4
+        # Fails when not a single build uploaded anything; the run is already
+        # red from the build job in that case.
+        continue-on-error: true
+        with:
+          name: prebuilt-all
+          pattern: prebuilt-*
+          separate-directories: false
+          retention-days: 14
+
+  # Independent of the binaries, but load bearing for them: gen/Gen.hx emits
+  # lib/dcimgui/dcimgui_js_glue.cpp, which is compiled INTO every artifact. If
+  # someone bumps imgui without regenerating, the binaries would be built from a
+  # glue layer that no longer matches the P/Invoke shim, which surfaces only as a
+  # runtime EntryPointNotFoundException.
+  validate-generated:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: krdlab/setup-haxe@v1
+        with:
+          haxe-version: 4.3.6
+      - name: Regenerate and diff
+        run: |
+          cd gen && haxe gen.hxml
+          cd ..
+          git diff --exit-code -- src lib/dcimgui/dcimgui_js_glue.cpp lib/dcimgui/dcimgui_js_exports.txt
+
+  smoke:
+    runs-on: ${{ matrix.os }}
+    needs: build
+    if: ${{ !cancelled() }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # HXCPP_ARM64 is hardcoded in test/smoke/smoke.hxml, so this one needs
+          # an arm64 runner.
+          - { name: cpp, os: macos-14 }
+          - { name: js, os: ubuntu-24.04 }
+          - { name: cs, os: ubuntu-24.04 }
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout imgui
+        if: matrix.name == 'cpp'
+        run: git submodule update --init --depth 1 lib/imgui
+      # krdlab/setup-haxe does not support arm64 runners, and the cpp smoke must
+      # run on arm64 (test/smoke/smoke.hxml hardcodes -D HXCPP_ARM64), so that
+      # one gets Haxe from Homebrew instead.
+      - name: Setup Haxe (brew, arm64)
+        if: matrix.name == 'cpp'
+        run: |
+          brew install haxe
+          mkdir -p ~/haxelib
+          haxelib setup ~/haxelib
+      - uses: krdlab/setup-haxe@v1
+        if: matrix.name != 'cpp'
+        with:
+          haxe-version: 4.3.6
+
+      # Run the js smoke against the wasm module this run just produced, not the
+      # committed copy, so a broken web build cannot pass here.
+      - uses: actions/download-artifact@v4
+        if: matrix.name == 'js'
+        continue-on-error: true
+        with:
+          name: prebuilt-web
+          path: ${{ runner.temp }}/web
+      - name: Use freshly built wasm module
+        if: matrix.name == 'js'
+        run: |
+          if [ -f "$RUNNER_TEMP/web/web.tar" ]; then
+            tar -C lib/prebuilt -xf "$RUNNER_TEMP/web/web.tar"
+            echo 'using the artifact from this run'
+          else
+            echo 'web was not rebuilt, using the committed module'
+          fi
+
+      - name: Smoke (cpp)
+        if: matrix.name == 'cpp'
+        run: |
+          haxelib install hxcpp --quiet
+          cd test/smoke && haxe smoke.hxml && rm -f imgui.ini && ./out/Smoke
+
+      - name: Smoke (js)
+        if: matrix.name == 'js'
+        run: cd test/smoke-js && haxe smokejs.hxml && rm -f imgui.ini && node run.js
+
+      - name: Smoke (cs)
+        if: matrix.name == 'cs'
+        run: |
+          haxelib install hxcs --quiet
+          cd test/smoke-cs && haxe smokecs.hxml
