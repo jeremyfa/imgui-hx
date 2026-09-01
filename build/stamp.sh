@@ -66,6 +66,7 @@ lib/dcimgui/dcimgui.cpp
 lib/dcimgui/dcimgui_extra.h
 lib/dcimgui/dcimgui_extra_glue.cpp
 lib/dcimgui/dcimgui_extra_ctors.cpp
+lib/dcimgui/dcimgui_extra_dockbuilder.cpp
 lib/dcimgui/dcimgui_js_glue.cpp
 "
 
