@@ -1,0 +1,3 @@
+# On C#, keep the native-callable callback trampolines in the output: they are
+# reached from DCImGuiCallbacks.cs, never from Haxe (see ImGuiKeep).
+--macro imgui.macros.ImGuiKeep.init()
