@@ -153,25 +153,52 @@ class NativeStructs {
      * Allocate native bytes and copy a haxe.io.Bytes into them (fast per
      * target: memcpy / HEAPU8.set / Marshal.Copy). Suited to font files and
      * other large blobs. The returned buffer is never freed automatically.
+     *
+     * For a blob an ImGui struct takes OWNERSHIP of, use
+     * `allocImGuiBytesFromHaxe` instead: ImGui releases what it owns with
+     * `IM_FREE`, which only pairs with its own allocator.
      */
     public static function allocBytesFromHaxe(bytes:haxe.io.Bytes):#if cpp cpp.RawPointer<cpp.UInt8> #elseif cs Float #else Int #end {
+        var addr = allocBytes(bytes.length);
+        copyBytesFromHaxe(addr, bytes);
+        return addr;
+    }
+
+    /**
+     * Same, but allocated with IMGUI'S OWN allocator, for a blob an ImGui
+     * struct takes ownership of and frees itself with `IM_FREE`: a font's TTF
+     * data with `fontDataOwnedByAtlas` (released when the atlas source goes
+     * away, so with the context), `glyphExcludeRanges`... Handing ImGui a
+     * buffer from any other allocator crashes at that free - and keeping the
+     * buffer out of ImGui's hands instead means leaking it once per context,
+     * which an editor that reloads the app in-process (Unity's play mode)
+     * turns into a leak per run.
+     */
+    public static function allocImGuiBytesFromHaxe(bytes:haxe.io.Bytes):#if cpp cpp.RawPointer<cpp.UInt8> #elseif cs Float #else Int #end {
+        #if cpp
+        var addr:cpp.RawPointer<cpp.UInt8> = cast ImGui.memAlloc(bytes.length);
+        #elseif js
+        var addr:Int = ImGui.memAlloc(bytes.length);
+        #elseif cs
+        var addr:Float = ImGui.memAlloc(bytes.length);
+        #else
+        var addr:Int = 0;
+        #end
+        copyBytesFromHaxe(addr, bytes);
+        return addr;
+    }
+
+    /** Copy a haxe.io.Bytes into already allocated native memory. */
+    static function copyBytesFromHaxe(addr:#if cpp cpp.RawPointer<cpp.UInt8> #elseif cs Float #else Int #end, bytes:haxe.io.Bytes):Void {
         var len = bytes.length;
         #if cpp
-        var addr:cpp.RawPointer<cpp.UInt8> = cast cpp.Stdlib.nativeMalloc(len);
         var src:cpp.Pointer<cpp.UInt8> = cpp.NativeArray.address(bytes.getData(), 0);
         untyped __cpp__('memcpy({0}, {1}, {2})', addr, src.raw, len);
-        return addr;
         #elseif js
-        var addr:Int = imguijs.ImGuiJs.M._malloc(len);
         var view = new js.lib.Uint8Array((bytes.getData():js.lib.ArrayBuffer), 0, len);
         (imguijs.ImGuiJs.M.HEAPU8:js.lib.Uint8Array).set(view, addr);
-        return addr;
         #elseif cs
-        var addr:Float = imguics.ImGuiCs.addr(imguics.DCImGui.Alloc(len));
         untyped __cs__('global::System.Runtime.InteropServices.Marshal.Copy((byte[]){0}, 0, (global::System.IntPtr)(long)(double){1}, {2})', bytes.getData(), addr, len);
-        return addr;
-        #else
-        return 0;
         #end
     }
 

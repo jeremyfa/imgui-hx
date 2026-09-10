@@ -45,17 +45,20 @@ class ImGuiFonts {
      * Japanese/CJK coverage, icons) to a base font. Order matters: add the
      * merge font right after its base font.
      *
-     * The TTF data is copied to native memory that stays alive for the whole
-     * app lifetime (the atlas does NOT own it, fontDataOwnedByAtlas=false,
-     * to avoid any cross-target allocator mismatch; native malloc memory is
-     * not garbage collected so no retention is needed).
+     * The TTF data is copied to native memory allocated with ImGui's OWN
+     * allocator and handed over to the atlas (fontDataOwnedByAtlas=true):
+     * since 1.92 the data must stay alive for the whole life of the atlas,
+     * and ImGui releases it with `IM_FREE` when the atlas source goes away
+     * (so with the context). Keeping ownership on our side instead would
+     * leak one copy of every font per context - which an editor that reloads
+     * the app in-process (Unity's play mode) turns into a leak per run.
      */
     public static function addFontFromBytes(bytes:haxe.io.Bytes, sizePixels:Float = 0.0, merge:Bool = false):ImGuiFontPtr {
 
-        var data = NativeStructs.allocBytesFromHaxe(bytes);
+        var data = NativeStructs.allocImGuiBytesFromHaxe(bytes);
 
         var cfg = NativeStructs.createFontConfig();
-        cfg.fontDataOwnedByAtlas = false;
+        cfg.fontDataOwnedByAtlas = true;
         cfg.mergeMode = merge;
 
         var io = ImGui.getIO();
@@ -99,7 +102,7 @@ class ImGuiFonts {
      */
     public static function addFontFromBytesRanged(bytes:haxe.io.Bytes, sizePixels:Float = 0.0, merge:Bool = false, ?ranges:Array<Int>, offsetY:Float = 0):ImGuiFontPtr {
 
-        var data = NativeStructs.allocBytesFromHaxe(bytes);
+        var data = NativeStructs.allocImGuiBytesFromHaxe(bytes);
 
         // A glyph offset is expressed relative to a reference size, so ImGui
         // asserts when one is given without the other. Substitute its own
@@ -109,13 +112,15 @@ class ImGuiFonts {
         }
 
         var cfg = NativeStructs.createFontConfig();
-        cfg.fontDataOwnedByAtlas = false;
+        cfg.fontDataOwnedByAtlas = true;
         cfg.mergeMode = merge;
         cfg.glyphOffset = ImVec2.make(0, offsetY);
 
-        // The ranges array must stay alive as long as the atlas uses it, so it
-        // lives in native memory that is never freed (same reasoning as the
-        // font data above). It is a zero terminated list of ImWchar pairs.
+        // A zero terminated list of ImWchar pairs, which must stay alive as
+        // long as the font: `glyphRanges` is ImGui's LEGACY field, the one
+        // pointer it never frees itself (unlike the font data above, or
+        // `glyphExcludeRanges`), so this small buffer stays ours and is never
+        // released - a handful of bytes per font, not a blob per font.
         // The address type follows the target (see NativeStructs.allocBytes),
         // and so does its "no ranges" value: null on cpp, 0 elsewhere.
         #if cpp
