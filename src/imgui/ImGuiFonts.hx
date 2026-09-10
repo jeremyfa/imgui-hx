@@ -116,7 +116,15 @@ class ImGuiFonts {
         // The ranges array must stay alive as long as the atlas uses it, so it
         // lives in native memory that is never freed (same reasoning as the
         // font data above). It is a zero terminated list of ImWchar pairs.
-        var rangesPtr = null;
+        // The address type follows the target (see NativeStructs.allocBytes),
+        // and so does its "no ranges" value: null on cpp, 0 elsewhere.
+        #if cpp
+        var rangesPtr:cpp.RawPointer<cpp.UInt8> = null;
+        #elseif cs
+        var rangesPtr:Float = 0;
+        #else
+        var rangesPtr:Int = 0;
+        #end
         if (ranges != null && ranges.length > 0) {
             var count = ranges.length + 1;
             var buffer = NativeStructs.allocBytes(count * 2);
@@ -130,11 +138,9 @@ class ImGuiFonts {
         var io = ImGui.getIO();
         var atlas = io.fonts;
         #if cpp
-        var font = ImFontAtlas.addFontFromMemoryTTF(atlas, cast data, bytes.length, sizePixels, cfg,
-            rangesPtr != null ? cast rangesPtr : null);
+        var font = ImFontAtlas.addFontFromMemoryTTF(atlas, cast data, bytes.length, sizePixels, cfg, cast rangesPtr);
         #else
-        var font = ImFontAtlas.addFontFromMemoryTTF(atlas, data, bytes.length, sizePixels, cfg,
-            rangesPtr != null ? rangesPtr : 0);
+        var font = ImFontAtlas.addFontFromMemoryTTF(atlas, data, bytes.length, sizePixels, cfg, rangesPtr);
         #end
 
         NativeStructs.destroyFontConfig(cfg); // The atlas copied the config
