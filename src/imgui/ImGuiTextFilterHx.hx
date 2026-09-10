@@ -24,6 +24,15 @@ class ImGuiTextFilterHx {
     var includes:Array<String> = [];
     var excludes:Array<String> = [];
 
+    /**
+     * The text `includes`/`excludes` were parsed from. Callers may assign
+     * `inputBuf` directly (one filter instance is often shared by several
+     * views, each keeping its own text), and such an assignment leaves the
+     * parsed terms behind: `draw()` compares against this and rebuilds, so
+     * the terms always match the text they filter with.
+     */
+    var builtFrom:String = '';
+
     public function new(defaultFilter:String = '') {
         if (defaultFilter != null && defaultFilter.length > 0) {
             inputBuf = defaultFilter;
@@ -39,12 +48,16 @@ class ImGuiTextFilterHx {
         var before = inputBuf;
         ImGui.inputText(label, inputBuf, 256);
         var changed = inputBuf != before;
-        if (changed) build();
+        // Rebuild on a change from the input box, but also when the text was
+        // assigned from outside since the last build: otherwise the previous
+        // terms keep filtering the new text
+        if (changed || inputBuf != builtFrom) build();
         return changed;
     }
 
     /** Split the input into include/exclude terms. */
     public function build():Void {
+        builtFrom = inputBuf != null ? inputBuf : '';
         includes.resize(0);
         excludes.resize(0);
         for (part in inputBuf.split(',')) {
