@@ -1440,8 +1440,8 @@ enum abstract ImGuiViewportFlags(Int) from Int to Int {
 
 @:native('ImTextureRef') @:struct extern class ImTextureRef {
     public var _TexData:cs.system.IntPtr;
-    public var _TexID:cs.StdTypes.UInt64;
-    function new(texData:cs.system.IntPtr, texID:cs.StdTypes.UInt64):Void;
+    public var _TexID:cs.UInt64;
+    function new(texData:cs.system.IntPtr, texID:cs.UInt64):Void;
     inline public static function fromID(texID:Float):ImTextureRef return new ImTextureRef(imguics.ImGuiCs.nullPtr(), imguics.ImGuiCs.toU64(texID));
 }
 

@@ -42,7 +42,7 @@ class ImGuiCs {
         return untyped __cs__('global::System.IntPtr.Zero');
     }
 
-    inline public static function toU64(v:Float):cs.StdTypes.UInt64 {
+    inline public static function toU64(v:Float):cs.UInt64 {
         return untyped __cs__('(ulong)(long){0}', v);
     }
 
@@ -50,7 +50,7 @@ class ImGuiCs {
         return untyped __cs__('(long){0}', v);
     }
 
-    inline public static function from64(v:cs.StdTypes.UInt64):Float {
+    inline public static function from64(v:cs.UInt64):Float {
         return untyped __cs__('(double){0}', v);
     }
 
@@ -59,10 +59,10 @@ class ImGuiCs {
     }
 
     // Small C integer types: explicit casts at the P/Invoke boundary.
-    inline public static function toI8(v:Int):cs.StdTypes.Int8 return untyped __cs__('(sbyte){0}', v);
-    inline public static function toU8(v:Int):cs.StdTypes.UInt8 return untyped __cs__('(byte){0}', v);
-    inline public static function toI16(v:Int):cs.StdTypes.Int16 return untyped __cs__('(short){0}', v);
-    inline public static function toU16(v:Int):cs.StdTypes.UInt16 return untyped __cs__('(ushort){0}', v);
+    inline public static function toI8(v:Int):cs.Int8 return untyped __cs__('(sbyte){0}', v);
+    inline public static function toU8(v:Int):cs.UInt8 return untyped __cs__('(byte){0}', v);
+    inline public static function toI16(v:Int):cs.Int16 return untyped __cs__('(short){0}', v);
+    inline public static function toU16(v:Int):cs.UInt16 return untyped __cs__('(ushort){0}', v);
 
     // Typed native memory reads/writes at Float byte addresses.
     inline public static function getF32(a:Float):Float return DCImGui.GetF32(ptr(a));

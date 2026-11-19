@@ -1992,14 +1992,14 @@ class Gen {
             case 'bool': 'Bool';
             case 'float': 'Single';
             case 'double': 'Float';
-            case 'sbyte': 'cs.StdTypes.Int8';
-            case 'byte': 'cs.StdTypes.UInt8';
-            case 'short': 'cs.StdTypes.Int16';
-            case 'ushort': 'cs.StdTypes.UInt16';
+            case 'sbyte': 'cs.Int8';
+            case 'byte': 'cs.UInt8';
+            case 'short': 'cs.Int16';
+            case 'ushort': 'cs.UInt16';
             case 'int': 'Int';
-            case 'uint': 'UInt';
+            case 'uint': 'cs.UInt';
             case 'long': 'haxe.Int64';
-            case 'ulong': 'cs.StdTypes.UInt64';
+            case 'ulong': 'cs.UInt64';
             case 'void': 'Void';
             case 'string': 'String';
             case s: s; // struct names (ImVec2...)
@@ -2079,7 +2079,7 @@ class Gen {
                                     out.add('    function set_$hName(v:ImVec4):ImVec4 { imguics.DCImGui.dcjs_${name}_set_$fName(imguics.ImGuiCs.ptr(this), v.x, v.y, v.z, v.w); return v; }\n');
                                 case 'ImTextureRef':
                                     csShimAccessors.push('    [DllImport(LIB, CallingConvention = CallingConvention.Cdecl)]\n    public static extern void dcjs_${name}_set_$fName(System.IntPtr self, System.IntPtr v__TexData, ulong v__TexID);\n');
-                                    csExternFns.push('    static function dcjs_${name}_set_$fName(self:cs.system.IntPtr, texData:cs.system.IntPtr, texID:cs.StdTypes.UInt64):Void;\n');
+                                    csExternFns.push('    static function dcjs_${name}_set_$fName(self:cs.system.IntPtr, texData:cs.system.IntPtr, texID:cs.UInt64):Void;\n');
                                     out.add('    inline function get_$hName():ImTextureRef { var v = new ImTextureRef(imguics.ImGuiCs.nullPtr(), imguics.ImGuiCs.toU64(0)); imguics.DCImGui.dcjs_${name}_get_$fName(imguics.ImGuiCs.ptr(this), v); return v; }\n');
                                     out.add('    function set_$hName(v:ImTextureRef):ImTextureRef { imguics.DCImGui.dcjs_${name}_set_$fName(imguics.ImGuiCs.ptr(this), v._TexData, v._TexID); return v; }\n');
                                 case _:
@@ -2238,8 +2238,8 @@ class Gen {
         out.add('    inline public static function make(x:Float, y:Float, z:Float, w:Float):ImVec4 return new ImVec4(x, y, z, w);\n');
         out.add('}\n\n');
         out.add('@:native(\'ImTextureRef\') @:struct extern class ImTextureRef {\n');
-        out.add('    public var _TexData:cs.system.IntPtr;\n    public var _TexID:cs.StdTypes.UInt64;\n');
-        out.add('    function new(texData:cs.system.IntPtr, texID:cs.StdTypes.UInt64):Void;\n');
+        out.add('    public var _TexData:cs.system.IntPtr;\n    public var _TexID:cs.UInt64;\n');
+        out.add('    function new(texData:cs.system.IntPtr, texID:cs.UInt64):Void;\n');
         out.add('    inline public static function fromID(texID:Float):ImTextureRef return new ImTextureRef(imguics.ImGuiCs.nullPtr(), imguics.ImGuiCs.toU64(texID));\n');
         out.add('}\n\n');
         var dcx = new StringBuf();

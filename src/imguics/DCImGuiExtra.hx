@@ -14,15 +14,15 @@ import imguics.ImGui;
     static function dcx_ImGuiSelectionBasicStorage_Construct(self:cs.system.IntPtr):Void;
 
     static function dcx_SetIniFilename(path:String):Void;
-    static function dcx_DockBuilderAddNode(nodeId:UInt, flags:Int):UInt;
-    static function dcx_DockBuilderAddDockSpaceNode(nodeId:UInt, extraFlags:Int):UInt;
-    static function dcx_DockBuilderRemoveNode(nodeId:UInt):Void;
-    static function dcx_DockBuilderRemoveNodeChildNodes(nodeId:UInt):Void;
-    static function dcx_DockBuilderSetNodePos(nodeId:UInt, x:Single, y:Single):Void;
-    static function dcx_DockBuilderSetNodeSize(nodeId:UInt, w:Single, h:Single):Void;
-    static function dcx_DockBuilderNodeExists(nodeId:UInt):Int;
-    static function dcx_DockBuilderSplitNode(nodeId:UInt, splitDir:Int, sizeRatioForNodeAtDir:Single, outIds:cs.NativeArray<UInt>):UInt;
-    static function dcx_DockBuilderDockWindow(windowName:String, nodeId:UInt):Void;
-    static function dcx_DockBuilderFinish(nodeId:UInt):Void;
-    static function dcx_DockBuilderGetCentralNode(nodeId:UInt):UInt;
+    static function dcx_DockBuilderAddNode(nodeId:cs.UInt, flags:Int):cs.UInt;
+    static function dcx_DockBuilderAddDockSpaceNode(nodeId:cs.UInt, extraFlags:Int):cs.UInt;
+    static function dcx_DockBuilderRemoveNode(nodeId:cs.UInt):Void;
+    static function dcx_DockBuilderRemoveNodeChildNodes(nodeId:cs.UInt):Void;
+    static function dcx_DockBuilderSetNodePos(nodeId:cs.UInt, x:Single, y:Single):Void;
+    static function dcx_DockBuilderSetNodeSize(nodeId:cs.UInt, w:Single, h:Single):Void;
+    static function dcx_DockBuilderNodeExists(nodeId:cs.UInt):Int;
+    static function dcx_DockBuilderSplitNode(nodeId:cs.UInt, splitDir:Int, sizeRatioForNodeAtDir:Single, outIds:cs.NativeArray<cs.UInt>):cs.UInt;
+    static function dcx_DockBuilderDockWindow(windowName:String, nodeId:cs.UInt):Void;
+    static function dcx_DockBuilderFinish(nodeId:cs.UInt):Void;
+    static function dcx_DockBuilderGetCentralNode(nodeId:cs.UInt):cs.UInt;
 }
